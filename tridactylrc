@@ -1,0 +1,30 @@
+" Bindings for normal mode
+bind / fillcmdline find
+bind ? fillcmdline find -?
+bind ,f fullscreen
+bind n findnext 1
+bind N findnext -1
+bind c fillcmdline bmarks
+
+" Bindings for changing modes
+bind --mode=ignore <C-[> mode normal
+bind --mode=hint <C-[> hint.reset
+bind --mode=ex <C-[> ex.hide_and_clear
+bind <c-]> mode ignore
+
+" Ex mode bindings
+bind --mode=ex <C-F> ex.complete
+bind --mode=ex <C-p> ex.prev_history
+bind --mode=ex <C-n> ex.next_history
+bind --mode=ex <C-f> text.forward_char
+bind --mode=ex <C-b> text.backward_char
+
+"guiset hoverlink none
+"guiset statuspanel left
+
+
+" Does not work
+"set editorcmd gnome-terminal -e "vim %f -f '+normal!%lGzv%c|'"
+"set editorcmd /home/dexq/bin/nvim %f '+normal!%lGzv%c|'
+
+" vim:ft=vim

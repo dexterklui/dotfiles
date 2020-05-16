@@ -287,6 +287,9 @@ set nocompatible " Use Vim, rather than Vi settings (nvim default).
   command -nargs=0 SI SyntasticInfo
   command -nargs=0 SR SyntasticReset
 
+" GitGutter {{{3
+  nnoremap <Leader>hc :GitGutterQuickFix<CR>
+
 " goyo {{{3
   function! s:goyo_enter()
     Limelight
@@ -299,7 +302,7 @@ set nocompatible " Use Vim, rather than Vi settings (nvim default).
 
   autocmd vimrcEx User GoyoEnter nested call <SID>goyo_enter()
   autocmd vimrcEx User GoyoLeave nested call <SID>goyo_leave()
-  
+
   nnoremap <silent> <Leader><Leader> :Goyo<CR>
 
 " limelight {{{3
