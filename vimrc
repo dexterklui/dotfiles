@@ -12,7 +12,7 @@ set nocompatible " Use Vim, rather than Vi settings (nvim default).
 " *** Adding packages *** {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ** setup vim-plug ** {{{2
-"""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/bundle')
 " General
 Plug 'Valloric/YouCompleteMe'
@@ -37,7 +37,7 @@ Plug 'tmhedberg/SimpylFold'
 call plug#end()
 
 " ** packadd ** {{{2
-"""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""
 if !has('nvim')
   packadd matchit " already added by nvim.
 endif
@@ -83,7 +83,7 @@ source ~/.vim/DQScripts/digraphs/super_sub_scripts.vim
 " *** settings *** {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ** Both vim and nvim ** {{{2
-"""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""
 set hlsearch	      " highlight search matches (nvim default)
 set autoindent      " (nvim default)
 set mouse=a	      " Use mouse
@@ -122,7 +122,7 @@ set cursorline
 set updatetime=250  " After 250ms nothing is typed, .swp is written and gitgutter is updated.
 
 " ** For vim only ** {{{2
-"""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""
 if !has('nvim')
   set termkey=<C-E>   " Set the key that starts a CTRL-W cmd in terminal window
 endif
@@ -164,7 +164,7 @@ exe 'nnoremap <silent> <Leader>B'
 " *** Customizing Plugins *** {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ** For both vim and nvim ** {{{2
-"""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""
 " * Airline * {{{3
 """"""""""""""""""""
 " General {{{4
@@ -306,6 +306,10 @@ command -nargs=0 SR SyntasticReset
 " * GitGutter * {{{3
 """"""""""""""""""""
 nnoremap <Leader>hc :GitGutterQuickFix<CR>
+
+" * Fugitive * {{{3
+""""""""""""""""""""
+command GitLog :Git log --all --graph --decorate
 
 " * goyo * {{{3
 """"""""""""""""""""
