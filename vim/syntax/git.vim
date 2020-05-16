@@ -13,7 +13,7 @@ syn sync minlines=50
 syn include @gitDiff syntax/diff.vim
 
 " Also work with --all --graph --decorate
-syn region gitHead start=/\%^=/ end=/^$/
+syn region gitHead start=/\%^/ end=/^$/
 syn region gitHead start=/^\%(\%(\* \)\=commit \x\{40\}\%(\s*(.*)\)\=$\)\@=/ end=/^|\s*\zs\ze\n\*/
 
 " For git reflog and git show ...^{tree}, avoid sync issues
@@ -56,7 +56,7 @@ syn region gitEmail matchgroup=gitEmailDelimiter start=/</ end=/>/ keepend oneli
 
 syn match  gitNotesHeader /^Notes:\ze\n    /
 
-syn region  gitSnap matchgroup=gitParen start=/\%(^|.*\)\@<!\zs(/ end=/)$/ keepend oneline contained containedin=gitHead contains=gitPointer,gitBranch,gitComma,gitTag,gitRemote
+syn region  gitSnap matchgroup=gitParen start=/\%(^|\)\@<!.*\zs(/ end=/)$/ keepend oneline contained containedin=gitHead contains=gitPointer,gitBranch,gitComma,gitTag,gitRemote
 syn match   gitRemote  &[^,/]\+/[^,/]\+&  contained nextgroup=gitComma
 syn match   gitTag     /tag:[^,]*/      contained nextgroup=gitComma
 syn match   gitComma   /,/              contained nextgroup=gitTag,gitRemote skipwhite
