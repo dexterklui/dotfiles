@@ -57,8 +57,9 @@ if $TERM ==# 'linux'
 else
   "let g:solarized_termcolors=256
   let g:solarized_termtrans=1
-  colorscheme dqsolarized
   let g:dqsolarized_dqn_title_color=1
+  let g:solarized_diffmode='high'
+  colorscheme dqsolarized
 endif
 
 " Put these in an autocmd group, so that we can delete them easily.

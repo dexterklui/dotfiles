@@ -1,7 +1,7 @@
 [user]
 	name = Dexter K. Lui
 	email = luikaon@gmail.com
-	
+
 # Define command which will be used when "nvim" is set as a merge tool
 ##############################################################################
 [mergetool "nvim"]
@@ -10,9 +10,10 @@
 [merge]
 	tool = nvim
 # Automatically launch merge tool without displaying a prompt
-#[mergetool]
-#	prompt = false
+[mergetool]
+	prompt = false
 
+##############################################################################
 [core]
 	editor = nvim
 	excludesfile = /home/dexq/.gitignore

@@ -1,7 +1,7 @@
 " DQFoldText:	    Plugin for generating fold text
 " Maintainer:	    DQ
-" Lat Change:	    30 Apr 2020
-" Version:	    1.3
+" Lat Change:	    17 May 2020
+" Version:	    1.4
 
 " Abort if running in vi-compatible mode or the user doesn't want us.
   if &cp || exists('g:loaded_DQFoldText')

@@ -40,7 +40,7 @@
     elseif DQNVersion() >= 1.32
       echom 'This DQNote is already at version 1.32 or newer, no update is done.'
       return
-    endif 
+    endif
 
     " first creat an empty quick fix list for later vimgrepadd cmd
     call setqflist([])
