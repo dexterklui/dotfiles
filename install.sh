@@ -28,6 +28,11 @@ cp -iu ${PWD}/vim/plugin/DQToggleConceal.vim ~/.vim/plugin/DQToggleConceal.vim
 cp -iu ${PWD}/vim/plugin/DQTreeDiagram.vim ~/.vim/plugin/DQTreeDiagram.vim
 cp -iu ${PWD}/vim/plugin/DQVim.vim ~/.vim/plugin/DQVim.vim
 
+# Git {{{1
+##############################################################################
+ln -s ${PWD}/gitconfig ~/.gitconfig && echo 'Installed ~/.gitconfig'
+ln -s ${PWD}/gitignore ~/.gitignore && echo 'Installed ~/.gitignore'
+
 # tridactylrc {{{1
 ##############################################################################
 ln -s ${PWD}/tridactylrc ~/.config/tridactyl/tridactylrc && echo 'Installed ~/.config/tridactyl/tridactylrc'
