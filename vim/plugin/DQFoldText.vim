@@ -31,7 +31,7 @@ function! DQFoldText()
     endif
   else
     if exists('g:loaded_gitgutter') && gitgutter#fold#is_changed() == 1
-    " Icons:🍳🥒🥢♂️ 🔗📎🔧💡📌📍➿🔅🔺🔸🔹▫️ 📝
+    " Icons:🍳🥒🥢♂️ 🔗📎🔧💡📌📍➿🔅🔺🔸🔹▫️ ▪️ 📝
       if l:foldlevel == 1
 	return '🔺' . l:line . '📝 [' . l:nrline . 'L]'
       elseif l:foldlevel == 2
@@ -39,9 +39,17 @@ function! DQFoldText()
       elseif l:foldlevel == 3
 	return '  🔹' . l:line . '📝 [' . l:nrline . 'L]'
       elseif l:foldlevel == 4
-	return '   ▫️ ' . l:line . '📝 [' . l:nrline . 'L]'
+	if &bg ==# 'dark'
+	  return '   ▫️ ' . l:line . '📝 [' . l:nrline . 'L]'
+	else
+	  return '   ▪️ ' . l:line . '📝 [' . l:nrline . 'L]'
+	endif
       else
-	return repeat(' ', l:foldlevel-1) . '▫️ ' . l:line . '📝 [' . l:nrline . 'L]'
+	if &bg ==# 'dark'
+	  return repeat(' ', l:foldlevel-1) . '▫️ ' . l:line . '📝 [' . l:nrline . 'L]'
+	else
+	  return repeat(' ', l:foldlevel-1) . '▪️ ' . l:line . '📝 [' . l:nrline . 'L]'
+	endif
       endif
     else
       if l:foldlevel == 1
@@ -51,9 +59,17 @@ function! DQFoldText()
       elseif l:foldlevel == 3
 	return '  🔹' . l:line . '[' . l:nrline . 'L]'
       elseif l:foldlevel == 4
-	return '   ▫️ ' . l:line . '[' . l:nrline . 'L]'
+	if &bg ==# 'dark'
+	  return '   ▫️ ' . l:line . '[' . l:nrline . 'L]'
+	else
+	  return '   ▪️ ' . l:line . '[' . l:nrline . 'L]'
+	endif
       else
-	return repeat(' ', l:foldlevel-1) . '▫️ ' . l:line . '[' . l:nrline . 'L]'
+	if &bg ==# 'dark'
+	  return repeat(' ', l:foldlevel-1) . '▫️ ' . l:line . '[' . l:nrline . 'L]'
+	else
+	  return repeat(' ', l:foldlevel-1) . '▪️ ' . l:line . '[' . l:nrline . 'L]'
+	endif
       endif
   endif
 endfunction

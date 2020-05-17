@@ -327,6 +327,11 @@ autocmd vimrcEx User GoyoLeave nested call <SID>goyo_leave()
 
 nnoremap <silent> <Leader><Leader> :Goyo<CR>
 
+if exists('g:loaded_airline')
+  autocmd vimrcEx User GoyoEnter nested set eventignore=FocusGained
+  autocmd vimrcEx User GoyoLeave nested set eventignore=
+endif
+
 " * limelight * {{{3
 """"""""""""""""""""
 autocmd vimrcEx ColorScheme *

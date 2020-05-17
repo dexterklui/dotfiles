@@ -6,6 +6,9 @@ bind n findnext 1
 bind N findnext -1
 bind c fillcmdline bmarks
 
+bind j scrollline 7
+bind k scrollline -7
+
 " Bindings for changing modes
 bind --mode=ignore <C-[> mode normal
 bind --mode=hint <C-[> hint.reset
