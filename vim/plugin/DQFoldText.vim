@@ -46,9 +46,9 @@ function! DQFoldText()
 	endif
       else
 	if &bg ==# 'dark'
-	  return repeat(' ', l:foldlevel-1) . '▫️ ' . l:line . '📝 [' . l:nrline . 'L]'
+	  return '   ▫️ ' . repeat('▫️ ', l:foldlevel-4) . l:line . '📝 [' . l:nrline . 'L]'
 	else
-	  return repeat(' ', l:foldlevel-1) . '▪️ ' . l:line . '📝 [' . l:nrline . 'L]'
+	  return '   ▪️ ' . repeat('▪️ ', l:foldlevel-4) . l:line . '📝 [' . l:nrline . 'L]'
 	endif
       endif
     else
@@ -66,9 +66,9 @@ function! DQFoldText()
 	endif
       else
 	if &bg ==# 'dark'
-	  return repeat(' ', l:foldlevel-1) . '▫️ ' . l:line . '[' . l:nrline . 'L]'
+	  return '   ▫️ ' . repeat('▫️ ', l:foldlevel-4) . l:line . '[' . l:nrline . 'L]'
 	else
-	  return repeat(' ', l:foldlevel-1) . '▪️ ' . l:line . '[' . l:nrline . 'L]'
+	  return '   ▪️ ' . repeat('▪️ ', l:foldlevel-4) . l:line . '[' . l:nrline . 'L]'
 	endif
       endif
   endif
