@@ -1,5 +1,5 @@
 " DQTreeDiagram:    Vim custom plugin for remapping keys to type tree diagrams easily
-" Maintainer:	    DQ
+" Maintainer:	    Dexter K. Lui <dexterklui@pm.me>
 " Lat Change:	    May 1 2020
 " Version:	    1.1
 
