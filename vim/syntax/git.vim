@@ -13,9 +13,9 @@ syn sync minlines=50
 
 syn include @gitDiff syntax/diff.vim
 
-" Also work with --all --graph --decorate
 syn region gitHead start=/\%^/ end=/^$/
-syn region gitHead start=/^\%(\%(\* \)\=commit \x\{40\}\%(\s*(.*)\)\=$\)\@=/ end=/^|\s*\zs\ze\n\*/
+" Added leading [*|\\/ ]* for git log --graph
+syn region gitHead start=+^\%([\*|\\/ ]*commit \x\{40\}\%(\s*(.*)\)\=$\)\@=+ end=/^|\s*\zs\ze\n\*/
 
 " For git reflog and git show ...^{tree}, avoid sync issues
 syn match gitHead /^\d\{6\} \%(\w\{4} \)\=\x\{40\}\%( [0-3]\)\=\t.*/
@@ -29,13 +29,13 @@ syn region gitDiffMerge start=/^\%(@@@@* -\)\@=/ end=/^\%(diff --\|$\)\@=/ conta
 syn match gitDiffAdded "^ \++.*" contained containedin=gitDiffMerge
 syn match gitDiffRemoved "^ \+-.*" contained containedin=gitDiffMerge
 
-syn match  gitKeyword /^\%(object\|type\|tag\|\%(\* \)\=\zscommit\|tree\|parent\|encoding\)\>/ contained containedin=gitHead nextgroup=gitHash,gitType skipwhite
+syn match  gitKeyword /^\%(object\|type\|tag\|[\*|\\/ ]*\zscommit\|tree\|parent\|encoding\)\>/ contained containedin=gitHead nextgroup=gitHash,gitType skipwhite
 syn match  gitKeyword /^\%(tag\>\|ref:\)/ contained containedin=gitHead nextgroup=gitReference skipwhite
 syn match  gitKeyword /^Merge:/  contained containedin=gitHead nextgroup=gitHashAbbrev skipwhite
 syn match  gitMode    /^\d\{6\}/ contained containedin=gitHead nextgroup=gitType,gitHash skipwhite
 syn match  gitIdentityKeyword /^\%(author\|committer\|tagger\)\>/ contained containedin=gitHead nextgroup=gitIdentity skipwhite
-syn match  gitIdentityHeader /^\%(| \)\=\zs\%(Author\|Commit\|Tagger\):/ contained containedin=gitHead nextgroup=gitIdentity skipwhite
-syn match  gitDateHeader /^\%(| \)\=\zs\%(AuthorDate\|CommitDate\|Date\):/ contained containedin=gitHead nextgroup=gitDate skipwhite
+syn match  gitIdentityHeader /^[\*|\\/ ]*\zs\%(Author\|Commit\|Tagger\):/ contained containedin=gitHead nextgroup=gitIdentity skipwhite
+syn match  gitDateHeader /^[\*|\\/ ]*\zs\%(AuthorDate\|CommitDate\|Date\):/ contained containedin=gitHead nextgroup=gitDate skipwhite
 
 syn match  gitReflogHeader /^Reflog:/ contained containedin=gitHead nextgroup=gitReflogMiddle skipwhite
 syn match  gitReflogHeader /^Reflog message:/ contained containedin=gitHead skipwhite
@@ -57,7 +57,8 @@ syn region gitEmail matchgroup=gitEmailDelimiter start=/</ end=/>/ keepend oneli
 
 syn match  gitNotesHeader /^Notes:\ze\n    /
 
-syn region  gitSnap matchgroup=gitParen start=/\%(^|\)\@<!.*\zs(/ end=/)$/ keepend oneline contained containedin=gitHead contains=gitPointer,gitBranch,gitComma,gitTag,gitRemote
+" This part is added for git log --graph
+syn region  gitSnap matchgroup=gitParen start=/(/ end=/)\ze\n|[|\\/ ]*Author:/ keepend oneline contained containedin=gitHead contains=gitPointer,gitBranch,gitComma,gitTag,gitRemote
 syn match   gitBranch  /\<\w\+\>/   contained nextgroup=gitComma
 syn match   gitRemote  &[^,/]\+/[^,/]\+&  contained nextgroup=gitComma
 syn match   gitTag     /tag:[^,]*/      contained nextgroup=gitComma
