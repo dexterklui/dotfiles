@@ -5,8 +5,9 @@ cd $BASEDIR || exit
 
 # bash {{{1
 ##############################################################################
-ln -s ${PWD}/bashrc ~/.bashrc && echo 'Installed ~/.bashrc'
-ln -s ${PWD}/bash_aliases ~/.bash_aliases && echo 'Installed ~/.bash_aliases'
+# Visual select and use 'Tabularize /\%(Installed\)\@<! \zs\ze\~\|&&'
+ln -s ${PWD}/bashrc        ~/.bashrc       && echo 'Installed ~/.bashrc'
+ln -s ${PWD}/bash_aliases  ~/.bash_aliases && echo 'Installed ~/.bash_aliases'
 
 # Vim {{{1
 ##############################################################################
@@ -20,13 +21,13 @@ cp -iu ${PWD}/vim/syntax/git.vim ~/.vim/syntax/git.vim
 
 # .vim/plugin {{{2
 ########################################
-cp -iu ${PWD}/vim/plugin/DQColorscheme.vim ~/.vim/plugin/DQColorscheme
-cp -iu ${PWD}/vim/plugin/DQFoldText.vim ~/.vim/plugin/DQFoldText.vim
-cp -iu ${PWD}/vim/plugin/DQNote.vim ~/.vim/plugin/DQNote.vim
-cp -iu ${PWD}/vim/plugin/DQNYank.vim ~/.vim/plugin/DQNYank.vim
-cp -iu ${PWD}/vim/plugin/DQToggleConceal.vim ~/.vim/plugin/DQToggleConceal.vim
-cp -iu ${PWD}/vim/plugin/DQTreeDiagram.vim ~/.vim/plugin/DQTreeDiagram.vim
-cp -iu ${PWD}/vim/plugin/DQVim.vim ~/.vim/plugin/DQVim.vim
+cp -iu ${PWD}/vim/plugin/DQColorscheme.vim    ~/.vim/plugin/DQColorscheme.vim
+cp -iu ${PWD}/vim/plugin/DQFoldText.vim       ~/.vim/plugin/DQFoldText.vim
+cp -iu ${PWD}/vim/plugin/DQNote.vim           ~/.vim/plugin/DQNote.vim
+cp -iu ${PWD}/vim/plugin/DQNYank.vim          ~/.vim/plugin/DQNYank.vim
+cp -iu ${PWD}/vim/plugin/DQToggleConceal.vim  ~/.vim/plugin/DQToggleConceal.vim
+cp -iu ${PWD}/vim/plugin/DQTreeDiagram.vim    ~/.vim/plugin/DQTreeDiagram.vim
+cp -iu ${PWD}/vim/plugin/DQVim.vim            ~/.vim/plugin/DQVim.vim
 
 # Git {{{1
 ##############################################################################

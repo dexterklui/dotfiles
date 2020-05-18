@@ -1,13 +1,17 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" *** evim and cpo *** {{{1
+" *** Load first *** {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" When started as "evim", evim.vim will already have done these settings.
-if v:progname =~? "evim"
-  finish
-endif
-
 " This must be first, because it changes other options as a side effect.
 set nocompatible " Use Vim, rather than Vi settings (nvim default).
+
+syntax on " (nvim default)
+filetype plugin indent on " (nvim default)
+let mapleader = ' '
+
+if v:vim_did_enter
+  augroup! vimrcEx " Delete any old autocmds added by vimrc.
+endif
+"}}}1
 
 " *** Adding packages *** {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -29,6 +33,8 @@ Plug 'frazrepo/vim-rainbow'
 Plug 'junegunn/limelight.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'godlygeek/tabular'
+Plug 'dhruvasagar/vim-table-mode'
 " Git
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
@@ -44,27 +50,19 @@ endif
 
 " *** Vim customization *** {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-syntax on " (nvim default)
-filetype plugin indent on " (nvim default)
-let mapleader = ' '
-
-" Make vim able to read man pages within Vim.
-runtime! ftplugin/man.vim
-
 " Setting the colorscheme
 if $TERM ==# 'linux'
   colorscheme dd-noitalic
 else
-  "let g:solarized_termcolors=256
   let g:solarized_termtrans=1
   let g:dqsolarized_dqn_title_color=1
   let g:solarized_diffmode='high'
+  " ^Config var must be assigned before applying colorscheme to take effect.
   colorscheme dqsolarized
 endif
 
 " Put these in an autocmd group, so that we can delete them easily.
 augroup vimrcEx
-  au!
   " For all text files set 'textwidth' to 78 characters.
   autocmd FileType text setlocal textwidth=78
 
@@ -76,6 +74,9 @@ augroup vimrcEx
     \   exe "normal! g`\"" |
     \ endif
 augroup END
+
+" Make vim able to read man pages within Vim.
+runtime! ftplugin/man.vim
 
 " Source digraphs
 source ~/.vim/DQScripts/digraphs/symbols.vim
@@ -138,8 +139,6 @@ command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
 " For easy access some documents:
 command Vimnote tabe ~/Documents/learn-type/vim.dqn0
 command Master e ~/.master.dqn
-" For opening help window on the right
-command -nargs=? -complete=help   HP normal :help <args><CR><C-w><S-l>
 " For saving and compiling current file
 command -nargs=0 Make update | make %:p:S
 
@@ -154,6 +153,7 @@ nnoremap Pp "0p
 nnoremap <Leader>sea :setl spell spelllang=en<CR>
 nnoremap <Leader>sen :setl spell spelllang=en_gb<CR>
 nnoremap <Leader>sde :setl spell spelllang=de_de<CR>
+nnoremap <Leader>sno :setl nospell
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
 inoremap <C-U> <C-G>u<C-U>
@@ -192,6 +192,8 @@ let g:airline_mode_map = {
   \ ''     : '^V',
   \ }
 
+" Sections customization {{{4
+""""""""""
 function AirlineMixIndent()
   if indent(".") % &sw == 0
     return ''
@@ -201,9 +203,7 @@ function AirlineMixIndent()
 endfunction
 
 function AirlineInit()
-  "let g:airline_section_b = 'I%{indent(".")/&sw}%#Search#'
-  "  \ . '%{AirlineMixIndent()}%#__restore__# F%{foldlevel(".")}'
-  let g:airline_section_z = '%p%%%#__accent__#%#__restore__#:%v'
+  let g:airline_section_z = '%p%% %l:%v'
     \ . ' I%{indent(".")/&sw}%#airline_z_red#'
     \ . '%{AirlineMixIndent()}%#__restore__# F%{foldlevel(".")}'
 endfunction
@@ -314,13 +314,23 @@ command GitLog :Git log --all --graph --decorate
 
 " * goyo * {{{3
 """"""""""""""""""""
-function! s:goyo_enter()
-  Limelight
+function s:goyo_enter()
+  if exists('g:loaded_limelight')
+    Limelight
+  endif
+  if &ft ==# 'dqn'
+    let g:limelight_paragraph_span = 2
+  endif
 endfunction
 
 function s:goyo_leave()
-  Limelight!
-  let &ft=&ft
+  if exists('g:loaded_limelight')
+    Limelight!
+  endif
+  if &ft ==# 'dqn'
+    let g:limelight_paragraph_span = 0
+  endif
+  "let &ft=&ft
 endfunction
 
 autocmd vimrcEx User GoyoEnter nested call <SID>goyo_enter()
@@ -392,4 +402,8 @@ nnoremap <Leader>rb :RainbowToggle<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " }}}1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if v:vim_did_enter
+  let &ft=&ft " Reload ftplugin to override vimrc settings.
+endif
+
 " vi: fdm=marker
