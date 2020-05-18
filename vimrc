@@ -6,10 +6,10 @@ set nocompatible " Use Vim, rather than Vi settings (nvim default).
 
 syntax on " (nvim default)
 filetype plugin indent on " (nvim default)
-let mapleader = ' '
+let mapleader = ' ' " Must b4 any mappings that use <Leader> to take effect
 
 if v:vim_did_enter
-  augroup! vimrcEx " Delete any old autocmds added by vimrc.
+  augroup! vimrcEx " Delete any old autocmds added by vimrc during resource
 endif
 "}}}1
 
@@ -65,7 +65,6 @@ endif
 augroup vimrcEx
   " For all text files set 'textwidth' to 78 characters.
   autocmd FileType text setlocal textwidth=78
-
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
   " (happens when dropping a file on gvim).
@@ -75,8 +74,7 @@ augroup vimrcEx
     \ endif
 augroup END
 
-" Make vim able to read man pages within Vim.
-runtime! ftplugin/man.vim
+runtime! ftplugin/man.vim " Make vim able to read man pages within Vim.
 
 " Source digraphs
 source ~/.vim/DQScripts/digraphs/symbols.vim
@@ -86,47 +84,48 @@ source ~/.vim/DQScripts/digraphs/super_sub_scripts.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ** Both vim and nvim ** {{{2
 """"""""""""""""""""""""""""""""""""""""
-set hlsearch	      " highlight search matches (nvim default)
-set autoindent      " (nvim default)
-set mouse=a	      " Use mouse
+" (n) = (nvim default)
+set hlsearch	    " highlight search matches (n)
+set autoindent      " (n)
+set mouse=a	    " Use mouse
 set history=1000    " keep 50 lines of command line history
-set ruler	      " show the cursor position all the time (nvim deault)
-set number	      " Show line number on left side
+set ruler	    " show the cursor position all the time (nvim deault)
+set number	    " Show line number on left side
 set relativenumber  " Show relative instead of absolute line nr
-set showcmd	      " display incomplete commands (nvim default)
-set incsearch	      " do incremental searching (nvim default)
-set wildmenu	      " Show matching terms when pressing tab
+set showcmd	    " display incomplete commands (n)
+set incsearch	    " do incremental searching (n)
+set wildmenu	    " Show matching terms when pressing tab
 set scrolloff=2     " Set the numbers of line to show around cursor
-set splitright
-set path+=**	      " allow :find fuzzy search with * at front
-set laststatus=2    " always show statusline (nvim default)
+set splitright	    " Split right by defaul when do a vertical split
+set path+=**	    " allow :find fuzzy search with * at front
+set laststatus=2    " always show statusline (n)
 set showtabline=2   " always show tabline
-let &fillchars = 'vert:|,fold: '
+set fillchars=vert:\|,fold:\  " Set filling characters for foldlines to space
 set conceallevel=2  " This is also needed for the plugin indentLine
 set nowrapscan      " disable search through bottom to the top
-set shiftwidth=4    " Make each indent level to be of 4 spaces.
-set softtabstop=4   " Make a <Tab> to add 4 spaces, auto turn 8spaces to Tab character
-set backspace=indent,eol,start " allow backspacing over everything in insert mode (nvim default)
-set belloff=all     " (nvim default)
-set nobackup
-set autoread	      " autoupdate the buffer when the file is changed externally (nvim default)
+set shiftwidth=4    " Make each indent level to be of 4 spaces
+set softtabstop=4   " <Tab> adds 4 spaces, auto turn 8spaces to Tab character
+set smarttab " <Tab> at line beginnings inserts whitespaces = 'shiftwidth' (n)
+set backspace=indent,eol,start " allow backspacing over everything (n)
+set belloff=all     " No alert sound in vim (n)
+set nobackup	    " Don't save backup file by default
+set autoread  " autoupdate the buffer when the file is changed externally (n)
 set listchars=eol:$,tab:>\ ,nbsp:+  " adjust the text printed by :list
-set nrformats=bin,hex	  " adjust what format of numbers <C-A> and <C-X> recognize (nvim default)
-set shortmess+=F    " Adjust the message format: often shorting them (nvim default)
-set sidescroll=1    " When 'wrap' is off, adjust the min cols to scoll horizontally (nvim default)
-set smarttab	      " <Tab> if front of a line inserts blacks according to 'shiftwidth' (nvim def)
-set undodir=~/.local/share/nvim/undo " (nvim default)
-set undofile	      " Now vim will safe undo history
-set ttimeoutlen=50  " Time in ms that is waited for a key sequence to complete. (nvim default)
-set viminfo^=!      " (nvim default)
-set langnoremap	    " (nvim default)
-set cursorline
-set updatetime=250  " After 250ms nothing is typed, .swp is written and gitgutter is updated.
+set nrformats=bin,hex " adjust what format of nr <C-A> and <C-X> recognize (n)
+set shortmess+=F    " Adjust the message format: often shorting them (n)
+set sidescroll=1  " When 'nowrap': the min. columns to scoll horizontally (n)
+set undodir=~/.local/share/nvim/undo " (n)
+set undofile	    " Now vim will safe undo history
+set ttimeoutlen=50  " Time (ms) that is waited for a key-seq to complete (n)
+set viminfo^=!      " (n)
+set langnoremap	    " (n)
+set cursorline	    " Make bg color of cursor line different
+set updatetime=250  " after 250ms, write swap and update gitgutter
 
 " ** For vim only ** {{{2
 """"""""""""""""""""""""""""""""""""""""
 if !has('nvim')
-  set termkey=<C-E>   " Set the key that starts a CTRL-W cmd in terminal window
+  set termkey=<C-E> " Set the key that starts a CTRL-W cmd in terminal window
 endif
 
 " *** Commands and Mappings *** {{{1
@@ -223,19 +222,21 @@ nnoremap <Leader>ta :AirlineToggleWhitespace<CR>
 """"""""""
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_tab_count = 0
-let g:airline#extensions#tabline#overflow_marker = '💬 ' " The symbol for skipped tab/buf
+let g:airline#extensions#tabline#overflow_marker = '💬 ' "Symbol: skipped buf
 let g:airline#extensions#tabline#formatter = 'dq_short_path'
 let g:airline#extensions#tabline#show_splits = 0
 let g:airline#extensions#tabline#show_close_button = 0
-if exists(g:airline#extensions#tabline#formatter) ? g:airline#extensions#tabline#formatter =~'^default$' : 0
-  let g:airline#extensions#tabline#fnamemod = ':p:~:.' " The filename format %:p:~:.
-  let g:airline#extensions#tabline#fnamecollapse = 1 " Whether shorten the parent dirs
+if exists(g:airline#extensions#tabline#formatter) ?
+  \ g:airline#extensions#tabline#formatter ==# 'default' : 0
+  let g:airline#extensions#tabline#fnamemod = ':p:~:.'
+  " Whether shorten the parent directory names:
+  let g:airline#extensions#tabline#fnamecollapse = 1
 endif
 
 " Tabs {{{4
 """"""""""
   let g:airline#extensions#tabline#tabs_label = 'T' " Text for tab lable
-  let g:airline#extensions#tabline#tab_nr_type = 2 " show tab nr, instead of nr of wins in tab
+  let g:airline#extensions#tabline#tab_nr_type = 2 " show tab nr & nr of wins
 
 " Buffers {{{4
 """"""""""
@@ -245,7 +246,7 @@ let g:airline#extensions#tabline#buffer_nr_format = '%s:'
 
 " dqsolarized theme {{{4
 """"""""""
-let airline_dqsolarized_dark_text = 1
+let airline_dqsolarized_dark_text = 1 " Better contrast for airline_section_z
 
 " * NERDTree * {{{3
 """"""""""""""""""""
@@ -403,7 +404,7 @@ nnoremap <Leader>rb :RainbowToggle<CR>
 " }}}1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if v:vim_did_enter
-  let &ft=&ft " Reload ftplugin to override vimrc settings.
+  let &ft=&ft " Reload ftplugin to override vimrc settings after resource
 endif
 
 " vi: fdm=marker

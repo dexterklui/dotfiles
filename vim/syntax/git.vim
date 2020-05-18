@@ -58,10 +58,10 @@ syn region gitEmail matchgroup=gitEmailDelimiter start=/</ end=/>/ keepend oneli
 syn match  gitNotesHeader /^Notes:\ze\n    /
 
 syn region  gitSnap matchgroup=gitParen start=/\%(^|\)\@<!.*\zs(/ end=/)$/ keepend oneline contained containedin=gitHead contains=gitPointer,gitBranch,gitComma,gitTag,gitRemote
+syn match   gitBranch  /\<\w\+\>/   contained nextgroup=gitComma
 syn match   gitRemote  &[^,/]\+/[^,/]\+&  contained nextgroup=gitComma
 syn match   gitTag     /tag:[^,]*/      contained nextgroup=gitComma
 syn match   gitComma   /,/              contained nextgroup=gitTag,gitRemote skipwhite
-syn match   gitBranch  /\<\w\+\>/   contained nextgroup=gitComma
 syn match   gitPointer /\<HEAD ->/      contained nextgroup=gitBranch skipwhite
 
 hi def link gitDateHeader        gitIdentityHeader
