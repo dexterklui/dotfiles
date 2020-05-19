@@ -1,5 +1,5 @@
 " DQVim:	    Vim plugin for Vim files
-" Maintainer:	    DQ
+" Maintainer:	    Dexter K. Lui <dexterklui@pm.me>
 " Latest Change:    17 May 2020
 " Version:	    1.3
 

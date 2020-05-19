@@ -1,5 +1,5 @@
 " DQColorscheme:    Plugin for changing colorscheme
-" Maintainer:	    DQ
+" Maintainer:	    Dexter K. Lui <dexterklui@pm.me>
 " Lat Change:	    11 May 2020
 " Version:	    1.2
 

@@ -1,5 +1,5 @@
 " DQToggleConceal:  Plugin for toggling conceallevel
-" Maintainer:	    DQ
+" Maintainer:	    Dexter K. Lui <dexterklui@pm.me>
 " Lat Change:	    30 Apr 2020
 " Version:	    1.2
 

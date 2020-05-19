@@ -1,6 +1,6 @@
 " DQFoldText:	    Plugin for generating fold text
-" Maintainer:	    DQ
-" Lat Change:	    17 May 2020
+" Maintainer:	    Dexter K. Lui <dexterklui@pm.me>
+" Last Change:	    17 May 2020
 " Version:	    1.4
 
 " Abort if running in vi-compatible mode or the user doesn't want us.

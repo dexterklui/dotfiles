@@ -1,5 +1,5 @@
 " DQNote:	    Vim plugin for DQNote files (.dqn)
-" Maintainer:	    DQ
+" Maintainer:	    Dexter K. Lui <dexterklui@pm.me>
 " Latest Change:    6 May 2020
 " Version:	    1.32.14 (For DQN version 1.32)
 
