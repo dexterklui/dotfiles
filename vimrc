@@ -319,7 +319,10 @@ function s:goyo_enter()
     Limelight
   endif
   if &ft ==# 'dqn'
-    let g:limelight_paragraph_span = 2
+    if g:limelight_paragraph_span != 2
+      let g:limelight_store_span = g:limelight_paragraph_span
+      let g:limelight_paragraph_span = 2
+    endif
   endif
 endfunction
 
@@ -327,10 +330,10 @@ function s:goyo_leave()
   if exists('g:loaded_limelight')
     Limelight!
   endif
-  if &ft ==# 'dqn'
-    let g:limelight_paragraph_span = 0
+  if exists('g:limelight_store_span')
+    let g:limelight_paragraph_span = g:limelight_store_span
+    unlet g:limelight_store_span
   endif
-  "let &ft=&ft
 endfunction
 
 autocmd vimrcEx User GoyoEnter nested call <SID>goyo_enter()
@@ -345,16 +348,20 @@ endif
 
 " * limelight * {{{3
 """"""""""""""""""""
-if g:colors_name =~ 'solarized'
 autocmd vimrcEx ColorScheme *
-  \ if &background ==# 'dark' |
-    \ let g:limelight_conceal_ctermfg = 10 |
-    \ let g:limelight_conceal_guifg = '#4F6770' |
-  \ else |
-    \ let g:limelight_conceal_ctermfg = 14 |
-    \ let g:limelight_conceal_guifg = '#B3BCBC' |
+  \ if g:colors_name =~ 'solarized' |
+    \ if &background ==# 'dark' |
+      \ let g:limelight_conceal_ctermfg = 10 |
+      \ let g:limelight_conceal_guifg = '#4F6770' |
+    \ else |
+      \ let g:limelight_conceal_ctermfg = 14 |
+      \ let g:limelight_conceal_guifg = '#B3BCBC' |
+    \ endif |
+  \ else | " other colorschemes
+    \ let g:limelight_conceal_ctermfg = 'gray' |
+    \ let g:limelight_conceal_guifg = 'DarkGray' |
   \ endif
-endif
+doautocmd vimrcEx Colorscheme
 
 let g:limelight_paragraph_span = 0
 nmap <Leader>l <Plug>(Limelight)
@@ -369,6 +376,7 @@ function s:LimePara(...)
     Limelight!
   endif
 endfunction
+" Note that you don't need a space before the argument, e.g. :L1
 command -nargs=? L call s:LimePara(<args>)
 
 " * rainbow * {{{3
