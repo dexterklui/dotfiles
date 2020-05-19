@@ -14,8 +14,7 @@ syn sync minlines=50
 syn include @gitDiff syntax/diff.vim
 
 syn region gitHead start=/\%^/ end=/^$/
-" Added leading [*|\\/ ]* for git log --graph
-syn region gitHead start=+^\%([\*|\\/ ]*commit \x\{40\}\%(\s*(.*)\)\=$\)\@=+ end=/^|\s*\zs\ze\n\*/
+syn region gitHead start=/\%(^commit \x\{40\}\%(\s*(.*)\)\=$\)\@=/ end=/^$/
 
 " For git reflog and git show ...^{tree}, avoid sync issues
 syn match gitHead /^\d\{6\} \%(\w\{4} \)\=\x\{40\}\%( [0-3]\)\=\t.*/
@@ -29,13 +28,13 @@ syn region gitDiffMerge start=/^\%(@@@@* -\)\@=/ end=/^\%(diff --\|$\)\@=/ conta
 syn match gitDiffAdded "^ \++.*" contained containedin=gitDiffMerge
 syn match gitDiffRemoved "^ \+-.*" contained containedin=gitDiffMerge
 
-syn match  gitKeyword /^\%(object\|type\|tag\|[\*|\\/ ]*\zscommit\|tree\|parent\|encoding\)\>/ contained containedin=gitHead nextgroup=gitHash,gitType skipwhite
+syn match  gitKeyword /^\%(object\|type\|tag\|commit\|tree\|parent\|encoding\)\>/ contained containedin=gitHead nextgroup=gitHash,gitType skipwhite
 syn match  gitKeyword /^\%(tag\>\|ref:\)/ contained containedin=gitHead nextgroup=gitReference skipwhite
 syn match  gitKeyword /^Merge:/  contained containedin=gitHead nextgroup=gitHashAbbrev skipwhite
 syn match  gitMode    /^\d\{6\}/ contained containedin=gitHead nextgroup=gitType,gitHash skipwhite
 syn match  gitIdentityKeyword /^\%(author\|committer\|tagger\)\>/ contained containedin=gitHead nextgroup=gitIdentity skipwhite
-syn match  gitIdentityHeader /^[\*|\\/ ]*\zs\%(Author\|Commit\|Tagger\):/ contained containedin=gitHead nextgroup=gitIdentity skipwhite
-syn match  gitDateHeader /^[\*|\\/ ]*\zs\%(AuthorDate\|CommitDate\|Date\):/ contained containedin=gitHead nextgroup=gitDate skipwhite
+syn match  gitIdentityHeader /^\%(Author\|Commit\|Tagger\):/ contained containedin=gitHead nextgroup=gitIdentity skipwhite
+syn match  gitDateHeader /^\%(AuthorDate\|CommitDate\|Date\):/ contained containedin=gitHead nextgroup=gitDate skipwhite
 
 syn match  gitReflogHeader /^Reflog:/ contained containedin=gitHead nextgroup=gitReflogMiddle skipwhite
 syn match  gitReflogHeader /^Reflog message:/ contained containedin=gitHead skipwhite
@@ -47,7 +46,8 @@ syn match  gitDate      /\<\d\+ \l\+ ago\>/                    contained
 syn match  gitType      /\<\%(tag\|commit\|tree\|blob\)\>/     contained nextgroup=gitHash skipwhite
 syn match  gitStage     /\<\d\t\@=/                            contained
 syn match  gitReference /\S\+\S\@!/                            contained
-syn match  gitHash      /\<\x\{40\}\>/                         contained nextgroup=gitIdentity,gitStage,gitHash,gitSnap skipwhite
+" Add: nextgroup.=',gitPointer'
+syn match  gitHash      /\<\x\{40\}\>/                         contained nextgroup=gitIdentity,gitStage,gitHash,gitPointer skipwhite
 syn match  gitHash      /^\<\x\{40\}\>/ containedin=gitHead contained nextgroup=gitHash skipwhite
 syn match  gitHashAbbrev /\<\x\{4,40\}\>/           contained nextgroup=gitHashAbbrev skipwhite
 syn match  gitHashAbbrev /\<\x\{4,39\}\.\.\./he=e-3 contained nextgroup=gitHashAbbrev skipwhite
@@ -57,13 +57,30 @@ syn region gitEmail matchgroup=gitEmailDelimiter start=/</ end=/>/ keepend oneli
 
 syn match  gitNotesHeader /^Notes:\ze\n    /
 
-" This part is added for git log --graph
-syn region  gitSnap matchgroup=gitParen start=/(/ end=/)\ze\n|[|\\/ ]*Author:/ keepend oneline contained containedin=gitHead contains=gitPointer,gitBranch,gitComma,gitTag,gitRemote
-syn match   gitBranch  /\<\w\+\>/   contained nextgroup=gitComma
-syn match   gitRemote  &[^,/]\+/[^,/]\+&  contained nextgroup=gitComma
-syn match   gitTag     /tag:[^,]*/      contained nextgroup=gitComma
-syn match   gitComma   /,/              contained nextgroup=gitTag,gitRemote skipwhite
-syn match   gitPointer /\<HEAD ->/      contained nextgroup=gitBranch skipwhite
+" Add: For git log --graph --decorate
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+syn region  gitLogGraph start=/^\ze[|\\/ \*]\+\&.*\*/ end=/^[|\\/ ]\+\zs$/ keepend
+
+syn keyword gitKeyword commit contained containedin=gitLogGraph
+      \ nextgroup=gitHash skipwhite
+syn match   gitKeyword /^[|\\/ ]\+\zsMerge:/ contained
+      \ containedin=gitLogGraph nextgroup=gitHashAbbrev skipwhite
+syn match  gitIdentityHeader /^[|\\/ ]\+\zs\%(Author\|Commit\|Tagger\):/
+      \ contained containedin=gitLogGraph nextgroup=gitIdentity skipwhite
+syn match  gitDateHeader /^[|\\/ ]\+\zs\%(AuthorDate\|CommitDate\|Date\):/
+      \ contained containedin=gitLogGraph nextgroup=gitDate skipwhite
+
+syn region  gitPointer matchgroup=gitPunc start=/(/ end=/)$/ keepend oneline
+      \ contained contains=gitCurrent,gitPunc,gitTag,gitRemote,gitBranch
+" Order matters. Vim matches newer syntax def first (i.e. in reverse order)
+syn match   gitBranch  /\<\w\+\>/        contained containedin=gitPointer nextgroup=gitPunc
+syn match   gitRemote  &[^,/]\+/[^,/]\+& contained containedin=gitPointer nextgroup=gitPunc
+syn match   gitTag     /tag:[^,]*/       contained containedin=gitPointer nextgroup=gitPunc
+syn match   gitPunc    /,/               contained containedin=gitPointer
+      \ nextgroup=gitTag,gitRemote,gitBranch skipwhite
+syn match   gitCurrent /\<HEAD ->/       contained containedin=gitPointer
+      \ nextgroup=gitBranch skipwhite
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 hi def link gitDateHeader        gitIdentityHeader
 hi def link gitIdentityHeader    gitIdentityKeyword
@@ -84,11 +101,13 @@ hi def link gitStage             gitType
 hi def link gitType              Type
 hi def link gitDiffAdded         diffAdded
 hi def link gitDiffRemoved       diffRemoved
+
+" Add: For git log --graph --decorate
+hi def link gitLogGraph          Normal
 hi def link gitRemote            Error
 hi def link gitTag               gitcommitUnmergedFile
-hi def link gitComma             gitParen
 hi def link gitBranch            gitcommitSelectedFile
-hi def link gitPointer           Question
-hi def link gitParen             Type
+hi def link gitPunc              Type
+hi def link gitCurrent           Question
 
 let b:current_syntax = "git"
