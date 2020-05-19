@@ -23,15 +23,20 @@ function! DQFoldText()
   let l:foldlevel = foldlevel(v:foldstart)
   let l:line = substitute(getline(v:foldstart), '^\s*\|\s*$', '', 'ge')
   let l:line = substitute(l:line, '/\*\|\*/\|{{{\d\=', '', 'ge')
+
+  " If no emoji supports TODO
   if $TERM ==# 'linux'
-    if exists('g:loaded_gitgutter') && gitgutter#fold#is_changed() == 1
+    if exists('g:loaded_gitgutter') && gitgutter#fold#is_changed()
       return '+' . v:folddashes . l:line . '(*) [' . l:nrline . 'L]'
     else
       return '+' . v:folddashes . l:line . '[' . l:nrline . 'L]'
     endif
-  else
-    if exists('g:loaded_gitgutter') && gitgutter#fold#is_changed() == 1
-    " Icons:🍳🥒🥢♂️ 🔗📎🔧💡📌📍➿🔅🔺🔸🔹▫️ ▪️ 📝
+
+  " If there is emoji supports
+  else " $TERM !=# 'linux'
+
+    " if there is modified lines unstaged (Git)
+    if exists('g:loaded_gitgutter') && gitgutter#fold#is_changed()
       if l:foldlevel == 1
 	return '🔺' . l:line . '📝 [' . l:nrline . 'L]'
       elseif l:foldlevel == 2
@@ -43,14 +48,16 @@ function! DQFoldText()
 	  return '   ▫️ ' . l:line . '📝 [' . l:nrline . 'L]'
 	else
 	  return '   ▪️ ' . l:line . '📝 [' . l:nrline . 'L]'
-	endif
+	endif " background: dark, light
       else
 	if &bg ==# 'dark'
-	  return repeat(' ', l:foldlevel-1) . '▫️ ' . l:line . '📝 [' . l:nrline . 'L]'
+	  return '   ▫️ ' . repeat('▫️ ', l:foldlevel-4) . l:line . '📝 [' . l:nrline . 'L]'
 	else
-	  return repeat(' ', l:foldlevel-1) . '▪️ ' . l:line . '📝 [' . l:nrline . 'L]'
-	endif
-      endif
+	  return '   ▪️ ' . repeat('▪️ ', l:foldlevel-4) . l:line . '📝 [' . l:nrline . 'L]'
+	endif " background: dark, light
+      endif " foldlevel: 1, 2, 3, 4, >4
+
+    " if there is no modified lines unstaged (Git)
     else
       if l:foldlevel == 1
 	return '🔺' . l:line . '[' . l:nrline . 'L]'
@@ -63,15 +70,17 @@ function! DQFoldText()
 	  return '   ▫️ ' . l:line . '[' . l:nrline . 'L]'
 	else
 	  return '   ▪️ ' . l:line . '[' . l:nrline . 'L]'
-	endif
+	endif " background: dark, light
       else
 	if &bg ==# 'dark'
-	  return repeat(' ', l:foldlevel-1) . '▫️ ' . l:line . '[' . l:nrline . 'L]'
+	  return '   ▫️ ' . repeat('▫️ ', l:foldlevel-4) . l:line . '[' . l:nrline . 'L]'
 	else
-	  return repeat(' ', l:foldlevel-1) . '▪️ ' . l:line . '[' . l:nrline . 'L]'
-	endif
-      endif
-  endif
+	  return '   ▪️ ' . repeat('▪️ ', l:foldlevel-4) . l:line . '[' . l:nrline . 'L]'
+	endif " background: dark, light
+      endif " foldlevel: 1, 2, 3, 4, >4
+    endif " Git's unstage modified lines: True, False
+  endif " Support emoji: False, True
+  " Reserved emojis: 🍳🥒🥢♂️ 🔗📎🔧💡📌📍➿🔅🔺🔸🔹▫️ ▪️ 📝
 endfunction
 
 " Setting
