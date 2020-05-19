@@ -7,8 +7,6 @@
   if &cp || exists('g:loaded_DQVim')
     if &cp && &verbose
       echo "Not loading DQVim in compatible mode."
-    elseif exists('g:loaded_DQVim')
-      echo "DQVim was loaded already."
     endif
     finish
   endif
@@ -53,6 +51,7 @@
   endfunction
 
   function ArgAdd() range
+    " Add filename to arg list for each line in range
     for m in range(a:firstline, a:lastline)
       exe '$argadd ' . getline(m)
     endfor

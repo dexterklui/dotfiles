@@ -7,8 +7,6 @@
   if &cp || exists('g:loaded_DQNYank')
     if &cp && &verbose
       echo "Not loading DQNYank in compatible mode."
-    elseif exists('g:loaded_DQNYank')
-      echo "DQNYank was loaded already."
     endif
     finish
   endif

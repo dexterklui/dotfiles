@@ -7,8 +7,6 @@
 if &cp || exists('g:loaded_DQTreeDiagram')
   if &cp && &verbose
     echo "Not loading DQTreeDiagram in compatible mode."
-  elseif exists('g:loaded_DQTreeDiagram')
-    echo "DQTreeDiagram was loaded already."
   endif
   finish
 endif

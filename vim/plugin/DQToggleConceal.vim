@@ -7,8 +7,6 @@
   if &cp || exists('g:loaded_DQToggleConceal')
     if &cp && &verbose
       echo "Not loading DQToggleConceal in compatible mode."
-    elseif exists('g:loaded_DQToggleConceal')
-      echo "DQToggleConceal was loaded already."
     endif
     finish
   endif

@@ -7,8 +7,6 @@
   if &cp || exists('g:loaded_DQFoldText')
     if &cp && &verbose
       echo "Not loading DQFoldText in compatible mode."
-    elseif exists('g:loaded_DQFoldText')
-      echo "DQFoldText was loaded already."
     endif
     finish
   endif
@@ -57,7 +55,7 @@ function! DQFoldText()
 	endif " background: dark, light
       endif " foldlevel: 1, 2, 3, 4, >4
 
-    " if there is no modified lines unstaged (Git)
+    " if there is no modified lines unstaged (Gitgutter)
     else
       if l:foldlevel == 1
 	return '🔺' . l:line . '[' . l:nrline . 'L]'

@@ -7,8 +7,6 @@
   if &cp || exists('g:loaded_DQColorscheme')
     if &cp && &verbose
       echo "Not loading DQColorscheme in compatible mode."
-    elseif exists('g:loaded_DQColorscheme')
-      echo "DQColorscheme was loaded already."
     endif
     finish
   endif

@@ -7,8 +7,6 @@
   if &cp || exists('g:loaded_DQNote')
     if &cp && &verbose
       echo "Not loading DQNote in compatible mode."
-    elseif exists('g:loaded_DQNote')
-      echo "DQNote was loaded already."
     endif
     finish
   endif
