@@ -31,3 +31,5 @@ alias cdd='cd -P'
 alias df='df -h'
 alias mv='echo "Use /bin/mv -i!"'
 alias rm='echo "Use the full path i.e. /bin/rm"'
+
+# vi: ft=sh
