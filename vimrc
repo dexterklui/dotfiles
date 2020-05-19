@@ -310,7 +310,7 @@ nnoremap <Leader>hc :GitGutterQuickFix<CR>
 
 " * Fugitive * {{{3
 """"""""""""""""""""
-command GitLog :Git log --all --graph --decorate
+command GitLog Git log --all --graph --decorate
 
 " * goyo * {{{3
 """"""""""""""""""""
@@ -345,6 +345,7 @@ endif
 
 " * limelight * {{{3
 """"""""""""""""""""
+if g:colors_name =~ 'solarized'
 autocmd vimrcEx ColorScheme *
   \ if &background ==# 'dark' |
     \ let g:limelight_conceal_ctermfg = 10 |
@@ -353,16 +354,22 @@ autocmd vimrcEx ColorScheme *
     \ let g:limelight_conceal_ctermfg = 14 |
     \ let g:limelight_conceal_guifg = '#B3BCBC' |
   \ endif
+endif
 
 let g:limelight_paragraph_span = 0
 nmap <Leader>l <Plug>(Limelight)
 xmap <Leader>l <Plug>(Limelight)
-nnoremap <Leader>L :Limelight!!<CR>
-nnoremap <silent> <Leader>`l :let g:limelight_paragraph_span = 0<CR>
-nnoremap <silent> <Leader>0l :let g:limelight_paragraph_span = 0<CR>
-nnoremap <silent> <Leader>1l :let g:limelight_paragraph_span = 1<CR>
-nnoremap <silent> <Leader>2l :let g:limelight_paragraph_span = 2<CR>
-nnoremap <silent> <Leader>3l :let g:limelight_paragraph_span = 3<CR>
+function s:LimePara(...)
+  if a:0 == 0
+    Limelight!!
+  elseif a:1 >= 0
+    let g:limelight_paragraph_span = a:1
+    Limelight
+  else
+    Limelight!
+  endif
+endfunction
+command -nargs=? L call s:LimePara(<args>)
 
 " * rainbow * {{{3
 """"""""""""""""""""
