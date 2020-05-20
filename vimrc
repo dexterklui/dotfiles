@@ -309,10 +309,6 @@ command -nargs=0 SR SyntasticReset
 """"""""""""""""""""
 nnoremap <Leader>hc :GitGutterQuickFix<CR>
 
-" * Fugitive * {{{3
-""""""""""""""""""""
-command GitLog Git log --all --graph --decorate
-
 " * goyo * {{{3
 """"""""""""""""""""
 function s:goyo_enter()
