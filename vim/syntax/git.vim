@@ -2,7 +2,7 @@
 " Language:	generic git output
 " Author:	Tim Pope <vimNOSPAM@tpope.org>
 " Modified:	Dexter K. Lui <dexterklui@pm.me>
-" Last Change:	2020 May 16
+" Last Change:	2020 May 20
 
 if exists("b:current_syntax")
   finish
@@ -13,6 +13,8 @@ syn sync minlines=50
 
 syn include @gitDiff syntax/diff.vim
 
+" Original syntax with little ammendment {{{1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syn region gitHead start=/\%^/ end=/^$/
 syn region gitHead start=/\%(^commit \x\{40\}\%(\s*(.*)\)\=$\)\@=/ end=/^$/
 
@@ -46,7 +48,7 @@ syn match  gitDate      /\<\d\+ \l\+ ago\>/                    contained
 syn match  gitType      /\<\%(tag\|commit\|tree\|blob\)\>/     contained nextgroup=gitHash skipwhite
 syn match  gitStage     /\<\d\t\@=/                            contained
 syn match  gitReference /\S\+\S\@!/                            contained
-" Add: nextgroup.=',gitPointer'
+" Add: nextgroup.=',gitPointer' :
 syn match  gitHash      /\<\x\{40\}\>/                         contained nextgroup=gitIdentity,gitStage,gitHash,gitPointer skipwhite
 syn match  gitHash      /^\<\x\{40\}\>/ containedin=gitHead contained nextgroup=gitHash skipwhite
 syn match  gitHashAbbrev /\<\x\{4,40\}\>/           contained nextgroup=gitHashAbbrev skipwhite
@@ -57,9 +59,10 @@ syn region gitEmail matchgroup=gitEmailDelimiter start=/</ end=/>/ keepend oneli
 
 syn match  gitNotesHeader /^Notes:\ze\n    /
 
-" Add: For git log --graph --decorate
+" Add Syntax: For git log --graph {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syn region  gitLogGraph start=/^\ze[|\\/ \*]\+\&.*\*/ end=/^[|\\/ ]\+\zs$/ keepend
+      \ contains=gitLeadHash
 
 syn keyword gitKeyword commit contained containedin=gitLogGraph
       \ nextgroup=gitHash skipwhite
@@ -70,7 +73,9 @@ syn match  gitIdentityHeader /^[|\\/ ]\+\zs\%(Author\|Commit\|Tagger\):/
 syn match  gitDateHeader /^[|\\/ ]\+\zs\%(AuthorDate\|CommitDate\|Date\):/
       \ contained containedin=gitLogGraph nextgroup=gitDate skipwhite
 
-syn region  gitPointer matchgroup=gitPunc start=/(/ end=/)$/ keepend oneline
+" Add Syntax: For git log --decorate {{{1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+syn region  gitPointer matchgroup=gitPunc start=/(/ end=/)/ keepend oneline
       \ contained contains=gitCurrent,gitPunc,gitTag,gitRemote,gitBranch
 " Order matters. Vim matches newer syntax def first (i.e. in reverse order)
 syn match   gitBranch  /\<\w\+\>/        contained containedin=gitPointer nextgroup=gitPunc
@@ -80,8 +85,16 @@ syn match   gitPunc    /,/               contained containedin=gitPointer
       \ nextgroup=gitTag,gitRemote,gitBranch skipwhite
 syn match   gitCurrent /\<HEAD ->/       contained containedin=gitPointer
       \ nextgroup=gitBranch skipwhite
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Add Syntax: For git log --oneline {{{1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+syn match gitLeadHash /^[|\\/ \*]*\<\zs\x\{7\}\>/
+      \ nextgroup=gitPointer skipwhite
+
+" Highlighting {{{1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Original {{{2
+""""""""""""""""""""""""""""""""""""""""
 hi def link gitDateHeader        gitIdentityHeader
 hi def link gitIdentityHeader    gitIdentityKeyword
 hi def link gitIdentityKeyword   Label
@@ -102,12 +115,18 @@ hi def link gitType              Type
 hi def link gitDiffAdded         diffAdded
 hi def link gitDiffRemoved       diffRemoved
 
-" Add: For git log --graph --decorate
+" Add Highlight: For git log --graph --decorate --oneline {{{2
+""""""""""""""""""""""""""""""""""""""""
 hi def link gitLogGraph          Normal
+
 hi def link gitRemote            Error
 hi def link gitTag               gitcommitUnmergedFile
 hi def link gitBranch            gitcommitSelectedFile
 hi def link gitPunc              Type
 hi def link gitCurrent           Question
 
+hi def link gitLeadHash          gitHash
+" }}}1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let b:current_syntax = "git"
+" vi: fdm=marker
