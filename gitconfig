@@ -18,5 +18,13 @@
 	editor = nvim
 	excludesfile = /home/dexq/.gitignore
 [alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	l = log
+	dt = difftool
+	mt = mergetool
 	last = log -1 HEAD
+	graph = log --all --graph --decorate
 	unstage = reset HEAD --

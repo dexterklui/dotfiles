@@ -17,19 +17,14 @@ if [[ "$(hostname)" == "DQ-x1c" ]]; then {
     # Save a lot of typing for common commands
     alias v='nvim'
     alias vr='nvim -R' # Neovim read-only mode
+    alias vdiff='nvim -d'
 };
 fi
 
-alias gs='git status'
-alias gc='git commit'
-alias gc='git add'
-
-# tweaking essential commands
-alias cdd='cd -P'
+alias g='git'
 
 # Overwrite existing commands for better defaults
-alias df='df -h'
 alias mv='echo "Use /bin/mv -i!"'
-alias rm='echo "Use the full path i.e. /bin/rm"'
+alias rm='echo "Use the full path i.e. /bin/rm!"'
 
 # vi: ft=sh
