@@ -1,7 +1,8 @@
 " Vim syntax file
 " Language:	generic git output
 " Author:	Tim Pope <vimNOSPAM@tpope.org>
-" Modified:	Dexter K. Lui <dexterklui@pm.me>
+" Last Change:	2010 May 21
+" Modified By:	Dexter K. Lui <dexterklui@pm.me>
 " Last Change:	2020 May 20
 
 if exists("b:current_syntax")
@@ -91,6 +92,19 @@ syn match   gitCurrent /\<HEAD ->/       contained containedin=gitPointer
 syn match gitLeadHash /^[|\\/ \*]*\<\zs\x\{7\}\>/
       \ nextgroup=gitPointer skipwhite
 
+" Add Syntax: For git log --(short)stat {{{1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+syn match gitStat /^[|\\/ \*]* \zs\S.* | \+\d\+ [+-]\+$/
+syn match gitPatch /\d\+ [+-]\+$/ contained containedin=gitStat
+syn match gitPatchNr /\d\+/ contained containedin=gitPatch
+syn match gitPatchPlus /+/ contained containedin=gitPatch
+syn match gitPatchMinus /-/ contained containedin=gitPatch
+syn match gitShortStat /^[|\\/ \*]* \d\+ files\= changed
+      \\%(, \d\+ insertions\=(+)\)\=\%(, \d\+ deletions\=(-)\)\=$/
+syn match gitPatchNr /\d\+\ze files\= changed/ contained containedin=gitShortStat
+syn match gitPatchPlus /\d\+\ze insertions\=(+)/ contained containedin=gitShortStat
+syn match gitPatchMinus /\d\+\ze deletions\=(-)/ contained containedin=gitShortStat
+
 " Highlighting {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Original {{{2
@@ -117,8 +131,6 @@ hi def link gitDiffRemoved       diffRemoved
 
 " Add Highlight: For git log --graph --decorate --oneline {{{2
 """"""""""""""""""""""""""""""""""""""""
-hi def link gitLogGraph          Normal
-
 hi def link gitRemote            Error
 hi def link gitTag               gitcommitUnmergedFile
 hi def link gitBranch            gitcommitSelectedFile
@@ -126,6 +138,10 @@ hi def link gitPunc              Type
 hi def link gitCurrent           Question
 
 hi def link gitLeadHash          gitHash
+
+hi def link gitPatchNr           Type
+hi def link gitPatchPlus         Statement
+hi def link gitPatchMinus        Special
 " }}}1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let b:current_syntax = "git"
