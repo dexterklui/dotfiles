@@ -354,7 +354,7 @@ autocmd vimrcEx ColorScheme *
       \ let g:limelight_conceal_ctermfg = 14 |
       \ let g:limelight_conceal_guifg = '#B3BCBC' |
     \ endif |
-  \ else | " other colorschemes
+  \ else |
     \ let g:limelight_conceal_ctermfg = 'gray' |
     \ let g:limelight_conceal_guifg = 'DarkGray' |
   \ endif
