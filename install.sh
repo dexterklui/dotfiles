@@ -18,6 +18,7 @@ ln -s ${PWD}/vimrc ~/.vimrc && echo 'Installed ~/.vimrc'
 # .vim/syntax {{{2
 ########################################
 cp -iu ${PWD}/vim/syntax/git.vim ~/.vim/syntax/git.vim
+cp -iu ${PWD}/vim/syntax/dqn.vim ~/.vim/syntax/dqn.vim
 
 # .vim/plugin {{{2
 ########################################
