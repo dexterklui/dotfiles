@@ -20,7 +20,7 @@
     " Return the version (float) if it is a DQN file and has a valid stamp.
     " Return 0 if it is a DQN file but does not have a valid stamp.
     " Return -1 if it is NOT a DQN file
-    if expand('%:e') !=# 'dqn'
+    if expand('%:e') !~ '^dqn\~\=$'
       return 0
     elseif getline(1) !~ '^/// Language: DQNote[-_][0-9.]\+'
       return -1
