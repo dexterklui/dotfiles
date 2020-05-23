@@ -1,8 +1,8 @@
 " Vim syntax file
 " Language:	DQNote
 " Maintainer:	DQ
-" Version:	1.32.3
-" Last Change:	22 May 2020
+" Version:	1.32.4
+" Last Change:	23 May 2020
 
 " Quit when a (custom) syntax file was already loaded {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -121,380 +121,203 @@ syn include @dqnPython syntax/python.vim
 syn region  dqnPython matchgroup=dqnMark start=/#beginPython#$/ end=/#endPython#$/
       \ contains=@dqnPython
 
-"" Setting colors according to colorscheme {{{1
-"""""""""""""""""""""""""""""""""""""""""
-"" Solarized Colorscheme: t_Co>=16 && g:solarized_termcolors != 256 {{{2
-"""""""""""""""""""""
-"if g:colors_name =~ 'solarized' && &t_Co>=16 && g:solarized_termcolors != 256
-"      \ && !has("gui_running")
-"
-"let g_yellow  = '#b58900'
-"let g_green   = '#859900'
-"let g_blue    = '#268bd2'
-"let g_orange  = '#cb4b16'
-"let g_purple  = '#6c71c4'
-"let g_cyan    = '#2aa198'
-"let g_magenta = '#d33682'
-"let g_red     = '#dc322f'
-"  if &background ==# 'dark'
-"let g_gray  = '#657b83'
-"let g_bkgrd = '#002b36'
-"let g_frgrd = '#fdf6e3'
-"  else
-"let g_gray  = '#93a1a1'
-"let g_bkgrd = '#fdf6e3'
-"let g_frgrd = '#002b36'
-"  endif
-"  
-"let t_yellow  = '3'
-"let t_green   = '2'
-"let t_blue    = '4'
-"let t_orange  = '9'
-"let t_purple  = '13'
-"let t_cyan    = '6'
-"let t_magenta = '5'
-"let t_red     = '1'
-"  if &background ==# 'dark'
-"let t_gray  = '10'
-"let t_bkgrd = '8'
-"let t_frgrd = '15'
-"  else
-"let t_gray  = '14'
-"let t_bkgrd = '15'
-"let t_frgrd = '8'
-"  endif
-"
-"" Solarized Colorscheme: gui || t_Co<16 || g:solarized_termcolors==256 {{{2
-"""""""""""""""""""""
-"elseif g:colors_name =~ 'solarized'
-"
-"let g_yellow  = '#b58900'
-"let g_green   = '#859900'
-"let g_blue    = '#268bd2'
-"let g_orange  = '#cb4b16'
-"let g_purple  = '#6c71c4'
-"let g_cyan    = '#2aa198'
-"let g_magenta = '#d33682'
-"let g_red     = '#dc322f'
-"  if &background ==# 'dark'
-"let g_gray  = '#657b83'
-"let g_bkgrd = '#002b36'
-"let g_frgrd = '#fdf6e3'
-"  else
-"let g_gray  = '#93a1a1'
-"let g_bkgrd = '#fdf6e3'
-"let g_frgrd = '#002b36'
-"  endif
-"  
-"  if t_Co<16
-"let t_yellow  = 'darkyellow'
-"let t_green   = 'darkgreen'
-"let t_blue    = 'darkblue'
-"let t_orange  = 'lightred'
-"let t_purple  = 'lightmagenta'
-"let t_cyan    = 'darkcyan'
-"let t_magenta = 'darkmagenta'
-"let t_red     = 'darkred'
-"    if &background ==# 'dark'
-"let t_gray  = 'lightgreen'
-"let t_bkgrd = 'darkgray'
-"let t_frgrd = 'white'
-"    else
-"let t_gray  = 'lightcyan'
-"let t_bkgrd = 'white'
-"let t_frgrd = 'darkgray'
-"    endif
-"
-"  else " if t_Co >= 16 i.e. g:solarized_termcolors == 256
-"let t_yellow  = '136'
-"let t_green   = '64'
-"let t_blue    = '33'
-"let t_orange  = '166'
-"let t_purple  = '61'
-"let t_cyan    = '37'
-"let t_magenta = '125'
-"let t_red     = '160'
-"    if &background ==# 'dark'
-"let t_gray  = '240'
-"let t_bkgrd = '234'
-"let t_frgrd = '230'
-"    else
-"let t_gray  = '245'
-"let t_bkgrd = '230'
-"let t_frgrd = '234'
-"    endif
-"  endif
-"
-"" Other colorscheme {{{2
-"""""""""""""""""""""
-"else " colorscheme other than solarized
-"
-"let g_yellow  = 'yellow'
-"let g_green   = 'green'
-"let g_blue    = 'blue'
-"let g_orange  = 'orange'
-"let g_purple  = 'darkmagenta'
-"let g_cyan    = 'cyan'
-"let g_magenta = 'magenta'
-"let g_red     = 'darkred'
-"  if &background ==# 'dark'
-"let g_gray  = 'darkgray'
-"let g_bkgrd = 'black'
-"let g_frgrd = 'white'
-"  else
-"let g_gray  = 'lightgray'
-"let g_bkgrd = 'white'
-"let g_frgrd = 'black'
-"  endif
-"
-"let t_yellow  = 'yellow'
-"let t_green   = 'green'
-"let t_blue    = 'blue'
-"let t_orange  = 'orange'
-"let t_purple  = 'darkmagenta'
-"let t_cyan    = 'cyan'
-"let t_magenta = 'magenta'
-"let t_red     = 'darkred'
-"  if &background ==# 'dark'
-"let t_gray  = 'darkgray'
-"let t_bkgrd = 'black'
-"let t_frgrd = 'white'
-"  else
-"let t_gray  = 'lightgray'
-"let t_bkgrd = 'white'
-"let t_frgrd = 'black'
-"  endif
-"
-"endif " colorscheme: =~ solarized OR else
-"
-" Old Highlighting {{{1
+" Setting colors according to colorscheme {{{1
 """"""""""""""""""""""""""""""""""""""""
 " Solarized Colorscheme: t_Co>=16 && g:solarized_termcolors != 256 {{{2
 """"""""""""""""""""
 if g:colors_name =~ 'solarized' && &t_Co>=16 && g:solarized_termcolors != 256
       \ && !has("gui_running")
-" Titles {{{3
-""""""""""
-  if &t_Co >= 256 && &background ==# 'dark'
-hi     dqnTitle1   ctermfg=213 cterm=bold
-hi     dqnTitle2   ctermfg=215 cterm=bold
-hi     dqnTitle3   ctermfg=43  cterm=bold
-hi     dqnSubtitle ctermfg=111
-  elseif &t_Co >= 256
-hi     dqnTitle1   ctermfg=133 cterm=bold
-hi     dqnTitle2   ctermfg=130 cterm=bold
-hi     dqnTitle3   ctermfg=30  cterm=bold
-hi     dqnSubtitle ctermfg=25
-  else " if &t_Co < 256
-hi def dqnTitle1   ctermfg=5 cterm=bold
-hi def dqnTitle2   ctermfg=9 cterm=bold
-hi def dqnTitle3   ctermfg=2 cterm=bold
-hi def dqnSubtitle ctermfg=4 cterm=bold
-  endif
 
-" Coloured highlighting without background {{{3
-""""""""""
-hi def dqnYellow  ctermfg=3  cterm=none
-hi def dqnGreen   ctermfg=2  cterm=none
-hi def dqnBlue    ctermfg=4  cterm=none
-hi def dqnOrange  ctermfg=9  cterm=none
-hi def dqnPurple  ctermfg=13 cterm=none
-hi def dqnCyan    ctermfg=6  cterm=none
-hi def dqnMagenta ctermfg=5  cterm=none
-hi def dqnRed     ctermfg=1  cterm=none
-hi def dqnGray    ctermfg=11 cterm=none
-if &bg ==# 'dark'
-  hi def dqnBkgrd ctermfg=8  cterm=none
-else
-  hi def dqnBkgrd ctermfg=15 cterm=none
-endif
-
-" Coloured highlighting with gray background {{{3
-""""""""""
-hi def dqnBgYellow  ctermfg=3  cterm=none ctermbg=10
-hi def dqnBgGreen   ctermfg=2  cterm=none ctermbg=10
-hi def dqnBgBlue    ctermfg=4  cterm=none ctermbg=10
-hi def dqnBgOrange  ctermfg=9  cterm=none ctermbg=10
-hi def dqnBgPurple  ctermfg=13 cterm=none ctermbg=10
-hi def dqnBgCyan    ctermfg=6  cterm=none ctermbg=10
-hi def dqnBgMagenta ctermfg=5  cterm=none ctermbg=10
-hi def dqnBgRed     ctermfg=1  cterm=none ctermbg=10
-hi def dqnBgGray    ctermfg=11 cterm=none ctermbg=10
-  if &bg ==# 'dark'
-hi def dqnBgBkgrd   ctermfg=8  cterm=none ctermbg=10
-hi def dqnBgFrgrd   ctermfg=15 cterm=none ctermbg=10
+let s:g_Yellow  = '#b58900'
+let s:g_Green   = '#859900'
+let s:g_Blue    = '#268bd2'
+let s:g_Orange  = '#cb4b16'
+let s:g_Purple  = '#6c71c4'
+let s:g_Cyan    = '#2aa198'
+let s:g_Magenta = '#d33682'
+let s:g_Red     = '#dc322f'
+  if &background ==# 'dark'
+let s:g_Gray  = '#657b83'
+let s:g_Bkgrd = '#002b36'
+let s:g_Frgrd = '#fdf6e3'
   else
-hi def dqnBgBkgrd   ctermfg=15 cterm=none ctermbg=10
-hi def dqnBgFrgrd   ctermfg=8  cterm=none ctermbg=10
+let s:g_Gray  = '#93a1a1'
+let s:g_Bkgrd = '#fdf6e3'
+let s:g_Frgrd = '#002b36'
   endif
-hi def dqnCode      ctermfg=14 cterm=none ctermbg=10
-hi def dqnCodeType  ctermfg=6  cterm=none ctermbg=10
+  
+let s:t_Yellow  = '3'
+let s:t_Green   = '2'
+let s:t_Blue    = '4'
+let s:t_Orange  = '9'
+let s:t_Purple  = '13'
+let s:t_Cyan    = '6'
+let s:t_Magenta = '5'
+let s:t_Red     = '1'
+  if &background ==# 'dark'
+let s:t_Gray  = '10'
+let s:t_Bkgrd = '8'
+let s:t_Frgrd = '15'
+  else
+let s:t_Gray  = '14'
+let s:t_Bkgrd = '15'
+let s:t_Frgrd = '8'
+  endif
 
-" Keywords and others {{{3
-""""""""""
-hi def link dqnKeyword  Todo
-hi def      dqnMark     ctermfg=10 cterm=none
-hi def link dqnFoldMark dqnBkgrd
-hi def link dqnComment  Comment
-hi def link dqnNomatch  dqnBgFrgrd
-
-" Solarized Colorscheme: gui || t_Co<16 || g:solarized_termcolors ==256 {{{2
+" Solarized Colorscheme: gui || t_Co<16 || g:solarized_termcolors==256 {{{2
 """"""""""""""""""""
 elseif g:colors_name =~ 'solarized'
-" Titles {{{3
-""""""""""
-  if (has("gui_running") || &t_Co >= 256) && &background ==# 'dark'
-hi     dqnTitle1   guifg=#ff87ff ctermfg=213 gui=bold cterm=bold
-hi     dqnTitle2   guifg=#ffaf5f ctermfg=215 gui=bold cterm=bold
-hi     dqnTitle3   guifg=#00d7af ctermfg=43  gui=bold cterm=bold
-hi     dqnSubtitle guifg=#87afff ctermfg=111 gui=bold 
-  elseif has("gui_running") || &t_Co >= 256
-hi     dqnTitle1   guifg=#af5faf ctermfg=133 gui=bold cterm=bold
-hi     dqnTitle2   guifg=#af5f00 ctermfg=130 gui=bold cterm=bold
-hi     dqnTitle3   guifg=#008787 ctermfg=30  gui=bold cterm=bold
-hi     dqnSubtitle guifg=#005faf ctermfg=25  gui=bold 
-  else " if &t_Co < 256
-hi def dqnTitle1   ctermfg=darkmagenta cterm=bold
-hi def dqnTitle2   ctermfg=lightred    cterm=bold
-hi def dqnTitle3   ctermfg=darkgreen   cterm=bold
-hi def dqnSubtitle ctermfg=darkblue    cterm=bold
-  endif
 
-" Coloured highlighting without background {{{3
-""""""""""
-hi def dqnYellow  guifg=#b58900 ctermfg=darkyellow   gui=none cterm=none
-hi def dqnGreen   guifg=#859900 ctermfg=darkgreen    gui=none cterm=none
-hi def dqnBlue    guifg=#268bd2 ctermfg=darkblue     gui=none cterm=none
-hi def dqnOrange  guifg=#cb4b16 ctermfg=lightred     gui=none cterm=none
-hi def dqnPurple  guifg=#6c71c4 ctermfg=lightmagenta gui=none cterm=none
-hi def dqnCyan    guifg=#2aa198 ctermfg=darkcyan     gui=none cterm=none
-hi def dqnMagenta guifg=#d33682 ctermfg=darkmagenta  gui=none cterm=none
-hi def dqnRed     guifg=#dc322f ctermfg=darkred      gui=none cterm=none
-hi def dqnGray    guifg=#586e75 ctermfg=lightgreen   gui=none cterm=none
-  if &bg ==# 'dark'
-hi def dqnBkgrd guifg=#002b36 ctermfg=darkgray     gui=none cterm=none
+let s:g_Yellow  = '#b58900'
+let s:g_Green   = '#859900'
+let s:g_Blue    = '#268bd2'
+let s:g_Orange  = '#cb4b16'
+let s:g_Purple  = '#6c71c4'
+let s:g_Cyan    = '#2aa198'
+let s:g_Magenta = '#d33682'
+let s:g_Red     = '#dc322f'
+  if &background ==# 'dark'
+let s:g_Gray  = '#657b83'
+let s:g_Bkgrd = '#002b36'
+let s:g_Frgrd = '#fdf6e3'
   else
-hi def dqnBkgrd guifg=#fdf6e3 ctermfg=white        gui=none cterm=none
+let s:g_Gray  = '#93a1a1'
+let s:g_Bkgrd = '#fdf6e3'
+let s:g_Frgrd = '#002b36'
   endif
+  
+  if &t_Co<16
+let s:t_Yellow  = 'darkyellow'
+let s:t_Green   = 'darkgreen'
+let s:t_Blue    = 'darkblue'
+let s:t_Orange  = 'lightred'
+let s:t_Purple  = 'lightmagenta'
+let s:t_Cyan    = 'darkcyan'
+let s:t_Magenta = 'darkmagenta'
+let s:t_Red     = 'darkred'
+    if &background ==# 'dark'
+let s:t_Gray  = 'lightgreen'
+let s:t_Bkgrd = 'darkgray'
+let s:t_Frgrd = 'white'
+    else
+let s:t_Gray  = 'lightcyan'
+let s:t_Bkgrd = 'white'
+let s:t_Frgrd = 'darkgray'
+    endif
 
-" Coloured highlighting with gray background {{{3
-""""""""""
-hi def dqnBgYellow  guifg=#b58900 ctermfg=darkyellow   gui=none cterm=none
-      \ guibg=#586e75 ctermbg=lightgreen
-hi def dqnBgGreen   guifg=#859900 ctermfg=darkgreen    gui=none cterm=none
-      \ guibg=#586e75 ctermbg=lightgreen
-hi def dqnBgBlue    guifg=#268bd2 ctermfg=darkblue     gui=none cterm=none
-      \ guibg=#586e75 ctermbg=lightgreen
-hi def dqnBgOrange  guifg=#cb4b16 ctermfg=lightred     gui=none cterm=none
-      \ guibg=#586e75 ctermbg=lightgreen
-hi def dqnBgPurple  guifg=#6c71c4 ctermfg=lightmagenta gui=none cterm=none
-      \ guibg=#586e75 ctermbg=lightgreen
-hi def dqnBgCyan    guifg=#2aa198 ctermfg=darkcyan     gui=none cterm=none
-      \ guibg=#586e75 ctermbg=lightgreen
-hi def dqnBgMagenta guifg=#d33682 ctermfg=darkmagenta  gui=none cterm=none
-      \ guibg=#586e75 ctermbg=lightgreen
-hi def dqnBgRed     guifg=#dc322f ctermfg=darkred      gui=none cterm=none
-      \ guibg=#586e75 ctermbg=lightgreen
-hi def dqnBgGray    guifg=#586e75 ctermfg=lightgreen   gui=none cterm=none
-      \ guibg=#586e75 ctermbg=lightgreen
-  if &bg ==# 'dark'
-hi def dqnBgBkgrd   guifg=#002b36 ctermfg=darkgray     gui=none cterm=none
-    \ guibg=#586e75 ctermbg=lightgreen
-hi def dqnBgFrgrd   guifg=#fdf6e3 ctermfg=white        gui=none cterm=none
-    \ guibg=#586e75 ctermbg=lightgreen
-  else
-hi def dqnBgBkgrd   guifg=#fdf6e3 ctermfg=white        gui=none cterm=none
-    \ guibg=#586e75 ctermbg=lightgreen
-hi def dqnBgFrgrd   guifg=#002b36 ctermfg=darkgray     gui=none cterm=none
-    \ guibg=#586e75 ctermbg=lightgreen
+  else " if t_Co >= 16 i.e. g:solarized_termcolors == 256
+let s:t_Yellow  = '136'
+let s:t_Green   = '64'
+let s:t_Blue    = '33'
+let s:t_Orange  = '166'
+let s:t_Purple  = '61'
+let s:t_Cyan    = '37'
+let s:t_Magenta = '125'
+let s:t_Red     = '160'
+    if &background ==# 'dark'
+let s:t_Gray  = '240'
+let s:t_Bkgrd = '234'
+let s:t_Frgrd = '230'
+    else
+let s:t_Gray  = '245'
+let s:t_Bkgrd = '230'
+let s:t_Frgrd = '234'
+    endif
   endif
-hi def dqnCode      guifg=#93a1a1 ctermfg=lightcyan    gui=none cterm=none
-    \ guibg=#586e75 ctermbg=lightgreen
-hi def dqnCodeType  guifg=#2aa198 ctermfg=darkcyan     gui=none cterm=none
-    \ guibg=#586e75 ctermbg=lightgreen
-
-" Keywords and others {{{3
-""""""""""
-hi def link dqnKeyword  Todo
-hi def dqnMark    guifg=#586e75 ctermfg=lightgreen gui=none cterm=none
-hi def link dqnFoldMark dqnBkgrd
-hi def link dqnComment  Comment
-hi def link dqnNomatch  dqnBgFrgrd
 
 " Other colorscheme {{{2
 """"""""""""""""""""
 else " colorscheme other than solarized
-" Titles {{{3
-""""""""""
-hi def dqnTitle1   guifg=cyan  ctermfg=cyan  gui=bold cterm=bold
-hi def dqnTitle2   guifg=brown ctermfg=brown gui=bold cterm=bold
-hi def dqnTitle3   guifg=green ctermfg=green gui=bold cterm=bold
-hi def dqnSubtitle guifg=blue  ctermfg=blue  gui=bold cterm=bold
 
-" Coloured highlighting without background {{{3
-""""""""""
-hi def dqnYellow  guifg=yellow      ctermfg=yellow      gui=none cterm=none
-hi def dqnGreen   guifg=green       ctermfg=green       gui=none cterm=none
-hi def dqnBlue    guifg=blue        ctermfg=blue        gui=none cterm=none
-hi def dqnOrange  guifg=brown       ctermfg=brown       gui=none cterm=none
-hi def dqnPurple  guifg=darkmagenta ctermfg=darkmagenta gui=none cterm=none
-hi def dqnCyan    guifg=cyan        ctermfg=cyan        gui=none cterm=none
-hi def dqnMagenta guifg=magenta     ctermfg=magenta     gui=none cterm=none
-hi def dqnRed     guifg=darkred     ctermfg=darkred     gui=none cterm=none
-hi def dqnGray    guifg=darkgray    ctermfg=darkgray    gui=none cterm=none
-  if &bg ==# 'dark'
-hi def dqnBkgrd   guifg=black     ctermfg=black       gui=none cterm=none
+let s:g_Yellow  = 'yellow'
+let s:g_Green   = 'green'
+let s:g_Blue    = 'blue'
+let s:g_Orange  = 'brown'
+let s:g_Purple  = 'darkmagenta'
+let s:g_Cyan    = 'cyan'
+let s:g_Magenta = 'magenta'
+let s:g_Red     = 'darkred'
+  if &background ==# 'dark'
+let s:g_Gray  = 'darkgray'
+let s:g_Bkgrd = 'black'
+let s:g_Frgrd = 'white'
   else
-hi def dqnBkgrd   guifg=white     ctermfg=white       gui=none cterm=none
+let s:g_Gray  = 'lightgray'
+let s:g_Bkgrd = 'white'
+let s:g_Frgrd = 'black'
   endif
 
-" Coloured highlighting with gray background {{{3
-""""""""""
-hi def dqnBgYellow  guifg=yellow      ctermfg=yellow      gui=none cterm=none
-      \ guibg=darkgray ctermbg=darkgray
-hi def dqnBgGreen   guifg=green       ctermfg=green       gui=none cterm=none
-      \ guibg=darkgray ctermbg=darkgray
-hi def dqnBgBlue    guifg=blue        ctermfg=blue        gui=none cterm=none
-      \ guibg=darkgray ctermbg=darkgray
-hi def dqnBgOrange  guifg=brown       ctermfg=brown       gui=none cterm=none
-      \ guibg=darkgray ctermbg=darkgray
-hi def dqnBgPurple  guifg=darkmagenta ctermfg=darkmagenta gui=none cterm=none
-      \ guibg=darkgray ctermbg=darkgray
-hi def dqnBgCyan    guifg=cyan        ctermfg=cyan        gui=none cterm=none
-      \ guibg=darkgray ctermbg=darkgray
-hi def dqnBgMagenta guifg=magenta     ctermfg=magenta     gui=none cterm=none
-      \ guibg=darkgray ctermbg=darkgray
-hi def dqnBgRed     guifg=darkred     ctermfg=darkred     gui=none cterm=none
-      \ guibg=darkgray ctermbg=darkgray
-hi def dqnBgGray    guifg=darkgray    ctermfg=darkgray    gui=none cterm=none
-      \ guibg=darkgray ctermbg=darkgray
-
-  if &bg ==# 'dark'
-hi def dqnBgBkgrd   guifg=black     ctermfg=black       gui=none cterm=none
-      \ guibg=darkgray ctermbg=darkgray
-hi def dqnBgFrgrd   guifg=white     ctermfg=white       gui=none cterm=none
-      \ guibg=darkgray ctermbg=darkgray
+let s:t_Yellow  = 'yellow'
+let s:t_Green   = 'green'
+let s:t_Blue    = 'blue'
+let s:t_Orange  = 'brown'
+let s:t_Purple  = 'darkmagenta'
+let s:t_Cyan    = 'cyan'
+let s:t_Magenta = 'magenta'
+let s:t_Red     = 'darkred'
+  if &background ==# 'dark'
+let s:t_Gray  = 'darkgray'
+let s:t_Bkgrd = 'black'
+let s:t_Frgrd = 'white'
   else
-hi def dqnBgBkgrd   guifg=white     ctermfg=white       gui=none cterm=none
-      \ guibg=darkgray ctermbg=darkgray
-hi def dqnBgFrgrd   guifg=black     ctermfg=black       gui=none cterm=none
-      \ guibg=darkgray ctermbg=darkgray
+let s:t_Gray  = 'lightgray'
+let s:t_Bkgrd = 'white'
+let s:t_Frgrd = 'black'
   endif
 
-hi def dqnCode      guifg=white     ctermfg=white       gui=none cterm=none
-    \ guibg=darkgray ctermbg=darkgray
-hi def dqnCodeType  guifg=cyan      ctermfg=cyan        gui=none cterm=none
-    \ guibg=darkgray ctermbg=darkgray
+endif " colorscheme: =~ solarized OR else
 
-" Keywords and others {{{3
+" Highlighting {{{1
+""""""""""""""""""""""""""""""""""""""""
+" Titles {{{2
+""""""""""""""""""""
+  if (has("gui_running") || &t_Co >= 256) && &background ==# 'dark'
+hi def dqnTitle1   guifg=#ff87ff ctermfg=213 gui=bold cterm=bold
+hi def dqnTitle2   guifg=#ffaf5f ctermfg=215 gui=bold cterm=bold
+hi def dqnTitle3   guifg=#00d7af ctermfg=43  gui=bold cterm=bold
+hi def dqnSubtitle guifg=#87afff ctermfg=111
+  elseif has("gui_running") || &t_Co >= 256
+hi def dqnTitle1   guifg=#af5faf ctermfg=133 gui=bold cterm=bold
+hi def dqnTitle2   guifg=#af5f00 ctermfg=130 gui=bold cterm=bold
+hi def dqnTitle3   guifg=#008787 ctermfg=30  gui=bold cterm=bold
+hi def dqnSubtitle guifg=#005faf ctermfg=25
+  else " if has('gui_running') OR &t_Co < 256
+exe 'hi def dqnTitle1   guifg=' .s:g_Magenta
+      \ .' ctermfg=' .s:t_Magenta .' gui=bold cterm=bold'
+exe 'hi def dqnTitle2   guifg=' .s:g_Orange
+      \ .' ctermfg=' .s:t_Orange  .' gui=bold cterm=bold'
+exe 'hi def dqnTitle3   guifg=' .s:g_Green
+      \ .' ctermfg=' .s:t_Green   .' gui=bold cterm=bold'
+exe 'hi def dqnSubtitle guifg=' .s:g_Blue
+      \ .' ctermfg=' .s:t_Blue    .' gui=bold cterm=bold'
+  endif
+
+" Coloured highlighting without background {{{2
 """"""""""
+let s:list = ['Yellow', 'Green', 'Blue', 'Orange', 'Purple', 'Cyan',
+      \ 'Magenta', 'Red', 'Gray', 'Bkgrd']
+for i in s:list
+  exe 'hi def dqn' .i .' guifg=' .eval('s:g_'.i) .' ctermfg=' .eval('s:t_'.i)
+endfor
+
+"" Coloured highlighting with gray background {{{2
+"""""""""""
+let s:list = ['Yellow', 'Green', 'Blue', 'Orange', 'Purple', 'Cyan',
+      \ 'Magenta', 'Red', 'Gray', 'Bkgrd', 'Frgrd']
+for i in s:list
+  exe 'hi def dqnBg' .i .' guifg=' .eval('s:g_'.i) .' ctermfg='
+	\ .eval('s:t_'.i) . ' guibg=' .s:g_Gray .' ctermbg=' .s:t_Gray
+endfor
+hi def link dqnCode     dqnBgFrgrd
+hi def link dqnCodeType dqnBgCyan
+
+"" Keywords and others {{{2
+"""""""""""
 hi def link dqnKeyword  Todo
-hi def dqnMark    guifg=darkgray    ctermfg=darkgray    gui=none cterm=none
+exe 'hi def dqnMark     guifg=' .s:g_Gray .' ctermfg=' .s:t_Gray
 hi def link dqnFoldMark dqnBkgrd
 hi def link dqnComment  Comment
 hi def link dqnNomatch  dqnBgFrgrd
-
-endif " colorscheme: =~ solarized OR else
 
 " Syntax Syncing {{{1
 """"""""""""""""""""""""""""""""""""""""
