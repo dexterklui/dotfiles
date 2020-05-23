@@ -308,7 +308,13 @@ for i in s:list
   exe 'hi def dqnBg' .i .' guifg=' .eval('s:g_'.i) .' ctermfg='
     \ .eval('s:t_'.i) . ' guibg=' .s:g_Gray .' ctermbg=' .s:t_Gray
 endfor
+  if g:colors_name =~ 'solarized' && &bg ==# 'dark'
+hi def dqnCode guifg=#93a1a1 ctermfg=14 guibg=#657b83 ctermbg=10
+  elseif g:colors_name =~ 'solarized'
+hi def dqnCode guifg=#657b83 ctermfg=10 guibg=#93a1a1 ctermbg=14
+  else
 hi def link dqnCode     dqnBgFrgrd
+  endif
 hi def link dqnCodeType dqnBgCyan
 
 "" Keywords and others {{{2
