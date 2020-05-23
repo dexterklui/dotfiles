@@ -121,6 +121,7 @@ set viminfo^=!      " (n)
 set langnoremap	    " (n)
 set cursorline	    " Make bg color of cursor line different
 set updatetime=250  " after 250ms, write swap and update gitgutter
+set winwidth=84	    " Set the min nr of columns for current window
 
 " ** For vim only ** {{{2
 """"""""""""""""""""""""""""""""""""""""
