@@ -692,9 +692,9 @@ else
   endif
 endif
 
-"exe "hi! Error"          .s:fmt_bold   .s:fg_base02  .s:bg_red
-exe "hi LineNr"         .s:fmt_none   .s:fg_base01  .s:bg_none
-exe "hi SignColumn"	 .s:bg_none
+"exe "hi! Error"     .s:fmt_bold   .s:fg_base02  .s:bg_red
+exe "hi LineNr"     .s:fmt_none   .s:fg_base01  .s:bg_none
+exe "hi SignColumn" .s:bg_none
 
 if ( has("gui_running") || &t_Co > 8 )
     exe "hi VertSplit"  .s:fmt_none   .s:fg_base01 .s:bg_base01
@@ -702,52 +702,16 @@ else
     exe "hi VertSplit"  .s:fmt_revbb  .s:fg_base00 .s:bg_base02
 endif
 
-" DQNote syntax highlighting {{{2
-""""""""""""""""""""""""""""""""""""""""
-" Titles {{{3
-""""""""""""""""""""
-"if $TERM ==# 'xterm-256color' || $TERM ==# 'screen-256color' || $TERM_PROGRAM ==# 'gnome-terminal'
-"  if exists('g:dqsolarized_dqn_title_color') && g:dqsolarized_dqn_title_color == 1
-"    if &background ==# 'dark'
-"      hi dqnTitle1	ctermfg=213 cterm=bold
-"      hi dqnTitle2	ctermfg=215 cterm=bold
-"      hi dqnTitle3	ctermfg=43  cterm=bold
-"      hi dqnSubtitle	ctermfg=111
-"    else
-"      hi dqnTitle1	ctermfg=133 cterm=bold
-"      hi dqnTitle2	ctermfg=130 cterm=bold
-"      hi dqnTitle3	ctermfg=30  cterm=bold
-"      hi dqnSubtitle	ctermfg=25
-"    endif
-"  else
-"    exe "hi dqnTitle1"       .s:fmt_undb   .s:fg_base1  .s:bg_none
-"    exe "hi dqnTitle2"	      .s:fmt_undb   .s:fg_base1  .s:bg_none
-"    exe "hi dqnTitle3"       .s:fmt_undb   .s:fg_base1  .s:bg_none
-"    exe "hi dqnSubtitle"     .s:fmt_undb   .s:fg_base1  .s:bg_none
-"  endif
-"elseif &t_Co >= 256
-"  hi dqnTitle1		ctermfg=213
-"  hi dqnTitle2		ctermfg=215
-"  hi dqnTitle3		ctermfg=43
-"  hi dqnSubtitle	ctermfg=111
-"else
-"  exe "hi dqnTitle1"       .s:fmt_none   .s:fg_magenta  .s:bg_none
-"  exe "hi dqnTitle2"	    .s:fmt_none   .s:fg_orange   .s:bg_none
-"  exe "hi dqnTitle3"       .s:fmt_none   .s:fg_green    .s:bg_none
-"  exe "hi dqnSubtitle"     .s:fmt_none   .s:fg_blue	 .s:bg_none
-"endif
-
 " Syntastic plugin syntax highlighting {{{2
   exe "hi SyntasticWarning"          .s:bg_base01
   exe "hi SyntasticError"            .s:bg_base01
   exe "hi SyntasticWarningSign"      .s:fmt_bold   .s:fg_yellow   .s:bg_base02
   exe "hi SyntasticErrorSign"        .s:fmt_bold   .s:fg_red      .s:bg_base02
-  "exe "hi! SyntasticWarningLine"      .s:bg_violet
-  "exe "hi! SyntasticErrorLine"	      .s:bg_violet
+
 " GitGutter plugin syntax highlighting {{{2
-  exe "hi GitGutterAdd"	      .s:fg_green
-  exe "hi GitGutterChange"           .s:fg_yellow
-  exe "hi GitGutterDelete"	      .s:fg_red
+  exe "hi GitGutterAdd"       .s:fg_green
+  exe "hi GitGutterChange"    .s:fg_yellow
+  exe "hi GitGutterDelete"    .s:fg_red
 "}}}1
 " vim syntax highlighting "{{{
 " ---------------------------------------------------------------------

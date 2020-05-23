@@ -31,6 +31,10 @@ cp -iu ${PWD}/vim/plugin/DQToggleConceal.vim  ~/.vim/plugin/DQToggleConceal.vim
 cp -iu ${PWD}/vim/plugin/DQTreeDiagram.vim    ~/.vim/plugin/DQTreeDiagram.vim
 cp -iu ${PWD}/vim/plugin/DQVim.vim            ~/.vim/plugin/DQVim.vim
 
+# .vim/colors {{{2
+########################################
+cp -iu ${PWD}/vim/colors/dqsolarized.vim ~/.vim/colors/dqsolarized.vim
+
 # Git {{{1
 ##############################################################################
 ln -s ${PWD}/gitconfig ~/.gitconfig && echo 'Installed ~/.gitconfig'
