@@ -313,7 +313,7 @@ nnoremap <Leader>hc :GitGutterQuickFix<CR>
 " * goyo * {{{3
 """"""""""""""""""""
 function s:goyo_enter()
-  if exists('g:loaded_limelight')
+  if exists(':Limelight') == 2
     Limelight
   endif
   if &ft ==# 'dqn'
@@ -325,7 +325,7 @@ function s:goyo_enter()
 endfunction
 
 function s:goyo_leave()
-  if exists('g:loaded_limelight')
+  if exists(':Limelight') == 2
     Limelight!
   endif
   if exists('g:limelight_store_span')
@@ -339,9 +339,11 @@ autocmd vimrcEx User GoyoLeave nested call <SID>goyo_leave()
 
 nnoremap <silent> <Leader><Leader> :Goyo<CR>
 
-if exists('g:loaded_airline')
-  autocmd vimrcEx User GoyoEnter nested set eventignore=FocusGained
-  autocmd vimrcEx User GoyoLeave nested set eventignore=
+" Prevent airline from popping up in Goyo mode when refocusing neovim
+" See https://github.com/junegunn/goyo.vim/issues/198
+if has('nvim')
+autocmd vimrcEx User GoyoEnter nested set eventignore=FocusGained
+autocmd vimrcEx User GoyoLeave nested set eventignore=
 endif
 
 " * limelight * {{{3
@@ -413,10 +415,9 @@ nnoremap <Leader>rb :RainbowToggle<CR>
 
 " *** Post vimrc *** {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" }}}1
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if v:vim_did_enter
   let &ft=&ft " Reload ftplugin to override vimrc settings after resource
 endif
-
+" }}}1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vi: fdm=marker
