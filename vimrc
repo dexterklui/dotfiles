@@ -21,6 +21,7 @@ call plug#begin('~/.vim/bundle')
 " General
 Plug 'Valloric/YouCompleteMe'
 Plug 'altercation/vim-colors-solarized'
+Plug 'morhetz/gruvbox'
 Plug 'Yggdroot/indentLine'
 Plug 'jiangmiao/auto-pairs'
 Plug 'vim-syntastic/syntastic'
@@ -152,7 +153,8 @@ nnoremap Pp "0p
 nnoremap <Leader>sea :setl spell spelllang=en<CR>
 nnoremap <Leader>sen :setl spell spelllang=en_gb<CR>
 nnoremap <Leader>sde :setl spell spelllang=de_de<CR>
-nnoremap <Leader>sno :setl nospell
+nnoremap <Leader>sno :setl nospell<CR>
+inoremap <C-L> <Del>
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
 inoremap <C-U> <C-G>u<C-U>
