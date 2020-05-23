@@ -6,11 +6,11 @@ set nocompatible " Use Vim, rather than Vi settings (nvim default).
 
 syntax on " (nvim default)
 filetype plugin indent on " (nvim default)
-let mapleader = ' ' " Must b4 any mappings that use <Leader> to take effect
+let mapleader = ' ' " Must b4 any mapping that uses <Leader> to take effect
 
-if v:vim_did_enter
-  augroup! vimrcEx " Delete any old autocmds added by vimrc during resource
-endif
+augroup vimrcEx
+  au!
+augroup END
 "}}}1
 
 " *** Adding packages *** {{{1
@@ -56,7 +56,6 @@ if $TERM ==# 'linux'
   colorscheme dd-noitalic
 else
   let g:solarized_termtrans=1
-  let g:dqsolarized_dqn_title_color=1
   let g:solarized_diffmode='high'
   " ^Config var must be assigned before applying colorscheme to take effect.
   colorscheme dqsolarized
