@@ -86,7 +86,7 @@ syn cluster dqnBgColor add=dqnCode,dqnCodeType
 
 " Keywords {{{2
 """"""""""""""""""""
-syn keyword dqnKeyword DUNNO NOTE WARN
+syn keyword dqnKeyword DUNNO NOTE WARN TODO XXX FIXME
 syn match   dqnKeyword +/?/+ display
 
 " Tags TODO {{{2
@@ -109,8 +109,8 @@ syn match dqnBreak /░\ze$/ conceal display
 syn region dqnConceal matchgroup=dqnMark start=+\[\.+ end=+]\.+ concealends
   \ conceal cchar=▒ contains=@Spell,dqnBreak
 " Used to prevent matching dqn syntax:
-syn match dqnNomatch +[`[]\zs`\ze[[{'-=";/,_\\|.]+ conceal display
-syn match dqnNomatch +[]`]\zs`\ze[]}'-=";/,_\\|.]+ conceal display
+syn match dqnNomatch +[`[]\zs\~\ze[[{'-=";/,_\\|.]+ conceal display
+syn match dqnNomatch +[]`]\zs\~\ze[]}'-=";/,_\\|.]+ conceal display
   \ containedin=@dqnColor,@dqnBgColor
 
 " Include syntax for other filetype {{{2
