@@ -89,10 +89,11 @@
 `~\white`~\
 ======================================================================
    |conceal|
-[.conceal].
+[.This is a piece of concealed text].
 ======================================================================
 
-NOTE
+NOTE░
+WARN
 
 #beginPython#
 def my_func():
@@ -103,3 +104,4 @@ def my_func():
 
 my_func()
 #endPython#
+	

@@ -1,7 +1,7 @@
 " DQNYank:	    DQN plugin for yanking a paragraph
 " Maintainer:	    Dexter K. Lui <dexterklui@pm.me>
-" Lat Change:	    30 Apr 2020
-" Version:	    1.2
+" Last Change:	    24 May 2020
+" Version:	    1.32.3
 
 " Abort if running in vi-compatible mode or the user doesn't want us.
   if &cp || exists('g:loaded_DQNYank')
@@ -71,6 +71,35 @@
       \ .'\ze\n=\{70,78}\n'          . '\|'
       \ .'\n=\{70,78}\zs\ze\n'
       \ , '░', 'ge'))
+
+    " For #beginPython# ... #endPython# area:
+    while match(getreg(a:clipboard),
+      \ '\n#beginPython#\_.\{-}░\@<!\zs\n\ze\_.\{-}#endPython#\n') != -1
+    call setreg(a:clipboard, substitute(getreg(a:clipboard),
+      \ '\n#beginPython#\_.\{-}░\@<!\zs\n\ze\_.\{-}#endPython#\n'
+      \, '░\n', 'e'))
+    endwhile
+    call setreg(a:clipboard, substitute(getreg(a:clipboard),
+      \ '\n\ze#beginPython#░\n'     . '\|'
+      \ .'#endPython#\zs\n'
+      \ , '░\n', 'ge'))
+  endfunction
+
+  function DQAddDeleteMark(clipboard)
+    " Surround parts needed to be deleted later with marker
+    call setreg(a:clipboard, substitute(getreg(a:clipboard),
+      \ '[`[]\zs\~\ze[[{'."'".'-=";/,_\\|.]'
+      \ , '<\\DQS>\~<\\DQE>', 'ge'))
+    
+    call setreg(a:clipboard, substitute(getreg(a:clipboard),
+      \ '[]`]\zs\~\ze[]}'."'".'-=";/,_\\|.]'
+      \ , '<\\DQS>\~<\\DQE>', 'ge'))
+  endfunction
+
+  function DQRemoveDeleteMark(clipboard)
+    call setreg(a:clipboard, substitute(getreg(a:clipboard),
+      \ '<\\DQS>.\{-}<\\DQE>'
+      \ , '', 'ge'))
   endfunction
 
   function DQJoinBrokenLines(clipboard)
@@ -99,9 +128,14 @@
       \ , ' ', 'ge'))
   endfunction
 
+  function DQRemoveEndEmptyLines(clipboard)
+    while match(getreg(a:clipboard), '\%^\n') != -1
+    call setreg(a:clipboard, substitute(getreg(a:clipboard), '\%^\zs\n', '', 'e'))
+    endwhile
+  endfunction
+
   function DQRemoveEmptyLines(clipboard)
     call setreg(a:clipboard, substitute(getreg(a:clipboard), '\n\ze\n', '', 'ge'))
-    call setreg(a:clipboard, substitute(getreg(a:clipboard), '\%^\n', '', 'ge'))
   endfunction
 
   function DQIndentReduce(clipboard)
@@ -141,20 +175,10 @@
       \ .'\[|\(\_.\{-}\)]|'
       \ , '\1\2\3', 'ge'))
 
-    " For the following DQN marker, its content will also be completely wiped out.
+    " The content of concealed text and version text will be wiped out.
     call setreg(a:clipboard, substitute(getreg(a:clipboard),
-      \ '\[\.\_.\{-}]\.', '', 'ge'))
-
-    " Remove dqnNomatch which prevents match dqn syntax
-    call setreg(a:clipboard, substitute(getreg(a:clipboard), 
-      \ '\[\zs\~\ze[[{' ."'". '-=";/,_\\|.]'
-      \ , '', 'ge'))
-    call setreg(a:clipboard, substitute(getreg(a:clipboard), 
-      \ ']\zs\~\ze[]}' ."'". '-=";/,_\\|.]'
-      \ , '', 'ge'))
-    " XXX
-    call setreg(a:clipboard, substitute(getreg(a:clipboard), 
-      \ '\%(\[\[\|]]\)\zs\~\ze'
+      \  '\%^/// Language: DQNote_\d\+\.\d\+ ' .'\|'
+      \ .'\[\.\_.\{-}]\.'
       \ , '', 'ge'))
 
     call setreg(a:clipboard, substitute(getreg(a:clipboard), 
@@ -173,11 +197,6 @@
       \  '`_\(\_.\{-}\)`_'             . '\|'
       \ .'`\\\(\_.\{-}\)`\\'           . '\|'
       \ , '\1\2', 'ge'))
-
-    " Remove dqnNomatch which prevents match dqn syntax
-    call setreg(a:clipboard, substitute(getreg(a:clipboard), 
-      \ '`\zs\~\ze[][}{' ."'". '-=";/,_\\.]'
-      \ , '', 'ge'))
   endfunction
 
   function DQRemoveDQNLineBreaker(clipboard)
@@ -193,6 +212,7 @@
     else
       call YankToPlusClipboard(a:type)
     endif
+    call DQRemoveEndEmptyLines('+')
     call DQTranslateDQNTitles('+')
     call DQAddLineBreak('+')
     call DQJoinBrokenLines('+')
@@ -200,7 +220,9 @@
     call DQIndentReduce('+')
     call DQRemoveTrailingWhitespaces('+')
     call DQRemoveFoldMarkers('+')
+    call DQAddDeleteMark('+')
     call DQRemoveDQNMarkers('+')
+    call DQRemoveDeleteMark('+')
     call DQRemoveDQNLineBreaker('+')
     call DQRemoveTrailingWhitespaces('+')
   endfunction
