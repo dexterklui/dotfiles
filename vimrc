@@ -122,6 +122,7 @@ set langnoremap	    " (n)
 set cursorline	    " Make bg color of cursor line different
 set updatetime=250  " after 250ms, write swap and update gitgutter
 set winwidth=84	    " Set the min nr of columns for current window
+set spelllang=en_gb " Set default spell language as british english
 
 " ** For vim only ** {{{2
 """"""""""""""""""""""""""""""""""""""""
