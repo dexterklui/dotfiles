@@ -1,7 +1,7 @@
 " DQNYank:	    DQN plugin for yanking a paragraph
 " Maintainer:	    Dexter K. Lui <dexterklui@pm.me>
-" Last Change:	    24 May 2020
-" Version:	    1.33.0 (DQN v1.33)
+" Last Change:	    26 May 2020
+" Version:	    1.33.1 (DQN v1.33)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Abort if running in vi-compatible mode or the user doesn't want us.
@@ -57,31 +57,38 @@
     " Competibity: till 1.32:    [< Title4]> /    |Title4|
     call setreg(a:clipboard, substitute(getreg(a:clipboard),
       \ '\%(\n\|^\)\zs\(\t*\) \{3}|\(.\{-}\)|.\{-}\ze\%(\n\|$\)', '>>>>\1\2░', 'ge'))
-    call setreg(a:clipboard, substitute(getreg(a:clipboard),
-      \ '>>>>>*\zs\t\ze.*░',  '>', 'ge'))
+    "while match(getreg(a:clipboard), '\%(\n\|^\)>>>>>*\zs\t\ze[^\n]*░')
+    "call setreg(a:clipboard, substitute(getreg(a:clipboard),
+    "  \ '>>>>>*\zs\t\ze.*░',  '>', 'e'))
+    "endwhile
   endfunction
 
   function DQAddLineBreak(clipboard)
     " Add line break at designated area to prevent it from joining the
     " following lines later
     call setreg(a:clipboard, substitute(getreg(a:clipboard),
-      \  '\ze\n/\*-\{66,74}\*/\n'    . '\|'
-      \ .'\n/\*-\{66,74}\*/\zs\ze\n' . '\|'
-      \ .'\ze\n-\{70,78}\n'          . '\|'
-      \ .'\n-\{70,78}\zs\ze\n'       . '\|'
-      \ .'\ze\n=\{70,78}\n'          . '\|'
-      \ .'\n=\{70,78}\zs\ze\n'
-      \ , '░', 'ge'))
+      \  '\n\ze/\*-\{66,74}\*/\n'    . '\|'
+      \ .'\n\ze-\{70,78}\n'          . '\|'
+      \ .'\n\ze=\{70,78}\n'
+      \ , '░\n', 'ge'))
+
+    " This must be a separate call from the previous (because both sets of
+    " patterns matches the same \newline)
+    call setreg(a:clipboard, substitute(getreg(a:clipboard),
+      \  '\n/\*-\{66,74}\*/\zs\n'   . '\|'
+      \ .'\n-\{70,78}\zs\n'       . '\|'
+      \ .'\n=\{70,78}\zs\n'
+      \ , '░\n', 'ge'))
 
     " For #beginPython# ... #endPython# area:
-    while match(getreg(a:clipboard),
-      \ '\n#beginPython#\_.\{-}░\@<!\zs\n\ze\_.\{-}#endPython#\n') != -1
+    " FIXME Too slow, maybe really needa save as a tmp file and work on it
+    while getreg(a:clipboard) =~ '\n\s*#beginPython#\_.\{-}[^░]\zs\n\ze\_.\{-}#endPython#\n'
     call setreg(a:clipboard, substitute(getreg(a:clipboard),
-      \ '\n#beginPython#\_.\{-}░\@<!\zs\n\ze\_.\{-}#endPython#\n'
+      \ '\n\s*#beginPython#\_.\{-}[^░]\zs\n\ze\_.\{-}#endPython#\n'
       \, '░\n', 'e'))
     endwhile
     call setreg(a:clipboard, substitute(getreg(a:clipboard),
-      \ '\n\ze#beginPython#░\n'     . '\|'
+      \ '\n\ze\s*#beginPython#░\n'     . '\|'
       \ .'#endPython#\zs\n'
       \ , '░\n', 'ge'))
   endfunction
@@ -107,11 +114,7 @@
     " Join broken lines within a paragraph (except bullet points or lists, and
     " except when the previous line ends in :, ░, or a separator)
     call setreg(a:clipboard, substitute(getreg(a:clipboard),
-      \ '\%('
-      \   .'\n'            . '\|'
-      \   .':'             . '\|'
-      \   .'░'
-      \   . '\)\@10<!'
+      \ '[^:\n░]'
       \ .'\zs\n'
       \   . '\%('
       \     . '\s*\%('
@@ -123,9 +126,10 @@
       \       . '+'             . '\|'
       \       . '*'             . '\|'
       \       . '·'             . '\|'
+      \       . '-'             . '\|'
       \       . '\n'
       \       . '\)'
-      \     . '\)\@10!' . '\s*'
+      \     . '\)\@4!' . '\s*'
       \ , ' ', 'ge'))
   endfunction
 
@@ -152,7 +156,8 @@
   endfunction
 
   function DQRemoveFoldMarkers(clipboard)
-    call setreg(a:clipboard, substitute(getreg(a:clipboard), '{{{\d*', '', 'ge'))
+    call setreg(a:clipboard, substitute(getreg(a:clipboard), '{\{3}\d*', '', 'ge'))
+    call setreg(a:clipboard, substitute(getreg(a:clipboard), '}\{3}\d*', '', 'ge'))
   endfunction
 
   function DQRemoveDQNMarkers(clipboard)
@@ -196,13 +201,13 @@
 
     call setreg(a:clipboard, substitute(getreg(a:clipboard), 
       \  '`_\(\_.\{-}\)`_'             . '\|'
-      \ .'`\\\(\_.\{-}\)`\\'           . '\|'
+      \ .'`\\\(\_.\{-}\)`\\'
       \ , '\1\2', 'ge'))
   endfunction
 
   function DQRemoveDQNLineBreaker(clipboard)
-    call setreg(a:clipboard, substitute(getreg(a:clipboard), '░\ze\n', '', 'ge'))
-    call setreg(a:clipboard, substitute(getreg(a:clipboard), '░\ze\%$', '', 'ge'))
+    call setreg(a:clipboard, substitute(getreg(a:clipboard), '░*\ze\n', '', 'ge'))
+    call setreg(a:clipboard, substitute(getreg(a:clipboard), '░*\ze\%$', '', 'ge'))
   endfunction
 
   function DQNYank(type, ...)
