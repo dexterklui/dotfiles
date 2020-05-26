@@ -1,7 +1,7 @@
 " Ftplugin:      Filetype plugin for DQN
 " Maintainer:    Dexter K. Lui <dexterklui@pm.me>
 " Latest Change: 26 May 2020
-" Version:       1.33.0 (DQN v1.33)
+" Version:       1.33.01 (DQN v1.33)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 setl autoindent
@@ -29,7 +29,6 @@ setl colorcolumn=+1
 " Format a paragraph but skip the first line (which is used for title).
 nnoremap <buffer> gqm {jjgq}
 nnoremap <buffer> gqn gqqgq}
-nnoremap <buffer> <F12> :Dqn2html<CR>
 
 inoremap <buffer> <C-B>t <C-O>:TableModeToggle<CR>
 inoremap <buffer> <C-B><C-T> <C-O>:TableModeToggle<CR>
@@ -39,6 +38,7 @@ inoremap <buffer> <C-J><C-K> ░<CR>
 noremap <buffer> <leader>>> :DQNDownTitle<CR>
 noremap <buffer> <leader><lt><lt> :DQNUpTitle<CR>
 noremap <buffer> <leader>{{ :DQNFoldMarkerToggle<CR>
+noremap <buffer> <F12> :Dqn2html<CR>
 
 " Define abbreviations that are local to .dqn buffers.
 iabbrev <buffer> #l ----------------------------------------------------------------------
@@ -74,7 +74,7 @@ iabbrev <buffer> latex LaTeX
     let b:autopairs_enabled = 0
 
 let b:undo_ftplugin = "setl cole< ai< fdm< fdc< js< tw< wrap< lbr< sbr< fo< flp< ts< com< ic< scs< cocu< nf< spell< cc<"
-"let b:undo_ftplugin .= "| nun <buffer> gqm| nun <buffer> gqn| nun <buffer> <F12>|iun <buffer> <C-B>t| iun <buffer> <C-B><C-T>| iun <buffer> <C-J><C-J>| iun <buffer> <C-J><C-K>| unm <buffer> <leader>>>| unm <buffer> <leader><lt><lt>| unm <buffer> <leader>{{"
+"let b:undo_ftplugin .= "| nun <buffer> gqm| nun <buffer> gqn|iun <buffer> <C-B>t| iun <buffer> <C-B><C-T>| iun <buffer> <C-J><C-J>| iun <buffer> <C-J><C-K>| unm <buffer> <leader>>>| unm <buffer> <leader><lt><lt>| unm <buffer> <leader>{{| unm <buffer> <F12>"
 "let b:undo_ftplugin .= "iunab <buffer> #L| iunab <buffer> #l| iunab <buffer> {{1| iunab <buffer> {{2| iunab <buffer> {{3| iunab <buffer> {{s| iunab <buffer> ;r| iunab <buffer> ;R| iunab <buffer> ;t| iunab <buffer> ;d| iunab <buffer> latex"
 
 let b:did_ftplugin = 1

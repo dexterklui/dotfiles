@@ -1,7 +1,7 @@
 " dqn2html:       Transforming format of DQN to html
 " Maintainer:    Dexter K. Lui <dexterklui@pm.me>
 " Latest Change: 26 May 2020
-" Version:       1.33.0 (DQN v1.33)
+" Version:       1.33.01 (DQN v1.33)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " vimscript thingy {{{1
@@ -358,7 +358,7 @@ if a:accurate == 1
 
   call cursor(1,1)
   let g:wrapscan = &wrapscan
-  let l:reg = getreg('*')
+  let l:reg = @*
   set nowrapscan
   let l:fo = &fo
   let &fo=''
@@ -532,7 +532,7 @@ func s:HtmlSkeleton()
   call append(line('$'), "</html>")
 endfunc " }}}
 
-func Dqn2html(accurate, open) abort
+func Dqn2html(accurate, open) range abort
 " Write content in /tmp/, and change format to HTML {{{
 " accurate: {0|1}: 0:faster but may wrongly highlight more words
 " open: {0|1}: 1:open the HTML file in a browser
@@ -541,8 +541,17 @@ func Dqn2html(accurate, open) abort
     return
   endif
   update
+  if !(a:firstline == a:lastline && a:firstline == line('.'))
+    let l:reg = @*
+    '<,'>yank *
+  endif
   let l:altbuf = bufnr(@#)
   call s:CreateTmp()
+  if !(a:firstline == a:lastline && a:firstline == line('.'))
+    normal gg0dG"*pggdd
+    let @* = l:reg
+  endif
+
   " TODO add silent
   call s:Html(a:accurate)
   call s:HtmlSkeleton()
@@ -565,8 +574,8 @@ endfunc " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Defining commands {{{2
 """"""""""""""""""""""""""""""""""""""""
-command Dqn2html call Dqn2html(0, 1)
-command Reloadhtml call Dqn2html(0, 0)
+command -range Dqn2html <line1>,<line2>call Dqn2html(0, 1)
+command -range Reloadhtml <line1>,<line2>call Dqn2html(0, 0)
 
 " mappings {{{2
 """"""""""""""""""""""""""""""""""""""""
