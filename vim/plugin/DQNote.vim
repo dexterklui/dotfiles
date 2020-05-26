@@ -1,7 +1,7 @@
 " DQNote:	    Vim plugin for DQNote files (.dqn)
 " Maintainer:	    Dexter K. Lui <dexterklui@pm.me>
 " Latest Change:    6 May 2020
-" Version:	    1.32.14 (For DQN version 1.32)
+" Version:	    0.2 (DQN v1.33)
 
 " Abort if running in vi-compatible mode or the user doesn't want us.
   if &cp || exists('g:loaded_DQNote')
@@ -32,11 +32,11 @@
   function DQNUpdate() abort
     " Update dqn file
     " Only run this script when it is a dqn file.
-    if !DQNVersion()
+    if DQNVersion() == 0
       echoe 'This is not a DQNote! No update is done.'
       return
-    elseif DQNVersion() >= 1.32
-      echom 'This DQNote is already at version 1.32 or newer, no update is done.'
+    elseif DQNVersion() >= 1.33
+      echom 'This DQNote is already at version 1.33 or newer, no update is done.'
       return
     endif
 
@@ -48,9 +48,14 @@
       call dqnupdate#v1_32()
     endif
 
+    " Update DQN file based on its current version according in a sequence.
+    if DQNVersion() < 1.33
+      call dqnupdate#v1_33()
+    endif
+
     " Save changes
     update
-    echom 'This DQNote has been updated to v1.32!'
+    echom 'This DQNote has been updated to v1.33!'
 
     " Open quickfix list if there is any item got by vimgrepadd cmd
     if getqflist() != []

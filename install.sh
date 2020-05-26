@@ -15,6 +15,10 @@ ln -s ${PWD}/bash_aliases  ~/.bash_aliases && echo 'Installed ~/.bash_aliases'
 ########################################
 ln -s ${PWD}/vimrc ~/.vimrc && echo 'Installed ~/.vimrc'
 
+# .vim/autoload {{{2
+########################################
+cp -iu ${PWD}/vim/autoload/dqnupdate.vim ~/.vim/autoload/dqnupdate.vim
+
 # .vim/syntax {{{2
 ########################################
 cp -iu ${PWD}/vim/syntax/git.vim ~/.vim/syntax/git.vim
