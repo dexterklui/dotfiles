@@ -1,3 +1,8 @@
+" dqnupdate:      Updates DQNotes
+" Maintainer:    Dexter K. Lui <dexterklui@pm.me>
+" Latest Change: 26 May 2020
+" Version:       1.33.0 (DQN v1.33)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " This provides functions for function DQNUpdate() defined in plugin DQNote
 " Function defined here are to update DQNotes.
 

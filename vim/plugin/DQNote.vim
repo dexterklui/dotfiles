@@ -1,7 +1,8 @@
 " DQNote:	    Vim plugin for DQNote files (.dqn)
 " Maintainer:	    Dexter K. Lui <dexterklui@pm.me>
 " Latest Change:    6 May 2020
-" Version:	    0.2 (DQN v1.33)
+" Version:	    1.33.0 (DQN v1.33)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Abort if running in vi-compatible mode or the user doesn't want us.
   if &cp || exists('g:loaded_DQNote')

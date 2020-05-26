@@ -1,3 +1,9 @@
+" Ftplugin:      Filetype plugin for DQN
+" Maintainer:    Dexter K. Lui <dexterklui@pm.me>
+" Latest Change: 26 May 2020
+" Version:       1.33.0 (DQN v1.33)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 setl autoindent
 setl foldmethod=marker
 setl conceallevel=2

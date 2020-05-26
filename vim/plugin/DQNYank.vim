@@ -1,7 +1,8 @@
 " DQNYank:	    DQN plugin for yanking a paragraph
 " Maintainer:	    Dexter K. Lui <dexterklui@pm.me>
 " Last Change:	    24 May 2020
-" Version:	    1.32.3
+" Version:	    1.33.0 (DQN v1.33)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Abort if running in vi-compatible mode or the user doesn't want us.
   if &cp || exists('g:loaded_DQNYank')

@@ -1,8 +1,9 @@
 " Vim syntax file
 " Language:	DQNote
 " Maintainer:	DQ
-" Version:	1.32.4
+" Version:	1.33.0 (DQN v1.33)
 " Last Change:	23 May 2020
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Quit when a (custom) syntax file was already loaded {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

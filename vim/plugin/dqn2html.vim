@@ -1,7 +1,8 @@
 " dqn2html:       Transforming format of DQN to html
 " Maintainer:    Dexter K. Lui <dexterklui@pm.me>
-" Latest Change: 24 May 2020
-" Version:       0.01 (DQN v1.33)
+" Latest Change: 26 May 2020
+" Version:       1.33.0 (DQN v1.33)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " vimscript thingy {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
