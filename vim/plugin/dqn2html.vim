@@ -421,7 +421,7 @@ if a:accurate == 1
       elseif l:key ==# '|'
 	normal vhc<font color="#dc322f"><code>
       endif
-      
+
       let @/ = l:endpat
       normal n
       " change end pattern
@@ -522,12 +522,14 @@ endfunc " }}}
 
 " Others {{{2
 """"""""""""""""""""""""""""""""""""""""
-func s:CreateTmp()
+func s:CreateTmp() range
 " Edit a file in /tmp/ {{{
-" TODO change saveas to edit. Then later only paste a selected range rather
-" than a whole file
-  silent! mkdir -p /tmp/dqn2html/
-  exe 'saveas! /tmp/dqn2html/' .expand('%:p:h:h:t') .'\%'
+  silent !mkdir -p /tmp/dqn2html/
+  exe a:firstline .',' .a:lastline .'write!' '/tmp/dqn2html/'
+    \ .expand('%:p:h:h:t') .'\%' .expand('%:p:h:t') .'\%'
+    \ .expand('%:t:r') . '.html'
+
+  exe 'edit /tmp/dqn2html/' .expand('%:p:h:h:t') .'\%'
     \ .expand('%:p:h:t') .'\%' .expand('%:t:r') . '.html'
 endfunc " }}}
 
@@ -563,16 +565,8 @@ func Dqn2html(accurate, open) range abort
     return
   endif
   update
-  if !(a:firstline == a:lastline && a:firstline == line('.'))
-    let l:reg = @*
-    '<,'>yank *
-  endif
   let l:altbuf = bufnr(@#)
-  call s:CreateTmp()
-  if !(a:firstline == a:lastline && a:firstline == line('.'))
-    normal gg0dG"*pggdd
-    let @* = l:reg
-  endif
+  exe a:firstline .',' .a:lastline .'call s:CreateTmp()'
 
   " TODO add silent
   call s:Html(a:accurate)
@@ -600,8 +594,8 @@ endfunc " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Defining commands {{{2
 """"""""""""""""""""""""""""""""""""""""
-command -range Dqn2html <line1>,<line2>call Dqn2html(0, 1)
-command -range Reloadhtml <line1>,<line2>call Dqn2html(0, 0)
+command -range=% Dqn2html silent <line1>,<line2>call Dqn2html(0, 1)
+command -range=% Reloadhtml silent <line1>,<line2>call Dqn2html(0, 0)
 
 " mappings {{{2
 """"""""""""""""""""""""""""""""""""""""
