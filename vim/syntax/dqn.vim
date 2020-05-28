@@ -281,7 +281,7 @@ hi def dqnSubtitle guifg=#87afff ctermfg=111
 hi def dqnTitle1   guifg=#af5faf ctermfg=133 gui=bold cterm=bold
 hi def dqnTitle2   guifg=#af5f00 ctermfg=130 gui=bold cterm=bold
 hi def dqnTitle3   guifg=#008787 ctermfg=30  gui=bold cterm=bold
-hi def dqnSubtitle guifg=#005faf ctermfg=25
+hi def dqnSubtitle guifg=#0087b7 ctermfg=31
   else " if has('gui_running') OR &t_Co < 256
 exe 'hi def dqnTitle1   guifg=' .s:g_Magenta
   \ .' ctermfg=' .s:t_Magenta .' gui=bold cterm=bold'

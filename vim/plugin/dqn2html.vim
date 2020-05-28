@@ -3,6 +3,12 @@
 " Latest Change: 26 May 2020
 " Version:       1.33.01 (DQN v1.33)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" TODO Keyword highlight
+" TODO background color highlight
+" TODO escape character delete e.g. ~ in [~[
+" TODO Python block
+" TODO html hyper link
+" TODO Picture link
 
 " vimscript thingy {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -395,7 +401,7 @@ if a:accurate == 1
       elseif l:key ==# '{'
 	normal vhc<font color="#859900">
       elseif l:key ==# "'"
-	normal vhc<font color="#268bd2">
+	normal vhc<font color="#409ee0">
       elseif l:key ==# '-'
 	normal vhc<font color="#e06431">
       elseif l:key ==# '='
@@ -463,7 +469,7 @@ if a:accurate == 1
 else
   %sub+\[\[\(\_.\{-}\)]]+<font color="#b58900">\1</font>+ge
   %sub+\[{\(\_.\{-}\)]}+<font color="#859900">\1</font>+ge
-  %sub+\['\(\_.\{-}\)]'+<font color="#268bd2">\1</font>+ge
+  %sub+\['\(\_.\{-}\)]'+<font color="#409ee0">\1</font>+ge
   %sub+\[-\(\_.\{-}\)]-+<font color="#e06431">\1</font>+ge
   %sub+\[=\(\_.\{-}\)]=+<font color="#6c71c4">\1</font>+ge
   %sub+\["\(\_.\{-}\)]"+<font color="#2aa198">\1</font>+ge
@@ -533,10 +539,10 @@ func s:HtmlSkeleton()
   call append(3, "    <style>")
   call append(4, "    body {background: #fcf8ee; padding-left: 10px}")
   call append(5, "    p {width: 40em; color: #5d727a; text-align: justify; text-justify: inter-word;}")
-  call append(6, "    h1 {color: #3e5963;}")
-  call append(7, "    h2 {color: #3e5963;}")
-  call append(8, "    h3 {color: #3e5963;}")
-  call append(9, "    h4 {color: #3e5963;}")
+  call append(6, "    h1 {color: #af5faf; text-align: center; font-size: 130%;}")
+  call append(7, "    h2 {color: #af5f00; font-size: 120%;}")
+  call append(8, "    h3 {color: #008787; font-size: 110%;}")
+  call append(9, "    h4 {color: #0087b7; font-size: 100%;}")
   call append(10, "    code {background-color: #ebe9e4; font-size: 105%}")
   call append(11, "    ol {}")
   call append(12, "    ul {}")
