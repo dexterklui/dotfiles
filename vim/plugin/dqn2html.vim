@@ -3,11 +3,8 @@
 " Latest Change: 26 May 2020
 " Version:       1.33.01 (DQN v1.33)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" TODO Keyword highlight
-" TODO background color highlight
 " TODO escape character delete e.g. ~ in [~[
 " TODO Python block
-" TODO html hyper link
 " TODO Picture link
 
 " vimscript thingy {{{1
@@ -66,6 +63,11 @@ func s:Paragraph()
   " Change position of </**> that immediately follows </p><p> to immediately
   " be4
   %sub&^\(\s*\)</p><p>\n\(\s*\)\(\%(</[^>]\+>\)\+\)&\1\3</p><p>\2&ge
+endfunc " }}}
+
+func s:Keyword()
+" Highlight DQN keywords {{{
+  %sub+\<\(DUNNO\|NOTE\|WARN\|TODO\|XXX\|FIXME\)\>\|/?/+<font color="#e4569b"><b>\1</b></font>+ge
 endfunc " }}}
 
 func s:char1_col(line, regexp, has_index)
@@ -359,7 +361,18 @@ func s:Highlight()
   %sub+\[\\\(\_.\{-}\)]\\+<font color="#073642"><code>\1</code></font>+ge
   %sub+\[|\(\_.\{-}\)]|+<font color="#dc322f"><code>\1</code></font>+ge
 
-  " TODO Remaining color with background
+  %sub+`\[\(\_.\{-}\)`]+<font color="#b58900" style="background-color: #cbd4d4">\1</font>+ge
+  %sub+`{\(\_.\{-}\)`}+<font color="#859900" style="background-color: #cbd4d4">\1</font>+ge
+  %sub+`'\(\_.\{-}\)`'+<font color="#409ee0" style="background-color: #cbd4d4">\1</font>+ge
+  %sub+`-\(\_.\{-}\)`-+<font color="#e06431" style="background-color: #cbd4d4">\1</font>+ge
+  %sub+`=\(\_.\{-}\)`=+<font color="#6c71c4" style="background-color: #cbd4d4">\1</font>+ge
+  %sub+`"\(\_.\{-}\)`"+<font color="#2aa198" style="background-color: #cbd4d4">\1</font>+ge
+  %sub+`;\(\_.\{-}\)`;+<font color="#e4569b" style="background-color: #cbd4d4">\1</font>+ge
+  %sub+`/\(\_.\{-}\)`/+<font color="#dc322f" style="background-color: #cbd4d4">\1</font>+ge
+  %sub+`,\(\_.\{-}\)`,+<font color="#cbd4d4" style="background-color: #cbd4d4">\1</font>+ge
+  %sub+`_\(\_.\{-}\)`_+<font color="#fcf8ee" style="background-color: #cbd4d4">\1</font>+ge
+  %sub+`\\\(\_.\{-}\)`\\+<font color="#073642"><code>\1</code></font>+ge
+  %sub+`|\(\_.\{-}\)`|+<font color="#dc322f"><code>\1</code></font>+ge
 endfunc " }}}
 
 func s:SeparateLine()
@@ -369,8 +382,9 @@ func s:SeparateLine()
 endfunc " }}}
 
 func s:Hyperlink()
-" TODO Make hyperlink {{{
-  return
+" Make hyperlink {{{
+  " FIXME What if the link breaks to several lines?
+  %sub+\[=\(https\=://\S\{-}\)]=+<a href="\1">\1</a>+ge
 endfunc " }}}
 
 func s:PreDelete()
@@ -390,6 +404,8 @@ func s:Html()
   call s:PreDelete()
   call s:EscapeChar()
   call s:Title()
+  call s:Keyword()
+  call s:Hyperlink()
   call s:Highlight()
   call s:PostDelete()
   call s:SeparateLine()
