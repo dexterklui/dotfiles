@@ -98,6 +98,7 @@ WARN
 ======================================================================
 [[this [{t`[hi`]s]}]]
 `/Red ["cyan]"`/
+[\code[|typecolor]|backtocode]\
 
 
 #beginPython#

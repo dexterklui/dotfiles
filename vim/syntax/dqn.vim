@@ -95,10 +95,6 @@ syn match   dqnKeyword +/?/+ display
 
 " Others {{{2
 """"""""""""""""""""
-syn region dqnCode     matchgroup=dqnMark start=+\[\\+ end=+]\\+ concealends
-  \ contains=@NoSpell,dqnBreak
-syn region dqnCodeType matchgroup=dqnMark start=+\[|+ end=+]|+   concealends
-  \ contains=@NoSpell,dqnBreak
 syn match dqnComment +///.*$+ keepend display contains=@Spell
 syn match dqnFoldMark /{\{3}[0-9]\{0,1}/ display
 syn match dqnFoldMark /}\{3}[0-9]\{0,1}/ display
