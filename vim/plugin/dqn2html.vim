@@ -344,129 +344,8 @@ func s:UnorderedList()
   endfor
 endfunc " }}}
 
-func s:Highlight(accurate)
+func s:Highlight()
 " Turn DQN highlights to html format {{{
-" Accurate but much slower method
-""""""""""""""""""""""""""""""""""""""""
-if a:accurate == 1
-  " generate pattern
-  let l:hl = {'[':']',
-    \ '{':'}',
-    \ "'":"'",
-    \ '-':'-',
-    \ '=':'=',
-    \ '"':'"',
-    \ ';':';',
-    \ '/':'/',
-    \ ',':',',
-    \ '_':'_',
-    \ '\':'\',
-    \ '|':'|',
-    \ }
-  let l:hl_beg_pat = '\('
-  for i in keys(l:hl)
-    let l:itempat = escape(i, '[\*.~')
-    let l:hl_beg_pat .= l:itempat .'\|'
-  endfor
-  let l:hl_beg_pat = substitute(l:hl_beg_pat, '\\\zs|$', ')', '')
-
-  let l:hl_end_pat = '\('
-  for i in keys(l:hl)
-    let l:item = eval('l:hl["' .escape(i, '"\') .'"]')
-    let l:itempat = escape(l:item, '[\*.~')
-    let l:hl_end_pat .= l:itempat .'\|'
-  endfor
-  let l:hl_end_pat = substitute(l:hl_end_pat, '\\\zs|$', ')', '')
-
-  call cursor(1,1)
-  let g:wrapscan = &wrapscan
-  let l:reg = @*
-  set nowrapscan
-  let l:fo = &fo
-  let &fo=''
-  " Find beginning of dqn highlight region, replace to <font color=..>, then
-  " jump to corresponding end of dqn highlight region, replace to </font>.
-  " Repeat until hit file bottom
-  while 1
-    let @/ = '\[' .l:hl_beg_pat
-    try
-      normal nlv"*y
-      let l:key = getreg('*')
-      let l:item = eval('l:hl["' .escape(l:key, '"\') .'"]')
-      let l:endpat = ']' .escape(l:item, '[\*.~')
-
-      " Change begin first pattern first
-      if l:key ==# '['
-	normal vhc<font color="#b58900">
-      elseif l:key ==# '{'
-	normal vhc<font color="#859900">
-      elseif l:key ==# "'"
-	normal vhc<font color="#409ee0">
-      elseif l:key ==# '-'
-	normal vhc<font color="#e06431">
-      elseif l:key ==# '='
-	normal vhc<font color="#6c71c4">
-      elseif l:key ==# '"'
-	normal vhc<font color="#2aa198">
-      elseif l:key ==# ';'
-	normal vhc<font color="#e4569b">
-      elseif l:key ==# '/'
-	normal vhc<font color="#dc322f">
-      elseif l:key ==# ','
-	normal vhc<font color="#cbd4d4">
-      elseif l:key ==# '_'
-	normal vhc<font color="#fcf8ee">
-      elseif l:key ==# '\'
-	normal vhc<font color="#073642"><code>
-      elseif l:key ==# '|'
-	normal vhc<font color="#dc322f"><code>
-      endif
-
-      let @/ = l:endpat
-      normal n
-      " change end pattern
-      if l:key ==# '['
-	normal vlc</font>
-      elseif l:key ==# '{'
-	normal vlc</font>
-      elseif l:key ==# "'"
-	normal vlc</font>
-      elseif l:key ==# '-'
-	normal vlc</font>
-      elseif l:key ==# '='
-	normal vlc</font>
-      elseif l:key ==# '"'
-	normal vlc</font>
-      elseif l:key ==# ';'
-	normal vlc</font>
-      elseif l:key ==# '/'
-	normal vlc</font>
-      elseif l:key ==# ','
-	normal vlc</font>
-      elseif l:key ==# '_'
-	normal vlc</font>
-      elseif l:key ==# '\'
-	normal vlc</code></font>
-      elseif l:key ==# '|'
-	normal vlc</code></font>
-      endif
-
-    catch /^Vim\%((\a\+)\)\=:E385/
-      break
-    endtry
-  endwhile
-  let &fo = l:fo
-  let &wrapscan = g:wrapscan
-  let @* = l:reg
-  "
-
-" TODO accurate and fast
-""""""""""""""""""""""""""""""""""""""""
-"elseif a:accurate == 2
-
-" Falsely add unwanted hl in already hl'ed area but is a much faster method
-""""""""""""""""""""""""""""""""""""""""
-else
   %sub+\[\[\(\_.\{-}\)]]+<font color="#b58900">\1</font>+ge
   %sub+\[{\(\_.\{-}\)]}+<font color="#859900">\1</font>+ge
   %sub+\['\(\_.\{-}\)]'+<font color="#409ee0">\1</font>+ge
@@ -480,7 +359,6 @@ else
   %sub+\[\\\(\_.\{-}\)]\\+<font color="#073642"><code>\1</code></font>+ge
   %sub+\[|\(\_.\{-}\)]|+<font color="#dc322f"><code>\1</code></font>+ge
 
-endif
   " TODO Remaining color with background
 endfunc " }}}
 
@@ -507,12 +385,12 @@ func s:PostDelete()
   %sub+\[\.\_.\{-}]\.++ge
 endfunc " }}}
 
-func s:Html(accurate)
+func s:Html()
 " Transform text to html {{{
   call s:PreDelete()
   call s:EscapeChar()
   call s:Title()
-  call s:Highlight(a:accurate)
+  call s:Highlight()
   call s:PostDelete()
   call s:SeparateLine()
   call s:UnorderedList()
@@ -543,8 +421,8 @@ func s:HtmlSkeleton()
   call append(5, "    p {width: 40em; color: #5d727a; text-align: justify; text-justify: inter-word;}")
   call append(6, "    h1 {color: #af5faf; text-align: center; font-size: 130%;}")
   call append(7, "    h2 {color: #af5f00; font-size: 120%;}")
-  call append(8, "    h3 {color: #008787; font-size: 110%;}")
-  call append(9, "    h4 {color: #0087b7; font-size: 100%;}")
+  call append(8, "    h3 {color: #008787; font-size: 110%; padding: 0; margin: 0;}")
+  call append(9, "    h4 {color: #0087b7; font-size: 100%; padding: 0; margin: 0;}")
   call append(10, "    code {background-color: #ebe9e4; font-size: 105%}")
   call append(11, "    ol {}")
   call append(12, "    ul {}")
@@ -556,22 +434,18 @@ func s:HtmlSkeleton()
   call append(line('$'), "</html>")
 endfunc " }}}
 
-func Dqn2html(accurate, open) range abort
+func Dqn2html(open) range abort
 " Write content in /tmp/, and change format to HTML {{{
-" accurate: {0|1}: 0:faster but may wrongly highlight more words
 " open: {0|1}: 1:open the HTML file in a browser
   if DQNVersion() == 0
     echoe 'This is not a dqn file! Abort function.'
     return
   endif
   update
-  let l:altbuf = bufnr(@#)
+  let l:altbuf = @#
   exe a:firstline .',' .a:lastline .'call s:CreateTmp()'
-
-  " TODO add silent
-  call s:Html(a:accurate)
+  call s:Html()
   call s:HtmlSkeleton()
-
   update
   if a:open == 1
     silent !xdg-open %&
@@ -594,8 +468,8 @@ endfunc " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Defining commands {{{2
 """"""""""""""""""""""""""""""""""""""""
-command -range=% Dqn2html silent <line1>,<line2>call Dqn2html(0, 1)
-command -range=% Reloadhtml silent <line1>,<line2>call Dqn2html(0, 0)
+command -range=% Dqn2html silent <line1>,<line2>call Dqn2html(1)
+command -range=% Reloadhtml silent <line1>,<line2>call Dqn2html(0)
 
 " mappings {{{2
 """"""""""""""""""""""""""""""""""""""""

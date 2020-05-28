@@ -1,8 +1,8 @@
 " Vim syntax file
-" Language:	DQNote
-" Maintainer:	DQ
-" Version:	1.33.0 (DQN v1.33)
-" Last Change:	23 May 2020
+" Language:     DQNote
+" Maintainer:   DQ
+" Version:      1.33.1 (DQN v1.33)
+" Last Change:  28 May 2020
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Quit when a (custom) syntax file was already loaded {{{1
@@ -29,60 +29,60 @@ syn cluster dqnTitle add=dqnTitle1,dqnTitle2,dqnTitle3,dqnSubtitle
 " Coloured highlighting without background {{{2
 """"""""""""""""""""
 syn region dqnYellow  matchgroup=dqnMark start=+\[\[+ end=+]]+ concealends
-  \ contains=@Spell,dqnBreak
+  \ contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
 syn region dqnGreen   matchgroup=dqnMark start=+\[{+ end=+]}+ concealends
-  \ contains=@Spell,dqnBreak
+  \ contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
 syn region dqnBlue    matchgroup=dqnMark start=+\['+ end=+]'+ concealends
-  \ contains=@Spell,dqnBreak
+  \ contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
 syn region dqnOrange  matchgroup=dqnMark start=+\[-+ end=+]-+ concealends
-  \ contains=@Spell,dqnBreak
+  \ contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
 syn region dqnPurple  matchgroup=dqnMark start=+\[=+ end=+]=+ concealends
-  \ contains=@Spell,dqnBreak
+  \ contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
 syn region dqnCyan    matchgroup=dqnMark start=+\["+ end=+]"+ concealends
-  \ contains=@Spell,dqnBreak
+  \ contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
 syn region dqnMagenta matchgroup=dqnMark start=+\[;+ end=+];+ concealends
-  \ contains=@Spell,dqnBreak
+  \ contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
 syn region dqnRed     matchgroup=dqnMark start=+\[/+ end=+]/+ concealends
-  \ contains=@Spell,dqnBreak
+  \ contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
 syn region dqnGray    matchgroup=dqnMark start=+\[,+ end=+],+ concealends
-  \ contains=@Spell,dqnBreak
+  \ contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
 syn region dqnBkgrd   matchgroup=dqnMark start=+\[_+ end=+]_+ concealends
-  \ contains=@Spell,dqnBreak
+  \ contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
 syn cluster dqnColor add=dqnYellow,dqnGreen,dqnBlue,dqnOrange,dqnPurple
   \,dqnCyan,dqnMagenta,dqnRed,dqnGray,dqnBkgrd
 
 " Coloured highlighting with gray background {{{2
 """"""""""""""""""""
 syn region dqnBgYellow  matchgroup=dqnMark start=+`\[+ end=+`]+ concealends
-  \ contains=@Spell,dqnBgBreak
+  \ contains=@Spell,dqnBgBreak,@dqnColor,@dqnBgColor
 syn region dqnBgGreen   matchgroup=dqnMark start=+`{+  end=+`}+ concealends
-  \ contains=@Spell,dqnBgBreak
+  \ contains=@Spell,dqnBgBreak,@dqnColor,@dqnBgColor
 syn region dqnBgBlue    matchgroup=dqnMark start=+`'+  end=+`'+ concealends
-  \ contains=@Spell,dqnBgBreak
+  \ contains=@Spell,dqnBgBreak,@dqnColor,@dqnBgColor
 syn region dqnBgOrange  matchgroup=dqnMark start=+`-+  end=+`-+ concealends
-  \ contains=@Spell,dqnBgBreak
+  \ contains=@Spell,dqnBgBreak,@dqnColor,@dqnBgColor
 syn region dqnBgPurple  matchgroup=dqnMark start=+`=+  end=+`=+ concealends
-  \ contains=@Spell,dqnBgBreak
+  \ contains=@Spell,dqnBgBreak,@dqnColor,@dqnBgColor
 syn region dqnBgCyan    matchgroup=dqnMark start=+`"+  end=+`"+ concealends
-  \ contains=@Spell,dqnBgBreak
+  \ contains=@Spell,dqnBgBreak,@dqnColor,@dqnBgColor
 syn region dqnBgMagenta matchgroup=dqnMark start=+`;+  end=+`;+ concealends
-  \ contains=@Spell,dqnBgBreak
+  \ contains=@Spell,dqnBgBreak,@dqnColor,@dqnBgColor
 syn region dqnBgRed     matchgroup=dqnMark start=+`/+  end=+`/+ concealends
-  \ contains=@Spell,dqnBgBreak
+  \ contains=@Spell,dqnBgBreak,@dqnColor,@dqnBgColor
 syn region dqnBgGray    matchgroup=dqnMark start=+`,+  end=+`,+ concealends
-  \ contains=@Spell,dqnBgBreak
+  \ contains=@Spell,dqnBgBreak,@dqnColor,@dqnBgColor
 syn region dqnBgBkgrd   matchgroup=dqnMark start=+`_+  end=+`_+ concealends
-  \ contains=@Spell,dqnBgBreak
+  \ contains=@Spell,dqnBgBreak,@dqnColor,@dqnBgColor
 syn region dqnBgFrgrd   matchgroup=dqnMark start=+`\\+ end=+`\\+
-  \ concealends contains=@Spell,dqnBgBreak
+  \ concealends contains=@Spell,dqnBgBreak,@dqnColor,@dqnBgColor
 syn cluster dqnBgColor add=dqnBgYellow,dqnBgGreen,dqnBgBlue,dqnBgOrange
   \,dqnBgPurple,dqnBgCyan,dqnBgMagenta,dqnBgRed,dqnBgGray,dqnBgBkgrd
   \,dqnBgFrgrd
 
 syn region dqnCode     matchgroup=dqnMark start=+\[\\+ end=+]\\+ concealends
-  \ contains=@NoSpell,dqnBreak
+  \ contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
 syn region dqnCodeType matchgroup=dqnMark start=+\[|+ end=+]|+   concealends
-  \ contains=@NoSpell,dqnBreak
+  \ contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
 syn cluster dqnBgColor add=dqnCode,dqnCodeType
 
 " Keywords {{{2
@@ -110,8 +110,8 @@ syn match dqnBreak /░\ze$/ conceal display
 syn region dqnConceal matchgroup=dqnMark start=+\[\.+ end=+]\.+ concealends
   \ conceal cchar=▒ contains=@Spell,dqnBreak
 " Used to prevent matching dqn syntax:
-syn match dqnNomatch +[`[]\zs\~\ze[[{'-=";/,_\\|.]+ conceal display
-syn match dqnNomatch +[]`]\zs\~\ze[]}'-=";/,_\\|.]+ conceal display
+syn match dqnNomatch +[`[]\~*\zs\~\ze[[{'-=";/,_\\|.]+ conceal display
+syn match dqnNomatch +[]`]\~*\zs\~\ze[]}'-=";/,_\\|.]+ conceal display
   \ containedin=@dqnColor,@dqnBgColor
 
 " Include syntax for other filetype {{{2
@@ -332,7 +332,7 @@ syn sync match dqnIncludeSync  grouphere NONE      /#endPython#$/
 syn sync match dqnIncludeSync  grouphere dqnPython /#beginPython#$/
 syn sync match dqnSubtitleSync grouphere NONE      /^\t* \{3}|.\+|$/
 syn sync match dqnFoldMarkSync grouphere NONE      /{\{3}[0-9]/
-syn sync minlines=1 maxlines=100
+syn sync minlines=1
 " }}}1
 "=====================================================================
 " To reapply cleared highlightings upon colorscheme change {{{1
