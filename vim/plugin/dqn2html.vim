@@ -1,7 +1,7 @@
 " dqn2html:       Transforming format of DQN to html
 " Maintainer:    Dexter K. Lui <dexterklui@pm.me>
 " Latest Change: 26 May 2020
-" Version:       1.33.01 (DQN v1.33)
+" Version:       1.33.02 (DQN v1.33)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TODO Python block
 " TODO Picture link
@@ -93,12 +93,9 @@ func s:OrderedList()
   let l:list = ['(\=\d\+)', '\d\+\.']
   let l:regexp = '\('
   for i in l:list
-    if i != l:list[-1]
-      let l:regexp .= i . '\|'
-    else
-      let l:regexp .= i . '\)'
-    endif
+    let l:regexp .= i . '\|'
   endfor
+  let l:regexp = substitute(l:regexp, '\\\zs|$', ')', '')
 
   let l:had_index = 0
   let l:list_lv = 0
@@ -221,12 +218,9 @@ func s:UnorderedList()
   for i in l:bullet
     let l:itempat = escape(i, '[\*.~')
     " TODO no need if statement. Use substitute+\\\zs|$+)
-    if i != l:bullet[-1]
-      let l:regexp .= l:itempat . '\|'
-    else
-      let l:regexp .= l:itempat . '\)'
-    endif
+    let l:regexp .= l:itempat . '\|'
   endfor
+  let l:regexp = substitute(l:regexp, '\\\zs|$', ')', '')
 
   let l:list_lv = 0
   let _ = escape(l:regexp, '/')
@@ -427,12 +421,11 @@ endfunc " }}}
 func s:CreateTmp() range
 " Edit a file in /tmp/ {{{
   silent !mkdir -p /tmp/dqn2html/
-  exe a:firstline .',' .a:lastline .'write!' '/tmp/dqn2html/'
-    \ .expand('%:p:h:h:t') .'\%' .expand('%:p:h:t') .'\%'
-    \ .expand('%:t:r') . '.html'
+  let l:fname = substitute(expand('%:p:r'), '[^/]\zs/', '\\%', 'ge')
+  echom a:firstline .',' .a:lastline .'w! /tmp/dqn2html' .l:fname .'.html'
+  exe a:firstline .',' .a:lastline .'w! /tmp/dqn2html' .l:fname .'.html'
 
-  exe 'edit /tmp/dqn2html/' .expand('%:p:h:h:t') .'\%'
-    \ .expand('%:p:h:t') .'\%' .expand('%:t:r') . '.html'
+  exe 'edit /tmp/dqn2html/' .l:fname .'.html'
 endfunc " }}}
 
 func s:HtmlSkeleton()
@@ -458,7 +451,7 @@ func s:HtmlSkeleton()
   call append(line('$'), "</html>")
 endfunc " }}}
 
-func Dqn2html(open) range abort
+func Dqn2html() range abort
 " Write content in /tmp/, and change format to HTML {{{
 " open: {0|1}: 1:open the HTML file in a browser
   if DQNVersion() == 0
@@ -471,29 +464,30 @@ func Dqn2html(open) range abort
   call s:Html()
   call s:HtmlSkeleton()
   update
-  if a:open == 1
-    silent !xdg-open %&
-  endif
-  buffer #
   let @# = l:altbuf
 endfunc " }}}
 
 func Opendqnhtml()
 " Open the corresponding html file for current dqn {{{
+  let l:altbuf = @#
   if expand('%:p') =~# '^/tmp/dqn2html/.*\.html$'
-    exe 'b ' .substitute(expand('%:p:t:r'), '%', '/', 'ge')
-  elseif expand('%:p') =~# '.dqn\~\=$'
-  exe 'e /tmp/dqn2html/' .expand('%:p:h:h:t') .'\%'
-    \ .expand('%:p:h:t') .'\%' .expand('%:t:r') . '.html'
+    let l:fname = substitute(expand('%:p:r'), '^/tmp/dqn2html', '', '')
+    exe 'e ' .substitute(l:fname, '%', '/', 'ge') .'.dqn'
+  elseif expand('%:e') =~# '^dqn\~\=$'
+    let l:fname = substitute(expand('%:p:r'), '[^/]/', '\\%', 'ge')
+    exe 'e /tmp/dqn2html' .l:fname .'.html'
   endif
+  let @# = l:altbuf
 endfunc " }}}
 
 " Defining commands and mappings {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Defining commands {{{2
 """"""""""""""""""""""""""""""""""""""""
-command -range=% Dqn2html silent <line1>,<line2>call Dqn2html(1)
-command -range=% Reloadhtml silent <line1>,<line2>call Dqn2html(0)
+command -range=% Dqn2html exe 'silent <line1>,<line2>call Dqn2html()'
+  \ | exe 'silent !xdg-open %&' | call Opendqnhtml()
+command -range=% Reloadhtml exe 'silent <line1>,<line2>call Dqn2html()'
+  \ | call Opendqnhtml()
 
 " mappings {{{2
 """"""""""""""""""""""""""""""""""""""""
