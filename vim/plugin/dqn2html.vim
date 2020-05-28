@@ -3,7 +3,6 @@
 " Latest Change: 26 May 2020
 " Version:       1.33.01 (DQN v1.33)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" TODO escape character delete e.g. ~ in [~[
 " TODO Python block
 " TODO Picture link
 
@@ -379,6 +378,9 @@ func s:SeparateLine()
 " Keep lines in certain area separated {{{
   %sub/░$/<br>/ge
   %sub/:$/:<br>/ge
+  %sub/^\(=\{70,78}\)$/\1/ge
+  %sub/^\(-\{70,78}\)$/\1/ge
+  %sub+^\(/\*-\{74}\*/\)$+\1+ge
 endfunc " }}}
 
 func s:Hyperlink()
@@ -397,6 +399,12 @@ endfunc " }}}
 func s:PostDelete()
 " Delete unwanted elements {{{
   %sub+\[\.\_.\{-}]\.++ge
+
+  " Remove dqnNomatch (escape char which prevents matching dqn highlighting)
+  %sub+[[`]\~*\zs\~\ze[[{'"-=";/,_\\|.]++ge
+  %sub+[]`]\~*\zs\~\ze[]}'"-=";/,_\\|.]++ge
+  %sub+\[\~*\zs\~\ze\(\[\|<font color\)++ge
+  %sub+]\~*\zs\~\ze\(]\|</font>\)++ge
 endfunc " }}}
 
 func s:Html()
