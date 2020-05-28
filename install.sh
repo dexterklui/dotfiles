@@ -44,6 +44,10 @@ cp -iu ${PWD}/vim/ftplugin/dqn.vim ~/.vim/ftplugin/dqn.vim
 ########################################
 cp -iu ${PWD}/vim/colors/dqsolarized.vim ~/.vim/colors/dqsolarized.vim
 
+# .vim/after/ftplugin {{{2
+########################################
+cp -iu ${PWD}/vim/after/ftplugin/* ~/.vim/after/ftplugin/
+
 # Git {{{1
 ##############################################################################
 ln -s ${PWD}/gitconfig ~/.gitconfig && echo 'Installed ~/.gitconfig'
