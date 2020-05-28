@@ -1,7 +1,7 @@
 " DQTreeDiagram:    Vim custom plugin for remapping keys to type tree diagrams easily
-" Maintainer:	    Dexter K. Lui <dexterklui@pm.me>
-" Lat Change:	    May 1 2020
-" Version:	    1.1
+" Maintainer:       Dexter K. Lui <dexterklui@pm.me>
+" Lat Change:       May 1 2020
+" Version:          1.1
 
 " Abort if running in vi-compatible mode or the user doesn't want us. {{{1
 if &cp || exists('g:loaded_DQTreeDiagram')
@@ -11,7 +11,7 @@ if &cp || exists('g:loaded_DQTreeDiagram')
   finish
 endif
 
-" vimscript thingy	{{{1
+" vimscript thingy      {{{1
 let s:save_cpo = &cpo
 set cpo&vim
 

@@ -85,43 +85,43 @@ source ~/.vim/DQScripts/digraphs/super_sub_scripts.vim
 " ** Both vim and nvim ** {{{2
 """"""""""""""""""""""""""""""""""""""""
 " (n) = (nvim default)
-set hlsearch	    " highlight search matches (n)
+set hlsearch        " highlight search matches (n)
 set autoindent      " (n)
-set mouse=a	    " Use mouse
+set mouse=a         " Use mouse
 set history=1000    " keep 50 lines of command line history
-set ruler	    " show the cursor position all the time (nvim deault)
-set number	    " Show line number on left side
+set ruler           " show the cursor position all the time (nvim deault)
+set number          " Show line number on left side
 set relativenumber  " Show relative instead of absolute line nr
-set showcmd	    " display incomplete commands (n)
-set incsearch	    " do incremental searching (n)
-set wildmenu	    " Show matching terms when pressing tab
+set showcmd         " display incomplete commands (n)
+set incsearch       " do incremental searching (n)
+set wildmenu        " Show matching terms when pressing tab
 set scrolloff=2     " Set the numbers of line to show around cursor
-set splitright	    " Split right by defaul when do a vertical split
-set path+=**	    " allow :find fuzzy search with * at front
+set splitright      " Split right by defaul when do a vertical split
+set path+=**        " allow :find fuzzy search with * at front
 set laststatus=2    " always show statusline (n)
 set showtabline=2   " always show tabline
 set fillchars=vert:\|,fold:\  " Set filling characters for foldlines to space
 set conceallevel=2  " This is also needed for the plugin indentLine
 set nowrapscan      " disable search through bottom to the top
-set expandtab	    " Typing <Tab> insert appropriate number of spaces
+set expandtab       " Typing <Tab> insert appropriate number of spaces
 set shiftwidth=4    " Make each indent level to be of 4 spaces
 set smarttab " <Tab> at line beginnings inserts whitespaces = 'shiftwidth' (n)
 set backspace=indent,eol,start " allow backspacing over everything (n)
 set belloff=all     " No alert sound in vim (n)
-set nobackup	    " Don't save backup file by default
+set nobackup        " Don't save backup file by default
 set autoread  " autoupdate the buffer when the file is changed externally (n)
 set listchars=eol:$,tab:>\ ,nbsp:+  " adjust the text printed by :list
 set nrformats=bin,hex " adjust what format of nr <C-A> and <C-X> recognize (n)
 set shortmess+=F    " Adjust the message format: often shorting them (n)
 set sidescroll=1  " When 'nowrap': the min. columns to scoll horizontally (n)
 set undodir=~/.local/share/nvim/undo " (n)
-set undofile	    " Now vim will safe undo history
+set undofile        " Now vim will safe undo history
 set ttimeoutlen=50  " Time (ms) that is waited for a key-seq to complete (n)
 set viminfo^=!      " (n)
-set langnoremap	    " (n)
-set cursorline	    " Make bg color of cursor line different
+set langnoremap     " (n)
+set cursorline      " Make bg color of cursor line different
 set updatetime=250  " after 250ms, write swap and update gitgutter
-set winwidth=84	    " Set the min nr of columns for current window
+set winwidth=84     " Set the min nr of columns for current window
 set spelllang=en_gb " Set default spell language as british english
 
 " ** For vim only ** {{{2
@@ -260,7 +260,7 @@ let NERDTreeShowBookmarks = 1
 
 " * YouCompleteMe * {{{3
 """"""""""""""""""""
-map <leader>g	:YcmCompleter GoToDefinitionElseDeclaration<CR>
+map <leader>g   :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 

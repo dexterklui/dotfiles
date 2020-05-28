@@ -1,30 +1,32 @@
 [user]
-	name = Dexter K. Lui
-	email = dexterklui@pm.me
+        name = Dexter K. Lui
+        email = dexterklui@pm.me
 
 # Define command which will be used when "nvim" is set as a merge tool
 ##############################################################################
 [mergetool "nvim"]
-	cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+        cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
 # Set "nvim" as tool for merging
 [merge]
-	tool = nvim
+        tool = nvim
 # Automatically launch merge tool without displaying a prompt
 [mergetool]
-	prompt = false
+        prompt = false
 
 ##############################################################################
 [core]
-	editor = nvim
-	excludesfile = /home/dexq/.gitignore
+        editor = nvim
+        excludesfile = /home/dexq/.gitignore
 [alias]
-	co = checkout
-	br = branch
-	ci = commit
-	st = status
-	l = log
-	dt = difftool
-	mt = mergetool
-	last = log -1 HEAD
-	graph = log --all --graph --decorate
-	unstage = reset HEAD --
+        co = checkout
+        br = branch
+        ci = commit
+        st = status
+        l = log
+        dt = difftool
+        mt = mergetool
+        last = log -1 HEAD
+        graph = log --all --graph --decorate
+        unstage = reset HEAD --
+
+# vi: sw=8 

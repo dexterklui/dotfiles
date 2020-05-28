@@ -1,7 +1,7 @@
 " DQColorscheme:    Plugin for changing colorscheme
-" Maintainer:	    Dexter K. Lui <dexterklui@pm.me>
-" Lat Change:	    11 May 2020
-" Version:	    1.2
+" Maintainer:       Dexter K. Lui <dexterklui@pm.me>
+" Lat Change:       11 May 2020
+" Version:          1.2
 
 " Abort if running in vi-compatible mode or the user doesn't want us.
   if &cp || exists('g:loaded_DQColorscheme')
@@ -68,19 +68,19 @@
     " Toggle colorscheme between (dq)solarized or dd/default.
     if g:colors_name !~ '^dqsolarized$\|^solarized$'
       try
-	colorscheme dqsolarized
+        colorscheme dqsolarized
       catch /^Vim\%((\a\+)\)\=:E185/
-	colorscheme solarized
+        colorscheme solarized
       catch /^Vim\%((\a\+)\)\=:E185/
-	colorscheme dd
+        colorscheme dd
       catch /^Vim\%((\a\+)\)\=:E185/
-	colorscheme default
+        colorscheme default
       endtry
     elseif g:colors_name !~ '^dd$\|^default$'
       try
-	colorscheme dd
+        colorscheme dd
       catch /^Vim\%((\a\+)\)\=:E185/
-	colorscheme default
+        colorscheme default
       endtry
     endif
 

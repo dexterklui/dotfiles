@@ -1,7 +1,7 @@
 " DQToggleConceal:  Plugin for toggling conceallevel
-" Maintainer:	    Dexter K. Lui <dexterklui@pm.me>
-" Lat Change:	    30 Apr 2020
-" Version:	    1.2
+" Maintainer:       Dexter K. Lui <dexterklui@pm.me>
+" Lat Change:       30 Apr 2020
+" Version:          1.2
 
 " Abort if running in vi-compatible mode or the user doesn't want us.
   if &cp || exists('g:loaded_DQToggleConceal')

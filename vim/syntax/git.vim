@@ -1,9 +1,9 @@
 " Vim syntax file
-" Language:	generic git output
-" Author:	Tim Pope <vimNOSPAM@tpope.org>
-" Last Change:	2010 May 21
-" Modified By:	Dexter K. Lui <dexterklui@pm.me>
-" Last Change:	2020 May 20
+" Language:     generic git output
+" Author:       Tim Pope <vimNOSPAM@tpope.org>
+" Last Change:  2010 May 21
+" Modified By:  Dexter K. Lui <dexterklui@pm.me>
+" Last Change:  2020 May 20
 
 if exists("b:current_syntax")
   finish

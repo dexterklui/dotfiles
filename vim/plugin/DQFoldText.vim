@@ -1,7 +1,7 @@
-" DQFoldText:	    Plugin for generating fold text
-" Maintainer:	    Dexter K. Lui <dexterklui@pm.me>
-" Last Change:	    17 May 2020
-" Version:	    1.4
+" DQFoldText:       Plugin for generating fold text
+" Maintainer:       Dexter K. Lui <dexterklui@pm.me>
+" Last Change:      17 May 2020
+" Version:          1.4
 
 " Abort if running in vi-compatible mode or the user doesn't want us.
   if &cp || exists('g:loaded_DQFoldText')
@@ -36,45 +36,45 @@ function! DQFoldText()
     " if there is modified lines unstaged (Git)
     if exists('g:loaded_gitgutter') && gitgutter#fold#is_changed()
       if l:foldlevel == 1
-	return '🔺' . l:line . '📝 [' . l:nrline . 'L]'
+        return '🔺' . l:line . '📝 [' . l:nrline . 'L]'
       elseif l:foldlevel == 2
-	return ' 🔸' . l:line . '📝 [' . l:nrline . 'L]'
+        return ' 🔸' . l:line . '📝 [' . l:nrline . 'L]'
       elseif l:foldlevel == 3
-	return '  🔹' . l:line . '📝 [' . l:nrline . 'L]'
+        return '  🔹' . l:line . '📝 [' . l:nrline . 'L]'
       elseif l:foldlevel == 4
-	if &bg ==# 'dark'
-	  return '   ▫️ ' . l:line . '📝 [' . l:nrline . 'L]'
-	else
-	  return '   ▪️ ' . l:line . '📝 [' . l:nrline . 'L]'
-	endif " background: dark, light
+        if &bg ==# 'dark'
+          return '   ▫️ ' . l:line . '📝 [' . l:nrline . 'L]'
+        else
+          return '   ▪️ ' . l:line . '📝 [' . l:nrline . 'L]'
+        endif " background: dark, light
       else
-	if &bg ==# 'dark'
-	  return '   ▫️ ' . repeat('▫️ ', l:foldlevel-4) . l:line . '📝 [' . l:nrline . 'L]'
-	else
-	  return '   ▪️ ' . repeat('▪️ ', l:foldlevel-4) . l:line . '📝 [' . l:nrline . 'L]'
-	endif " background: dark, light
+        if &bg ==# 'dark'
+          return '   ▫️ ' . repeat('▫️ ', l:foldlevel-4) . l:line . '📝 [' . l:nrline . 'L]'
+        else
+          return '   ▪️ ' . repeat('▪️ ', l:foldlevel-4) . l:line . '📝 [' . l:nrline . 'L]'
+        endif " background: dark, light
       endif " foldlevel: 1, 2, 3, 4, >4
 
     " if there is no modified lines unstaged (Gitgutter)
     else
       if l:foldlevel == 1
-	return '🔺' . l:line . '[' . l:nrline . 'L]'
+        return '🔺' . l:line . '[' . l:nrline . 'L]'
       elseif l:foldlevel == 2
-	return ' 🔸' . l:line . '[' . l:nrline . 'L]'
+        return ' 🔸' . l:line . '[' . l:nrline . 'L]'
       elseif l:foldlevel == 3
-	return '  🔹' . l:line . '[' . l:nrline . 'L]'
+        return '  🔹' . l:line . '[' . l:nrline . 'L]'
       elseif l:foldlevel == 4
-	if &bg ==# 'dark'
-	  return '   ▫️ ' . l:line . '[' . l:nrline . 'L]'
-	else
-	  return '   ▪️ ' . l:line . '[' . l:nrline . 'L]'
-	endif " background: dark, light
+        if &bg ==# 'dark'
+          return '   ▫️ ' . l:line . '[' . l:nrline . 'L]'
+        else
+          return '   ▪️ ' . l:line . '[' . l:nrline . 'L]'
+        endif " background: dark, light
       else
-	if &bg ==# 'dark'
-	  return '   ▫️ ' . repeat('▫️ ', l:foldlevel-4) . l:line . '[' . l:nrline . 'L]'
-	else
-	  return '   ▪️ ' . repeat('▪️ ', l:foldlevel-4) . l:line . '[' . l:nrline . 'L]'
-	endif " background: dark, light
+        if &bg ==# 'dark'
+          return '   ▫️ ' . repeat('▫️ ', l:foldlevel-4) . l:line . '[' . l:nrline . 'L]'
+        else
+          return '   ▪️ ' . repeat('▪️ ', l:foldlevel-4) . l:line . '[' . l:nrline . 'L]'
+        endif " background: dark, light
       endif " foldlevel: 1, 2, 3, 4, >4
     endif " Git's unstage modified lines: True, False
   endif " Support emoji: False, True

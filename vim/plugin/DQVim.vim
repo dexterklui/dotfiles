@@ -1,7 +1,7 @@
-" DQVim:	    Vim plugin for Vim files
-" Maintainer:	    Dexter K. Lui <dexterklui@pm.me>
+" DQVim:            Vim plugin for Vim files
+" Maintainer:       Dexter K. Lui <dexterklui@pm.me>
 " Latest Change:    17 May 2020
-" Version:	    1.3
+" Version:          1.3
 
 " Abort if running in vi-compatible mode or the user doesn't want us.
   if &cp || exists('g:loaded_DQVim')
@@ -64,17 +64,17 @@
     " Runs vim diff between that in ~/.vim and ~/src/dotfiles
     if expand('%:p:~') =~# '^\~/src/dotfiles/vim/'
       if filereadable(expand('~') . '/.vim/' . substitute(expand('%:p:~'), '^\~/src/dotfiles/vim/', '', ''))
-	exe 'diffsplit ' . expand('~') . '/.vim/' . substitute(expand('%:p:~'), '^\~/src/dotfiles/vim/', '', '')
+        exe 'diffsplit ' . expand('~') . '/.vim/' . substitute(expand('%:p:~'), '^\~/src/dotfiles/vim/', '', '')
       elseif filereadable(expand('~') . '/.config/nvim/' . substitute(expand('%:p:~'), '^\~/src/dotfiles/vim/', '', ''))
-	exe 'diffsplit ' . expand('~') . '/.config/nvim/' . substitute(expand('%:p:~'), '^\~/src/dotfiles/vim/', '', '')
+        exe 'diffsplit ' . expand('~') . '/.config/nvim/' . substitute(expand('%:p:~'), '^\~/src/dotfiles/vim/', '', '')
       else
-	echom 'Cannot find a corresponding file in ~/.vim/ or ~/.config/nvim/.'
+        echom 'Cannot find a corresponding file in ~/.vim/ or ~/.config/nvim/.'
       endif
     else
       if expand('%:p:~') =~# '^\~/.vim/\|^\~/.config/nvim/'
-	exe 'diffsplit ' . expand("~") . "/src/dotfiles/vim/" . substitute(expand('%:p:~'), '^\~/.vim/\|^\~/.config/nvim/', '', '')
+        exe 'diffsplit ' . expand("~") . "/src/dotfiles/vim/" . substitute(expand('%:p:~'), '^\~/.vim/\|^\~/.config/nvim/', '', '')
       else
-	echom 'Cannot find a corresponding file in ~/src/dotfiles/vim/.'
+        echom 'Cannot find a corresponding file in ~/src/dotfiles/vim/.'
       endif
     endif
   endfunction

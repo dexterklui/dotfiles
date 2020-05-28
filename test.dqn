@@ -102,11 +102,11 @@ WARN
 
 #beginPython#
 def my_func():
-	if True:
-		print('hello, world!')
-	else:
-		print('woof!')
+    if True:
+        print('hello, world!')
+    else:
+        print('woof!')
 
 my_func()
 #endPython#
-	
+    

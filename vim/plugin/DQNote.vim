@@ -1,7 +1,7 @@
-" DQNote:	    Vim plugin for DQNote files (.dqn)
-" Maintainer:	    Dexter K. Lui <dexterklui@pm.me>
+" DQNote:           Vim plugin for DQNote files (.dqn)
+" Maintainer:       Dexter K. Lui <dexterklui@pm.me>
 " Latest Change:    6 May 2020
-" Version:	    1.33.0 (DQN v1.33)
+" Version:          1.33.0 (DQN v1.33)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Abort if running in vi-compatible mode or the user doesn't want us.
@@ -125,23 +125,23 @@
       echo 'This line is already at the top level!'
     elseif l:titlelevel == 2
       if DQNTitleFoldMarkerCheck() == 1
-	call setline(".", '[~{ ' . DQNTitleContentFilter() . ' }~] {{{1')
+        call setline(".", '[~{ ' . DQNTitleContentFilter() . ' }~] {{{1')
       else
-	call setline(".", '[~{ ' . DQNTitleContentFilter() . ' }~]')
+        call setline(".", '[~{ ' . DQNTitleContentFilter() . ' }~]')
       endif
     elseif l:titlelevel == 3
       if DQNTitleFoldMarkerCheck() == 1
-	call setline(".", ' == ' . DQNTitleContentFilter() . ' == {{{2')
+        call setline(".", ' == ' . DQNTitleContentFilter() . ' == {{{2')
       else
-	call setline(".", ' == ' . DQNTitleContentFilter() . ' ==')
+        call setline(".", ' == ' . DQNTitleContentFilter() . ' ==')
       endif
     elseif l:titlelevel == 4
       call setline(".", '  > ' . DQNTitleContentFilter() . ' < {{{3')
     elseif l:titlelevel == -1
       if DQNTitleFoldMarkerCheck() == 1
-	call setline(".", '   |' . DQNTitleContentFilter() . '| {{{4')
+        call setline(".", '   |' . DQNTitleContentFilter() . '| {{{4')
       else
-	call setline(".", '   |' . DQNTitleContentFilter() . '|')
+        call setline(".", '   |' . DQNTitleContentFilter() . '|')
       endif
     endif
   endfunction
@@ -151,15 +151,15 @@
     let l:titlelevel = DQNTitleLevelCheck()
     if l:titlelevel == 1
       if DQNTitleFoldMarkerCheck() == 1
-	call setline(".", ' == ' . DQNTitleContentFilter() . ' == {{{2')
+        call setline(".", ' == ' . DQNTitleContentFilter() . ' == {{{2')
       else
-	call setline(".", ' == ' . DQNTitleContentFilter() . ' ==')
+        call setline(".", ' == ' . DQNTitleContentFilter() . ' ==')
       endif
     elseif l:titlelevel == 2
       if DQNTitleFoldMarkerCheck() ==1
-	call setline(".", '  > ' . DQNTitleContentFilter() . ' < {{{3')
+        call setline(".", '  > ' . DQNTitleContentFilter() . ' < {{{3')
       else
-	call setline(".", '  > ' . DQNTitleContentFilter() . ' <')
+        call setline(".", '  > ' . DQNTitleContentFilter() . ' <')
       endif
     elseif l:titlelevel == 3
       call setline(".", '   |' . DQNTitleContentFilter() . '|')

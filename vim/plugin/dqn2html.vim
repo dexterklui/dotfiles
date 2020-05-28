@@ -125,7 +125,7 @@ func s:OrderedList()
     elseif getline(i) =~# '^\s*$'
       let l:had_index = 0
       if getline(i-1) =~# '<br>$'
-	exe i-1 'sub/\s*<br>$/'
+        exe i-1 'sub/\s*<br>$/'
       endif
       " TODO add indent to <br> and all others with 4 spaces front
       exe i .'sub/^\s*$/    <br>'
@@ -135,7 +135,7 @@ func s:OrderedList()
     elseif getline(i) =~# '^\s*<br>$'
       let l:had_index = 0
       if getline(i-1) =~# '<br>$'
-	exe i-1 'sub/\s*<br>$/'
+        exe i-1 'sub/\s*<br>$/'
       endif
 
     " if no index
@@ -143,23 +143,23 @@ func s:OrderedList()
     elseif getline(i) !~# '^\s*' .'\%(</li>\|</ul>\|</p>\|<p>\)*' .l:regexp
       " If the line above was a list, add a line break if not already exist.
       if l:had_index
-	exe i-1 .'sub&\s*\%(<br>\)*$&<br>'
+        exe i-1 .'sub&\s*\%(<br>\)*$&<br>'
       endif
       let l:had_index = 0
 
       let l:char1_col_current = s:char1_col(i, l:regexp, 0)
       " check upwards if it belongs to a list. End finished list in process
       while l:list_lv >= 1
-	if l:char1_col_current >= eval('l:char1_col_' .l:list_lv)
-	  break
-	else
-	  let l:list_lv -= 1
-	  if l:list_lv > 0
-	    exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\|</ol>\)*\zs&</li></ol>'
-	  else
-	    exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\|</ol>\)*\zs&</li></ol></p><p>'
-	  endif
-	endif
+        if l:char1_col_current >= eval('l:char1_col_' .l:list_lv)
+          break
+        else
+          let l:list_lv -= 1
+          if l:list_lv > 0
+            exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\|</ol>\)*\zs&</li></ol>'
+          else
+            exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\|</ol>\)*\zs&</li></ol></p><p>'
+          endif
+        endif
       endwhile
 
     " From Now On: has index
@@ -178,25 +178,25 @@ func s:OrderedList()
 
       " if even higher list lv than outter most existing list, create new list
       if l:char1_col_current < l:char1_col_1
-	let l:list_lv = 1
-	exe 'let l:char1_col_' .l:list_lv .' = l:char1_col_current'
-	exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\)*\zs' ._ .'\s*&<ol><li>'
+        let l:list_lv = 1
+        exe 'let l:char1_col_' .l:list_lv .' = l:char1_col_current'
+        exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\)*\zs' ._ .'\s*&<ol><li>'
       else " set a new list item
-	exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\)*\zs' ._ .'\s*&<li>'
+        exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\)*\zs' ._ .'\s*&<li>'
       endif
 
       " check upwards and end finished list in process
       while l:list_lv >= 1
-	if l:char1_col_current >= eval('l:char1_col_' .l:list_lv)
-	  break
-	else
-	  let l:list_lv -= 1
-	  if l:list_lv > 0
-	    exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\|</ol>\)*\zs&</li></ol>'
-	  else
-	    exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\|</ol>\)*\zs&</li></ol></p><p>'
-	  endif
-	endif
+        if l:char1_col_current >= eval('l:char1_col_' .l:list_lv)
+          break
+        else
+          let l:list_lv -= 1
+          if l:list_lv > 0
+            exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\|</ol>\)*\zs&</li></ol>'
+          else
+            exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\|</ol>\)*\zs&</li></ol></p><p>'
+          endif
+        endif
       endwhile
 
     " From Now On: has lower list level  (i.e. greater indent lv)
@@ -248,7 +248,7 @@ func s:UnorderedList()
     elseif getline(i) =~# '^\s*$'
       let l:had_index = 0
       if getline(i-1) =~# '<br>$'
-	exe i-1 'sub/\s*<br>$/'
+        exe i-1 'sub/\s*<br>$/'
       endif
       " TODO add indent to <br> and all others with 4 spaces front
       exe i .'sub/^\s*$/    <br>'
@@ -258,7 +258,7 @@ func s:UnorderedList()
     elseif getline(i) =~# '^\s*<br>$'
       let l:had_index = 0
       if getline(i-1) =~# '<br>$'
-	exe i-1 'sub/\s*<br>$/'
+        exe i-1 'sub/\s*<br>$/'
       endif
 
     " if no index
@@ -266,28 +266,28 @@ func s:UnorderedList()
     elseif getline(i) !~# '^\s*' .l:regexp
       " If the line above was a list, add a line break if not already exist.
       if l:had_index
-	exe i-1 .'sub&\s*\%(<br>\)*$&<br>'
+        exe i-1 .'sub&\s*\%(<br>\)*$&<br>'
       endif
       let l:had_index = 0
 
       let l:char1_col_current = s:char1_col(i, l:regexp, 0)
       " check upwards if it belongs to a list. End finished list in process
       while l:list_lv >= 1
-	if l:char1_col_current >= eval('l:char1_col_' .l:list_lv)
-	  break
-	else
-	  let l:list_lv -= 1
-	  if l:list_lv > 0
-	    exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\)*\zs&</li></ul>'
-	  else
-	    exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\)*\zs&</li></ul></p><p>'
-	  endif
-	endif
+        if l:char1_col_current >= eval('l:char1_col_' .l:list_lv)
+          break
+        else
+          let l:list_lv -= 1
+          if l:list_lv > 0
+            exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\)*\zs&</li></ul>'
+          else
+            exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\)*\zs&</li></ul></p><p>'
+          endif
+        endif
       endwhile
 
       " If the line above was a list, add a line break if not already exist.
       if getline(i-1) =~# '^\s*' .'\%(</li>\|</ul>\)*' .l:regexp
-	exe i-1 .'sub&\s*<br>*$&<br>'
+        exe i-1 .'sub&\s*<br>*$&<br>'
       endif
 
     " From Now On: has index
@@ -306,25 +306,25 @@ func s:UnorderedList()
 
       " if even higher list lv than outter most existing list, create new list
       if l:char1_col_current < l:char1_col_1
-	let l:list_lv = 1
-	exe 'let l:char1_col_' .l:list_lv .' = l:char1_col_current'
-	exe i .'sub/^\s*\zs\%(<br>\)*' ._ .'\s*/<ul><li>'
+        let l:list_lv = 1
+        exe 'let l:char1_col_' .l:list_lv .' = l:char1_col_current'
+        exe i .'sub/^\s*\zs\%(<br>\)*' ._ .'\s*/<ul><li>'
       else " set a new list item
-	exe i .'sub/^\s*\zs\%(<br>\)*' ._ .'\s*/<li>'
+        exe i .'sub/^\s*\zs\%(<br>\)*' ._ .'\s*/<li>'
       endif
 
       " check upwards and end finished list in process
       while l:list_lv >= 1
-	if l:char1_col_current >= eval('l:char1_col_' .l:list_lv)
-	  break
-	else
-	  let l:list_lv -= 1
-	  if l:list_lv > 0
-	    exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\)*\zs&</li></ul>'
-	  else
-	    exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\)*\zs&</li></ul></p><p>'
-	  endif
-	endif
+        if l:char1_col_current >= eval('l:char1_col_' .l:list_lv)
+          break
+        else
+          let l:list_lv -= 1
+          if l:list_lv > 0
+            exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\)*\zs&</li></ul>'
+          else
+            exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\)*\zs&</li></ul></p><p>'
+          endif
+        endif
       endwhile
 
     " From Now On: has lower list level  (i.e. greater indent lv)
