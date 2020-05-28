@@ -1,7 +1,7 @@
 " DQNote:           Vim plugin for DQNote files (.dqn)
 " Maintainer:       Dexter K. Lui <dexterklui@pm.me>
 " Latest Change:    6 May 2020
-" Version:          1.33.0 (DQN v1.33)
+" Version:          1.34.0 (DQN v1.34)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Abort if running in vi-compatible mode or the user doesn't want us.
@@ -36,8 +36,8 @@
     if !DQNVersion()
       echoe 'This is not a DQNote! No update is done.'
       return
-    elseif DQNVersion() >= 1.33
-      echom 'This DQNote is already at version 1.33 or newer, no update is done.'
+    elseif DQNVersion() >= 1.34
+      echom 'This DQNote is already at version 1.34 or newer, no update is done.'
       return
     endif
 
@@ -48,15 +48,16 @@
     if DQNVersion() < 1.32
       call dqnupdate#v1_32()
     endif
-
-    " Update DQN file based on its current version according in a sequence.
     if DQNVersion() < 1.33
       call dqnupdate#v1_33()
+    endif
+    if DQNVersion() < 1.34
+      call dqnupdate#v1_34()
     endif
 
     " Save changes
     update
-    echom 'This DQNote has been updated to v1.33!'
+    echom 'This DQNote has been updated to v1.34!'
 
     " Open quickfix list if there is any item got by vimgrepadd cmd
     if getqflist() != []
@@ -70,16 +71,13 @@
     " Check the title level of current line. Return 1 (top level) to 4 (4th
     " level), or return -1 for other cases.
     let l:string = getline(".")
-    if l:string =~ '^\[ - \S.* - \]\%( \={{{1\)\=$' || l:string =~ '^\[\~{ .* }\~]\%( \={{{1\)\=$'
-      " ^Here we have two versions, front: <1.32 after: >1.32
+    if l:string =~ '^\[\~{ .* }\~]\%( \={\{3}1\)\=$'
       return 1
-    elseif l:string =~ '^=== \S.* ===\%( \={{{2\)\=$' || l:string =~ '^ == .* ==\%( \={{{2\)\=$'
-      " ^Here we have two versions, front: <1.32 after: >1.32
+    elseif l:string =~ '^ == .* ==\%( \={\{3}2\)\=$'
       return 2
-    elseif l:string =~ '^  > \S.* <\%( \={{{3\)\=$'
+    elseif l:string =~ '^  > \S.* <\%( \={\{3}3\)\=$'
       return 3
-    elseif l:string =~ '^\t\[< \S.*\]>\%( \={{{4\)\=$' || l:string =~ '^ \{3}|.*|\%( \={{{4\)\=$'
-      " ^Here we have two versions, front: <1.32 after: >1.32
+    elseif l:string =~ '^ \{3}|.*|\%( \={\{3}4\)\=$'
       return 4
     else
       return -1
@@ -91,27 +89,27 @@
     " markers of its corresponding title level.
     let l:titlelevel = DQNTitleLevelCheck()
     if l:titlelevel == 1
-      let l:content = substitute(getline("."), '^\[\~{ \|^\[ - ', '', '') " There are 2 versions: >1.32 and <1.32
-      return substitute(l:content, '\%( }\~]\| - ]\)\%( \={{{1\)\=$', '', '')
+      let l:content = substitute(getline("."), '^\[\~{ ', '', '')
+      return substitute(l:content, ' }\~]\%( \={\{3}1\)\=$', '', '')
     elseif l:titlelevel == 2
-      let l:content = substitute(getline("."), '^ == \|^=== ', '', '') " There are 2 versions: >1.32 and <1.32
-      return substitute(l:content, ' ===\=\%( \={{{2\)\=$', '', '')
+      let l:content = substitute(getline("."), '^ == ', '', '')
+      return substitute(l:content, ' ==\%( \={\{3}2\)\=$', '', '')
     elseif l:titlelevel == 3
       let l:content = substitute(getline("."), '^  > ', '', '')
-      return substitute(l:content, ' <\%( \={{{3\)\=$', '', '')
+      return substitute(l:content, ' <\%( \={\{3}3\)\=$', '', '')
     elseif l:titlelevel == 4
-      let l:content = substitute(getline("."), '^ \{3}|\|^\t\[< ', '', '') " There are 2 versions: >1.32 and <1.32
-      return substitute(l:content, '\%(|\|\]>\)\%( \={{{4\)\=$', '', '')
+      let l:content = substitute(getline("."), '^ \{3}|', '', '')
+      return substitute(l:content, '|\%( \={\{3}4\)\=$', '', '')
     else
       let l:content = substitute(getline("."), '^\s*', '', '')
-      return substitute(l:content, '\s*\%({{{\d*\)\=$', '', '')
+      return substitute(l:content, '\s*\%({\{3}\d*\)\=$', '', '')
     end
   endfunction
 
   function DQNTitleFoldMarkerCheck()
     " Check if there is fold marker at the end of the current line. Return 1 if
     " yes, 0 if no.
-    if getline(".") =~ ' \={{{\d*$'
+    if getline(".") =~ ' \={\{3}\d*$'
       return 1
     else
       return 0
@@ -164,7 +162,7 @@
     elseif l:titlelevel == 3
       call setline(".", '   |' . DQNTitleContentFilter() . '|')
     elseif l:titlelevel == 4
-      call setline(".", "\t" . DQNTitleContentFilter())
+      call setline(".", "    " . DQNTitleContentFilter())
     elseif l:titlelevel == -1
       echo 'This line is already at lower than level 4!'
     endif

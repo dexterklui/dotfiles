@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:     DQNote
 " Maintainer:   DQ
-" Version:      1.33.1 (DQN v1.33)
+" Version:      1.34.0 (DQN v1.34)
 " Last Change:  28 May 2020
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -22,7 +22,8 @@ syn match dqnTitle2 /^ \zs== .\+ ==\ze\%( \={\{3}2\)\=$/ contains=@Spell
   \ display
 syn match dqnTitle3 /^  \zs> .\+ <\ze\%( \={\{3}3\)\=$/ contains=@Spell
   \ display
-syn match dqnSubtitle /^\t* \{3}\zs|.\+|\ze\%( \={\{3}\d\=\)\=$/
+" \t is depricated. Use a series of 4 spaces instead, for expandtab is set.
+syn match dqnSubtitle /^\%(\t\| \{4}\)* \{3}\zs|.\+|\ze\%( \={\{3}\d\=\)\=$/
   \ contains=@Spell display
 syn cluster dqnTitle add=dqnTitle1,dqnTitle2,dqnTitle3,dqnSubtitle
 
@@ -326,7 +327,7 @@ hi def link dqnNomatch  dqnBgFrgrd
 """"""""""""""""""""""""""""""""""""""""
 syn sync match dqnIncludeSync  grouphere NONE      /#endPython#$/
 syn sync match dqnIncludeSync  grouphere dqnPython /#beginPython#$/
-syn sync match dqnSubtitleSync grouphere NONE      /^\t* \{3}|.\+|$/
+syn sync match dqnSubtitleSync grouphere NONE      /^\%(\t\| \{4}\)* \{3}|.\+|$/
 syn sync match dqnFoldMarkSync grouphere NONE      /{\{3}[0-9]/
 syn sync minlines=1
 " }}}1

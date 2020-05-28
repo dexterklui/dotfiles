@@ -1,7 +1,7 @@
 " dqnupdate:      Updates DQNotes
 " Maintainer:    Dexter K. Lui <dexterklui@pm.me>
 " Latest Change: 26 May 2020
-" Version:       1.33.0 (DQN v1.33)
+" Version:       1.34.0 (DQN v1.34)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " This provides functions for function DQNUpdate() defined in plugin DQNote
 " Function defined here are to update DQNotes.
@@ -66,7 +66,7 @@ function dqnupdate#v1_32()
 endfunction " dqnupdate#v1_32()
 
 function dqnupdate#v1_33()
-  " Update dqn script to v1.32
+  " Update dqn script to v1.33
   %s/^\s*\zs##beginPython/#beginPython#/e
   %s/^\s*\zs##endPython/#endPython#/e
   " Updating dqn stamp
@@ -78,3 +78,18 @@ function dqnupdate#v1_33()
     endif
   endif
 endfunction " dqnupdate#v1_32()
+
+func dqnupdate#v1_34()
+  let l:et=&et
+  set expandtab
+  retab
+  let &et=l:et
+  " Updating dqn stamp
+  if getline(1) !~ '^/// Language: DQNote_1\.34$'
+    if getline(1) =~ '^///.*DQNote.*$'
+      call setline(1, '/// Language: DQNote_1.34')
+    else
+      call append(0, '/// Language: DQNote_1.34')
+    endif
+  endif
+endfunc

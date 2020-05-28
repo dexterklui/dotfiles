@@ -20,7 +20,7 @@ function! DQFoldText()
   let l:nrline = v:foldend - v:foldstart + 1
   let l:foldlevel = foldlevel(v:foldstart)
   let l:line = substitute(getline(v:foldstart), '^\s*\|\s*$', '', 'ge')
-  let l:line = substitute(l:line, '/\*\|\*/\|{{{\d\=', '', 'ge')
+  let l:line = substitute(l:line, '/\*\|\*/\|{\{3}\d\=', '', 'ge')
 
   " If no emoji supports TODO
   if $TERM ==# 'linux'

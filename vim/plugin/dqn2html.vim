@@ -1,7 +1,7 @@
 " dqn2html:       Transforming format of DQN to html
 " Maintainer:    Dexter K. Lui <dexterklui@pm.me>
 " Latest Change: 26 May 2020
-" Version:       1.33.02 (DQN v1.33)
+" Version:       1.34.0 (DQN v1.34)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TODO Python block
 " TODO Picture link

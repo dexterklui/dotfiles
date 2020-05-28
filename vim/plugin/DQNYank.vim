@@ -1,7 +1,7 @@
 " DQNYank:          DQN plugin for yanking a paragraph
 " Maintainer:       Dexter K. Lui <dexterklui@pm.me>
 " Last Change:      26 May 2020
-" Version:          1.33.1 (DQN v1.33)
+" Version:          1.34.0 (DQN v1.34)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Abort if running in vi-compatible mode or the user doesn't want us.
@@ -56,7 +56,9 @@
       \ '\%(\n\|^\)\zs  > \(.\{-}\) <.\{-}\ze\%(\n\|$\)', '>>>\1░', 'ge'))
     " Competibity: till 1.32:    [< Title4]> /    |Title4|
     call setreg(a:clipboard, substitute(getreg(a:clipboard),
-      \ '\%(\n\|^\)\zs\(\t*\) \{3}|\(.\{-}\)|.\{-}\ze\%(\n\|$\)', '>>>>\1\2░', 'ge'))
+      \ '\%(\n\|^\)\zs\(\%(\t\| \{4}\)*\) \{3}|\(.\{-}\)|.\{-}\ze\%(\n\|$\)', '>>>>\1\2░', 'ge'))
+    " ^ FIXME later no need \t, for I expanded tab
+    " TODO Make it support 5 or above title levels >>>>>...
     "while match(getreg(a:clipboard), '\%(\n\|^\)>>>>>*\zs\t\ze[^\n]*░')
     "call setreg(a:clipboard, substitute(getreg(a:clipboard),
     "  \ '>>>>>*\zs\t\ze.*░',  '>', 'e'))
@@ -145,9 +147,9 @@
 
   function DQIndentReduce(clipboard)
     "Take the string in the file manager clipboard, reduce one level of
-    "indentation.
-    call setreg(a:clipboard, substitute(getreg(a:clipboard), '\%^\t*\zs\t\ze\S', '', 'ge'))
-    call setreg(a:clipboard, substitute(getreg(a:clipboard), '\n\t*\zs\t\ze\S', '', 'ge'))
+    "indentation. FIXME later no need \t for I expanded tab.
+    call setreg(a:clipboard, substitute(getreg(a:clipboard), '\%^\%(\t\| \{4}\)*\zs\%(\t\| \{4}\)\ze\S', '', 'ge'))
+    call setreg(a:clipboard, substitute(getreg(a:clipboard), '\n\%(\t\| \{4}\)*\zs\%(\t\| \{4}\)\ze\S', '', 'ge'))
   endfunction
 
   function DQRemoveTrailingWhitespaces(clipboard)
