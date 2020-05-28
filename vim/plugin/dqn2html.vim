@@ -110,7 +110,7 @@ func s:OrderedList()
       let l:had_index = 1
       let l:list_lv += 1
       exe 'let l:char1_col_' .l:list_lv .' = s:char1_col(i, l:regexp, 1)'
-      exe i .'sub&^\s*\%(</li>\|</ul>\)*\zs' ._ .'\s*&<ol><li>'
+      exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\)*\zs' ._ .'\s*&<ol><li>'
 
     " Form Now On: list(s) was/were started
 
@@ -136,7 +136,7 @@ func s:OrderedList()
 
     " if no index
     """"""""""""""""""""""""""""""
-    elseif getline(i) !~# '^\s*' .'\%(</li>\|</ul>\)*' .l:regexp
+    elseif getline(i) !~# '^\s*' .'\%(</li>\|</ul>\|</p>\|<p>\)*' .l:regexp
       " If the line above was a list, add a line break if not already exist.
       if l:had_index
 	exe i-1 .'sub&\s*\%(<br>\)*$&<br>'
@@ -149,8 +149,12 @@ func s:OrderedList()
 	if l:char1_col_current >= eval('l:char1_col_' .l:list_lv)
 	  break
 	else
-	  exe i .'sub&^\s*\%(</li>\|</ul>\)*\zs&</li></ol>'
 	  let l:list_lv -= 1
+	  if l:list_lv > 0
+	    exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\|</ol>\)*\zs&</li></ol>'
+	  else
+	    exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\|</ol>\)*\zs&</li></ol></p><p>'
+	  endif
 	endif
       endwhile
 
@@ -160,7 +164,7 @@ func s:OrderedList()
     """"""""""""""""""""""""""""""
     elseif s:char1_col(i, l:regexp, 1) == eval('l:char1_col_' .l:list_lv)
       let l:had_index = 1
-      exe i .'sub&^\s*\%(</li>\|</ul>\)*\zs' ._ .'\s*&</li><li>'
+      exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\)*\zs' ._ .'\s*&</li><li>'
 
     " if on higher list level (i.e. smaller indent lv)
     """"""""""""""""""""""""""""""
@@ -172,9 +176,9 @@ func s:OrderedList()
       if l:char1_col_current < l:char1_col_1
 	let l:list_lv = 1
 	exe 'let l:char1_col_' .l:list_lv .' = l:char1_col_current'
-	exe i .'sub&^\s*\%(</li>\|</ul>\)*\zs' ._ .'\s*&<ol><li>'
+	exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\)*\zs' ._ .'\s*&<ol><li>'
       else " set a new list item
-	exe i .'sub&^\s*\%(</li>\|</ul>\)*\zs' ._ .'\s*&<li>'
+	exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\)*\zs' ._ .'\s*&<li>'
       endif
 
       " check upwards and end finished list in process
@@ -182,8 +186,12 @@ func s:OrderedList()
 	if l:char1_col_current >= eval('l:char1_col_' .l:list_lv)
 	  break
 	else
-	  exe i .'sub&^\s*\%(</li>\|</ul>\)*\zs&</li></ol>'
 	  let l:list_lv -= 1
+	  if l:list_lv > 0
+	    exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\|</ol>\)*\zs&</li></ol>'
+	  else
+	    exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\|</ol>\)*\zs&</li></ol></p><p>'
+	  endif
 	endif
       endwhile
 
@@ -194,7 +202,7 @@ func s:OrderedList()
       " TODO Now always assume start a new list
       let l:list_lv += 1
       exe 'let l:char1_col_' .l:list_lv .' = s:char1_col(i, l:regexp, 1)'
-      exe i .'sub&^\s*\%(</li>\|</ul>\)*\zs' ._ .'\s*&<ol><li>'
+      exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\)*\zs' ._ .'\s*&<ol><li>'
     endif
   endfor
 endfunc " }}}
@@ -267,8 +275,12 @@ func s:UnorderedList()
 	if l:char1_col_current >= eval('l:char1_col_' .l:list_lv)
 	  break
 	else
-	  exe i .'sub&^\s*\zs&</li></ul>'
 	  let l:list_lv -= 1
+	  if l:list_lv > 0
+	    exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\)*\zs&</li></ul>'
+	  else
+	    exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\)*\zs&</li></ul></p><p>'
+	  endif
 	endif
       endwhile
 
@@ -305,8 +317,12 @@ func s:UnorderedList()
 	if l:char1_col_current >= eval('l:char1_col_' .l:list_lv)
 	  break
 	else
-	  exe i .'sub&^\s*\zs&</li></ul>'
 	  let l:list_lv -= 1
+	  if l:list_lv > 0
+	    exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\)*\zs&</li></ul>'
+	  else
+	    exe i .'sub&^\s*\%(</li>\|</ul>\|</p>\|<p>\)*\zs&</li></ul></p><p>'
+	  endif
 	endif
       endwhile
 
@@ -564,10 +580,14 @@ func Dqn2html(accurate, open) range abort
   let @# = l:altbuf
 endfunc " }}}
 
-func Openhtml()
+func Opendqnhtml()
 " Open the corresponding html file for current dqn {{{
+  if expand('%:p') =~# '^/tmp/dqn2html/.*\.html$'
+    exe 'b ' .substitute(expand('%:p:t:r'), '%', '/', 'ge')
+  elseif expand('%:p') =~# '.dqn\~\=$'
   exe 'e /tmp/dqn2html/' .expand('%:p:h:h:t') .'\%'
     \ .expand('%:p:h:t') .'\%' .expand('%:t:r') . '.html'
+  endif
 endfunc " }}}
 
 " Defining commands and mappings {{{1
