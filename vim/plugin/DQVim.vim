@@ -18,8 +18,11 @@
 " Functions
   function ResourceScpt()
     " Write if needed and resource the current vim script
-    update " Write if changed
+    if expand('%:e') !=# 'vim'
+      echoe 'This is not a vim script (.vim)! aborting function.'
+    endif
 
+    update " Write if changed
     let l:line = line('.') " record cursor position
     let l:col = col('.')
 
