@@ -33,7 +33,7 @@
   function DQNUpdate() abort
     " Update dqn file
     " Only run this script when it is a dqn file.
-    if !DQNVersion()
+    if DQNVersion() == 0
       echoe 'This is not a DQNote! No update is done.'
       return
     elseif DQNVersion() >= 1.34
