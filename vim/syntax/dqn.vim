@@ -333,8 +333,14 @@ syn sync match dqnFoldMarkSync grouphere NONE      /{\{3}[0-9]/
 syn sync minlines=1
 " }}}1
 "=====================================================================
-" To reapply cleared highlightings upon colorscheme change {{{1
+" Others {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Spelling {{{2
+""""""""""""""""""""""""""""""""""""""""
+syn spell toplevel
+
+" To reapply cleared highlightings upon colorscheme change {{{2
+""""""""""""""""""""""""""""""""""""""""
 " This is needed because changing 'background' causes changing colorscheme,
 " and whenever new colorscheme is applied, all defined highlightings are
 " cleared before reapplying what defined by the new colorscheme's scipt. Since
