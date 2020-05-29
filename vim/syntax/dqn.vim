@@ -108,8 +108,9 @@ syn region dqnConceal matchgroup=dqnMark start=+\[\.+ end=+]\.+ concealends
   \ conceal cchar=▒ contains=@Spell,dqnBreak
 " Used to prevent matching dqn syntax:
 syn match dqnNomatch +[`[]\~*\zs\~\ze[[{'-=";/,_\\|.]+ conceal display
+  \ containedin=@dqnColor,@dqnBgColor,dqnMark
 syn match dqnNomatch +[]`]\~*\zs\~\ze[]}'-=";/,_\\|.]+ conceal display
-  \ containedin=@dqnColor,@dqnBgColor
+  \ containedin=@dqnColor,@dqnBgColor,dqnMark
 
 " Include syntax for other filetype {{{2
 """"""""""""""""""""
