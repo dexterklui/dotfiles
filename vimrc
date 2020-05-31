@@ -65,12 +65,12 @@ else
       return
     endif
     " overriding default highlight
-    hi SignColumn   guibg=none ctermbg=none
+    hi SignColumn   guibg=NONE ctermbg=NONE
     if &background ==# 'dark'
-      hi Folded       guifg=#586e75 ctermfg=10 guibg=none ctermbg=none
+      hi Folded       guifg=#586e75 ctermfg=10 guibg=NONE ctermbg=NONE
             \         gui=bold cterm=bold
     else
-      hi Folded       guifg=#93a1a1 ctermfg=14 guibg=none ctermbg=none
+      hi Folded       guifg=#93a1a1 ctermfg=14 guibg=NONE ctermbg=NONE
             \         gui=bold cterm=bold
     endif
     " Syntastic highlight
