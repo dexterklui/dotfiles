@@ -35,7 +35,7 @@ endfunc " }}}
 func s:Title()
 " Turn DQNTitles to html headings {{{
   " Handle [~{ Title_1 }~]
-  %sub+^\[\~{ \(.*\) }\~].*$+    <h1>[\~{ \1 }\~]</h1>+ge
+  %sub+^\[\~{ \(.*\) }\~].*$+    <h1>[<TILD>{ \1 }\~]</h1>+ge
   " Handle _== Title_2 == (_ is a sapce)
   %sub+^ == \(.*\) ==.*$+    <h2>== \1 ==</h2>+ge
   " Handle __> Title_3 < (_ is a sapce)
@@ -401,6 +401,11 @@ func s:PostDelete()
   %sub+]\~*\zs\~\ze\(]\|</font>\)++ge
 endfunc " }}}
 
+func s:Replace()
+" Replace temporary mark with correct string {{{
+  %sub+<TILD>+\~+ge
+endfunc " }}}
+
 func s:Html()
 " Transform text to html {{{
   call s:PreDelete()
@@ -414,6 +419,7 @@ func s:Html()
   call s:UnorderedList()
   call s:OrderedList()
   call s:Paragraph()
+  call s:Replace()
 endfunc " }}}
 
 " Others {{{2
