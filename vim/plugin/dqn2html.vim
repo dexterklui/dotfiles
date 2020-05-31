@@ -438,7 +438,7 @@ func s:HtmlSkeleton()
 " Create html skeleton and head {{{
   call append(0, "<html>")
   call append(1, "  <head>")
-  call append(2, "    <title>" . expand('%:t:r') . "</title>")
+  call append(2, "    <title>" . substitute(expand('%:t:r'), '^.*%\ze[^%]*$'), '', 'e') . "</title>")
   call append(3, "    <style>")
   call append(4, "    body {background: #fcf8ee; padding-left: 10px}")
   call append(5, "    p {width: 40em; color: #5d727a; text-align: justify; text-justify: inter-word;}")
@@ -483,6 +483,7 @@ func Opendqnhtml()
   elseif DQNVersion() != 0
     let l:fname = substitute(expand('%:p:r'), '[^/]\zs/', '\\%', 'ge')
     exe 'e /tmp/dqn2html' .l:fname .'.html'
+    setl nobuflisted
   endif
   let @# = l:altbuf
 endfunc " }}}
