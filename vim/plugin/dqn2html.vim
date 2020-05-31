@@ -465,8 +465,9 @@ func Dqn2html() range abort
     return
   endif
   update
-  let l:altbuf = @#
+  let l:altbuf = bufnr(@#)
   exe a:firstline .',' .a:lastline .'call s:CreateTmp()'
+  set nobuflisted
   call s:Html()
   call s:HtmlSkeleton()
   update
@@ -475,12 +476,12 @@ endfunc " }}}
 
 func Opendqnhtml()
 " Open the corresponding html file for current dqn {{{
-  let l:altbuf = @#
+  let l:altbuf = bufnr(@#)
   if expand('%:p') =~# '^/tmp/dqn2html/.*\.html$'
     let l:fname = substitute(expand('%:p:r'), '^/tmp/dqn2html', '', '')
     exe 'e ' .substitute(l:fname, '%', '/', 'ge') .'.dqn'
   elseif DQNVersion() != 0
-    let l:fname = substitute(expand('%:p:r'), '[^/]/', '\\%', 'ge')
+    let l:fname = substitute(expand('%:p:r'), '[^/]\zs/', '\\%', 'ge')
     exe 'e /tmp/dqn2html' .l:fname .'.html'
   endif
   let @# = l:altbuf
