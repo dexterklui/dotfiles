@@ -40,10 +40,6 @@ cp -iu ${PWD}/vim/plugin/dqn2html.vim         ~/.vim/plugin/dqn2html.vim
 ########################################
 cp -iu ${PWD}/vim/ftplugin/dqn.vim ~/.vim/ftplugin/dqn.vim
 
-# .vim/colors {{{2
-########################################
-cp -iu ${PWD}/vim/colors/dqsolarized.vim ~/.vim/colors/dqsolarized.vim
-
 # .vim/after/ftplugin {{{2
 ########################################
 cp -iu ${PWD}/vim/after/ftplugin/* ~/.vim/after/ftplugin/

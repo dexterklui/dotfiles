@@ -140,13 +140,13 @@ let s:g_Cyan    = '#2aa198'
 let s:g_Magenta = '#d33682'
 let s:g_Red     = '#dc322f'
   if &background ==# 'dark'
-let s:g_Gray  = '#657b83'
+let s:g_Gray  = '#073642'
 let s:g_Bkgrd = '#002b36'
-let s:g_Frgrd = '#fdf6e3'
+let s:g_Frgrd = '#eee8d5'
   else
-let s:g_Gray  = '#93a1a1'
+let s:g_Gray  = '#eee8d5'
 let s:g_Bkgrd = '#fdf6e3'
-let s:g_Frgrd = '#002b36'
+let s:g_Frgrd = '#073642'
   endif
 
 let s:t_Yellow  = '3'
@@ -157,14 +157,14 @@ let s:t_Purple  = '13'
 let s:t_Cyan    = '6'
 let s:t_Magenta = '5'
 let s:t_Red     = '1'
-  if &background ==# 'dark'
-let s:t_Gray  = '10'
+  if g:colors_name ==# 'solarized' && &background ==# 'dark'
+let s:t_Gray  = '0'
 let s:t_Bkgrd = '8'
-let s:t_Frgrd = '15'
+let s:t_Frgrd = '7'
   else
-let s:t_Gray  = '14'
+let s:t_Gray  = '7'
 let s:t_Bkgrd = '15'
-let s:t_Frgrd = '8'
+let s:t_Frgrd = '0'
   endif
 
 " Solarized Colorscheme: gui || t_Co<16 || g:solarized_termcolors==256 {{{2
@@ -283,8 +283,8 @@ hi def dqnTitle2Text guifg=#af5f00 ctermfg=130
       \ gui=bold,underline cterm=bold,underline
 hi def dqnTitle3   guifg=#008787 ctermfg=30  gui=bold cterm=bold
 hi def dqnTitle3Text guifg=#008787 ctermfg=30 gui=underline cterm=underline
-hi  dqnSubtitle guifg=#0087b7 ctermfg=31 gui=bold cterm=bold
-hi def dqnSubtitleText guifg=#0087b7 ctermfg=31 gui=none cterm=none
+hi  dqnSubtitle guifg=#0087af ctermfg=31 gui=bold cterm=bold
+hi def dqnSubtitleText guifg=#0087af ctermfg=31 gui=none cterm=none
   else " if has('gui_running') OR &t_Co < 256
 exe 'hi def dqnTitle1   guifg=' .s:g_Magenta
       \ .' ctermfg=' .s:t_Magenta .' gui=bold cterm=bold'
@@ -312,14 +312,15 @@ for i in s:list
   exe 'hi def dqnBg' .i .' guifg=' .eval('s:g_'.i) .' ctermfg='
         \ .eval('s:t_'.i) . ' guibg=' .s:g_Gray .' ctermbg=' .s:t_Gray
 endfor
-  if g:colors_name =~ 'solarized' && &bg ==# 'dark'
-hi def dqnCode guifg=#93a1a1 ctermfg=14 guibg=#657b83 ctermbg=10
-  elseif g:colors_name =~ 'solarized'
-hi def dqnCode guifg=#657b83 ctermfg=10 guibg=#93a1a1 ctermbg=14
-  else
+
+"  if g:colors_name ==# 'solarized' && &bg ==# 'dark'
+"hi def dqnCode guifg=#93a1a1 ctermfg=15 guibg=#657b83 ctermbg=10
+"  elseif g:colors_name ==# 'solarized'
+"hi def dqnCode guifg=#657b83 ctermfg=10 guibg=#93a1a1 ctermbg=7
+"  else
 hi def link dqnCode     dqnBgFrgrd
-  endif
-hi def link dqnCodeType dqnBgCyan
+  "endif
+hi def link dqnCodeType dqnBgRed
 
 "" Keywords and others {{{2
 """""""""""

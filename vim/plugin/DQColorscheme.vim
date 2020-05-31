@@ -40,7 +40,7 @@
       set buflisted " this is required for :bufdo cmd
       let l:del = 1
     endif
-    if g:colors_name =~# '^dqsolarized$\|^solarized$'
+    if g:colors_name =~ 'solarized'
       exe l:bufnr . 'bufdo %s/^\s*"vim":.*\n\s*"colorscheme": \="\zsdefault\ze"/solarized/e| update'
     else
       exe l:bufnr . 'bufdo %s/^\s*"vim":.*\n\s*"colorscheme": \="\zssolarized\ze"/default/e| update'
@@ -53,23 +53,10 @@
     endif
   endfunction
 
-  function DQAlColorMatch()
-    " Match the colorscheme of the Airline to that of Vim.
-    if g:colors_name ==# 'dqsolarized'
-      AirlineTheme dqsolarized
-    elseif g:colors_name ==# 'solarized'
-      AirlineTheme solarized
-    else
-      AirlineTheme dark
-    endif
-  endfunction
-
   function DQColorToggle()
     " Toggle colorscheme between (dq)solarized or dd/default.
-    if g:colors_name !~ '^dqsolarized$\|^solarized$'
+    if g:colors_name !=# 'solarized'
       try
-        colorscheme dqsolarized
-      catch /^Vim\%((\a\+)\)\=:E185/
         colorscheme solarized
       catch /^Vim\%((\a\+)\)\=:E185/
         colorscheme dd
@@ -88,28 +75,11 @@
       call DQPlColorMatch()
     endif
 
-    if exists('g:loaded_airline')
-      call DQAlColorMatch()
-    endif
-
     echo 'New colorscheme: ' . g:colors_name
   endfunction
 
-  function DQDarkCommentToggle()
-    " Toggle concealment for comment
-    if exists('g:dqsolarized_dark_comment') && g:dqsolarized_dark_comment == 1
-      let g:dqsolarized_dark_comment = 0
-      colorscheme dqsolarized
-    else
-      let g:dqsolarized_dark_comment = 1
-      colorscheme dqsolarized
-    endif
-  endfunction
-
-
 " mappings
   nnoremap <Leader>cs :call DQColorToggle()<CR>
-  nnoremap <Leader>C :call DQDarkCommentToggle()<CR>
 
 " vimscript thingy
   let &cpo = s:save_cpo

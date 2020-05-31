@@ -51,15 +51,49 @@ endif
 
 " *** Vim customization *** {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Setting the colorscheme
+" Setting the colorscheme {{{2
+""""""""""""""""""""""""""""""""""""""""
 if $TERM ==# 'linux'
   colorscheme dd-noitalic
 else
   let g:solarized_termtrans=1
   let g:solarized_diffmode='high'
   " ^Config var must be assigned before applying colorscheme to take effect.
-  colorscheme dqsolarized
-endif
+  colorscheme solarized
+  func s:CustomHlSolarized()
+    if g:colors_name !=# 'solarized'
+      return
+    endif
+    " overriding default highlight
+    hi SignColumn   guibg=none ctermbg=none
+    if &background ==# 'dark'
+      hi Folded       guifg=#586e75 ctermfg=10 guibg=none ctermbg=none
+            \         gui=bold cterm=bold
+    else
+      hi Folded       guifg=#93a1a1 ctermfg=14 guibg=none ctermbg=none
+            \         gui=bold cterm=bold
+    endif
+    " Syntastic highlight
+    hi SyntasticWarning gui=inverse cterm=inverse
+    hi SyntasticError   gui=inverse cterm=inverse
+    if &background ==# 'dark'
+      hi SyntasticWarningSign guifg=#b58900 ctermfg=3
+            \ guibg=#073642 ctermbg=0 gui=bold cterm=bold
+      hi SyntasticErrorSign guifg=#dc322f ctermfg=1
+            \ guibg=#073642 ctermbg=0 gui=bold cterm=bold
+    else " if &background ==# 'light'
+      hi SyntasticWarningSign guifg=#b58900 ctermfg=3
+            \ guibg=#eee8d5 ctermbg=7 gui=bold cterm=bold
+      hi SyntasticErrorSign guifg=#dc322f ctermfg=1
+            \ guibg=#eee8d5 ctermbg=7 gui=bold cterm=bold
+    endif
+    " GitGutter highlight
+    hi link GitGutterAdd    Statement
+    hi link GitGutterChange Type
+    hi link GitGutterDelete Special
+  endfunc
+  autocmd vimrcEx ColorScheme * call s:CustomHlSolarized()
+endif " }}}2
 
 " Put these in an autocmd group, so that we can delete them easily.
 augroup vimrcEx
@@ -172,6 +206,7 @@ exe 'nnoremap <silent> <Leader>B'
 """"""""""""""""""""
 " General {{{4
 """"""""""
+let g:airline_theme='dqsolarized'
 let g:airline_powerline_fonts = 1
 let g:airline_mode_map = {
   \ '__'     : '-',
@@ -193,6 +228,14 @@ let g:airline_mode_map = {
   \ 'V'      : 'V.L',
   \ ''     : '^V',
   \ }
+
+" Since my colorscheme is solarized whereas Airlinetheme is dqsolarized, which
+" has a different name, so I need to force vim to reload AirlineTheme
+" everytime the 'background' / colorscheme is changed.
+autocmd vimrcEx ColorScheme *
+  \ if g:colors_name ==# 'solarized' && exists(':AirlineTheme') |
+  \   AirlineTheme dqsolarized |
+  \ endif
 
 " Sections customization {{{4
 """"""""""
@@ -285,6 +328,9 @@ let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 " conceallevel and concealcursor. This keeps the conceallevel and
 " concealcursor not overwriten.
 let g:indentLine_setConceal = 0
+let g:indentLine_fileTypeExclude = ['dqn', 'dqn0', 'man']
+let g:indentLine_bufTypeExclude = ['help', 'terminal']
+let g:indentLine_bufNameExclude = ['NERD_tree.*']
 
 " * AutoPairs * {{{3
 """"""""""""""""""""

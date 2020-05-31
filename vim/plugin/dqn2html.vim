@@ -342,28 +342,28 @@ endfunc " }}}
 func s:Highlight()
 " Turn DQN highlights to html format {{{
   %sub+\[\[\(\_.\{-}\)]]+<font color="#b58900">\1</font>+ge
-  %sub+\[{\(\_.\{-}\)]}+<font color="#859900">\1</font>+ge
-  %sub+\['\(\_.\{-}\)]'+<font color="#409ee0">\1</font>+ge
-  %sub+\[-\(\_.\{-}\)]-+<font color="#e06431">\1</font>+ge
+  %sub+\[{\(\_.\{-}\)]}+<font color="#719e07">\1</font>+ge
+  %sub+\['\(\_.\{-}\)]'+<font color="#268bd2">\1</font>+ge
+  %sub+\[-\(\_.\{-}\)]-+<font color="#cb4b16">\1</font>+ge
   %sub+\[=\(\_.\{-}\)]=+<font color="#6c71c4">\1</font>+ge
   %sub+\["\(\_.\{-}\)]"+<font color="#2aa198">\1</font>+ge
-  %sub+\[;\(\_.\{-}\)];+<font color="#e4569b">\1</font>+ge
+  %sub+\[;\(\_.\{-}\)];+<font color="#d33682">\1</font>+ge
   %sub+\[/\(\_.\{-}\)]/+<font color="#dc322f">\1</font>+ge
   %sub+\[,\(\_.\{-}\)],+<font color="#cbd4d4">\1</font>+ge
-  %sub+\[_\(\_.\{-}\)]_+<font color="#fcf8ee">\1</font>+ge
+  %sub+\[_\(\_.\{-}\)]_+<font color="#eee8d5">\1</font>+ge
   %sub+\[\\\(\_.\{-}\)]\\+<font color="#073642"><code>\1</code></font>+ge
   %sub+\[|\(\_.\{-}\)]|+<font color="#dc322f"><code>\1</code></font>+ge
 
   %sub+`\[\(\_.\{-}\)`]+<font color="#b58900" style="background-color: #cbd4d4">\1</font>+ge
-  %sub+`{\(\_.\{-}\)`}+<font color="#859900" style="background-color: #cbd4d4">\1</font>+ge
-  %sub+`'\(\_.\{-}\)`'+<font color="#409ee0" style="background-color: #cbd4d4">\1</font>+ge
-  %sub+`-\(\_.\{-}\)`-+<font color="#e06431" style="background-color: #cbd4d4">\1</font>+ge
+  %sub+`{\(\_.\{-}\)`}+<font color="#719e07" style="background-color: #cbd4d4">\1</font>+ge
+  %sub+`'\(\_.\{-}\)`'+<font color="#268bd2" style="background-color: #cbd4d4">\1</font>+ge
+  %sub+`-\(\_.\{-}\)`-+<font color="#cb4b16" style="background-color: #cbd4d4">\1</font>+ge
   %sub+`=\(\_.\{-}\)`=+<font color="#6c71c4" style="background-color: #cbd4d4">\1</font>+ge
   %sub+`"\(\_.\{-}\)`"+<font color="#2aa198" style="background-color: #cbd4d4">\1</font>+ge
-  %sub+`;\(\_.\{-}\)`;+<font color="#e4569b" style="background-color: #cbd4d4">\1</font>+ge
+  %sub+`;\(\_.\{-}\)`;+<font color="#d33682" style="background-color: #cbd4d4">\1</font>+ge
   %sub+`/\(\_.\{-}\)`/+<font color="#dc322f" style="background-color: #cbd4d4">\1</font>+ge
   %sub+`,\(\_.\{-}\)`,+<font color="#cbd4d4" style="background-color: #cbd4d4">\1</font>+ge
-  %sub+`_\(\_.\{-}\)`_+<font color="#fcf8ee" style="background-color: #cbd4d4">\1</font>+ge
+  %sub+`_\(\_.\{-}\)`_+<font color="#eee8d5" style="background-color: #cbd4d4">\1</font>+ge
   %sub+`\\\(\_.\{-}\)`\\+<font color="#073642"><code>\1</code></font>+ge
   %sub+`|\(\_.\{-}\)`|+<font color="#dc322f"><code>\1</code></font>+ge
 endfunc " }}}
@@ -439,7 +439,7 @@ func s:HtmlSkeleton()
   call append(6, "    h1 {color: #af5faf; text-align: center; font-size: 130%;}")
   call append(7, "    h2 {color: #af5f00; font-size: 120%;}")
   call append(8, "    h3 {color: #008787; font-size: 110%; padding: 0; margin: 0;}")
-  call append(9, "    h4 {color: #0087b7; font-size: 100%; padding: 0; margin: 0;}")
+  call append(9, "    h4 {color: #0087af; font-size: 100%; padding: 0; margin: 0;}")
   call append(10, "    code {background-color: #ebe9e4; font-size: 105%}")
   call append(11, "    ol {}")
   call append(12, "    ul {}")
