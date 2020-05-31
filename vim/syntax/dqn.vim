@@ -158,11 +158,11 @@ let s:t_Cyan    = '6'
 let s:t_Magenta = '5'
 let s:t_Red     = '1'
   if g:colors_name ==# 'solarized' && &background ==# 'dark'
-let s:t_Gray  = '0'
+exe 'let s:t_Gray  = ' .($TERM==#'linux' ? 0 : 236)
 let s:t_Bkgrd = '8'
 let s:t_Frgrd = '7'
   else
-let s:t_Gray  = '7'
+exe 'let s:t_Gray  = ' .($TERM==#'linux' ? 7 : 253)
 let s:t_Bkgrd = '15'
 let s:t_Frgrd = '0'
   endif
@@ -325,7 +325,7 @@ hi def link dqnCodeType dqnBgRed
 "" Keywords and others {{{2
 """""""""""
 hi def link dqnKeyword  Todo
-exe 'hi def dqnMark     guifg=' .s:g_Gray .' ctermfg=' .s:t_Gray
+hi def link dqnMark     Comment
 hi def link dqnFoldMark dqnBkgrd
 hi def link dqnComment  Comment
 hi def link dqnNomatch  dqnBgFrgrd
