@@ -141,10 +141,6 @@ func s:OrderedList()
     " if no index
     """"""""""""""""""""""""""""""
     elseif getline(i) !~# '^\s*' .'\%(</li>\|</ul>\|</p>\|<p>\)*' .l:regexp
-      " If the line above was a list, add a line break if not already exist.
-      if l:had_index
-        exe i-1 .'sub&\s*\%(<br>\)*$&<br>'
-      endif
       let l:had_index = 0
 
       let l:char1_col_current = s:char1_col(i, l:regexp, 0)
@@ -264,10 +260,6 @@ func s:UnorderedList()
     " if no index
     """"""""""""""""""""""""""""""
     elseif getline(i) !~# '^\s*' .l:regexp
-      " If the line above was a list, add a line break if not already exist.
-      if l:had_index
-        exe i-1 .'sub&\s*\%(<br>\)*$&<br>'
-      endif
       let l:had_index = 0
 
       let l:char1_col_current = s:char1_col(i, l:regexp, 0)
@@ -284,11 +276,6 @@ func s:UnorderedList()
           endif
         endif
       endwhile
-
-      " If the line above was a list, add a line break if not already exist.
-      if getline(i-1) =~# '^\s*' .'\%(</li>\|</ul>\)*' .l:regexp
-        exe i-1 .'sub&\s*<br>*$&<br>'
-      endif
 
     " From Now On: has index
 
