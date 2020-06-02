@@ -2,21 +2,25 @@
 " Maintainer:       Dexter K. Lui <dexterklui@pm.me>
 " Last Change:      17 May 2020
 " Version:          1.5
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Abort if running in vi-compatible mode or the user doesn't want us.
-  if &cp || exists('g:loaded_DQFold')
-    if &cp && &verbose
-      echo "Not loading DQFold in compatible mode."
-    endif
-    finish
+" Abort if running in vi-compatible mode or the user doesn't want us. {{{1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if &cp || exists('g:loaded_DQFold')
+  if &cp && &verbose
+    echo "Not loading DQFold in compatible mode."
   endif
+  finish
+endif
 
 " vimscript thingy
-  let s:save_cpo = &cpo
-  set cpo&vim
+let s:save_cpo = &cpo
+set cpo&vim
 
-" Defining functions
-function! DQFoldText()
+" Defining functions {{{1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+func DQFoldText()
+" create fold text {{{
   let l:nrline = v:foldend - v:foldstart + 1
   let l:foldlevel = foldlevel(v:foldstart)
   let l:line = substitute(getline(v:foldstart), '^\s*\|\s*$', '', 'ge')
@@ -79,7 +83,7 @@ function! DQFoldText()
     endif " Git's unstage modified lines: True, False
   endif " Support emoji: False, True
   " Reserved emojis: 🍳🥒🥢♂️ 🔗📎🔧💡📌📍➿🔅🔺🔸🔹▫️ ▪️ 📝
-endfunction
+endfunc " }}}
 
 func s:CloFdChild()
 " close all fold children of current fold {{{
@@ -111,17 +115,20 @@ func s:OpFdChild()
   call cursor(l:line,l:virtcol)
 endfunc " }}}
 
-" Setting
-  set foldtext=DQFoldText()
+" Setting {{{1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set foldtext=DQFoldText()
 
-" Mappings
+" Mappings {{{1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap z[ :call <SID>CloFdChild()<CR>
 nnoremap z{ [z:call <SID>CloFdChild()<CR>
 nnoremap z] :call <SID>OpFdChild()<CR>
 
-" vimscript thingy
-  let &cpo = s:save_cpo
-  unlet s:save_cpo
-  let g:loaded_DQFold = 1
+" vimscript thingy {{{1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let &cpo = s:save_cpo
+unlet s:save_cpo
+let g:loaded_DQFold = 1
 
-" vim:set sw=2 sts=2 fdm=indent:
+" vim:set sw=2 sts=2 fdm=marker:
