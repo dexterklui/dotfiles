@@ -93,7 +93,7 @@ function s:titlelv(line)
   endif
 endfunction
 "}}}
-function DQNTitleContentFilter(line)
+function s:titleContent(line)
 " Return a string of the content of current line without title markers{{{
   let l:titlelevel = s:titlelv(a:line)
   if l:titlelevel == 1
@@ -114,7 +114,7 @@ function DQNTitleContentFilter(line)
   end
 endfunction
 "}}}
-function DQNTitleFoldMarkerCheck(line)
+function s:hasFoldMk(line)
 " Check if there is fold marker at the end of the current line{{{
 " Return 1 if yes, 0 if no.
   if getline(a:line) =~ ' \={\{3}\d*$'
@@ -138,25 +138,25 @@ function DQNTitleLevelUp() range
     if l:titlelevel == 1 && exists('l:is_oneline')
       echo 'This line is already at the top level!'
     elseif l:titlelevel == 2
-      if DQNTitleFoldMarkerCheck(l:line) == 1
-        call setline(l:line, '[~{ ' . DQNTitleContentFilter(l:line) . ' }~] {'.'{{1')
+      if s:hasFoldMk(l:line)
+        call setline(l:line, '[~{ ' . s:titleContent(l:line) . ' }~] {'.'{{1')
       else
-        call setline(l:line, '[~{ ' . DQNTitleContentFilter(l:line) . ' }~]')
+        call setline(l:line, '[~{ ' . s:titleContent(l:line) . ' }~]')
       endif
     elseif l:titlelevel == 3
-      if DQNTitleFoldMarkerCheck(l:line) == 1
-        call setline(l:line, ' == ' . DQNTitleContentFilter(l:line) . ' == {'.'{{2')
+      if s:hasFoldMk(l:line)
+        call setline(l:line, ' == ' . s:titleContent(l:line) . ' == {'.'{{2')
       else
-        call setline(l:line, ' == ' . DQNTitleContentFilter(l:line) . ' ==')
+        call setline(l:line, ' == ' . s:titleContent(l:line) . ' ==')
       endif
     elseif l:titlelevel == 4
-      call setline(l:line, '  > ' . DQNTitleContentFilter(l:line) . ' < {'.'{{3')
+      call setline(l:line, '  > ' . s:titleContent(l:line) . ' < {'.'{{3')
     elseif !l:titlelevel && exists('l:is_oneline')
     " Ignore lines that were not DQN Titles when processing a visual range of line
-      if DQNTitleFoldMarkerCheck(l:line) == 1
-        call setline(l:line, '   |' . DQNTitleContentFilter(l:line) . '| {'.'{{4')
+      if s:hasFoldMk(l:line)
+        call setline(l:line, '   |' . s:titleContent(l:line) . '| {'.'{{4')
       else
-        call setline(l:line, '   |' . DQNTitleContentFilter(l:line) . '|')
+        call setline(l:line, '   |' . s:titleContent(l:line) . '|')
       endif
     endif
   endfor
@@ -174,21 +174,21 @@ function DQNTitleLevelDown() range
   for l:line in range(a:firstline, a:lastline)
     let l:titlelevel = s:titlelv(l:line)
     if l:titlelevel == 1
-      if DQNTitleFoldMarkerCheck(l:line) == 1
-        call setline(l:line, ' == ' . DQNTitleContentFilter(l:line) . ' == {'.'{{2')
+      if s:hasFoldMk(l:line)
+        call setline(l:line, ' == ' . s:titleContent(l:line) . ' == {'.'{{2')
       else
-        call setline(l:line, ' == ' . DQNTitleContentFilter(l:line) . ' ==')
+        call setline(l:line, ' == ' . s:titleContent(l:line) . ' ==')
       endif
     elseif l:titlelevel == 2
-      if DQNTitleFoldMarkerCheck(l:line) ==1
-        call setline(l:line, '  > ' . DQNTitleContentFilter(l:line) . ' < {'.'{{3')
+      if s:hasFoldMk(l:line)
+        call setline(l:line, '  > ' . s:titleContent(l:line) . ' < {'.'{{3')
       else
-        call setline(l:line, '  > ' . DQNTitleContentFilter(l:line) . ' <')
+        call setline(l:line, '  > ' . s:titleContent(l:line) . ' <')
       endif
     elseif l:titlelevel == 3
-      call setline(l:line, '   |' . DQNTitleContentFilter(l:line) . '|')
+      call setline(l:line, '   |' . s:titleContent(l:line) . '|')
     elseif l:titlelevel == 4
-      call setline(l:line, "    " . DQNTitleContentFilter(l:line))
+      call setline(l:line, "    " . s:titleContent(l:line))
     elseif !l:titlelevel && exists('l:is_oneline')
       echo 'This line is already at lower than level 4!'
     endif
@@ -206,7 +206,7 @@ function DQNTitleFoldMarkerToggle() range
   endif
   for l:line in range(a:firstline, a:lastline)
     let l:titlelevel = s:titlelv(l:line)
-    if DQNTitleFoldMarkerCheck(l:line) == 1
+    if s:hasFoldMk(l:line)
       call setline(l:line, substitute(getline(l:line), '\s*{'.'{{\d*$', '', ''))
     elseif !l:titlelevel && exists('l:is_oneline')
       call setline(l:line, getline(l:line) . ' {'.'{{')
