@@ -1,7 +1,7 @@
 " DQNote:           Vim plugin for DQNote files (.dqn)
 " Maintainer:       Dexter K. Lui <dexterklui@pm.me>
 " Latest Change:    6 May 2020
-" Version:          1.34.0 (DQN v1.34)
+" Version:          1.34.1 (DQN v1.34)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " vimscript thingy {{{1
@@ -126,6 +126,10 @@ endfunction
 "}}}
 function DQNTitleLevelUp()
 " Make current line accend by 1 title level{{{
+  if DQNVersion() == -1
+    echom 'This is not a DQN file! Abort function.'
+    return
+  endif
   let l:titlelevel = DQNTitleLevelCheck()
   if l:titlelevel == 1
     echo 'This line is already at the top level!'
@@ -154,6 +158,10 @@ endfunction
 "}}}
 function DQNTitleLevelDown()
 " Make current line decend by 1 title level{{{
+  if DQNVersion() == -1
+    echom 'This is not a DQN file! Abort function.'
+    return
+  endif
   let l:titlelevel = DQNTitleLevelCheck()
   if l:titlelevel == 1
     if DQNTitleFoldMarkerCheck() == 1
@@ -178,6 +186,10 @@ endfunction
 "}}}
 function DQNTitleFoldMarkerToggle()
 " Add/remove fold markers at the end of line according to title lvl{{{
+  if DQNVersion() == -1
+    echom 'This is not a DQN file! Abort function.'
+    return
+  endif
   let l:titlelevel = DQNTitleLevelCheck()
   if DQNTitleFoldMarkerCheck() == 1
     call setline(".", substitute(getline("."), '\s*{'.'{{\d*$', '', ''))
