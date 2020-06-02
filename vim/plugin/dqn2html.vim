@@ -447,7 +447,7 @@ endfunc " }}}
 func Dqn2html() range abort
 " Write content in /tmp/, and change format to HTML {{{
 " open: {0|1}: 1:open the HTML file in a browser
-  if DQNVersion() == 0
+  if DQNVersion() == -1
     echoe 'This is not a dqn file! Abort function.'
     return
   endif
@@ -467,7 +467,7 @@ func Opendqnhtml()
   if expand('%:p') =~# '^/tmp/dqn2html/.*\.html$'
     let l:fname = substitute(expand('%:p:r'), '^/tmp/dqn2html', '', '')
     exe 'e ' .substitute(l:fname, '%', '/', 'ge') .'.dqn'
-  elseif DQNVersion() != 0
+  elseif DQNVersion() != -1
     let l:fname = substitute(expand('%:p:r'), '[^/]\zs/', '\\%', 'ge')
     exe 'e /tmp/dqn2html' .l:fname .'.html'
     setl nobuflisted

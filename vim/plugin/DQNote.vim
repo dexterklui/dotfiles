@@ -31,9 +31,9 @@ function DQNVersion()
 " Return 0 if it is a DQN file but does not have a valid stamp.
 " Return -1 if it is NOT a DQN file
   if expand('%:e') !~ '^dqn$'
-    return 0
-  elseif getline(1) !~ '^/// Language: DQNote[-_][0-9.]\+'
     return -1
+  elseif getline(1) !~ '^/// Language: DQNote[-_][0-9.]\+'
+    return 0
   else
     return str2float(substitute(getline(1), '^/// Language: DQNote[-_]', '', ''))
   endif
@@ -42,7 +42,7 @@ endfunction
 function DQNUpdate() abort
 " Update dqn file{{{
   " Only run this script when it is a dqn file.
-  if DQNVersion() == 0
+  if DQNVersion() == -1
     echoe 'This is not a DQNote! No update is done.'
     return
   elseif DQNVersion() >= 1.34
