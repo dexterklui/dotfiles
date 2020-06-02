@@ -146,11 +146,23 @@ export TERM_PROGRAM=gnome-terminal
 export XDG_CONFIG_HOME=/home/dexq/.config
 export XDG_DATA_HOME=/home/dexq/.local/share
 
-# Powerline config
-    #startup quicker
-    powerline-daemon -q
-    POWERLINE_BASH_CONTINUATION=1
-    POWERLINE_BASH_SELECT=1
-    POWERLINE_ROOT=/home/dexq/.local/lib/python3.6/site-packages
-    #start up
-    . $POWERLINE_ROOT/powerline/bindings/bash/powerline.sh
+# Application setup {{{1
+######################################################################
+# Powerline config {{{2
+########################################
+##startup quicker
+#powerline-daemon -q
+#POWERLINE_BASH_CONTINUATION=1
+#POWERLINE_BASH_SELECT=1
+#POWERLINE_ROOT=/home/dexq/.local/lib/python3.6/site-packages
+##start up
+#. $POWERLINE_ROOT/powerline/bindings/bash/powerline.sh
+
+# fasd setup {{{2
+########################################
+fasd_cache="$HOME/.fasd-init-bash"
+if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
+  fasd --init posix-alias bash-hook bash-ccomp bash-ccomp-install >| "$fasd_cache"
+fi
+source "$fasd_cache"
+unset fasd_cache
