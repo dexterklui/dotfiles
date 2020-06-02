@@ -28,7 +28,7 @@ cp -iu ${PWD}/vim/syntax/dqn0.vim ~/.vim/syntax/dqn0.vim
 # .vim/plugin {{{2
 ########################################
 cp -iu ${PWD}/vim/plugin/DQColorscheme.vim    ~/.vim/plugin/DQColorscheme.vim
-cp -iu ${PWD}/vim/plugin/DQFoldText.vim       ~/.vim/plugin/DQFoldText.vim
+cp -iu ${PWD}/vim/plugin/DQFold.vim           ~/.vim/plugin/DQFold.vim
 cp -iu ${PWD}/vim/plugin/DQNote.vim           ~/.vim/plugin/DQNote.vim
 cp -iu ${PWD}/vim/plugin/DQNYank.vim          ~/.vim/plugin/DQNYank.vim
 cp -iu ${PWD}/vim/plugin/DQToggleConceal.vim  ~/.vim/plugin/DQToggleConceal.vim

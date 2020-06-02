@@ -1,12 +1,12 @@
-" DQFoldText:       Plugin for generating fold text
+" DQFold:           Plugin for generating fold text
 " Maintainer:       Dexter K. Lui <dexterklui@pm.me>
 " Last Change:      17 May 2020
-" Version:          1.4
+" Version:          1.5
 
 " Abort if running in vi-compatible mode or the user doesn't want us.
-  if &cp || exists('g:loaded_DQFoldText')
+  if &cp || exists('g:loaded_DQFold')
     if &cp && &verbose
-      echo "Not loading DQFoldText in compatible mode."
+      echo "Not loading DQFold in compatible mode."
     endif
     finish
   endif
@@ -81,12 +81,47 @@ function! DQFoldText()
   " Reserved emojis: 🍳🥒🥢♂️ 🔗📎🔧💡📌📍➿🔅🔺🔸🔹▫️ ▪️ 📝
 endfunction
 
+func s:CloFdChild()
+" close all fold children of current fold {{{
+  if foldclosed(line('.')) != -1
+    let l:foldclosed = 1
+  endif
+  let l:line = line('.')
+  let l:virtcol = virtcol('.')
+  normal [z
+  if foldlevel(line('.')) < foldlevel(l:line)
+    exe "normal \<C-o>"
+  endif
+  exe "normal zoV]zo:foldclose!\rzv"
+  call cursor(l:line,l:virtcol)
+  if exists('l:foldclosed')
+    normal zc
+  endif
+endfunc " }}}
+
+func s:OpFdChild()
+" open all fold children of current fold {{{
+  let l:line = line('.')
+  let l:virtcol = virtcol('.')
+  normal [z
+  if foldlevel(line('.')) < foldlevel(l:line)
+    exe "normal \<C-o>"
+  endif
+  exe "normal zoV]zo:foldopen!\rzv"
+  call cursor(l:line,l:virtcol)
+endfunc " }}}
+
 " Setting
   set foldtext=DQFoldText()
+
+" Mappings
+nnoremap z[ :call <SID>CloFdChild()<CR>
+nnoremap z{ [z:call <SID>CloFdChild()<CR>
+nnoremap z] :call <SID>OpFdChild()<CR>
 
 " vimscript thingy
   let &cpo = s:save_cpo
   unlet s:save_cpo
-  let g:loaded_DQFoldText = 1
+  let g:loaded_DQFold = 1
 
 " vim:set sw=2 sts=2 fdm=indent:
