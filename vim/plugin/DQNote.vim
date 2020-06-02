@@ -1,7 +1,7 @@
 " DQNote:           Vim plugin for DQNote files (.dqn)
 " Maintainer:       Dexter K. Lui <dexterklui@pm.me>
 " Latest Change:    6 May 2020
-" Version:          1.34.2 (DQN v1.34)
+" Version:          1.34.3 (DQN v1.34)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " vimscript thingy {{{1
@@ -77,8 +77,8 @@ endfunction
 "}}}
 " Functions for handling Titles {{{2
 """"""""""""""""""""""""""""""""""""""""
-function DQNTitleLevelCheck(line)
-" Check the title level of current line{{{
+function s:titlelv(line)
+" Return the title level of current line{{{
   let l:string = getline(a:line)
   if l:string =~ '^\[\~{ .* }\~]\%( \={\{3}1\)\=$'
     return 1
@@ -89,13 +89,13 @@ function DQNTitleLevelCheck(line)
   elseif l:string =~ '^ \{3}|.*|\%( \={\{3}4\)\=$'
     return 4
   else
-    return -1
+    return 0
   endif
 endfunction
 "}}}
 function DQNTitleContentFilter(line)
 " Return a string of the content of current line without title markers{{{
-  let l:titlelevel = DQNTitleLevelCheck(a:line)
+  let l:titlelevel = s:titlelv(a:line)
   if l:titlelevel == 1
     let l:content = substitute(getline(a:line), '^\[\~{ ', '', '')
     return substitute(l:content, ' }\~]\%( \={\{3}1\)\=$', '', '')
@@ -134,7 +134,7 @@ function DQNTitleLevelUp() range
     let l:is_oneline = 1
   endif
   for l:line in range(a:firstline, a:lastline)
-    let l:titlelevel = DQNTitleLevelCheck(l:line)
+    let l:titlelevel = s:titlelv(l:line)
     if l:titlelevel == 1 && exists('l:is_oneline')
       echo 'This line is already at the top level!'
     elseif l:titlelevel == 2
@@ -151,7 +151,7 @@ function DQNTitleLevelUp() range
       endif
     elseif l:titlelevel == 4
       call setline(l:line, '  > ' . DQNTitleContentFilter(l:line) . ' < {'.'{{3')
-    elseif l:titlelevel == -1 && exists('l:is_oneline')
+    elseif !l:titlelevel && exists('l:is_oneline')
     " Ignore lines that were not DQN Titles when processing a visual range of line
       if DQNTitleFoldMarkerCheck(l:line) == 1
         call setline(l:line, '   |' . DQNTitleContentFilter(l:line) . '| {'.'{{4')
@@ -172,7 +172,7 @@ function DQNTitleLevelDown() range
     let l:is_oneline = 1
   endif
   for l:line in range(a:firstline, a:lastline)
-    let l:titlelevel = DQNTitleLevelCheck(l:line)
+    let l:titlelevel = s:titlelv(l:line)
     if l:titlelevel == 1
       if DQNTitleFoldMarkerCheck(l:line) == 1
         call setline(l:line, ' == ' . DQNTitleContentFilter(l:line) . ' == {'.'{{2')
@@ -189,7 +189,7 @@ function DQNTitleLevelDown() range
       call setline(l:line, '   |' . DQNTitleContentFilter(l:line) . '|')
     elseif l:titlelevel == 4
       call setline(l:line, "    " . DQNTitleContentFilter(l:line))
-    elseif l:titlelevel == -1 && exists('l:is_oneline')
+    elseif !l:titlelevel && exists('l:is_oneline')
       echo 'This line is already at lower than level 4!'
     endif
   endfor
@@ -205,10 +205,10 @@ function DQNTitleFoldMarkerToggle() range
     let l:is_oneline = 1
   endif
   for l:line in range(a:firstline, a:lastline)
-    let l:titlelevel = DQNTitleLevelCheck(l:line)
+    let l:titlelevel = s:titlelv(l:line)
     if DQNTitleFoldMarkerCheck(l:line) == 1
       call setline(l:line, substitute(getline(l:line), '\s*{'.'{{\d*$', '', ''))
-    elseif l:titlelevel == -1 && exists('l:is_oneline')
+    elseif !l:titlelevel && exists('l:is_oneline')
       call setline(l:line, getline(l:line) . ' {'.'{{')
     else
       call setline(l:line, getline(l:line) . ' {'.'{{' . l:titlelevel)
