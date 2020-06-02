@@ -70,8 +70,8 @@ function DQNUpdate() abort
 
   " Open quickfix list if there is any item got by vimgrepadd cmd
   if getqflist() != []
-    echo 'Here are some areas where you may want to make manual update.'
     clist
+    echoe 'Here are some areas where you may want to make manual update.'
   endif
 endfunction
 "}}}
