@@ -23,8 +23,4 @@ fi
 
 alias g='git'
 
-# Overwrite existing commands for better defaults
-alias mv='echo "Use /bin/mv -i!"'
-alias rm='echo "Use the full path i.e. /bin/rm!"'
-
 # vi: ft=sh
