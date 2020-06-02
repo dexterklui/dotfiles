@@ -18,7 +18,7 @@
 " Functions
   function ResourceScpt()
     " Write if needed and resource the current vim script
-    if expand('%:e') !=# 'vim'
+    if expand('%:e') !=# 'vim' && expand('%:t') !~# '^\.\=vimrc$'
       echoe 'This is not a vim script (.vim)! aborting function.'
     endif
 
