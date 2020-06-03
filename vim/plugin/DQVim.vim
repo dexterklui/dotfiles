@@ -1,7 +1,7 @@
 " DQVim:            Vim plugin for Vim files
 " Maintainer:       Dexter K. Lui <dexterklui@pm.me>
-" Latest Change:    17 May 2020
-" Version:          1.3
+" Latest Change:    3 June 2020
+" Version:          1.4
 
 " Abort if running in vi-compatible mode or the user doesn't want us.
   if &cp || exists('g:loaded_DQVim')
@@ -48,9 +48,11 @@
 
   function VimRunSel() range
     " Run as Vim Ex cmd using the range of visual selection
-    '<,'>yank *
+    let l:reg = getreg('*')
+    exe a:firstline .',' .a:lastline .'yank *'
     call setreg('*', substitute(getreg('*'), '\n\s*\\\(/\|&\|?\)\@!', '', 'ge'))
     @*
+    call setreg('*', l:reg)
   endfunction
 
   function ArgAdd() range
@@ -81,7 +83,7 @@
 
 " Defining commands
   command Sovim call ResourceScpt()
-  command -range Runvim call VimRunSel()
+  command -range Runvim <line1>,<line2>call VimRunSel()
 
 " mappings
 
