@@ -100,7 +100,7 @@
     call setreg(a:clipboard, substitute(getreg(a:clipboard),
       \ '[`[]\zs\~\ze[[{'."'".'-=";/,_\\|.]'
       \ , '<\\DQS>\~<\\DQE>', 'ge'))
-    
+
     call setreg(a:clipboard, substitute(getreg(a:clipboard),
       \ '[]`]\zs\~\ze[]}'."'".'-=";/,_\\|.]'
       \ , '<\\DQS>\~<\\DQE>', 'ge'))
@@ -165,7 +165,7 @@
   function DQRemoveDQNMarkers(clipboard)
     " Take the string in the file manager clipboard, remove any DQN
     " highlighting markers, and vim folding markers.
-    call setreg(a:clipboard, substitute(getreg(a:clipboard), 
+    call setreg(a:clipboard, substitute(getreg(a:clipboard),
       \  '\[\[\(\_.\{-}\)]]'            . '\|'
       \ .'\[{\(\_.\{-}\)]}'             . '\|'
       \ .'\['."'".'\(\_.\{-}\)]'."'"    . '\|'
@@ -177,7 +177,7 @@
       \ .'\[,\(\_.\{-}\)],'
       \ , '\1\2\3\4\5\6\7\8\9', 'ge'))
 
-    call setreg(a:clipboard, substitute(getreg(a:clipboard), 
+    call setreg(a:clipboard, substitute(getreg(a:clipboard),
       \  '\[_\(\_.\{-}\)]_'             . '\|'
       \ .'\[\\\(\_.\{-}\)]\\'           . '\|'
       \ .'\[|\(\_.\{-}\)]|'
@@ -189,7 +189,7 @@
       \ .'\[\.\_.\{-}]\.'
       \ , '', 'ge'))
 
-    call setreg(a:clipboard, substitute(getreg(a:clipboard), 
+    call setreg(a:clipboard, substitute(getreg(a:clipboard),
       \  '`\[\(\_.\{-}\)`]'            . '\|'
       \ .'`{\(\_.\{-}\)`}'             . '\|'
       \ .'`'."'".'\(\_.\{-}\)`'."'"    . '\|'
@@ -201,7 +201,7 @@
       \ .'`,\(\_.\{-}\)`,'
       \ , '\1\2\3\4\5\6\7\8\9', 'ge'))
 
-    call setreg(a:clipboard, substitute(getreg(a:clipboard), 
+    call setreg(a:clipboard, substitute(getreg(a:clipboard),
       \  '`_\(\_.\{-}\)`_'             . '\|'
       \ .'`\\\(\_.\{-}\)`\\'
       \ , '\1\2', 'ge'))
