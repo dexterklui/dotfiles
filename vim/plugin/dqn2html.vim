@@ -66,7 +66,8 @@ endfunc " }}}
 
 func s:Keyword()
 " Highlight DQN keywords {{{
-  %sub+\<\(DUNNO\|NOTE\|WARN\|TODO\|XXX\|FIXME\)\>\|/?/+<font color="#e4569b"><b>\1</b></font>+ge
+  %sub+\<\(DUNNO\|NOTE\|WARNI\=N\=G\=\|TODO\|XXX\|FIXME\)\>\|/?/
+        \+<font color="#e4569b"><b>\1</b></font>+ge
 endfunc " }}}
 
 func s:char1_col(line, regexp, has_index)
@@ -118,25 +119,10 @@ func s:OrderedList()
 
     " Form Now On: list(s) was/were started
 
-    " if is blank line, add line break if not already added in this series of
-    " blank lines
+    " ignore blank lines
     """"""""""""""""""""""""""""""
-    " TODO What if I want a paragraph break? Is it possible to distinguish?
     elseif getline(i) =~# '^\s*$'
       let l:had_index = 0
-      if getline(i-1) =~# '<br>$'
-        exe i-1 'sub/\s*<br>$/'
-      endif
-      " TODO add indent to <br> and all others with 4 spaces front
-      exe i .'sub/^\s*$/    <br>'
-
-    " if is has <br> only, remove extra <br> in previous line.
-    """"""""""""""""""""""""""""""
-    elseif getline(i) =~# '^\s*<br>$'
-      let l:had_index = 0
-      if getline(i-1) =~# '<br>$'
-        exe i-1 'sub/\s*<br>$/'
-      endif
 
     " if no index
     """"""""""""""""""""""""""""""
@@ -237,25 +223,10 @@ func s:UnorderedList()
 
     " Form Now On: list(s) was/were started
 
-    " if is blank line, add line break if not already added in this series of
-    " blank lines
+    " ignore blank lines
     """"""""""""""""""""""""""""""
-    " TODO What if I want a paragraph break? Is it possible to distinguish?
     elseif getline(i) =~# '^\s*$'
       let l:had_index = 0
-      if getline(i-1) =~# '<br>$'
-        exe i-1 'sub/\s*<br>$/'
-      endif
-      " TODO add indent to <br> and all others with 4 spaces front
-      exe i .'sub/^\s*$/    <br>'
-
-    " if is has <br> only, remove extra <br> in previous line.
-    """"""""""""""""""""""""""""""
-    elseif getline(i) =~# '^\s*<br>$'
-      let l:had_index = 0
-      if getline(i-1) =~# '<br>$'
-        exe i-1 'sub/\s*<br>$/'
-      endif
 
     " if no index
     """"""""""""""""""""""""""""""
