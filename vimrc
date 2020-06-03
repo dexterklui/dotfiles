@@ -22,6 +22,7 @@ call plug#begin('~/.vim/bundle')
 Plug 'Valloric/YouCompleteMe'
 Plug 'altercation/vim-colors-solarized'
 Plug 'morhetz/gruvbox'
+Plug 'easymotion/vim-easymotion'
 Plug 'Yggdroot/indentLine'
 Plug 'jiangmiao/auto-pairs'
 Plug 'vim-syntastic/syntastic'
@@ -315,6 +316,15 @@ let g:ctrlp_mruf_save_on_update = 0
 nnoremap <leader>sm :CtrlPMixed<CR>
 nnoremap <leader>sr :CtrlPMRUFiles<CR>
 nnoremap <leader>sb :CtrlPBuffer<CR>
+
+" * Easymotion * {{{3
+""""""""""""""""""""
+nmap s <Plug>(easymotion-sn)
+nmap <M-s> <Plug>(easymotion-overwin-f2)
+map S <Plug>(easymotion-prefix)
+map <M-S> <C-o><Plug>(easymotion-prefix)
+imap <M-s> <C-o><Plug>(easymotion-overwin-f2)
+imap <M-S> <C-o><Plug>(easymotion-prefix)
 
 " * Table-mode setting * {{{3
 """"""""""""""""""""
