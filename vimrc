@@ -233,10 +233,12 @@ let g:airline_mode_map = {
 " Since my colorscheme is solarized whereas Airlinetheme is dqsolarized, which
 " has a different name, so I need to force vim to reload AirlineTheme
 " everytime the 'background' / colorscheme is changed.
-autocmd vimrcEx ColorScheme *
-  \ if g:colors_name ==# 'solarized' && exists(':AirlineTheme') |
-  \   AirlineTheme dqsolarized |
-  \ endif
+func s:AirlineTheme()
+  if g:colors_name ==# 'solarized' && exists(':AirlineTheme')
+    AirlineTheme dqsolarized
+  endif
+endfunc
+autocmd vimrcEx ColorScheme * call s:AirlineTheme()
 
 " Sections customization {{{4
 """"""""""
@@ -406,20 +408,21 @@ endif
 
 " * limelight * {{{3
 """"""""""""""""""""
-autocmd vimrcEx ColorScheme *
-  \ if g:colors_name =~ 'solarized' |
-    \ if &background ==# 'dark' |
-      \ let g:limelight_conceal_ctermfg = 10 |
-      \ let g:limelight_conceal_guifg = '#4F6770' |
-    \ else |
-      \ let g:limelight_conceal_ctermfg = 14 |
-      \ let g:limelight_conceal_guifg = '#B3BCBC' |
-    \ endif |
-  \ else |
-    \ let g:limelight_conceal_ctermfg = 'gray' |
-    \ let g:limelight_conceal_guifg = 'DarkGray' |
-  \ endif
-doautocmd vimrcEx Colorscheme
+func s:limelight_conceal()
+  if g:colors_name =~ 'solarized'
+    if &background ==# 'dark'
+      let g:limelight_conceal_ctermfg = 10
+      let g:limelight_conceal_guifg = '#4F6770'
+    else
+      let g:limelight_conceal_ctermfg = 14
+      let g:limelight_conceal_guifg = '#B3BCBC'
+    endif
+  else
+    let g:limelight_conceal_ctermfg = 'gray'
+    let g:limelight_conceal_guifg = 'DarkGray'
+  endif
+endfunc
+autocmd vimrcEx ColorScheme * call s:limelight_conceal()
 
 let g:limelight_paragraph_span = 0
 nmap <Leader>l <Plug>(Limelight)
@@ -473,6 +476,8 @@ nnoremap <Leader>rb :RainbowToggle<CR>
 
 " *** Post vimrc *** {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" To ensure the autocmds added by vimrc got run
+doautocmd vimrcEx ColorScheme *
 if v:vim_did_enter
   let &ft=&ft " Reload ftplugin to override vimrc settings after resource
 endif
