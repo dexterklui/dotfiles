@@ -338,7 +338,7 @@ let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 " conceallevel and concealcursor. This keeps the conceallevel and
 " concealcursor not overwriten.
 let g:indentLine_setConceal = 0
-let g:indentLine_fileTypeExclude = ['dqn', 'dqn0', 'man']
+let g:indentLine_fileTypeExclude = ['dqn', 'dqn0', 'man', 'help']
 let g:indentLine_bufTypeExclude = ['help', 'terminal']
 let g:indentLine_bufNameExclude = ['NERD_tree.*']
 
