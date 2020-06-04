@@ -1,7 +1,7 @@
 " Ftplugin:      Filetype plugin for DQN
 " Maintainer:    Dexter K. Lui <dexterklui@pm.me>
 " Latest Change: 26 May 2020
-" Version:       1.33.01 (DQN v1.33)
+" Version:       1.34.0 (DQN v1.34)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 setl autoindent
@@ -10,7 +10,6 @@ setl conceallevel=2
 setl textwidth=78
 setl wrap
 setl linebreak
-setl showbreak=∥
 setl formatoptions=cqltn
 setl formatlistpat=^\\s*(\\=\\d\\+[:.)]\\s\\+\\\|^\\s*[⮱➱‣•·+*-]\\s\\+
 setl tabstop=4

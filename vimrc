@@ -159,6 +159,12 @@ set updatetime=250  " after 250ms, write swap and update gitgutter
 set winwidth=84     " Set the min nr of columns for current window
 set spelllang=en_gb " Set default spell language as british english
 
+if $TERM !=# 'linux'
+  set showbreak=∥
+else
+  set showbreak=>
+endif
+
 " ** For vim only ** {{{2
 """"""""""""""""""""""""""""""""""""""""
 if !has('nvim')
