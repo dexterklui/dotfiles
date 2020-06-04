@@ -195,7 +195,7 @@ endfunc " }}}
 
 func s:UnorderedList()
 " Turn unordered list into html format {{{
-  let l:bullet = ['⮱', '➱', '‣', '·', '+', '*', '-']
+  let l:bullet = ['⮱', '➱', '‣', '•', '·', '+', '*', '-']
   let l:regexp = '\('
   for i in l:bullet
     let l:itempat = escape(i, '[\*.~')

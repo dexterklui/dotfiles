@@ -11,8 +11,8 @@ setl textwidth=78
 setl wrap
 setl linebreak
 setl showbreak=****
-setl formatoptions=cqrltn
-setl formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*\\\|^\\s*[◆+‣•►➱⮱]\\s*"
+setl formatoptions=cqltn
+setl formatlistpat=^\\s*(\\=\\d\\+[:.)]\\s\\+\\\|^\\s*[⮱➱‣•·+*-]\\s\\+
 setl tabstop=4
 setl comments=s1:/*,mb:*,ex:*/,:///
 setl nojoinspaces
@@ -60,6 +60,7 @@ iabbrev <buffer> ;r ➱
 iabbrev <buffer> ;R ⮱
 iabbrev <buffer> ;t ‣
 iabbrev <buffer> ;d ·
+iabbrev <buffer> ;D •
 iabbrev <buffer> latex LaTeX
 
 " The following function is needed for iabbrev {{s
@@ -75,6 +76,6 @@ iabbrev <buffer> latex LaTeX
 
 let b:undo_ftplugin = "setl cole< ai< fdm< fdc< js< tw< wrap< lbr< sbr< fo< flp< ts< com< ic< scs< cocu< nf< spell< cc<"
 "let b:undo_ftplugin .= "| nun <buffer> gqm| nun <buffer> gqn|iun <buffer> <C-B>t| iun <buffer> <C-B><C-T>| iun <buffer> <C-J><C-J>| iun <buffer> <C-J><C-K>| unm <buffer> <leader>>>| unm <buffer> <leader><lt><lt>| unm <buffer> <leader>{{| unm <buffer> <F12>"
-"let b:undo_ftplugin .= "iunab <buffer> #L| iunab <buffer> #l| iunab <buffer> {{1| iunab <buffer> {{2| iunab <buffer> {{3| iunab <buffer> {{s| iunab <buffer> ;r| iunab <buffer> ;R| iunab <buffer> ;t| iunab <buffer> ;d| iunab <buffer> latex"
+"let b:undo_ftplugin .= "iunab <buffer> #L| iunab <buffer> #l| iunab <buffer> {{1| iunab <buffer> {{2| iunab <buffer> {{3| iunab <buffer> {{s| iunab <buffer> ;r| iunab <buffer> ;R| iunab <buffer> ;t| iunab <buffer> ;d| iunab <buffer> ;D| iunab <buffer> latex"
 
 let b:did_ftplugin = 1
