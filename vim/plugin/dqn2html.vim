@@ -1,7 +1,7 @@
 " dqn2html:       Transforming format of DQN to html
 " Maintainer:    Dexter K. Lui <dexterklui@pm.me>
 " Latest Change: 26 May 2020
-" Version:       1.34.0 (DQN v1.34)
+" Version:       1.34.1 (DQN v1.34)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TODO Python block
 " TODO Picture link
@@ -35,13 +35,13 @@ endfunc " }}}
 func s:Title()
 " Turn DQNTitles to html headings {{{
   " Handle [~{ Title_1 }~]
-  %sub+^\[\~{ \(.*\) }\~].*$+    <h1>[<TILD>{ \1 }\~]</h1>+ge
+  %sub+^\[\~{ \(.*\) }\~].*$+    <h1>[<TILD>{ \1 }\~]</h1>\r+ge
   " Handle _== Title_2 == (_ is a sapce)
-  %sub+^ == \(.*\) ==.*$+    <h2>== \1 ==</h2>+ge
+  %sub+^ == \(.*\) ==.*$+    <h2>== \1 ==</h2>\r+ge
   " Handle __> Title_3 < (_ is a sapce)
-  %sub+^  > \(.*\) &lt.*$+    <h3>> \1 \&lt</h3>+ge
+  %sub+^  > \(.*\) &lt.*$+    <h3>> \1 \&lt</h3>\r+ge
   " Handle ___|Title_4| (_ is a sapce)
-  %sub+^   |\(.*\)|.*$+    <h4>|\1|</h4>+ge
+  %sub+^   |\(.*\)|.*$+    <h4>|\1|</h4>\r+ge
 endfunc " }}}
 
 func s:Paragraph()
@@ -52,16 +52,16 @@ func s:Paragraph()
 
   " turns a series of empty lines and lines containing only <br> to a single
   " line with <br> XXX
-  %sub+\%(\n\s*\)*\%(\n\s*\%(<br>\)\+\)\+\n+    <br>+ge
+  %sub+\%(\n\s*\)*\%(\n\s*\%(<br>\)\+\)\+\n+\r    <br>\r+ge
 
   " turns a series of blank lines to a single line and break paragraph
-  %sub+\%(\n\s*\)\+\n+    </p><p>+ge
+  %sub+\%(\n\s*\)\+\n+\r    </p><p>\r+ge
 
   "%sub+^\s*</p><p>\n\ze\s*<br>++ge
 
   " Change position of </**> that immediately follows </p><p> to immediately
   " be4
-  %sub&^\(\s*\)</p><p>\n\(\s*\)\(\%(</[^>]\+>\)\+\)&\1\3</p><p>\2&ge
+  %sub&^\(\s*\)</p><p>\n\(\s*\)\(\%(</[^>]\+>\)\+\)&\1\3</p><p>\r\2&ge
 endfunc " }}}
 
 func s:Keyword()
@@ -330,9 +330,9 @@ func s:SeparateLine()
 " Keep lines in certain area separated {{{
   %sub/░$/<br>/ge
   %sub/:$/:<br>/ge
-  %sub/^\(=\{70,78}\)$/\1/ge
-  %sub/^\(-\{70,78}\)$/\1/ge
-  %sub+^\(/\*-\{74}\*/\)$+\1+ge
+  %sub/^\(=\{70,78}\)$/\r\1\r/ge
+  %sub/^\(-\{70,78}\)$/\r\1\r/ge
+  %sub+^\(/\*-\{74}\*/\)$+\r\1\r+ge
 endfunc " }}}
 
 func s:Hyperlink()
