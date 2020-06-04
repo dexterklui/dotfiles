@@ -323,10 +323,11 @@ nnoremap <leader>sb :CtrlPBuffer<CR>
 """"""""""""""""""""
 nmap s <Plug>(easymotion-sn)
 nmap <M-s> <Plug>(easymotion-overwin-f2)
+imap <M-s> <C-o><Plug>(easymotion-overwin-f2)
 map S <Plug>(easymotion-prefix)
 map <M-S> <C-o><Plug>(easymotion-prefix)
-imap <M-s> <C-o><Plug>(easymotion-overwin-f2)
 imap <M-S> <C-o><Plug>(easymotion-prefix)
+let g:EasyMotion_add_search_history = 0 " Don't want vim's search highlight
 
 " * Table-mode setting * {{{3
 """"""""""""""""""""
