@@ -164,6 +164,7 @@ if $TERM !=# 'linux'
 else
   set showbreak=>
 endif
+autocmd vimrcEx FileType * set breakindent breakindentopt=min:32,shift:-1
 
 " ** For vim only ** {{{2
 """"""""""""""""""""""""""""""""""""""""

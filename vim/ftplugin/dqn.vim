@@ -22,6 +22,8 @@ setl nrformats=alpha,hex
 setl spell
 setl spellfile=~/.vim/spell/en.utf-8.add,~/.vim/spell/dqn.utf-8.add
 setl colorcolumn=+1
+setl breakindent
+setl breakindentopt=min:32,shift:-1
 
 " Define mappings that are local to .dqn buffers.
 "
@@ -73,7 +75,7 @@ iabbrev <buffer> latex LaTeX
 " Customize plugin AutoPairs
     let b:autopairs_enabled = 0
 
-let b:undo_ftplugin = "setl cole< ai< fdm< fdc< js< tw< wrap< lbr< sbr< fo< flp< ts< com< ic< scs< cocu< nf< spell< cc<"
+let b:undo_ftplugin = "setl cole< ai< fdm< fdc< js< tw< wrap< lbr< fo< flp< ts< com< ic< scs< cocu< nf< spell< cc< bri< briopt<"
 "let b:undo_ftplugin .= "| nun <buffer> gqm| nun <buffer> gqn|iun <buffer> <C-B>t| iun <buffer> <C-B><C-T>| iun <buffer> <C-J><C-J>| iun <buffer> <C-J><C-K>| unm <buffer> <leader>>>| unm <buffer> <leader><lt><lt>| unm <buffer> <leader>{{| unm <buffer> <F12>"
 "let b:undo_ftplugin .= "iunab <buffer> #L| iunab <buffer> #l| iunab <buffer> {{1| iunab <buffer> {{2| iunab <buffer> {{3| iunab <buffer> {{s| iunab <buffer> ;r| iunab <buffer> ;R| iunab <buffer> ;t| iunab <buffer> ;d| iunab <buffer> ;D| iunab <buffer> latex"
 
