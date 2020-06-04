@@ -10,11 +10,11 @@ setl conceallevel=2
 setl textwidth=78
 setl wrap
 setl linebreak
-setl showbreak=****
+setl showbreak=∥
 setl formatoptions=cqltn
 setl formatlistpat=^\\s*(\\=\\d\\+[:.)]\\s\\+\\\|^\\s*[⮱➱‣•·+*-]\\s\\+
 setl tabstop=4
-setl comments=s1:/*,mb:*,ex:*/,:///
+setl comments=:///
 setl nojoinspaces
 setl ignorecase
 setl smartcase
