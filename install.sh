@@ -44,6 +44,10 @@ cp -iu ${PWD}/vim/ftplugin/dqn.vim ~/.vim/ftplugin/dqn.vim
 ########################################
 cp -iu ${PWD}/vim/after/ftplugin/* ~/.vim/after/ftplugin/
 
+# tmux {{{1
+##############################################################################
+ln -s ${PWD}/tmux.conf ~/.tmux.conf && echo 'Installed ~/.tmux.conf'
+
 # Git {{{1
 ##############################################################################
 ln -s ${PWD}/gitconfig ~/.gitconfig && echo 'Installed ~/.gitconfig'
