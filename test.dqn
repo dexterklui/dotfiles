@@ -91,6 +91,20 @@
    |conceal|
 [.This is a piece of concealed text].
 ======================================================================
+   |list| {{{4
+    1)  1st index: 1)
+    2)  2nd index: 2)
+        ‣   1st sub bullet ‣
+        ‣   2nd sub bullet ‣░
+            Paragraph for 2nd sub buller ‣. There is some more sentences to
+            come in order to form a paragraph
+            ░‣  A fake sub bullet ░‣
+
+        ‣   3rd sub bullet ‣ with a blank line separating from previous bullet
+    3)  3rd index: 3)
+    (4) 4th index but different style: (4)
+
+======================================================================
 
 NOTE░
 WARN

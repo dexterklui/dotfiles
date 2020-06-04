@@ -342,10 +342,11 @@ func s:Hyperlink()
 endfunc " }}}
 
 func s:PreDelete()
-" Delete unwanted elements {{{
+" Delete unwanted elements and replace some with temporary marks {{{
   %sub+\%^/// Language: DQNote_\d\+.*\n++e
   %sub+{\{3}\d\=\s*++ge
   %sub+}\{3}\d\=\s*++ge
+  %sub+^\s*\zs░+{D{DEL}Q}+e
 endfunc " }}}
 
 func s:PostDelete()
@@ -362,6 +363,7 @@ endfunc " }}}
 func s:Replace()
 " Replace temporary mark with correct string {{{
   %sub+<TILD>+\~+ge
+  %sub+{D{DEL}Q}++ge
 endfunc " }}}
 
 func s:Html()

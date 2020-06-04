@@ -108,6 +108,8 @@ syn match dqnFoldMark /}\{3}[0-9]\{0,1}/ display
 """"""""""""""""""""
 " A mark used to prevent DQNYank() from joining the following line:
 syn match dqnBreak /░\ze$/ conceal display
+" A mark used to prevent dqn2html() recognizing the line as a list:
+syn match dqnBreak /^\s*\zs░/ conceal display
 syn region dqnConceal matchgroup=dqnMark start=+\[\.+ end=+]\.+ concealends
       \ conceal cchar=▒ contains=@Spell,dqnBreak
 " Used to prevent matching dqn syntax:
