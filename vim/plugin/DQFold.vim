@@ -122,7 +122,7 @@ set foldtext=DQFoldText()
 " Mappings {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap z[ :call <SID>CloFdChild()<CR>
-nnoremap z{ [z:call <SID>CloFdChild()<CR>
+nnoremap z{ zc:call <SID>CloFdChild()<CR>
 nnoremap z] :call <SID>OpFdChild()<CR>
 
 " vimscript thingy {{{1
