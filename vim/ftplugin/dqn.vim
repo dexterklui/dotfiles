@@ -28,8 +28,8 @@ setl breakindentopt=min:32,shift:-1
 " Define mappings that are local to .dqn buffers.
 "
 " Format a paragraph but skip the first line (which is used for title).
-nnoremap <buffer> gqm {jjgq}
-nnoremap <buffer> gqn gqqgq}
+nnoremap <buffer> gqm :call DqnParFormat()<CR>
+nnoremap <buffer> gqn m`gq}``
 
 inoremap <buffer> <C-B>t <C-O>:TableModeToggle<CR>
 inoremap <buffer> <C-B><C-T> <C-O>:TableModeToggle<CR>

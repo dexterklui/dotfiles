@@ -216,6 +216,46 @@ function DQNTitleFoldMarkerToggle() range
   endfor
 endfunction
 "}}}
+" Functions for handling DQN para {{{2
+""""""""""""""""""""""""""""""""""""""""
+func DqnParFormat()
+" format current dqn paragraph{{{
+  exe 'let l:cursor = [' .line('.') .', ' .virtcol('.') .']'
+  let l:start = s:find_para_start(l:cursor[0])
+  let l:end   = s:find_para_end(l:cursor[0])
+  if l:start > l:end
+    return
+  endif
+  call cursor(l:start, 0)
+  exe 'normal V' .l:end .'Ggq'
+  call cursor(l:cursor[0], l:cursor[1])
+endfunc
+" }}}
+func s:find_para_start(line)
+" Find the first line of the current paragraph{{{
+  let l:line = a:line
+  while getline(l:line) !~ '^\s*\%([{}]\{3}\d\=\)\=$' && s:titlelv(l:line) == 0
+        \ && getline(l:line) !~ '[:░]$'
+    let l:line-=1
+  endwhile
+  let l:line+=1
+  return (l:line)
+endfunc
+" }}}
+func s:find_para_end(line)
+" Find the last line of the current paragraph{{{
+  let l:line = a:line
+  while getline(l:line) !~ '^\s*\%([{}]\{3}\d\=\)\=$' && s:titlelv(l:line) == 0
+        \ && getline(l:line) !~ '[:░]$'
+    let l:line+=1
+  endwhile
+  if getline(l:line) !~ '[:░]$'
+    let l:line-=1
+  endif
+  return (l:line)
+endfunc
+" }}}
+
 " Functions for handling vim's formatoptions {{{2
 """"""""""""""""""""""""""""""""""""""""
 function FoToggle()
