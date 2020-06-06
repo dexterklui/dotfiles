@@ -1,13 +1,9 @@
 setl shiftwidth=2
 setl softtabstop=2
+setl formatoptions=cqjl
 
 if !exists(b:undo_ftplugin)
-  let b:undo_ftplugin = 'setl cole<'
+  let b:undo_ftplugin = 'setl sw< sts< fo<'
 else
-  if match(b:undo_ftplugin,'\%(sw\|shiftwidth\)<') == -1
-    let b:undo_ftplugin .= "| setl sw<"
-  endif
-  if match(b:undo_ftplugin,'\%(sts\|softtabstop\)<') == -1
-    let b:undo_ftplugin .= "| setl sts<"
-  endif
+  let b:undo_ftplugin .= '| setl sw< sts< fo<'
 endif
