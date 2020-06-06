@@ -70,9 +70,11 @@ else
     if &background ==# 'dark'
       hi Folded       guifg=#586e75 ctermfg=10 guibg=NONE ctermbg=NONE
             \         gui=bold cterm=bold
+      if $TERM!=#'linux' | hi NonText guifg=#4e4e4e ctermfg=239 | endif
     else
       hi Folded       guifg=#93a1a1 ctermfg=14 guibg=NONE ctermbg=NONE
             \         gui=bold cterm=bold
+      if $TERM!=#'linux' | hi NonText guifg=#d0d0d0 ctermfg=252 | endif
     endif
     " Syntastic highlight
     hi SyntasticWarning gui=inverse cterm=inverse
@@ -145,7 +147,6 @@ set backspace=indent,eol,start " allow backspacing over everything (n)
 set belloff=all     " No alert sound in vim (n)
 set nobackup        " Don't save backup file by default
 set autoread  " autoupdate the buffer when the file is changed externally (n)
-set listchars=eol:$,tab:>\ ,nbsp:+  " adjust the text printed by :list
 set nrformats=bin,hex " adjust what format of nr <C-A> and <C-X> recognize (n)
 set shortmess+=F    " Adjust the message format: often shorting them (n)
 set sidescroll=1  " When 'nowrap': the min. columns to scoll horizontally (n)
@@ -161,8 +162,11 @@ set spelllang=en_gb " Set default spell language as british english
 
 if $TERM !=# 'linux'
   set showbreak=∥
+  set lcs=tab:‹\ ›,trail:·,eol:¬,nbsp:_ " adjust the text printed by :list
+  set list            " Show "invisible chars on screen like using :list
 else
   set showbreak=>
+  set listchars=eol:$,tab:>\ ,nbsp:+ " adjust the text printed by :list
 endif
 autocmd vimrcEx FileType * set breakindent breakindentopt=min:32,shift:-1
 
