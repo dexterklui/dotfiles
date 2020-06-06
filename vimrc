@@ -184,6 +184,9 @@ endif
 command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
   \ | wincmd p | diffthis
 
+" write a file as root FIXME: can't prompt for password, so can't run
+command SudoW exe 'w !sudo tee ' .shellescape(expand('%:p')) .' > /dev/null'
+
 " For easy access some documents:
 command Vimnote tabe ~/Documents/learn-type/vim.dqn0
 command Master e ~/.master.dqn
