@@ -1,4 +1,4 @@
-if [[ "$(hostname)" == "DQ-x1c" ]]; then {
+if [[ "$(hostname)" == "dq-x1c" || "$(hostname)" == "DQ-x1c" ]]; then {
     # shortcuts for directories
     alias hku='cd /media/dexq/mSD-xStorage-NTFS/HKU'
     alias ntfs='cd /media/dexq/mSD-xStorage-NTFS'
@@ -6,7 +6,8 @@ if [[ "$(hostname)" == "DQ-x1c" ]]; then {
     alias hkuv='vim /media/dexq/mSD-xStorage-NTFS/HKU/courses.dqn -c "cd /media/dexq/mSD-xStorage-NTFS/HKU"'
 
     # often used commands for fixing common issues
-    alias re='xinput set-prop "TPPS/2 Elan TrackPoint" "libinput Accel Speed" -0.7 && xinput list-props "TPPS/2 Elan TrackPoint"' # Lower the sensitivity of laptop's TrackPoint
+    #alias re='xinput set-prop "TPPS/2 Elan TrackPoint" "libinput Accel Speed" -0.7 && xinput list-props "TPPS/2 Elan TrackPoint"' # Lower the sensitivity of laptop's TrackPoint
+    alias re='xinput set-prop "TPPS/2 Elan TrackPoint" "libinput Accel Speed" 0.5 && xinput list-props "TPPS/2 Elan TrackPoint"' # Lower the sensitivity of laptop's TrackPoint
     alias network='sudo service network-manager restart'
 
     # running programs
@@ -18,6 +19,7 @@ if [[ "$(hostname)" == "DQ-x1c" ]]; then {
     alias v='nvim'
     alias vr='nvim -R' # Neovim read-only mode
     alias vdiff='nvim -d'
+    alias VB='VBoxManage'
 };
 fi
 
