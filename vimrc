@@ -174,7 +174,7 @@ autocmd vimrcEx FileType * set breakindent breakindentopt=min:32,shift:-1
 " ** For vim only ** {{{2
 """"""""""""""""""""""""""""""""""""""""
 if !has('nvim')
-  set termkey=<C-E> " Set the key that starts a CTRL-W cmd in terminal window
+  set termwinkey=<C-E> " Set the key that starts a CTRL-W cmd in terminal window
 endif
 
 " *** Commands and Mappings *** {{{1
