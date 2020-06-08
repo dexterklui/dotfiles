@@ -1,7 +1,7 @@
 " DQNote:           Vim plugin for DQNote files (.dqn)
 " Maintainer:       Dexter K. Lui <dexterklui@pm.me>
-" Latest Change:    6 May 2020
-" Version:          1.34.3 (DQN v1.34)
+" Latest Change:    8 Jun 2020
+" Version:          1.34.4 (DQN v1.34)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " vimscript thingy {{{1
@@ -256,6 +256,23 @@ func s:find_para_end(line)
 endfunc
 " }}}
 
+" Functions for handling images {{{2
+""""""""""""""""""""""""""""""""""""""""
+func s:openImg()
+" Open images at cursor {{{
+  let l:reg = getreg('*')
+  normal "*yi>
+  if getreg('*') =~# '^IMG:\zs.\+\ze$'
+    let l:img = substitute(@*, '^IMG:\(.\+\)$', '\1', '')
+  else
+    echo 'No <IMG:(img_name)> here!'
+    return ''
+  endif
+  let l:fpath = expand('%:p:h') .'/' .l:img
+  let @* = l:reg
+  exe 'silent !xdg-open ' .shellescape(l:fpath)
+endfunc " }}}
+
 " Functions for handling vim's formatoptions {{{2
 """"""""""""""""""""""""""""""""""""""""
 function FoToggle()
@@ -282,6 +299,7 @@ command -range DQNUpTitle <line1>,<line2>call DQNTitleLevelUp()
 command -range DQNDownTitle <line1>,<line2>call DQNTitleLevelDown()
 command -range DQNFoldMarkerToggle <line1>,<line2>call DQNTitleFoldMarkerToggle()
 command DQNUpdate call DQNUpdate()
+command DQNImg    call <SID>openImg()
 
 " Defining mappings {{{2
 """"""""""""""""""""""""""""""""""""""""

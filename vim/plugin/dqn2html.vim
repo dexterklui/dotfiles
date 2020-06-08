@@ -1,7 +1,7 @@
 " dqn2html:       Transforming format of DQN to html
 " Maintainer:    Dexter K. Lui <dexterklui@pm.me>
-" Latest Change: 26 May 2020
-" Version:       1.34.1 (DQN v1.34)
+" Latest Change: 8 Jun 2020
+" Version:       1.34.2 (DQN v1.34)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TODO Python block
 " TODO Picture link
@@ -341,12 +341,21 @@ func s:Hyperlink()
   %sub+\[=\(https\=://\S\{-}\)]=+<a href="\1">\1</a>+ge
 endfunc " }}}
 
+func s:Image()
+" Insert images {{{
+  let l:fpath = substitute(expand('%:t:r'), '%\zs[^%]\+$', '', 'ge')
+  let l:fpath = substitute(l:fpath, '%', '\\/', 'ge')
+  exe '%sub/{D{IMG}Q}\(.\+\)$/<img src="\/' .l:fpath .'\1" alt="[\1]">/e'
+endfunc " }}}
+
 func s:PreDelete()
 " Delete unwanted elements and replace some with temporary marks {{{
   %sub+\%^/// Language: DQNote_\d\+.*\n++e
   %sub+{\{3}\d\=\s*++ge
   %sub+}\{3}\d\=\s*++ge
+
   %sub+^\s*\zs░+{D{DEL}Q}+e
+  %sub/<IMG:\([^>]\+\)>/\r    {D{IMG}Q}\1\r/ge
 endfunc " }}}
 
 func s:PostDelete()
@@ -373,6 +382,7 @@ func s:Html()
   call s:Title()
   call s:Keyword()
   call s:Hyperlink()
+  call s:Image()
   call s:Highlight()
   call s:PostDelete()
   call s:SeparateLine()
@@ -410,9 +420,10 @@ func s:HtmlSkeleton()
   call append(11, "    ol {}")
   call append(12, "    ul {}")
   call append(13, "    li {width: 40em; color: #5d727a; text-align: justify; text-justify: inter-word}")
-  call append(14, "    </style>")
-  call append(15, "  </head>")
-  call append(16, "  <body>")
+  call append(14, "    img {width: 40em;}")
+  call append(15, "    </style>")
+  call append(16, "  </head>")
+  call append(17, "  <body>")
   call append(line('$'), "  </body>")
   call append(line('$'), "</html>")
 endfunc " }}}

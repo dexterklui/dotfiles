@@ -1,7 +1,7 @@
 " Ftplugin:      Filetype plugin for DQN
 " Maintainer:    Dexter K. Lui <dexterklui@pm.me>
-" Latest Change: 26 May 2020
-" Version:       1.34.0 (DQN v1.34)
+" Latest Change: 8 Jun 2020
+" Version:       1.34.1 (DQN v1.34)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 setl autoindent
@@ -31,6 +31,7 @@ setl nolist
 " Format a paragraph but skip the first line (which is used for title).
 nnoremap <buffer> gqm :call DqnParFormat()<CR>
 nnoremap <buffer> gqn m`gq}``
+nnoremap <buffer> <Leader>fi :call <SID>openImg()<CR>
 
 inoremap <buffer> <C-B>t <C-O>:TableModeToggle<CR>
 inoremap <buffer> <C-B><C-T> <C-O>:TableModeToggle<CR>
@@ -77,7 +78,7 @@ iabbrev <buffer> latex LaTeX
     let b:autopairs_enabled = 0
 
 let b:undo_ftplugin = "setl cole< ai< fdm< fdc< js< tw< wrap< lbr< fo< flp< ts< com< ic< scs< cocu< nf< spell< cc< bri< briopt< list<"
-"let b:undo_ftplugin .= "| nun <buffer> gqm| nun <buffer> gqn|iun <buffer> <C-B>t| iun <buffer> <C-B><C-T>| iun <buffer> <C-J><C-J>| iun <buffer> <C-J><C-K>| unm <buffer> <leader>>>| unm <buffer> <leader><lt><lt>| unm <buffer> <leader>{{| unm <buffer> <F12>"
+"let b:undo_ftplugin .= "| nun <buffer> gqm| nun <buffer> gqn| nun <buffer> <leader>fi| iun <buffer> <C-B>t| iun <buffer> <C-B><C-T>| iun <buffer> <C-J><C-J>| iun <buffer> <C-J><C-K>| unm <buffer> <leader>>>| unm <buffer> <leader><lt><lt>| unm <buffer> <leader>{{| unm <buffer> <F12>"
 "let b:undo_ftplugin .= "iunab <buffer> #L| iunab <buffer> #l| iunab <buffer> {{1| iunab <buffer> {{2| iunab <buffer> {{3| iunab <buffer> {{s| iunab <buffer> ;r| iunab <buffer> ;R| iunab <buffer> ;t| iunab <buffer> ;d| iunab <buffer> ;D| iunab <buffer> latex"
 
 let b:did_ftplugin = 1
