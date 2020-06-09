@@ -95,7 +95,12 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 
-source ~/.bash_aliases
+if [ -f ~/.bash_env ]; then
+    . ~/.bash_env
+fi
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
