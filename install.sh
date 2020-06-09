@@ -12,8 +12,13 @@ ln -s ${PWD}/bash_env      ~/.bash_env     && echo 'Installed ~/.bash_env'
 
 # zsh {{{1
 ##############################################################################
-# Visual select and use 'Tabularize /\%(Installed\)\@<! \zs\ze\~\|&&'
-ln -s ${PWD}/zshrc        ~/.zshrc       && echo 'Installed ~/.zshrc'
+if [[ -e $ZSH ]]; then {
+    ln -s ${PWD}/zshrc     ~/.zshrc      && echo 'Installed ~/.zshrc'
+    if [[ -e "$ZSH_CUSTOM" ]]; then {
+        ln -s ${PWD}/zsh/themes/* -t $ZSH_CUSTOM/themes/ && echo 'Installed zsh themes'
+    }; fi
+};
+fi
 
 # Vim {{{1
 ##############################################################################
