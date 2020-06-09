@@ -63,5 +63,9 @@ ln -s ${PWD}/gitignore ~/.gitignore && echo 'Installed ~/.gitignore'
 ##############################################################################
 ln -s ${PWD}/tridactylrc ~/.config/tridactyl/tridactylrc && echo 'Installed ~/.config/tridactyl/tridactylrc'
 #}}}1
+# alacritty {{{1
+##############################################################################
+ln -s ${PWD}/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml && echo 'Installed ~/.config/alacritty/alacritty.yml'
+#}}}1
 ##############################################################################
 # vi: fdm=marker
