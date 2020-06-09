@@ -8,6 +8,12 @@ cd $BASEDIR || exit
 # Visual select and use 'Tabularize /\%(Installed\)\@<! \zs\ze\~\|&&'
 ln -s ${PWD}/bashrc        ~/.bashrc       && echo 'Installed ~/.bashrc'
 ln -s ${PWD}/bash_aliases  ~/.bash_aliases && echo 'Installed ~/.bash_aliases'
+ln -s ${PWD}/bash_env      ~/.bash_env     && echo 'Installed ~/.bash_env'
+
+# zsh {{{1
+##############################################################################
+# Visual select and use 'Tabularize /\%(Installed\)\@<! \zs\ze\~\|&&'
+ln -s ${PWD}/zshrc        ~/.zshrc       && echo 'Installed ~/.zshrc'
 
 # Vim {{{1
 ##############################################################################
