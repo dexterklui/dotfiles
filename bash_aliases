@@ -23,6 +23,21 @@ if [[ "$(hostname)" == "dq-x1c" || "$(hostname)" == "DQ-x1c" ]]; then {
 };
 fi
 
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
 alias g='git'
+alias ll='ls -lh'
+alias la='ls -lAh'
+alias l='ls -CF'
 
 # vi: ft=sh

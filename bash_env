@@ -1,1 +1,13 @@
 dd="/media/dexq/mSD-xStorage-NTFS"
+ if [[ -n $SSH_CONNECTION ]]; then
+   export EDITOR='vim'
+   export VISUAL='vim'
+ else
+   export EDITOR='nvim'
+   export VISUAL='nvim'
+ fi
+export TERM_PROGRAM=gnome-terminal
+export XDG_CONFIG_HOME=/home/dexq/.config
+export XDG_DATA_HOME=/home/dexq/.local/share
+
+# vi:ft=sh
