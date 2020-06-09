@@ -184,7 +184,7 @@ endif
 command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
   \ | wincmd p | diffthis
 
-" write a file as root FIXME: can't prompt for password, so can't run
+" write a file as root (Neovim can't use for no prompt to fill password)
 if !has('nvim')
   command W exe 'w !sudo tee ' .shellescape(expand('%:p')) .' > /dev/null'
 endif
