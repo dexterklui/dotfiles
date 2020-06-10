@@ -226,7 +226,9 @@ exe 'nnoremap <silent> <Leader>B'
 " General {{{4
 """"""""""
 let g:airline_theme='dqsolarized'
-let g:airline_powerline_fonts = 1
+if $HOST_NAME ==# 'dq-x1c' && $TERM_PROGRAM ==# 'gnome-terminal'
+  let g:airline_powerline_fonts = 1
+endif
 let g:airline_mode_map = {
   \ '__'     : '-',
   \ 'c'      : 'C',
