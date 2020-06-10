@@ -1,12 +1,14 @@
 dd="/media/dexq/mSD-xStorage-NTFS"
- if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='vim'
-   export VISUAL='vim'
- else
-   export EDITOR='nvim'
-   export VISUAL='nvim'
- fi
-export TERM_PROGRAM=gnome-terminal
+if [[ $(hostname) == 'dq-x1c' && ! -n $TERM_PROGRAM ]]; then {
+   export TERM_PROGRAM=gnome-terminal
+}; fi
+
+if [[ $(hostname) == 'dq-x1c' ]]; then {
+    export EDITOR='nvim'
+    export VISUAL='nvim'
+}; fi
+
+export HOST_NAME=$(hostname)
 export XDG_CONFIG_HOME=/home/dexq/.config
 export XDG_DATA_HOME=/home/dexq/.local/share
 
