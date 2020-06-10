@@ -14,7 +14,7 @@ env:
   # check the local terminfo database and use `alacritty` if it is
   # available, otherwise `xterm-256color` is used.
   #TERM: alacritty
-  TERM: xterm-256color
+  TERM_PROGRAM: alacritty
 
 # Window {{{1
 ######################################################################
@@ -106,7 +106,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: ubuntu mono
+    family: Ubuntu Mono
 
     # The `style` can be specified to pick a specific face.
     style: Regular
@@ -118,7 +118,7 @@ font:
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: ubuntu mono
+    family: Ubuntu Mono
 
     # The `style` can be specified to pick a specific face.
     style: Bold
@@ -130,7 +130,7 @@ font:
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: ubuntu mono
+    family: Ubuntu Mono
 
     # The `style` can be specified to pick a specific face.
     style: Italic
@@ -142,7 +142,7 @@ font:
     #
     # If the bold italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: ubuntu mono
+    family: Ubuntu Mono
 
     # The `style` can be specified to pick a specific face.
     style: Bold Italic
