@@ -1,8 +1,8 @@
 " Vim syntax file
 " Language:     DQNote
 " Maintainer:   DQ
-" Version:      1.34.0 (DQN v1.34)
-" Last Change:  28 May 2020
+" Version:      1.34.1 (DQN v1.34)
+" Last Change:  11 Jun 2020
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Quit when a (custom) syntax file was already loaded {{{1
@@ -59,27 +59,27 @@ syn cluster dqnColor add=dqnYellow,dqnGreen,dqnBlue,dqnOrange,dqnPurple
 " Coloured highlighting with gray background {{{2
 """"""""""""""""""""
 syn region dqnBgYellow  matchgroup=dqnMark start=+`\[+ end=+`]+ concealends
-      \ contains=@Spell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
+      \ contains=@NoSpell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
 syn region dqnBgGreen   matchgroup=dqnMark start=+`{+  end=+`}+ concealends
-      \ contains=@Spell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
+      \ contains=@NoSpell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
 syn region dqnBgBlue    matchgroup=dqnMark start=+`'+  end=+`'+ concealends
-      \ contains=@Spell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
+      \ contains=@NoSpell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
 syn region dqnBgOrange  matchgroup=dqnMark start=+`-+  end=+`-+ concealends
-      \ contains=@Spell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
+      \ contains=@NoSpell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
 syn region dqnBgPurple  matchgroup=dqnMark start=+`=+  end=+`=+ concealends
-      \ contains=@Spell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
+      \ contains=@NoSpell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
 syn region dqnBgCyan    matchgroup=dqnMark start=+`"+  end=+`"+ concealends
-      \ contains=@Spell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
+      \ contains=@NoSpell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
 syn region dqnBgMagenta matchgroup=dqnMark start=+`;+  end=+`;+ concealends
-      \ contains=@Spell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
+      \ contains=@NoSpell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
 syn region dqnBgRed     matchgroup=dqnMark start=+`/+  end=+`/+ concealends
-      \ contains=@Spell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
+      \ contains=@NoSpell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
 syn region dqnBgGray    matchgroup=dqnMark start=+`,+  end=+`,+ concealends
-      \ contains=@Spell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
+      \ contains=@NoSpell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
 syn region dqnBgBkgrd   matchgroup=dqnMark start=+`_+  end=+`_+ concealends
-      \ contains=@Spell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
+      \ contains=@NoSpell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
 syn region dqnBgFrgrd   matchgroup=dqnMark start=+`\\+ end=+`\\+ concealends
-      \ contains=@Spell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
+      \ contains=@NoSpell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
 syn cluster dqnBgColor add=dqnBgYellow,dqnBgGreen,dqnBgBlue,dqnBgOrange
       \,dqnBgPurple,dqnBgCyan,dqnBgMagenta,dqnBgRed,dqnBgGray,dqnBgBkgrd
       \,dqnBgFrgrd
