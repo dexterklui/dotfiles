@@ -68,7 +68,7 @@ ZSH_THEME="dqpygmalion-virtualenv"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting zsh-history-substring-search)
+plugins=(git zsh-syntax-highlighting zsh-history-substring-search zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 bindkey -M emacs '^P' history-substring-search-up
@@ -106,8 +106,17 @@ fi
 if [ -f ~/.zsh_history ]; then
     alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(cat ~/.zsh_history|tail -n1|sed -e '\''s/^[: 0-9]\+\;//;s/\s*[;&|]\s*alert$//'\'')"'
 fi
+
 # enable fasd
 eval "$(fasd --init auto)"
+
+# Plugins
+######################################################################
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
+export ZSH_AUTOSUGGEST_USE_ASYNC='True'
+export ZSH_AUTOSUGGEST_HISTORY_IGNORE='cd*'
+export ZSH_AUTOSUGGEST_COMPLETION_IGNORE='git*'
+bindkey '^ ' autosuggest-toggle
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
