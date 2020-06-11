@@ -387,6 +387,8 @@ command -nargs=0 ST SyntasticToggleMode
 command -nargs=0 SI SyntasticInfo
 command -nargs=0 SR SyntasticReset
 
+let g:syntastic_python_checkers = ["pylint"]
+
 " * GitGutter * {{{3
 """"""""""""""""""""
 nnoremap <Leader>hc :GitGutterQuickFix<CR>
