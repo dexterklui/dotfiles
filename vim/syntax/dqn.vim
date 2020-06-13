@@ -1,9 +1,11 @@
 " Vim syntax file
 " Language:     DQNote
 " Maintainer:   DQ
-" Version:      1.34.1 (DQN v1.34)
-" Last Change:  11 Jun 2020
+" Version:      1.35.0 (DQN v1.35)
+" Last Change:  13 Jun 2020
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" TODO differentiate background colour and shade fg colour.
+" TODO Src Block allows fold marks
 
 " Quit when a (custom) syntax file was already loaded {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -14,6 +16,80 @@ endif
 "=====================================================================
 " Syntax {{{1
 """"""""""""""""""""""""""""""""""""""""
+" Coloured highlighting without background {{{2
+""""""""""""""""""""
+syn region dqnRed     matchgroup=dqnMark start=+\[/+ end=+]/+ skip=+\~]+
+  \ concealends contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
+syn region dqnOrange  matchgroup=dqnMark start=+\[-+ end=+]-+ skip=+\~]+
+  \ concealends contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
+syn region dqnYellow  matchgroup=dqnMark start=+\[\[+ end=+]]+ skip=+\~]+
+  \ concealends contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
+syn region dqnGreen   matchgroup=dqnMark start=+\[{+ end=+]}+ skip=+\~]+
+  \ concealends contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
+syn region dqnCyan    matchgroup=dqnMark start=+\["+ end=+]"+ skip=+\~]+
+  \ concealends contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
+syn region dqnBlue    matchgroup=dqnMark start=+\['+ end=+]'+ skip=+\~]+
+  \ concealends contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
+syn region dqnPurple  matchgroup=dqnMark start=+\[=+ end=+]=+ skip=+\~]+
+  \ concealends contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
+syn region dqnMagenta matchgroup=dqnMark start=+\[;+ end=+];+ skip=+\~]+
+  \ concealends contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
+syn region dqnShade   matchgroup=dqnMark start=+\[,+ end=+],+ skip=+\~]+
+  \ concealends contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
+syn region dqnFrgrd   matchgroup=dqnMark start=+\[`+ end=+]`+ skip=+\~]+
+  \ concealends contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
+syn region dqnBkgrd   matchgroup=dqnMark start=+\[_+ end=+]_+ skip=+\~]+
+  \ concealends contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
+
+syn cluster dqnColor add=dqnRed,dqnOrange,dqnYellow,dqnGreen,dqnCyan,dqnBlue
+  \,dqnPurple,dqnMagenta,dqnShade,dqnFrgrd,dqnBkgrd
+
+" Coloured highlighting with gray background {{{2
+""""""""""""""""""""
+syn region dqnBgRed     matchgroup=dqnMark start=+{/+ end=+}/+ skip=+\~}+
+  \ concealends contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
+syn region dqnBgOrange  matchgroup=dqnMark start=+{-+ end=+}-+ skip=+\~}+
+  \ concealends contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
+syn region dqnBgYellow  matchgroup=dqnMark start=+{\[+ end=+}]+ skip=+\~}+
+  \ concealends contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
+syn region dqnBgGreen   matchgroup=dqnMark start=+{{+ end=+}}+ skip=+\~}+
+  \ concealends contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
+syn region dqnBgCyan    matchgroup=dqnMark start=+{"+ end=+}"+ skip=+\~}+
+  \ concealends contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
+syn region dqnBgBlue    matchgroup=dqnMark start=+{'+ end=+}'+ skip=+\~}+
+  \ concealends contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
+syn region dqnBgPurple  matchgroup=dqnMark start=+{=+ end=+}=+ skip=+\~}+
+  \ concealends contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
+syn region dqnBgMagenta matchgroup=dqnMark start=+{;+ end=+};+ skip=+\~}+
+  \ concealends contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
+syn region dqnBgShade   matchgroup=dqnMark start=+{,+ end=+},+ skip=+\~}+
+  \ concealends contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
+syn region dqnBgFrgrd   matchgroup=dqnMark start=+{`+ end=+}`+ skip=+\~}+
+  \ concealends contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
+syn region dqnBgBkgrd   matchgroup=dqnMark start=+{_+ end=+}_+ skip=+\~}+
+  \ concealends contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
+
+syn cluster dqnBgColor add=dqnBgRed,dqnBgOrange,dqnBgYellow,dqnBgGreen
+  \,dqnBgCyan,dqnBgBlue,dqnBgPurple,dqnBgMagenta,dqnBgShade,dqnBgFrgrd
+  \,dqnBgBkgrd
+
+" Conceal Paragraph {{{2
+""""""""""""""""""""
+syn region dqnConceal matchgroup=dqnMark start=+\[\.+ end=+]\.+ skip=+\~]+
+  \ concealends conceal cchar=▒ contains=@Spell,dqnBreak
+
+" code highlighting {{{2
+""""""""""""""""""""
+syn match dqnEsc     +`.+he=e-1 conceal contained containedin=dqnCodeEsc
+syn match dqnCodeEsc +`.+ contained display
+syn match dqnCodeSym +\.\.\.\|[]{|}[]+ contained display
+syn region dqnCodeAlt matchgroup=dqnMark start=+:+ end=+:+ skip=+\~:+
+  \ concealends contained contains=@NoSpell,dqnCodeSym,dqnCodeEsc
+syn region dqnCodeNrm matchgroup=dqnMark start=+\[\\+ end=+]\\+ skip=+\~]+
+  \ concealends contains=@NoSpell,dqnCodeAlt keepend
+
+syn cluster dqnCode add=dqnCodeNrm,dqnCodeAlt,dqnCodeSym
+
 " Titles {{{2
 """"""""""""""""""""
 syn match dqnTitle1 /^\[\~{ .\+ }\~]\ze\%( \={\{3}1\)\=$/ contains=dqnTitle1Text
@@ -31,65 +107,6 @@ syn match dqnSubtitle /^\%(\t\| \{4}\)* \{3}\zs|.\+|\ze\%( \={\{3}\d\=\)\=$/
 syn match dqnSubtitleText /|\zs.\+\ze|/ contained contains=@Spell
 syn cluster dqnTitle add=dqnTitle1,dqnTitle2,dqnTitle3,dqnSubtitle
 
-" Coloured highlighting without background {{{2
-""""""""""""""""""""
-syn region dqnYellow  matchgroup=dqnMark start=+\[\[+ end=+]]+ concealends
-      \ contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor,dqnNomatch
-syn region dqnGreen   matchgroup=dqnMark start=+\[{+ end=+]}+ concealends
-      \ contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor,dqnNomatch
-syn region dqnBlue    matchgroup=dqnMark start=+\['+ end=+]'+ concealends
-      \ contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor,dqnNomatch
-syn region dqnOrange  matchgroup=dqnMark start=+\[-+ end=+]-+ concealends
-      \ contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor,dqnNomatch
-syn region dqnPurple  matchgroup=dqnMark start=+\[=+ end=+]=+ concealends
-      \ contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor,dqnNomatch
-syn region dqnCyan    matchgroup=dqnMark start=+\["+ end=+]"+ concealends
-      \ contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor,dqnNomatch
-syn region dqnMagenta matchgroup=dqnMark start=+\[;+ end=+];+ concealends
-      \ contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor,dqnNomatch
-syn region dqnRed     matchgroup=dqnMark start=+\[/+ end=+]/+ concealends
-      \ contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor,dqnNomatch
-syn region dqnGray    matchgroup=dqnMark start=+\[,+ end=+],+ concealends
-      \ contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor,dqnNomatch
-syn region dqnBkgrd   matchgroup=dqnMark start=+\[_+ end=+]_+ concealends
-      \ contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor,dqnNomatch
-syn cluster dqnColor add=dqnYellow,dqnGreen,dqnBlue,dqnOrange,dqnPurple
-      \,dqnCyan,dqnMagenta,dqnRed,dqnGray,dqnBkgrd
-
-" Coloured highlighting with gray background {{{2
-""""""""""""""""""""
-syn region dqnBgYellow  matchgroup=dqnMark start=+`\[+ end=+`]+ concealends
-      \ contains=@NoSpell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
-syn region dqnBgGreen   matchgroup=dqnMark start=+`{+  end=+`}+ concealends
-      \ contains=@NoSpell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
-syn region dqnBgBlue    matchgroup=dqnMark start=+`'+  end=+`'+ concealends
-      \ contains=@NoSpell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
-syn region dqnBgOrange  matchgroup=dqnMark start=+`-+  end=+`-+ concealends
-      \ contains=@NoSpell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
-syn region dqnBgPurple  matchgroup=dqnMark start=+`=+  end=+`=+ concealends
-      \ contains=@NoSpell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
-syn region dqnBgCyan    matchgroup=dqnMark start=+`"+  end=+`"+ concealends
-      \ contains=@NoSpell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
-syn region dqnBgMagenta matchgroup=dqnMark start=+`;+  end=+`;+ concealends
-      \ contains=@NoSpell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
-syn region dqnBgRed     matchgroup=dqnMark start=+`/+  end=+`/+ concealends
-      \ contains=@NoSpell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
-syn region dqnBgGray    matchgroup=dqnMark start=+`,+  end=+`,+ concealends
-      \ contains=@NoSpell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
-syn region dqnBgBkgrd   matchgroup=dqnMark start=+`_+  end=+`_+ concealends
-      \ contains=@NoSpell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
-syn region dqnBgFrgrd   matchgroup=dqnMark start=+`\\+ end=+`\\+ concealends
-      \ contains=@NoSpell,dqnBgBreak,@dqnColor,@dqnBgColor,dqnNomatch
-syn cluster dqnBgColor add=dqnBgYellow,dqnBgGreen,dqnBgBlue,dqnBgOrange
-      \,dqnBgPurple,dqnBgCyan,dqnBgMagenta,dqnBgRed,dqnBgGray,dqnBgBkgrd
-      \,dqnBgFrgrd
-
-syn region dqnCode     matchgroup=dqnMark start=+\[\\+ end=+]\\+ concealends
-      \ contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor,dqnNomatch
-syn region dqnCodeType matchgroup=dqnMark start=+\[|+ end=+]|+   concealends
-      \ contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor,dqnNomatch
-syn cluster dqnBgColor add=dqnCode,dqnCodeType
-
 " Keywords {{{2
 """"""""""""""""""""
 syn keyword dqnKeyword DUNNO NOTE WARN TODO XXX FIXME
@@ -100,9 +117,10 @@ syn match   dqnKeyword +/?/+ display
 
 " Others {{{2
 """"""""""""""""""""
-syn match dqnComment +///.*$+ keepend display contains=@Spell
-syn match dqnFoldMark /{\{3}[0-9]\{0,1}/ display
-syn match dqnFoldMark /}\{3}[0-9]\{0,1}/ display
+syn match dqnComment  +///.*$+ keepend display contains=@Spell
+syn match dqnFoldMark /{\{3}\d\=/
+syn match dqnFoldMark /}\{3}\d\=/
+
 
 " Concealed {{{2
 """"""""""""""""""""
@@ -110,21 +128,22 @@ syn match dqnFoldMark /}\{3}[0-9]\{0,1}/ display
 syn match dqnBreak /░\ze$/ conceal display
 " A mark used to prevent dqn2html() recognizing the line as a list:
 syn match dqnBreak /^\s*\zs░/ conceal display
-syn region dqnConceal matchgroup=dqnMark start=+\[\.+ end=+]\.+ concealends
-      \ conceal cchar=▒ contains=@Spell,dqnBreak
-" Used to prevent matching dqn syntax:
-syn match dqnNomatch +[`[]\~*\zs\~\ze[[{'-=";/,_\\|.]+ conceal display
-      \ containedin=@dqnColor,@dqnBgColor,dqnMark
-syn match dqnNomatch +[]`]\~*\zs\~\ze[]}'-=";/,_\\|.]+ conceal display
-      \ containedin=@dqnColor,@dqnBgColor,dqnMark
 
 " Include syntax for other filetype {{{2
 """"""""""""""""""""
 " Python {{{3
 """"""""""
 syn include @dqnPython syntax/python.vim
-syn region  dqnPython matchgroup=dqnMark start=/#beginPython#$/ end=/#endPython#$/
+syn region  dqnPython matchgroup=dqnMark start=/#beginPython#\( {\{3}\d\=\)\=/ end=/#endPython#\( }\{3}\d\=\)\=/
       \ contains=@dqnPython
+
+" Escape character (highest priority) {{{2
+""""""""""""""""""""
+syn match dqnEscChar +\~.+he=e-1 conceal contained contains=@NoSpell display
+syn match dqnEsc     +\~[|.:`]+ transparent contains=dqnEscChar
+  \ contained containedin=@dqnCode
+syn match dqnEsc     +\~[]{~}[]+ transparent contains=dqnEscChar
+  \ containedin=@dqnColor,@dqnBgColor,@dqnCode display
 
 " Setting colors according to colorscheme {{{1
 """"""""""""""""""""""""""""""""""""""""
@@ -142,11 +161,11 @@ let s:g_Cyan    = '#2aa198'
 let s:g_Magenta = '#d33682'
 let s:g_Red     = '#dc322f'
   if &background ==# 'dark'
-let s:g_Gray  = '#073642'
+let s:g_Shade = '#073642'
 let s:g_Bkgrd = '#002b36'
 let s:g_Frgrd = '#eee8d5'
   else
-let s:g_Gray  = '#eee8d5'
+let s:g_Shade = '#eee8d5'
 let s:g_Bkgrd = '#fdf6e3'
 let s:g_Frgrd = '#073642'
   endif
@@ -160,11 +179,11 @@ let s:t_Cyan    = '6'
 let s:t_Magenta = '5'
 let s:t_Red     = '1'
   if g:colors_name ==# 'solarized' && &background ==# 'dark'
-exe 'let s:t_Gray  = ' .($TERM==#'linux' ? 0 : 236)
+exe 'let s:t_Shade = ' .($TERM==#'linux' ? 0 : 236)
 let s:t_Bkgrd = '8'
 let s:t_Frgrd = '7'
   else
-exe 'let s:t_Gray  = ' .($TERM==#'linux' ? 7 : 253)
+exe 'let s:t_Shade = ' .($TERM==#'linux' ? 7 : 253)
 let s:t_Bkgrd = '15'
 let s:t_Frgrd = '0'
   endif
@@ -182,11 +201,11 @@ let s:g_Cyan    = '#2aa198'
 let s:g_Magenta = '#d33682'
 let s:g_Red     = '#dc322f'
   if &background ==# 'dark'
-let s:g_Gray  = '#657b83'
+let s:g_Shade = '#657b83'
 let s:g_Bkgrd = '#002b36'
 let s:g_Frgrd = '#fdf6e3'
   else
-let s:g_Gray  = '#93a1a1'
+let s:g_Shade = '#93a1a1'
 let s:g_Bkgrd = '#fdf6e3'
 let s:g_Frgrd = '#002b36'
   endif
@@ -201,11 +220,11 @@ let s:t_Cyan    = 'darkcyan'
 let s:t_Magenta = 'darkmagenta'
 let s:t_Red     = 'darkred'
     if &background ==# 'dark'
-let s:t_Gray  = 'lightgreen'
+let s:t_Shade = 'lightgreen'
 let s:t_Bkgrd = 'darkgray'
 let s:t_Frgrd = 'white'
     else
-let s:t_Gray  = 'lightcyan'
+let s:t_Shade = 'lightcyan'
 let s:t_Bkgrd = 'white'
 let s:t_Frgrd = 'darkgray'
     endif
@@ -220,11 +239,11 @@ let s:t_Cyan    = '37'
 let s:t_Magenta = '125'
 let s:t_Red     = '160'
     if &background ==# 'dark'
-let s:t_Gray  = '240'
+let s:t_Shade = '240'
 let s:t_Bkgrd = '234'
 let s:t_Frgrd = '230'
     else
-let s:t_Gray  = '245'
+let s:t_Shade = '245'
 let s:t_Bkgrd = '230'
 let s:t_Frgrd = '234'
     endif
@@ -243,11 +262,11 @@ let s:g_Cyan    = 'cyan'
 let s:g_Magenta = 'magenta'
 let s:g_Red     = 'darkred'
   if &background ==# 'dark'
-let s:g_Gray  = 'darkgray'
+let s:g_Shade = 'darkgray'
 let s:g_Bkgrd = 'black'
 let s:g_Frgrd = 'white'
   else
-let s:g_Gray  = 'lightgray'
+let s:g_Shade = 'lightgray'
 let s:g_Bkgrd = 'white'
 let s:g_Frgrd = 'black'
   endif
@@ -261,11 +280,11 @@ let s:t_Cyan    = 'cyan'
 let s:t_Magenta = 'magenta'
 let s:t_Red     = 'darkred'
   if &background ==# 'dark'
-let s:t_Gray  = 'darkgray'
+let s:t_Shade = 'darkgray'
 let s:t_Bkgrd = 'black'
 let s:t_Frgrd = 'white'
   else
-let s:t_Gray  = 'lightgray'
+let s:t_Shade = 'lightgray'
 let s:t_Bkgrd = 'white'
 let s:t_Frgrd = 'black'
   endif
@@ -301,7 +320,7 @@ exe 'hi def dqnSubtitle guifg=' .s:g_Blue
 " Coloured highlighting without background {{{2
 """"""""""
 let s:list = ['Yellow', 'Green', 'Blue', 'Orange', 'Purple', 'Cyan',
-      \ 'Magenta', 'Red', 'Gray', 'Bkgrd']
+      \ 'Magenta', 'Red', 'Shade', 'Bkgrd']
 for i in s:list
   exe 'hi def dqn' .i .' guifg=' .eval('s:g_'.i) .' ctermfg=' .eval('s:t_'.i)
 endfor
@@ -309,20 +328,25 @@ endfor
 "" Coloured highlighting with gray background {{{2
 """""""""""
 let s:list = ['Yellow', 'Green', 'Blue', 'Orange', 'Purple', 'Cyan',
-      \ 'Magenta', 'Red', 'Gray', 'Bkgrd', 'Frgrd']
+      \ 'Magenta', 'Red', 'Shade', 'Bkgrd', 'Frgrd']
 for i in s:list
   exe 'hi def dqnBg' .i .' guifg=' .eval('s:g_'.i) .' ctermfg='
-        \ .eval('s:t_'.i) . ' guibg=' .s:g_Gray .' ctermbg=' .s:t_Gray
+        \ .eval('s:t_'.i) . ' guibg=' .s:g_Shade .' ctermbg=' .s:t_Shade
 endfor
 
+
+"" Code highlighting {{{2
+"""""""""""
 "  if g:colors_name ==# 'solarized' && &bg ==# 'dark'
 "hi def dqnCode guifg=#93a1a1 ctermfg=15 guibg=#657b83 ctermbg=10
 "  elseif g:colors_name ==# 'solarized'
 "hi def dqnCode guifg=#657b83 ctermfg=10 guibg=#93a1a1 ctermbg=7
 "  else
-hi def link dqnCode     dqnBgFrgrd
+hi def link dqnCodeNrm dqnBgFrgrd
   "endif
-hi def link dqnCodeType dqnBgRed
+hi def link dqnCodeAlt dqnBgGreen
+hi def link dqnCodeSym dqnBgOrange
+hi def link dqnCodeEsc dqnCodeNrm
 
 "" Keywords and others {{{2
 """""""""""
@@ -331,13 +355,15 @@ hi def link dqnMark     Comment
 hi def link dqnFoldMark dqnBkgrd
 hi def link dqnComment  Comment
 hi def link dqnNomatch  dqnBgFrgrd
+hi def link dqnCodeMark dqnBgOrange
+hi def link dqnEscChar  Comment
 
 " Syntax Syncing {{{1
 """"""""""""""""""""""""""""""""""""""""
-syn sync match dqnIncludeSync  grouphere NONE      /#endPython#$/
-syn sync match dqnIncludeSync  grouphere dqnPython /#beginPython#$/
-syn sync match dqnSubtitleSync grouphere NONE      /^\%(\t\| \{4}\)* \{3}|.\+|$/
-syn sync match dqnFoldMarkSync grouphere NONE      /{\{3}[0-9]/
+syn sync match dqnIncludeSync  groupthere NONE      /#endPython#$/
+syn sync match dqnIncludeSync  groupthere dqnPython /#beginPython#$/
+syn sync match dqnSubtitleSync groupthere NONE      /^\%(\t\| \{4}\)* \{3}|.\+|$/
+syn sync match dqnFoldMarkSync groupthere NONE      /{\{3}\d\=$/
 syn sync minlines=1
 " }}}1
 "=====================================================================
@@ -371,3 +397,4 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let b:current_syntax = "dqn"
 " vim: sts=2 sw=2 fdm=marker
+

@@ -1,0 +1,124 @@
+[~{ Highlighting }~] {{{1
+ == Without Background == {{{2
+  > Normal: Colourful < {{{3
+   |color|
+    [/red]/
+    [-orange]-
+    [[yellow]]
+    [{green]}
+    ["cyan]"
+    ['blue]'
+    [=purple]=
+    [;magenta];
+
+   |B&W|
+    [,shade],
+    [`foreground]`
+    [_bkground]_
+
+  > Colourless with dqnMark visible at Both Ends < {{{3
+   |color|
+    ~[/red]/
+    ~[-orange]-
+    ~[[yellow]]
+    ~[{green]}
+    ~["cyan]"
+    ~['blue]'
+    ~[=purple]=
+    ~[;magenta];
+
+   |B&W|
+    ~[,shade],
+    ~[`foreground]`
+    ~[_bkground]_
+
+  > Colourful with dqnMark visible < {{{3
+   |color|
+    [/red~]/]/
+    [-orange~]-]-
+    [[yellow~]~]]]
+    [{green~]}]}
+    ["cyan~]"]"
+    ['blue~]']'
+    [=purple~]=]=
+    [;magenta~];];
+
+   |B&W|
+    [,shade~],],
+    [`foreground~]`]`
+    [_bkground~]_]_
+
+ == With Background == {{{2
+  > Normal: Colourful < {{{3
+   |color|
+    {/red}/
+    {-orange}-
+    {[yellow}]
+    {{green}}
+    {"cyan}"
+    {'blue}'
+    {=purple}=
+    {;magenta};
+
+   |B&W|
+    {,shade},
+    {`foreground}`
+    {_bkground}_
+
+  > Colourless with dqnMark Visible at Both Ends < {{{3
+   |color|
+    ~{/red}/
+    ~{-orange}-
+    ~{[yellow}]
+    ~{{green}}
+    ~{"cyan}"
+    ~{'blue}'
+    ~{=purple}=
+    ~{;magenta};
+
+   |B&W|
+    ~{,shade},
+    ~{`foreground}`
+    ~{_bkground}_
+
+  > Colourful with dqnMark Visible < {{{3
+   |color|
+    {/red~}/}/
+    {-orange~}-}-
+    {[yellow~}~]}]
+    {{green~}~}}}
+    {"cyan~}"}"
+    {'blue~}'}'
+    {=purple~}=}=
+    {;magenta~};};
+
+   |B&W|
+    {,shade~},},
+    {`foreground~}`}`
+    {_bkground~}_}_
+
+ == Mixed Colour == {{{2
+    This is [[a]] {{sample[/ L]/ine}}.
+
+ == Code == {{{2
+  > DQN Code Format < {{{3
+   |literal|
+    [\cd /tmp/]\
+    [\touch /tmp/file{1..10}]\
+
+   |non-literal input|
+    [\cd :{path|link}:]\
+    [\sort -k:{start-field}[`,{end-field}]:]\
+
+  > Sourcing Other Language Format < {{{3
+    #beginPython#
+    def my_func():
+        if True:
+            print('hello, world!')
+        else:
+            print('woof!')
+
+    my_func()
+    #endPython#
+
+ vi:ft=dqn2 fdm=marker
