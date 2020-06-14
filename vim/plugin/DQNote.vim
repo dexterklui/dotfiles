@@ -50,6 +50,10 @@ function DQNUpdate() abort
     return
   endif
 
+  " Open all folds, otherwise, normal commands like n don't function properly
+  let l:foldenable = &fen
+  set nofoldenable
+
   " first creat an empty quick fix list for later vimgrepadd cmd
   call setqflist([])
 
@@ -67,13 +71,16 @@ function DQNUpdate() abort
     call dqnupdate#v1_35()
   endif
 
+  " reset foldenable option
+  let &fen = l:foldenable
+
   " Save changes
   update
   echom 'This DQNote has been updated to v1.35!'
 
   " Open quickfix list if there is any item got by vimgrepadd cmd
   if getqflist() != []
-    clist
+    copen
     echoe 'Here are some areas where you may want to make manual update.'
   endif
 endfunction

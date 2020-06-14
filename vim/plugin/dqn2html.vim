@@ -5,6 +5,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TODO Python block
 " TODO Picture link
+" TODO In dqnCodeNrm, opened dqnCodeAlt ended by dqnCodeNrm (single colon)
 
 " vimscript thingy {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -367,6 +368,8 @@ func s:PostDelete()
   %sub+[]`]\~*\zs\~\ze[]}'"-=";/,_\\|.]++ge
   %sub+\[\~*\zs\~\ze\(\[\|<font color\)++ge
   %sub+]\~*\zs\~\ze\(]\|</font>\)++ge
+
+  %g/\[[\\|]/sub+[{}]\zs\~++ge
 endfunc " }}}
 
 func s:Replace()
@@ -442,7 +445,10 @@ func Dqn2html() range abort
   call s:Html()
   call s:HtmlSkeleton()
   update
-  let @# = l:altbuf
+  try
+    let @# = l:altbuf
+  catch /^Vim\%((\a\+)\)\=:E86/
+  endtry
 endfunc " }}}
 
 func Opendqnhtml()
