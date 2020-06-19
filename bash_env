@@ -1,15 +1,15 @@
-dd="/media/dexq/mSD-xStorage-NTFS"
-if [[ $(hostname) == 'dq-x1c' && ! -n $TERM_PROGRAM ]]; then {
-   export TERM_PROGRAM=gnome-terminal
-}; fi
-
-if [[ $(hostname) == 'dq-x1c' ]]; then {
-    export EDITOR='nvim'
-    export VISUAL='nvim'
-}; fi
-
 export HOST_NAME=$(cat /etc/hostname)
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share
+
+if [[ $HOST_NAME == 'dq-x1c' && ! -n $TERM_PROGRAM ]]; then
+   export TERM_PROGRAM=gnome-terminal
+; fi
+
+if [[ $HOST_NAME == 'dq-x1c' || $HOST_NAME == 'dqarch' ]]; then
+    export EDITOR='nvim'
+    export VISUAL='nvim'
+    export DIFFPROG="nvim -d"
+; fi
 
 # vi:ft=sh

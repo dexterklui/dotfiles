@@ -17,7 +17,11 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ** setup vim-plug ** {{{2
 """"""""""""""""""""""""""""""""""""""""
-call plug#begin('~/.vim/bundle')
+if $HOST_NAME == 'dqarch'
+  call plug#begin('~/.config/nvim/plug')
+else
+  call plug#begin('~/.vim/bundle')
+endif
 " General
 Plug 'Valloric/YouCompleteMe'
 Plug 'altercation/vim-colors-solarized'
@@ -114,9 +118,9 @@ augroup END
 
 runtime! ftplugin/man.vim " Make vim able to read man pages within Vim.
 
-" Source digraphs
-source ~/.vim/DQScripts/digraphs/symbols.vim
-source ~/.vim/DQScripts/digraphs/super_sub_scripts.vim
+" TODO Source digraphs
+"source ~/.vim/DQScripts/digraphs/symbols.vim
+"source ~/.vim/DQScripts/digraphs/super_sub_scripts.vim
 
 " *** settings *** {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -167,8 +171,8 @@ if $TERM !=# 'linux'
   set lcs=tab:‹\ ›,trail:·,eol:¬,nbsp:_ " adjust the text printed by :list
   set list            " Show "invisible chars on screen like using :list
 else
-  set showbreak=>
-  set listchars=eol:$,tab:>\ ,nbsp:+ " adjust the text printed by :list
+  set showbreak=▶
+  set lcs=tab:<\ >,trail:·,eol:¬,nbsp:_ " adjust the text printed by :list
 endif
 autocmd vimrcEx FileType * set breakindent breakindentopt=min:32,shift:-1
 
@@ -225,8 +229,12 @@ exe 'nnoremap <silent> <Leader>B'
 """"""""""""""""""""
 " General {{{4
 """"""""""
-let g:airline_theme='dqsolarized'
-if $HOST_NAME ==# 'dq-x1c' && $TERM_PROGRAM ==# 'gnome-terminal'
+if g:colors_name ==# 'solarized'
+  let g:airline_theme='dqsolarized'
+else
+  let g:airline_theme='dark'
+endif
+if ($HOST_NAME ==# 'dqarch' && $TERM_PROGRAM ==# 'alacritty') || ($HOST_NAME ==# 'dq-x1c' && $TERM_PROGRAM ==# 'gnome-terminal')
   let g:airline_powerline_fonts = 1
 endif
 let g:airline_mode_map = {
@@ -256,6 +264,8 @@ let g:airline_mode_map = {
 func s:AirlineTheme()
   if g:colors_name ==# 'solarized' && exists(':AirlineTheme')
     AirlineTheme dqsolarized
+  elseif exists(':AirlineTheme')
+    AirlineTheme dark
   endif
 endfunc
 autocmd vimrcEx ColorScheme * call s:AirlineTheme()

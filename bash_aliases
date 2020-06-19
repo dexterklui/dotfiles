@@ -15,12 +15,21 @@ if [[ $HOST_NAME == "dq-x1c" ]]; then
     alias Tor='cd ~/Tor/tor-browser_en-US/ && ./start-tor-browser.desktop && cd -'
     alias ATLauncher='java64 ~/Launch/ATLauncher3.3.4.2/ATLauncher.jar &'
 
+    alias VB='VBoxManage'
+fi
+
+
+if [[ $HOST_NAME == 'dqarch' || $HOST_NAME == 'dq-x1c' ]]; then
+    # allows alias expansion after sudo
+    alias sudo='sudo '
     # Save a lot of typing for common commands
     alias v='nvim'
     alias vr='nvim -R' # Neovim read-only mode
     alias vdiff='nvim -d'
-    alias VB='VBoxManage'
-};
+    alias g='git'
+    alias ll='ls -lh'
+    alias la='ls -lAh'
+    alias l='ls -CF'
 fi
 
 # enable color support of ls and also add handy aliases
@@ -37,9 +46,4 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-alias g='git'
-alias ll='ls -lh'
-alias la='ls -lAh'
-alias l='ls -CF'
-
-# vi: ft=sh
+# vi: ft=sh et sw=4
