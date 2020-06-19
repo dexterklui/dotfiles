@@ -1,4 +1,4 @@
-if [[ "$(hostname)" == "dq-x1c" || "$(hostname)" == "DQ-x1c" ]]; then {
+if [[ $HOST_NAME == "dq-x1c" ]]; then
     # shortcuts for directories
     alias hku='cd /media/dexq/mSD-xStorage-NTFS/HKU'
     alias ntfs='cd /media/dexq/mSD-xStorage-NTFS'
