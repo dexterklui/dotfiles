@@ -81,6 +81,12 @@ esac
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+# Environment Variables
+
+if [ -f ~/.bash_env ]; then
+    . ~/.bash_env
+fi
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
@@ -103,9 +109,6 @@ fi
 
 ### Customization ###
 
-if [ -f ~/.bash_env ]; then
-    . ~/.bash_env
-fi
 # added by Anaconda3 5.3.0 installer
 # >>> conda init >>>
 # !! Contents within this block are managed by 'conda init' !!
