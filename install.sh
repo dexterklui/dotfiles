@@ -1,14 +1,19 @@
 #!/usr/bin/env bash
 ##############################################################################
 BASEDIR=$(dirname $0)
-cd $BASEDIR || exit
+cd $BASEDIR || exit 1
+HOST_NAME=$(cat /etc/hostname)
+[ -z "$HOST_NAME" ] && exit 1
+[ -z "$HOME" ] && exit 1
+TMP_DOT_SCRIPT=/tmp/$(whoami)_dot_install.sh
+touch $TMP_DOT_SCRIPT || exit 1
 
 # bash {{{1
 ##############################################################################
 # Visual select and use 'Tabularize /\%(Installed\)\@<! \zs\ze\~\|&&'
-ln -s ${PWD}/bashrc        ~/.bashrc       && echo 'Installed ~/.bashrc'
-ln -s ${PWD}/bash_aliases  ~/.bash_aliases && echo 'Installed ~/.bash_aliases'
-ln -s ${PWD}/bash_env      ~/.bash_env     && echo 'Installed ~/.bash_env'
+ln -sv ${PWD}/bashrc        ~/.bashrc
+ln -sv ${PWD}/bash_aliases  ~/.bash_aliases
+ln -sv ${PWD}/bash_env      ~/.bash_env
 
 # zsh {{{1
 ##############################################################################
@@ -22,55 +27,55 @@ fi
 
 # Vim {{{1
 ##############################################################################
+if [[ $HOST_NAME == 'dq-x1c' ]]; then
+    DSTDIR="$HOME/.vim"
+elif [[ $HOST_NAME == 'dqarch' ]]; then
+    DSTDIR="$HOME/.config/nvim"
+    [ $XDG_CONFIG_HOME ] && DSTDIR=$XDG_CONFIG_HOME/nvim
+else
+    DSTDIR="$HOME/.config/nvim"
+    [ $XDG_CONFIG_HOME ] && DSTDIR=$XDG_CONFIG_HOME/nvim
+fi
+
 # .vimrc {{{2
 ########################################
-ln -s ${PWD}/vimrc ~/.vimrc && echo 'Installed ~/.vimrc'
+if [[ $HOST_NAME == 'dq-x1c' ]]; then
+    ln -sv ${PWD}/vimrc $HOME/.vimrc
+else
+    ln -sv ${PWD}/vimrc $DSTDIR/init.vim
+fi
 
-# .vim/autoload {{{2
+# other config files {{{2
 ########################################
-cp -iu ${PWD}/vim/autoload/dqnupdate.vim ~/.vim/autoload/dqnupdate.vim
-
-# .vim/syntax {{{2
-########################################
-cp -iu ${PWD}/vim/syntax/git.vim ~/.vim/syntax/git.vim
-cp -iu ${PWD}/vim/syntax/dqn.vim ~/.vim/syntax/dqn.vim
-cp -iu ${PWD}/vim/syntax/dqn0.vim ~/.vim/syntax/dqn0.vim
-
-# .vim/plugin {{{2
-########################################
-cp -iu ${PWD}/vim/plugin/DQColorscheme.vim    ~/.vim/plugin/DQColorscheme.vim
-cp -iu ${PWD}/vim/plugin/DQFold.vim           ~/.vim/plugin/DQFold.vim
-cp -iu ${PWD}/vim/plugin/DQNote.vim           ~/.vim/plugin/DQNote.vim
-cp -iu ${PWD}/vim/plugin/DQNYank.vim          ~/.vim/plugin/DQNYank.vim
-cp -iu ${PWD}/vim/plugin/DQToggleConceal.vim  ~/.vim/plugin/DQToggleConceal.vim
-cp -iu ${PWD}/vim/plugin/DQTreeDiagram.vim    ~/.vim/plugin/DQTreeDiagram.vim
-cp -iu ${PWD}/vim/plugin/DQVim.vim            ~/.vim/plugin/DQVim.vim
-cp -iu ${PWD}/vim/plugin/dqn2html.vim         ~/.vim/plugin/dqn2html.vim
-
-# .vim/ftplugin {{{2
-########################################
-cp -iu ${PWD}/vim/ftplugin/dqn.vim ~/.vim/ftplugin/dqn.vim
-
-# .vim/after/ftplugin {{{2
-########################################
-cp -iu ${PWD}/vim/after/ftplugin/* ~/.vim/after/ftplugin/
+# Create necessary dirs
+find vim -type f -name '*.vim' | sed 's|/[^/]*$||' | sort | uniq | sed -E "s|^vim/(.*)$|$DSTDIR/\1|" | xargs mkdir -p
+# Make a script to make symbolic link for each vim scripts
+find vim -type f -name '*.vim' | sed -E "s|^(.*)$|\1 \1|" | sed -E "s|^([^ ]*) vim/(.*)$|ln -sv $(pwd)/\1 $DSTDIR/\2|" > $TMP_DOT_SCRIPT
+sh $TMP_DOT_SCRIPT
 
 # tmux {{{1
 ##############################################################################
-ln -s ${PWD}/tmux.conf ~/.tmux.conf && echo 'Installed ~/.tmux.conf'
+ln -sv ${PWD}/tmux.conf ~/.tmux.conf
 
 # Git {{{1
 ##############################################################################
-ln -s ${PWD}/gitconfig ~/.gitconfig && echo 'Installed ~/.gitconfig'
-ln -s ${PWD}/gitignore ~/.gitignore && echo 'Installed ~/.gitignore'
+ln -sv ${PWD}/gitconfig ~/.gitconfig
+ln -sv ${PWD}/gitignore ~/.gitignore
 
 # tridactylrc {{{1
 ##############################################################################
-ln -s ${PWD}/tridactylrc ~/.config/tridactyl/tridactylrc && echo 'Installed ~/.config/tridactyl/tridactylrc'
+ln -sv ${PWD}/tridactylrc ~/.config/tridactyl/tridactylrc
 #}}}1
 # alacritty {{{1
 ##############################################################################
-ln -s ${PWD}/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml && echo 'Installed ~/.config/alacritty/alacritty.yml'
+ln -sv ${PWD}/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
+#}}}1
+# others {{{1
+##############################################################################
+DSTDIR=$HOME/.config
+[ -n $XDG_CONFIG_HOME ] && DSTDIR=$XDG_CONFIG_HOME
+ln -sv ${PWD}/dircolors $DSTDIR/dircolors
 #}}}1
 ##############################################################################
-# vi: fdm=marker
+rm $TMP_DOT_SCRIPT
+# vi: fdm=marker sw=4 et
