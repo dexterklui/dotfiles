@@ -30,4 +30,6 @@ bind --mode=ex <C-b> text.backward_char
 "set editorcmd gnome-terminal -e "vim %f -f '+normal!%lGzv%c|'"
 "set editorcmd /home/dexq/bin/nvim %f '+normal!%lGzv%c|'
 
+set newtab about:blank
+
 " vim:ft=vim
