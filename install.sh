@@ -18,6 +18,12 @@ ln -sv ${PWD}/bashrc        ~/.bashrc
 ln -sv ${PWD}/bash_aliases  ~/.bash_aliases
 ln -sv ${PWD}/bash_env      ~/.bash_env
 
+# okular {{{1
+##############################################################################
+mkdir $XDG_DATA_HOME/okular/shortcuts
+ln -sv ${PWD}/okular/config/* $XDG_CONFIG_HOME/
+ln -sv ${PWD}/okular/local/share/okular/shortcuts/* $XDG_DATA_HOME/okular/shortcuts/
+
 # zsh {{{1
 ##############################################################################
 if [[ -e $ZSH ]]; then

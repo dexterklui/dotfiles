@@ -1,0 +1,19 @@
+[General]
+ShellOpenFileInTabs=true
+
+[Main View]
+ShowBottomBar=false
+ShowLeftPanel=false
+SplitterSizes=600,1224
+
+[Nav Panel]
+GroupByAuthor=false
+
+[PageView]
+ScrollOverlap=50
+
+[Reviews]
+AnnotationTools=<tool name="Topic Highlight" id="1" type="straight-line"><engine points="2" color="#e49ddc" type="PolyLine"><annotation width="5" color="#e49ddc" type="Line" opacity="0.3"/></engine><shortcut>1</shortcut></tool>,<tool name="Comments" id="2" type="note-inline"><engine hoverIcon="tool-note-inline" color="#e49ddc" type="PickPoint" block="true"><annotation font="Ubuntu\\,5\\,-1\\,5\\,50\\,0\\,0\\,0\\,0\\,0" width="1" color="#e49ddc" type="FreeText" opacity="0.6"/></engine><shortcut>2</shortcut></tool>,<tool name="Outline" id="3" type="note-inline"><engine hoverIcon="tool-note-inline" color="#fcaf3e" type="PickPoint" block="true"><annotation font="Ubuntu\\,5\\,-1\\,5\\,50\\,0\\,0\\,0\\,0\\,0" width="1" color="#fcaf3e" type="FreeText" opacity="0.6"/></engine><shortcut>3</shortcut></tool>,<tool name="Cited People" id="4" type="straight-line"><engine points="2" color="#73d216" type="PolyLine"><annotation width="8" color="#73d216" type="Line" opacity="0.3"/></engine><shortcut>4</shortcut></tool>,<tool name="1st highlight" id="5" type="straight-line"><engine points="2" color="#ffe000" type="PolyLine"><annotation width="8" color="#ffe000" type="Line" opacity="0.3"/></engine><shortcut>5</shortcut></tool>,<tool name="Underline" id="6" type="straight-line"><engine points="2" color="#000000" type="PolyLine"><annotation width="1" color="#000000" type="Line" opacity="0.7"/></engine><shortcut>6</shortcut></tool>,<tool id="7" type="polygon"><engine points="-1" color="#007eee" type="PolyLine"><annotation width="1" color="#007eee" type="Line" opacity="0.6"/></engine><shortcut>7</shortcut></tool>,<tool name="Circle" id="8" type="ellipse"><engine color="#00ffff" type="PickPoint" block="true"><annotation width="1" color="#00ffff" type="GeomCircle" opacity="0.6"/></engine><shortcut>8</shortcut></tool>,<tool name="Connect Marker" id="9" type="ellipse"><engine color="#ef2929" type="PickPoint" block="true"><annotation innerColor="#73d216" width="1" color="#ef2929" type="GeomCircle" opacity="0.6"/></engine><shortcut>9</shortcut></tool>,<tool name="Not Understood" id="10" type="polygon"><engine points="-1" color="#f57900" type="PolyLine"><annotation width="1" color="#f57900" type="Line" opacity="0.6"/></engine></tool>,<tool name="Explanation/Definition" id="11" type="stamp"><engine size="64" hoverIcon="help-about" type="PickPoint" block="true"><annotation icon="help-about" type="Stamp"/></engine></tool>,<tool name="2nd highlight" id="12" type="straight-line"><engine points="2" color="#729fcf" type="PolyLine"><annotation width="8" color="#729fcf" type="Line" opacity="0.2"/></engine></tool>,<tool id="13" type="note-linked"><engine hoverIcon="tool-note" color="#ffff00" type="PickPoint"><annotation icon="Note" color="#ffff00" type="Text" opacity="0.55"/></engine></tool>
+
+[Search]
+SearchCaseSensitive=false
