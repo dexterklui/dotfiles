@@ -2,9 +2,12 @@
 ##############################################################################
 BASEDIR=$(dirname $0)
 cd $BASEDIR || exit 1
-HOST_NAME=$(cat /etc/hostname)
-[ -z "$HOST_NAME" ] && exit 1
+
+[ "$LOADED_BASH_ENV" = 1 ] || exit 1
 [ -z "$HOME" ] && exit 1
+[ -z "$HOST_NAME" ] && exit 1
+[ -z "$XDG_CONFIG_HOME" ] && exit 1
+[ -z "$XDG_DATA_HOME" ] && exit 1
 TMP_DOT_SCRIPT=/tmp/$(whoami)_dot_install.sh
 touch $TMP_DOT_SCRIPT || exit 1
 
@@ -17,12 +20,11 @@ ln -sv ${PWD}/bash_env      ~/.bash_env
 
 # zsh {{{1
 ##############################################################################
-if [[ -e $ZSH ]]; then {
-    ln -s ${PWD}/zshrc     ~/.zshrc      && echo 'Installed ~/.zshrc'
-    if [[ -e "$ZSH_CUSTOM" ]]; then {
-        ln -s ${PWD}/zsh/themes/* -t $ZSH_CUSTOM/themes/ && echo 'Installed zsh themes'
-    }; fi
-};
+if [[ -e $ZSH ]]; then
+    ln -sv ${PWD}/zshrc     ~/.zshrc
+    if [[ -e "$ZSH_CUSTOM" ]]; then
+        ln -sv ${PWD}/zsh/themes/* -t $ZSH_CUSTOM/themes/
+    fi
 fi
 
 # Vim {{{1

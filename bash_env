@@ -11,15 +11,18 @@ export LESS_TERMCAP_se=$'\e[0m'
 export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
+[ -n $PATH ] && export PATH=$HOME/bin:$PATH
 
 if [[ $HOST_NAME == 'dq-x1c' && ! -n $TERM_PROGRAM ]]; then
    export TERM_PROGRAM=gnome-terminal
-; fi
+fi
 
 if [[ $HOST_NAME == 'dq-x1c' || $HOST_NAME == 'dqarch' ]]; then
     export EDITOR='nvim'
     export VISUAL='nvim'
     export DIFFPROG="nvim -d"
-; fi
+fi
+
+export LOADED_BASH_ENV=1
 
 # vi:ft=sh
