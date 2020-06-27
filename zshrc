@@ -119,6 +119,13 @@ export ZSH_AUTOSUGGEST_HISTORY_IGNORE='cd*'
 export ZSH_AUTOSUGGEST_COMPLETION_IGNORE='git*'
 bindkey '^ ' autosuggest-toggle
 
+# kitty
+######################################################################
+autoload -Uz compinit
+compinit
+# Completion for kitty
+kitty + complete setup zsh | source /dev/stdin
+
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"

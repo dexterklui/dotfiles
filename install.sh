@@ -69,7 +69,12 @@ ln -sv ${PWD}/tridactylrc ~/.config/tridactyl/tridactylrc
 # alacritty {{{1
 ##############################################################################
 ln -sv ${PWD}/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
-#}}}1
+
+# kitty {{{1
+##############################################################################
+mkdir -p $XDG_CONFIG_HOME/kitty
+ln -sv ${PWD}/kitty/kitty.conf $XDG_CONFIG_HOME/kitty/
+
 # others {{{1
 ##############################################################################
 DSTDIR=$HOME/.config
