@@ -108,6 +108,8 @@ if [ -f ~/.zsh_history ]; then
     alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(cat ~/.zsh_history|tail -n1|sed -e '\''s/^[: 0-9]\+\;//;s/\s*[;&|]\s*alert$//'\'')"'
 fi
 
+[ -f ~/.config/localshellrc ] && . ~/.config/localshellrc
+
 # enable fasd
 eval "$(fasd --init auto)"
 
