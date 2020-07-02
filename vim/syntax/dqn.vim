@@ -142,7 +142,7 @@ syn region  dqnPython matchgroup=dqnMark start=/#beginPython#\( {\{3}\d\=\)\=/ e
 syn match dqnEscChar +\~.+he=e-1 conceal contained contains=@NoSpell display
 syn match dqnEsc     +\~[|.:`]+ transparent contains=dqnEscChar
   \ contained containedin=@dqnCode
-syn match dqnEsc     +\~[]{~}[]+ transparent contains=dqnEscChar
+syn match dqnEsc     +\~[]{~}[]+ transparent extend contains=dqnEscChar
   \ containedin=@dqnColor,@dqnBgColor,@dqnCode display
 
 " Setting colors according to colorscheme {{{1
