@@ -3,11 +3,10 @@
 BASEDIR=$(dirname $0)
 cd $BASEDIR || exit 1
 
-[ "$LOADED_BASH_ENV" = 1 ] || exit 1
 [ -z "$HOME" ] && exit 1
-[ -z "$HOST_NAME" ] && exit 1
-[ -z "$XDG_CONFIG_HOME" ] && exit 1
-[ -z "$XDG_DATA_HOME" ] && exit 1
+[ -z "$HOST_NAME" ] && HOST_NAME=$(cat /etc/hostname)
+[ -z "$XDG_CONFIG_HOME" ] && XDG_CONFIG_HOME=$HOME/.config
+[ -z "$XDG_DATA_HOME" ] && XDG_DATA_HOME=$HOME/.local/share
 TMP_DOT_SCRIPT=/tmp/$(whoami)_dot_install.sh
 touch $TMP_DOT_SCRIPT || exit 1
 
