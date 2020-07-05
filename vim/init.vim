@@ -67,7 +67,7 @@ else
   " ^Config var must be assigned before applying colorscheme to take effect.
   colorscheme solarized
   func s:CustomHlSolarized()
-    if g:colors_name !=# 'solarized'
+    if !exists('g:colors_name') || g:colors_name !=# 'solarized'
       return
     endif
     " overriding default highlight
@@ -259,7 +259,7 @@ nnoremap <M-l> <C-w>l
 """"""""""""""""""""
 " General {{{4
 """"""""""
-if g:colors_name ==# 'solarized'
+if exists('g:colors_name') && g:colors_name ==# 'solarized'
   let g:airline_theme='dqsolarized'
 else
   let g:airline_theme='dark'
@@ -292,7 +292,7 @@ let g:airline_mode_map = {
 " has a different name, so I need to force vim to reload AirlineTheme
 " everytime the 'background' / colorscheme is changed.
 func s:AirlineTheme()
-  if g:colors_name ==# 'solarized' && exists(':AirlineTheme')
+  if exists('g:colors_name') && g:colors_name ==# 'solarized' && exists(':AirlineTheme')
     AirlineTheme dqsolarized
   elseif exists(':AirlineTheme')
     AirlineTheme dark
@@ -472,7 +472,7 @@ endif
 " * limelight * {{{3
 """"""""""""""""""""
 func s:limelight_conceal()
-  if g:colors_name =~ 'solarized'
+  if exists('g:colors_name') && g:colors_name =~ 'solarized'
     if &background ==# 'dark'
       let g:limelight_conceal_ctermfg = 10
       let g:limelight_conceal_guifg = '#4F6770'
