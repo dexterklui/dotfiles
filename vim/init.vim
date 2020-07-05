@@ -221,6 +221,36 @@ nnoremap Q <nop>
 exe 'nnoremap <silent> <Leader>B'
   \ . ' :if &bg==#"dark"<CR>se bg=light<CR>el<CR>se bg=dark<CR>end<CR>'
 
+" NVim Customization {{{2
+""""""""""""""""""""""""""""""""""""""""
+tnoremap <C-E><C-E> <C-E>
+" To simulate i_CTRL-R
+tnoremap <expr> <C-E>" '<C-\><C-N>"'.nr2char(getchar()).'pi'
+"tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
+" Windows shortcuts in Terminal buffer
+tnoremap <C-E><C-W> <C-\><C-N><C-W><C-W>
+tnoremap <C-E><C-J> <C-\><C-N><C-W><C-J>
+tnoremap <C-E><C-K> <C-\><C-N><C-W><C-K>
+tnoremap <C-E><C-H> <C-\><C-N><C-W><C-H>
+tnoremap <C-E><C-L> <C-\><C-N><C-W><C-L>
+tnoremap <C-E>:	    <C-\><C-N>:
+tnoremap <C-E>N	    <C-\><C-N>
+tnoremap <C-E><C-N> <C-\><C-N>  
+
+" To use `ALT+{h,j,k,l}` to navigate windows from any mode:
+tnoremap <M-h> <C-\><C-N><C-w>h
+tnoremap <M-j> <C-\><C-N><C-w>j
+tnoremap <M-k> <C-\><C-N><C-w>k
+tnoremap <M-l> <C-\><C-N><C-w>l
+inoremap <M-h> <C-\><C-N><C-w>h
+inoremap <M-j> <C-\><C-N><C-w>j
+inoremap <M-k> <C-\><C-N><C-w>k
+inoremap <M-l> <C-\><C-N><C-w>l
+nnoremap <M-h> <C-w>h
+nnoremap <M-j> <C-w>j
+nnoremap <M-k> <C-w>k
+nnoremap <M-l> <C-w>l
+
 " *** Customizing Plugins *** {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ** For both vim and nvim ** {{{2
