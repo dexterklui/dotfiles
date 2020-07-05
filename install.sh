@@ -1,92 +1,146 @@
 #!/usr/bin/env bash
+
+# Documentations {{{1
+##############################################################################
+# SYNTAX: install.sh [--force] [--all] [APP]...
+# With --force the program remove existing destination files while making
+# symbolic link.
+# With --all install symbolic links for all applications.
+# Without -all install symbolic links for only mentioned applications in
+# [APP]...
+
+# Preparation and setting up variables {{{1
 ##############################################################################
 BASEDIR=$(dirname $0)
 cd $BASEDIR || exit 1
-
-[ -z "$HOME" ] && exit 1
-[ -z "$HOST_NAME" ] && HOST_NAME=$(cat /etc/hostname)
-[ -z "$XDG_CONFIG_HOME" ] && XDG_CONFIG_HOME=$HOME/.config
-[ -z "$XDG_DATA_HOME" ] && XDG_DATA_HOME=$HOME/.local/share
+[[ -z $HOME ]]            && exit 1
+[[ -z $HOST_NAME ]]       && HOST_NAME=$(cat /etc/hostname)
+[[ -z $XDG_CONFIG_HOME ]] && XDG_CONFIG_HOME=$HOME/.config
+[[ -z $XDG_DATA_HOME ]]   && XDG_DATA_HOME=$HOME/.local/share
 TMP_DOT_SCRIPT=/tmp/$(whoami)_dot_install.sh
-touch $TMP_DOT_SCRIPT || exit 1
+touch $TMP_DOT_SCRIPT || (echo "Can't create $TMP_DOT_SCRIPT! Abort." ; exit 1)
+
+LINK_ARG='-sv'
+for i in $@ ; do
+    [[ $i = '--force' ]] && LINK_ARG='-svf'
+done
 
 # bash {{{1
 ##############################################################################
-# Visual select and use 'Tabularize /\%(Installed\)\@<! \zs\ze\~\|&&'
-ln -sv ${PWD}/bashrc        ~/.bashrc
-ln -sv ${PWD}/bash_aliases  ~/.bash_aliases
-ln -sv ${PWD}/bash_env      ~/.bash_env
+for i in $@ ; do
+    if [[ $i = 'bash' || $i = '--all' ]] ; then
+ln $LINK_ARG $PWD/bash/bashrc        ~/.bashrc
+ln $LINK_ARG $PWD/bash/bash_aliases  ~/.bash_aliases
+ln $LINK_ARG $PWD/bash/bash_env      ~/.bash_env
+        break
+    fi
+done
 
 # okular {{{1
 ##############################################################################
-mkdir $XDG_DATA_HOME/okular/shortcuts
-ln -sv ${PWD}/okular/config/* $XDG_CONFIG_HOME/
-ln -sv ${PWD}/okular/local/share/okular/shortcuts/* $XDG_DATA_HOME/okular/shortcuts/
+for i in $@ ; do
+    if [[ $i = 'okular' || $i = '--all' ]] ; then
+mkdir -p $XDG_DATA_HOME/okular/shortcuts
+ln $LINK_ARG $PWD/okular/config/*                       $XDG_CONFIG_HOME/
+ln $LINK_ARG $PWD/okular/local/share/okular/shortcuts/* $XDG_DATA_HOME/okular/shortcuts/
+        break
+    fi
+done
 
 # zsh {{{1
 ##############################################################################
-if [[ -e $ZSH ]]; then
-    ln -sv ${PWD}/zshrc     ~/.zshrc
-    if [[ -e "$ZSH_CUSTOM" ]]; then
-        ln -sv ${PWD}/zsh/themes/* -t $ZSH_CUSTOM/themes/
+for i in $@ ; do
+    if [[ $i = 'zsh' || $i = '--all' ]] ; then
+ln $LINK_ARG $PWD/zshrc ~/.zshrc
+[[ -n $ZSH_CUSTOM ]] && DSTDIR=$ZSH_CUSTOM
+[[ -z $ZSH_CUSTOM && -n $ZSH ]] && DSTDIR=$ZSH/custom
+[[ -z $ZSH_CUSTOM && -z $ZSH ]] && DSTDIR=$HOME/.oh-my-zsh/custom
+mkdir -p $DSTDIR
+ln $LINK_ARG $PWD/zsh/themes/* $DSTDIR/themes/
+        break
     fi
-fi
+done
 
 # Vim {{{1
 ##############################################################################
-if [[ $HOST_NAME == 'dq-x1c' ]]; then
-    DSTDIR="$HOME/.vim"
-elif [[ $HOST_NAME == 'dqarch' ]]; then
-    DSTDIR="$HOME/.config/nvim"
-    [ $XDG_CONFIG_HOME ] && DSTDIR=$XDG_CONFIG_HOME/nvim
-else
-    DSTDIR="$HOME/.config/nvim"
-    [ $XDG_CONFIG_HOME ] && DSTDIR=$XDG_CONFIG_HOME/nvim
-fi
+for i in $@ ; do
+    if [[ $i = 'vim' || $i = '--all' ]] ; then
 
-# .vimrc {{{2
+DSTDIR=$XDG_CONFIG_HOME/nvim
+
+# .vimrc and init.vim {{{2
 ########################################
-if [[ $HOST_NAME == 'dq-x1c' ]]; then
-    ln -sv ${PWD}/vimrc $HOME/.vimrc
-else
-    ln -sv ${PWD}/vimrc $DSTDIR/init.vim
-fi
+ln $LINK_ARG $PWD/vimrc ~/.vimrc
 
 # other config files {{{2
 ########################################
 # Create necessary dirs
 find vim -type f -name '*.vim' | sed 's|/[^/]*$||' | sort | uniq | sed -E "s|^vim/(.*)$|$DSTDIR/\1|" | xargs mkdir -p
 # Make a script to make symbolic link for each vim scripts
-find vim -type f -name '*.vim' | sed -E "s|^(.*)$|\1 \1|" | sed -E "s|^([^ ]*) vim/(.*)$|ln -sv $(pwd)/\1 $DSTDIR/\2|" > $TMP_DOT_SCRIPT
-sh $TMP_DOT_SCRIPT
+find vim -type f -name '*.vim' | sed -E "s|^(.*)$|\1 \1|" | sed -E "s|^([^ ]*) vim/(.*)$|ln $LINK_ARG $PWD/\1 $DSTDIR/\2|" > $TMP_DOT_SCRIPT
+bash $TMP_DOT_SCRIPT
+
+        break
+    fi
+done
 
 # tmux {{{1
 ##############################################################################
-ln -sv ${PWD}/tmux.conf ~/.tmux.conf
+for i in $@ ; do
+    if [[ $i = 'tmux' || $i = '--all' ]] ; then
+ln $LINK_ARG $PWD/tmux/tmux.conf ~/.tmux.conf
+        break
+    fi
+done
 
 # Git {{{1
 ##############################################################################
-ln -sv ${PWD}/gitconfig ~/.gitconfig
-ln -sv ${PWD}/gitignore ~/.gitignore
+for i in $@ ; do
+    if [[ $i = 'git' || $i = '--all' ]] ; then
+ln $LINK_ARG $PWD/git/gitconfig ~/.gitconfig
+ln $LINK_ARG $PWD/git/gitignore ~/.gitignore
+        break
+    fi
+done
 
-# tridactylrc {{{1
+# tridactyl {{{1
 ##############################################################################
-ln -sv ${PWD}/tridactylrc ~/.config/tridactyl/tridactylrc
-#}}}1
+for i in $@ ; do
+    if [[ $i = 'tridactyl' || $i = '--all' ]] ; then
+mkdir -p $XDG_CONFIG_HOME/tridactyl
+ln $LINK_ARG $PWD/tridactyl/tridactylrc $XDG_CONFIG_HOME/tridactyl/tridactylrc
+        break
+    fi
+done
+
 # alacritty {{{1
 ##############################################################################
-ln -sv ${PWD}/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
+for i in $@ ; do
+    if [[ $i = 'alacritty' || $i = '--all' ]] ; then
+mkdir -p $XDG_CONFIG_HOME/alacritty
+ln $LINK_ARG $PWD/alacritty/alacritty.yml $XDG_CONFIG_HOME/alacritty/alacritty.yml
+        break
+    fi
+done
 
 # kitty {{{1
 ##############################################################################
+for i in $@ ; do
+    if [[ $i = 'kitty' || $i = '--all' ]] ; then
 mkdir -p $XDG_CONFIG_HOME/kitty
-ln -sv ${PWD}/kitty/kitty.conf $XDG_CONFIG_HOME/kitty/
+ln $LINK_ARG $PWD/kitty/kitty.conf $XDG_CONFIG_HOME/kitty/kitty.conf
+        break
+    fi
+done
 
-# others {{{1
+# dircolors {{{1
 ##############################################################################
-DSTDIR=$HOME/.config
-[ -n $XDG_CONFIG_HOME ] && DSTDIR=$XDG_CONFIG_HOME
-ln -sv ${PWD}/dircolors $DSTDIR/dircolors
+for i in $@ ; do
+    if [[ $i = 'dircolors' || $i = '--all' ]] ; then
+ln $LINK_ARG $PWD/dircolors $XDG_CONFIG_HOME/dircolors
+        break
+    fi
+done
 #}}}1
 ##############################################################################
 rm $TMP_DOT_SCRIPT
