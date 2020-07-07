@@ -45,18 +45,20 @@ func DQFoldText()
         return ' 🔸' . l:line . '📝 [' . l:nrline . 'L]'
       elseif l:foldlevel == 3
         return '  🔹' . l:line . '📝 [' . l:nrline . 'L]'
-      elseif l:foldlevel == 4
-        if &bg ==# 'dark'
-          return '   ▫️ ' . l:line . '📝 [' . l:nrline . 'L]'
-        else
-          return '   ▪️ ' . l:line . '📝 [' . l:nrline . 'L]'
-        endif " background: dark, light
       else
-        if &bg ==# 'dark'
-          return '   ▫️ ' . repeat('▫️ ', l:foldlevel-4) . l:line . '📝 [' . l:nrline . 'L]'
-        else
-          return '   ▪️ ' . repeat('▪️ ', l:foldlevel-4) . l:line . '📝 [' . l:nrline . 'L]'
-        endif " background: dark, light
+        return '   ' .repeat('▪ ', l:foldlevel-3) .l:line . '📝 [' . l:nrline . 'L]'
+      "elseif l:foldlevel == 4
+      "  if &bg ==# 'dark'
+      "    return '   ▫️ ' . l:line . '📝 [' . l:nrline . 'L]'
+      "  else
+      "    return '   ▪️ ' . l:line . '📝 [' . l:nrline . 'L]'
+      "  endif " background: dark, light
+      "else
+      "  if &bg ==# 'dark'
+      "    return '   ▫️ ' . repeat('▫️ ', l:foldlevel-4) . l:line . '📝 [' . l:nrline . 'L]'
+      "  else
+      "    return '   ▪️ ' . repeat('▪️ ', l:foldlevel-4) . l:line . '📝 [' . l:nrline . 'L]'
+      "  endif " background: dark, light
       endif " foldlevel: 1, 2, 3, 4, >4
 
     " if there is no modified lines unstaged (Gitgutter)
@@ -67,18 +69,20 @@ func DQFoldText()
         return ' 🔸' . l:line . '[' . l:nrline . 'L]'
       elseif l:foldlevel == 3
         return '  🔹' . l:line . '[' . l:nrline . 'L]'
-      elseif l:foldlevel == 4
-        if &bg ==# 'dark'
-          return '   ▫️ ' . l:line . '[' . l:nrline . 'L]'
-        else
-          return '   ▪️ ' . l:line . '[' . l:nrline . 'L]'
-        endif " background: dark, light
       else
-        if &bg ==# 'dark'
-          return '   ▫️ ' . repeat('▫️ ', l:foldlevel-4) . l:line . '[' . l:nrline . 'L]'
-        else
-          return '   ▪️ ' . repeat('▪️ ', l:foldlevel-4) . l:line . '[' . l:nrline . 'L]'
-        endif " background: dark, light
+        return '   ' .repeat('▪ ', l:foldlevel-3) .l:line . '[' . l:nrline . 'L]'
+      "elseif l:foldlevel == 4
+      "  if &bg ==# 'dark'
+      "    return '   ▫️ ' . l:line . '[' . l:nrline . 'L]'
+      "  else
+      "    return '   ▪️ ' . l:line . '[' . l:nrline . 'L]'
+      "  endif " background: dark, light
+      "else
+      "  if &bg ==# 'dark'
+      "    return '   ▫️ ' . repeat('▫️ ', l:foldlevel-4) . l:line . '[' . l:nrline . 'L]'
+      "  else
+      "    return '   ▪️ ' . repeat('▪️ ', l:foldlevel-4) . l:line . '[' . l:nrline . 'L]'
+      "  endif " background: dark, light
       endif " foldlevel: 1, 2, 3, 4, >4
     endif " Git's unstage modified lines: True, False
   endif " Support emoji: False, True
