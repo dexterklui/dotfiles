@@ -371,6 +371,7 @@ let NERDTreeShowBookmarks = 1
 map <leader>g   :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
+let g:ycm_filetype_blacklist = { 'ledger': 1 }
 
 " * ctrlp * {{{3
 """"""""""""""""""""
@@ -509,6 +510,14 @@ command -nargs=? L call s:LimePara(<args>)
 """"""""""""""""""""
 au FileType python,vim,tex,sh call rainbow#load()
 nnoremap <Leader>rb :RainbowToggle<CR>
+
+" * ledger * {{{3
+""""""""""""""""""""
+let g:ledger_maxwidth = 78
+let g:ledger_fillstring = '-'
+let g:ledger_detailed_first = 1
+let g:ledger_fold_blanks = 1
+let g:ledger_extra_options = '--pedantic --explicit --check-payees'
 
 " * Netrw Customization * {{{3
 """"""""""""""""""""
