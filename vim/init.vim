@@ -23,7 +23,7 @@ else
   call plug#begin('~/.vim/bundle')
 endif
 " General
-Plug 'Valloric/YouCompleteMe'
+"Plug 'Valloric/YouCompleteMe'
 Plug 'altercation/vim-colors-solarized'
 Plug 'morhetz/gruvbox'
 Plug 'easymotion/vim-easymotion'
@@ -47,6 +47,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 " For optimizing python3
 Plug 'tmhedberg/SimpylFold'
+" For ledger
+Plug 'ledger/vim-ledger'
 call plug#end()
 
 " ** packadd ** {{{2
