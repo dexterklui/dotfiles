@@ -10,6 +10,8 @@ bind J tabnext
 
 bind j scrollline 7
 bind k scrollline -7
+bind <C-e> scrollline 1
+bind <C-y> scrollline -1
 
 bind T tabopen -c
 
