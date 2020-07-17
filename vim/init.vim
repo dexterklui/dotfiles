@@ -17,39 +17,42 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ** setup vim-plug ** {{{2
 """"""""""""""""""""""""""""""""""""""""
-if $HOST_NAME == 'dqarch'
-  call plug#begin('~/.config/nvim/plug')
-else
-  call plug#begin('~/.vim/bundle')
-endif
-" General
-"Plug 'Valloric/YouCompleteMe'
-Plug 'altercation/vim-colors-solarized'
-Plug 'morhetz/gruvbox'
-Plug 'easymotion/vim-easymotion'
-Plug 'Yggdroot/indentLine'
-Plug 'jiangmiao/auto-pairs'
-Plug 'vim-syntastic/syntastic'
-Plug 'preservim/nerdtree'
-Plug 'kien/ctrlp.vim'
-Plug 'tpope/vim-surround'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'junegunn/goyo.vim'
-Plug 'frazrepo/vim-rainbow'
-Plug 'junegunn/limelight.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'godlygeek/tabular'
-Plug 'dhruvasagar/vim-table-mode'
-Plug 'lambdalisue/suda.vim'
-" Git
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
-" For optimizing python3
-Plug 'tmhedberg/SimpylFold'
-" For ledger
-Plug 'ledger/vim-ledger'
-call plug#end()
+try
+  if $HOST_NAME == 'dqarch'
+    call plug#begin('~/.config/nvim/plug')
+  else
+    call plug#begin('~/.vim/bundle')
+  endif
+  " General
+  "Plug 'Valloric/YouCompleteMe'
+  Plug 'altercation/vim-colors-solarized'
+  Plug 'morhetz/gruvbox'
+  Plug 'easymotion/vim-easymotion'
+  Plug 'Yggdroot/indentLine'
+  Plug 'jiangmiao/auto-pairs'
+  Plug 'vim-syntastic/syntastic'
+  Plug 'preservim/nerdtree'
+  Plug 'kien/ctrlp.vim'
+  Plug 'tpope/vim-surround'
+  Plug 'terryma/vim-multiple-cursors'
+  Plug 'junegunn/goyo.vim'
+  Plug 'frazrepo/vim-rainbow'
+  Plug 'junegunn/limelight.vim'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'godlygeek/tabular'
+  Plug 'dhruvasagar/vim-table-mode'
+  Plug 'lambdalisue/suda.vim'
+  " Git
+  Plug 'airblade/vim-gitgutter'
+  Plug 'tpope/vim-fugitive'
+  " For optimizing python3
+  Plug 'tmhedberg/SimpylFold'
+  " For ledger
+  Plug 'ledger/vim-ledger'
+  call plug#end()
+catch /^Vim\%((\a\+)\)\=:E117/
+endtry
 
 " ** packadd ** {{{2
 """"""""""""""""""""""""""""""""""""""""
@@ -67,42 +70,45 @@ else
   let g:solarized_termtrans=1
   let g:solarized_diffmode='high'
   " ^Config var must be assigned before applying colorscheme to take effect.
-  colorscheme solarized
-  func s:CustomHlSolarized()
-    if !exists('g:colors_name') || g:colors_name !=# 'solarized'
-      return
-    endif
-    " overriding default highlight
-    hi SignColumn   guibg=NONE ctermbg=NONE
-    if &background ==# 'dark'
-      hi Folded       guifg=#586e75 ctermfg=10 guibg=NONE ctermbg=NONE
-            \         gui=bold cterm=bold
-      if $TERM!=#'linux' | hi NonText guifg=#4e4e4e ctermfg=239 | endif
-    else
-      hi Folded       guifg=#93a1a1 ctermfg=14 guibg=NONE ctermbg=NONE
-            \         gui=bold cterm=bold
-      if $TERM!=#'linux' | hi NonText guifg=#d0d0d0 ctermfg=252 | endif
-    endif
-    " Syntastic highlight
-    hi SyntasticWarning gui=inverse cterm=inverse
-    hi SyntasticError   gui=inverse cterm=inverse
-    if &background ==# 'dark'
-      hi SyntasticWarningSign guifg=#b58900 ctermfg=3
-            \ guibg=#073642 ctermbg=0 gui=bold cterm=bold
-      hi SyntasticErrorSign guifg=#dc322f ctermfg=1
-            \ guibg=#073642 ctermbg=0 gui=bold cterm=bold
-    else " if &background ==# 'light'
-      hi SyntasticWarningSign guifg=#b58900 ctermfg=3
-            \ guibg=#eee8d5 ctermbg=7 gui=bold cterm=bold
-      hi SyntasticErrorSign guifg=#dc322f ctermfg=1
-            \ guibg=#eee8d5 ctermbg=7 gui=bold cterm=bold
-    endif
-    " GitGutter highlight
-    hi link GitGutterAdd    Statement
-    hi link GitGutterChange Type
-    hi link GitGutterDelete Special
-  endfunc
-  autocmd vimrcEx ColorScheme * call s:CustomHlSolarized()
+  try
+    colorscheme solarized
+    func s:CustomHlSolarized()
+      if !exists('g:colors_name') || g:colors_name !=# 'solarized'
+        return
+      endif
+      " overriding default highlight
+      hi SignColumn   guibg=NONE ctermbg=NONE
+      if &background ==# 'dark'
+        hi Folded       guifg=#586e75 ctermfg=10 guibg=NONE ctermbg=NONE
+              \         gui=bold cterm=bold
+        if $TERM!=#'linux' | hi NonText guifg=#4e4e4e ctermfg=239 | endif
+      else
+        hi Folded       guifg=#93a1a1 ctermfg=14 guibg=NONE ctermbg=NONE
+              \         gui=bold cterm=bold
+        if $TERM!=#'linux' | hi NonText guifg=#d0d0d0 ctermfg=252 | endif
+      endif
+      " Syntastic highlight
+      hi SyntasticWarning gui=inverse cterm=inverse
+      hi SyntasticError   gui=inverse cterm=inverse
+      if &background ==# 'dark'
+        hi SyntasticWarningSign guifg=#b58900 ctermfg=3
+              \ guibg=#073642 ctermbg=0 gui=bold cterm=bold
+        hi SyntasticErrorSign guifg=#dc322f ctermfg=1
+              \ guibg=#073642 ctermbg=0 gui=bold cterm=bold
+      else " if &background ==# 'light'
+        hi SyntasticWarningSign guifg=#b58900 ctermfg=3
+              \ guibg=#eee8d5 ctermbg=7 gui=bold cterm=bold
+        hi SyntasticErrorSign guifg=#dc322f ctermfg=1
+              \ guibg=#eee8d5 ctermbg=7 gui=bold cterm=bold
+      endif
+      " GitGutter highlight
+      hi link GitGutterAdd    Statement
+      hi link GitGutterChange Type
+      hi link GitGutterDelete Special
+    endfunc
+    autocmd vimrcEx ColorScheme * call s:CustomHlSolarized()
+  catch /^Vim\%((\a\+)\)\=:E185/
+  endtry
 endif " }}}2
 
 " Put these in an autocmd group, so that we can delete them easily.
