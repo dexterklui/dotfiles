@@ -111,7 +111,9 @@ fi
 [ -f ~/.config/localshellrc ] && . ~/.config/localshellrc
 
 # enable fasd
-eval "$(fasd --init auto)"
+if [ -x /usr/bin/fasd ]; then
+    eval "$(fasd --init auto)"
+fi
 
 # Plugins
 ######################################################################
@@ -123,10 +125,12 @@ bindkey '^ ' autosuggest-toggle
 
 # kitty
 ######################################################################
-autoload -Uz compinit
-compinit
-# Completion for kitty
-kitty + complete setup zsh | source /dev/stdin
+if [ -x /usr/bin/kitty ]; then
+    autoload -Uz compinit
+    compinit
+    # Completion for kitty
+    kitty + complete setup zsh | source /dev/stdin
+fi
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"

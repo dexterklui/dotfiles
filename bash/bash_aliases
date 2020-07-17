@@ -20,17 +20,25 @@ fi
 
 
 if [[ $HOST_NAME == 'dqarch' || $HOST_NAME == 'dq-x1c' ]]; then
-    # allows alias expansion after sudo
-    alias sudo='sudo '
     # Save a lot of typing for common commands
-    alias v='nvim'
-    alias vr='nvim -R' # Neovim read-only mode
-    alias vdiff='nvim -d'
-    alias g='git'
     alias ll='ls -lh'
     alias la='ls -lAh'
     alias l='ls -CF'
 fi
+
+if [ -x /usr/bin/nvim ]; then¬
+    alias v='nvim'¬
+    alias vr='nvim -R' # Neovim read-only mode¬
+    alias vdiff='nvim -d'¬
+elif [ -x /usr/bin/vim ]; then¬
+    alias v='vim'¬
+    alias vr='vim -R'¬
+    alias vdiff='vim -d'¬
+fi¬
+[ -x /usr/bin/git ] && alias g='git'¬
+
+# allows alias expansion after sudo
+alias sudo='sudo '
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
