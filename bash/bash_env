@@ -17,10 +17,13 @@ if [[ $HOST_NAME == 'dq-x1c' && ! -n $TERM_PROGRAM ]]; then
    export TERM_PROGRAM=gnome-terminal
 fi
 
-if [[ $HOST_NAME == 'dq-x1c' || $HOST_NAME == 'dqarch' ]]; then
+if [ -x /usr/bin/nvim ]; then
     export EDITOR='nvim'
-    export VISUAL='nvim'
+    #export VISUAL='nvim'
     export DIFFPROG="nvim -d"
+elif [ -x /usr/bin/vim ]; then
+    export EDITOR='vim'
+    export DIFFPROG='vimdiff'
 fi
 
 export LOADED_BASH_ENV=1
