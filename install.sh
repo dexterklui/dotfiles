@@ -21,8 +21,10 @@ TMP_DOT_SCRIPT=/tmp/$(whoami)_dot_install.sh
 touch $TMP_DOT_SCRIPT || (echo "Can't create $TMP_DOT_SCRIPT! Abort." ; exit 1)
 
 LINK_ARG='-sv'
+CP_ARG='-nv'
 for i in $@ ; do
     [[ $i = '--force' ]] && LINK_ARG='-svf'
+    [[ $i = '--force' ]] && CP_ARG='-v --remove-destination'
 done
 
 # bash {{{1
@@ -41,8 +43,8 @@ done
 for i in $@ ; do
     if [[ $i = 'okular' || $i = '--all' ]] ; then
 mkdir -p $XDG_DATA_HOME/okular/shortcuts
-ln $LINK_ARG $PWD/okular/config/*                       $XDG_CONFIG_HOME/
-ln $LINK_ARG $PWD/okular/local/share/okular/shortcuts/* $XDG_DATA_HOME/okular/shortcuts/
+cp $CP_ARG $PWD/okular/config/*                       $XDG_CONFIG_HOME/
+cp $CP_ARG $PWD/okular/local/share/okular/shortcuts/* $XDG_DATA_HOME/okular/shortcuts/
         break
     fi
 done
