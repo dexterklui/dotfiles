@@ -1,4 +1,4 @@
-export HOST_NAME=$(cat /etc/hostname)
+export HOST_NAME=$(cat /proc/sys/kernel/hostname)
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share
 export MANWIDTH=80
