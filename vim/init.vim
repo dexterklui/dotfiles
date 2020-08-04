@@ -176,8 +176,8 @@ set pastetoggle=<F36> " Set mapping for toggle 'paste' option.
 
 if $TERM !=# 'linux'
   set showbreak=∥   " TODO dqn0 unset its showbreak setting messing up others
-  set lcs=tab:‹\ ›,trail:·,eol:¬,nbsp:_ " adjust the text printed by :list
-  set list            " Show "invisible chars on screen like using :list
+  "set lcs=tab:‹\ ›,trail:·,eol:¬,nbsp:_ " adjust the text printed by :list
+  "set list            " Show "invisible chars on screen like using :list
 else
   set showbreak=▶
   set lcs=tab:<\ >,trail:·,eol:¬,nbsp:_ " adjust the text printed by :list
