@@ -229,6 +229,18 @@ nnoremap Q <nop>
 exe 'nnoremap <silent> <Leader>B'
   \ . ' :if &bg==#"dark"<CR>se bg=light<CR>el<CR>se bg=dark<CR>end<CR>'
 
+" For compiling at an interative terminal running in Nvim:
+command -nargs=0 Compile up | let g:_tem_makeprg = &makeprg |
+  \ let g:_tem_fpath = expand("%:p:S") | let g:_tem_fname = expand("%:t") |
+  \ vert new | cal termopen(g:_tem_makeprg . " " . g:_tem_fpath .
+  \ " 2>&1 | tee /tmp/" . g:_tem_fname . ".err") |
+  \ unl g:_tem_makeprg g:_tem_fpath g:_tem_fname | norm i
+command -nargs=0 Readcfile cfile /tmp/%:t.err
+command -nargs=0 Opencfile e /tmp/%:t.err
+nnoremap <F11> :Compile<CR>
+nnoremap <F10> :Readcfile<CR>
+nnoremap <F9> :Opencfile<CR>
+
 " NVim Customization {{{2
 """"""""""""""""""""""""""""""""""""""""
 tnoremap <C-E><C-E> <C-E>
