@@ -24,7 +24,7 @@ try
     call plug#begin('~/.vim/bundle')
   endif
   " General
-  "Plug 'Valloric/YouCompleteMe'
+  Plug 'Valloric/YouCompleteMe'
   Plug 'altercation/vim-colors-solarized'
   Plug 'morhetz/gruvbox'
   Plug 'easymotion/vim-easymotion'
