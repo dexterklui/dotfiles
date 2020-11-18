@@ -1,5 +1,9 @@
 " Enable folding
-setl foldmethod=indent
+if exists("b:loaded_SimpylFold")
+  setl foldmethod=expr
+else
+  setl foldmethod=indent
+endif
 setl foldlevel=99
 
 " Add the proper PEP8 indentation standard
