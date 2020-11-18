@@ -10,6 +10,7 @@ setl foldlevel=99
     setl expandtab
     setl autoindent
     setl fileformat=unix
+    setl colorcolumn=73,+1
 
 " Set compiler
 compiler python
