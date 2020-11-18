@@ -378,6 +378,7 @@ map <leader>g   :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 let g:ycm_filetype_blacklist = { 'ledger': 1 }
+let g:ycm_autoclose_preview_window_after_completion = 1
 
 " * ctrlp * {{{3
 """"""""""""""""""""
