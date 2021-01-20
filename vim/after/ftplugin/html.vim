@@ -1,4 +1,5 @@
 " Enable folding
+setl fdm=indent
 setl foldlevel=99
 
 setl tabstop=2
@@ -12,7 +13,7 @@ setl colorcolumn=+1
 " for Plugin tmhedberg/SimpylFold
 
 if exists('b:undo_ftplugin')
-  let b:undo_ftplugin .= "| setl fdl< ts< sts< sw< cc<"
+  let b:undo_ftplugin .= "| setl fdm< fdl< ts< sts< sw< cc<"
 else
-  let b:undo_ftplugin = "setl fdl< ts< sts< sw< cc<"
+  let b:undo_ftplugin = "setl fdm< fdl< ts< sts< sw< cc<"
 endif
