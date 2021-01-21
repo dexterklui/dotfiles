@@ -59,12 +59,13 @@ iabbrev <buffer> {{s <C-O>0<C-O>d$<Space><Space><Space><Bar><Bar><Left>
 iabbrev <buffer> {{S <C-O>0<C-O>d$<Space><Space><Space><Bar><Bar><Space>{{{4<Left><Left><Left><Left><Left><Left>
   \<C-O>:let b:Eatchar=1<CR>
   \<C-R>=Eatchar('\s')<CR>
-iabbrev <buffer> ;r <Space><Space>➱
-iabbrev <buffer> ;R <Space><Space>⮱
-iabbrev <buffer> ;t <Space><Space>‣
-iabbrev <buffer> ;d <Space><Space>·
-iabbrev <buffer> ;D <Space><Space>•
+iabbrev <buffer> ;r ➱
+iabbrev <buffer> ;R ⮱
+iabbrev <buffer> ;t ‣
+iabbrev <buffer> ;d ·
+iabbrev <buffer> ;D •
 iabbrev <buffer> latex LaTeX
+iabbrev <buffer> ;; <BS><Space>
 
 " The following function is needed for iabbrev {{s
 "if !exists('*Eatchar')
