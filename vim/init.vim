@@ -440,7 +440,8 @@ command -nargs=0 SI SyntasticInfo
 command -nargs=0 SR SyntasticReset
 
 let g:syntastic_python_checkers = ["pylint"]
-let g:syntastic_cpp_checkers = ["clang_check", "clang_tidy"]
+let g:syntastic_cpp_checkers = ["clang_check"]
+let g:syntastic_html_checkers = ["validator"]
 
 " * GitGutter * {{{3
 """"""""""""""""""""
