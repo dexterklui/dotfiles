@@ -1,6 +1,8 @@
 setl expandtab
 setl shiftwidth=2
 setl softtabstop=2
+setl textwidth=80
+setl colorcolumn=+1
 
 " Shortcuts for compilation
 command! -nargs=0 Compile up | make %:t:r.out
@@ -14,8 +16,8 @@ command! -nargs=0 RunCppOut vsp term://./%:.:r.out
 nnoremap <buffer> <F12> :RunCppOut<CR>
 
 if !exists(b:undo_ftplugin)
-  let b:undo_ftplugin = 'setl et< sw< sts<'
+  let b:undo_ftplugin = 'setl et< sw< sts< tw< cc<'
 else
-  let b:undo_ftplugin .= '| ' . 'setl et< sw< sts<'
+  let b:undo_ftplugin .= '| ' . 'setl et< sw< sts< tw< cc<'
 endif
 let b:undo_ftplugin .= '| delc Compile| delc Readcfile| delc Opencfile| delc RunCppOut'

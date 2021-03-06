@@ -379,6 +379,8 @@ let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 let g:ycm_filetype_blacklist = { 'ledger': 1 }
 let g:ycm_autoclose_preview_window_after_completion = 1
+" Let Syntastic do syntax checking (see :help syntastic)
+let g:ycm_show_diagnostics_ui = 0
 
 " * ctrlp * {{{3
 """"""""""""""""""""
@@ -438,6 +440,7 @@ command -nargs=0 SI SyntasticInfo
 command -nargs=0 SR SyntasticReset
 
 let g:syntastic_python_checkers = ["pylint"]
+let g:syntastic_cpp_checkers = ["clang_check", "clang_tidy"]
 
 " * GitGutter * {{{3
 """"""""""""""""""""
