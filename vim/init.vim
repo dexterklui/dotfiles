@@ -173,6 +173,8 @@ set updatetime=250  " after 250ms, write swap and update gitgutter
 set winwidth=84     " Set the min nr of columns for current window
 set spelllang=en_gb " Set default spell language as british english
 set pastetoggle=<F36> " Set mapping for toggle 'paste' option.
+set textwidth=80
+set colorcolumn=+1
 
 if $TERM !=# 'linux'
   set showbreak=∥   " TODO dqn0 unset its showbreak setting messing up others
