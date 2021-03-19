@@ -1,6 +1,7 @@
 [user]
         name = Dexter Lui
         email = dexlui@pm.me
+        signingkey = 24628C9E1B04F6D1
 
 # Define command which will be used when "nvim" is set as a merge tool
 ##############################################################################
