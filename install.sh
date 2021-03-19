@@ -34,6 +34,7 @@ for i in $@ ; do
 ln $LINK_ARG $PWD/bash/bashrc        ~/.bashrc
 ln $LINK_ARG $PWD/bash/bash_aliases  ~/.bash_aliases
 ln $LINK_ARG $PWD/bash/bash_env      ~/.bash_env
+ln $LINK_ARG $PWD/bash/bash_profile  ~/.bash_profile
         break
     fi
 done
