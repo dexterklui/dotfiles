@@ -144,6 +144,15 @@ ln $LINK_ARG $PWD/dircolors $XDG_CONFIG_HOME/dircolors
         break
     fi
 done
+
+# profile {{{1
+##############################################################################
+for i in $@ ; do
+    if [[ $i = 'profile' || $i = '--all' ]] ; then
+ln $LINK_ARG $PWD/profile ~/.profile
+        break
+    fi
+done
 #}}}1
 ##############################################################################
 rm $TMP_DOT_SCRIPT
