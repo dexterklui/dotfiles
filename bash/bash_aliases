@@ -19,11 +19,12 @@ if [[ $HOST_NAME == "dq-x1c" ]]; then
 fi
 
 
-if [[ $HOST_NAME == 'dqarch' || $HOST_NAME == 'dq-x1c' ]]; then
-    # Save a lot of typing for common commands
-    alias ll='ls -lh'
-    alias la='ls -lAh'
-    alias l='ls -CF'
+# Save a lot of typing for common commands
+alias ll='ls -lh'
+alias la='ls -lAh'
+alias l='ls -CF'
+
+if [[ (-x "/usr/bin/which" || -x "/bin/which") && -x $(which gcc) ]]; then
     alias comp='g++ -pedantic-errors -std=c++11'
     alias compc='gcc -pedantic-errors -std=c11'
 fi
