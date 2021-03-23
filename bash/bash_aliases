@@ -25,6 +25,7 @@ if [[ $HOST_NAME == 'dqarch' || $HOST_NAME == 'dq-x1c' ]]; then
     alias la='ls -lAh'
     alias l='ls -CF'
     alias comp='g++ -pedantic-errors -std=c++11'
+    alias compc='gcc -pedantic-errors -std=c11'
 fi
 
 if [ -x /usr/bin/nvim ]; then
