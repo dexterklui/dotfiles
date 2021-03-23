@@ -1,3 +1,7 @@
+" Unbind
+unbind --mode=browser <C-6>
+unbind --mode=browser <CS-6>
+
 " Bindings for normal mode
 bind / fillcmdline find
 bind ? fillcmdline find -?
@@ -7,35 +11,95 @@ bind N findnext -1
 bind c fillcmdline bmarks
 bind K tabprev
 bind J tabnext
+bind D tabclose
+bind gd tabduplicate
+bind gc gobble 1 recontain
+bind m gobble 1 quickmark
+bind g. no_mouse_mode
+bind g/ neo_mouse_mode
+bind ,. set modeindicator false
+bind ,/ set modeindicator true
+bind gj !s xdotool key Down
+bind gk !s xdotool key Up
+bind gh !s xdotool key Left
+bind gl !s xdotool key Right
+bind zj !s xdotool key Page_Down
+bind zk !s xdotool key Page_Up
+bind zh !s xdotool key Home
+bind zl !s xdotool key End
+bind ` nmode ignore 1 mode normal
+bind gy home
+bind gY home true
 
-bind j scrollline 7
-bind k scrollline -7
+bind j scrollline 8
+bind k scrollline -8
 bind <C-e> scrollline 1
 bind <C-y> scrollline -1
 
-bind T tabopen -c
+" tabopen in different containers
+bind T fillcmdline tabopen -c
 
-" Bindings for changing modes
+
+" For easy focus on a div and scroll that
+ bind ,, hint -J;c div,nav
+" hint anchor link with no java
+bind q hint
+bind Q hint -b
+bind d fillcmdline hint -f
+bind f hint -Jc a,button,input
+bind F hint -Jbc a,button,input
+
+bindurl lihkg.com f hint -Jc a,i
+bindurl mail.protonmail.com f hint -Jc a,button,input,[class^="subject-text"]
+
+" Stupid workaround to let hint -; be used with composite which steals
+" semi-colons
+command hint_focus hint -;
+" Open right click menu on links
+bind ;C composite hint_focus; !s xdotool key Menu
+bind ,m composite hint_focus; !s xdotool key Menu
+
+" hint menus
+bind ;c hint -c [class*="expand"],[class="togg"],[class*="menu"]
+
+" hint link open current tab
+bind ;o hint -W open
+
+" Allow Ctrl-a to select all in the commandline
+unbind --mode=ex <C-a>
+
+" Allow Ctrl-c to copy in the commandline
+unbind --mode=ex <C-c>
+
+" Bindings for changing modes with <C-]>
 bind --mode=ignore <C-[> mode normal
 bind --mode=hint <C-[> hint.reset
 bind --mode=ex <C-[> ex.hide_and_clear
 bind <c-]> mode ignore
 
 " Ex mode bindings
-bind --mode=ex <C-F> ex.complete
+bind --mode=ex <C-g> ex.complete
 bind --mode=ex <C-p> ex.prev_history
-bind --mode=ex <C-n> ex.next_history
+bind --mode=ex <C-n> ex.next_history  " doesn't work
 bind --mode=ex <C-f> text.forward_char
 bind --mode=ex <C-b> text.backward_char
 
-guiset hoverlink none
-"guiset statuspanel left
+" Sane hinting mode (basically you type english to limit the range)
+"set hintfiltermode vimperator-reflow
+"set hintnames numeric
 
-" command aliases
-command sp tabopen -c p search
-command sh tabopen -c h search
-command sg tabopen -c g search
+" guiset
+"guiset_quiet hoverlink none
+"guiset gui none
+"guiset tabs always
 
+" settings
 set newtab about:blank
+
+" Set search urls
+set searchurls.en https://dictionary.cambridge.org/search/direct/?datasetsearch=english-chinese-traditional&q=
+set searchurls.de https://de.pons.com/%C3%BCbersetzung?l=deen&in=&lf=de&qnac=&q=
+
+command se set
 
 " vim:ft=vim
