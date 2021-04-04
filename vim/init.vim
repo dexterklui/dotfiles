@@ -23,33 +23,49 @@ try
   else
     call plug#begin('~/.vim/bundle')
   endif
-  " General
-  Plug 'Valloric/YouCompleteMe'
-  Plug 'altercation/vim-colors-solarized'
-  Plug 'morhetz/gruvbox'
-  Plug 'easymotion/vim-easymotion'
-  Plug 'Yggdroot/indentLine'
-  Plug 'jiangmiao/auto-pairs'
-  Plug 'vim-syntastic/syntastic'
-  Plug 'preservim/nerdtree'
-  Plug 'kien/ctrlp.vim'
-  Plug 'tpope/vim-surround'
-  Plug 'terryma/vim-multiple-cursors'
-  Plug 'junegunn/goyo.vim'
-  Plug 'frazrepo/vim-rainbow'
-  Plug 'junegunn/limelight.vim'
+  " Vim themes
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
-  Plug 'godlygeek/tabular'
-  Plug 'dhruvasagar/vim-table-mode'
-  Plug 'lambdalisue/suda.vim'
+  Plug 'altercation/vim-colors-solarized'
+
+  " General files management and search
+  Plug 'preservim/nerdtree'
+  Plug 'kien/ctrlp.vim'
+
+  " General syntax checking and autocomplete
+  Plug 'Valloric/YouCompleteMe'
+  Plug 'vim-syntastic/syntastic'
+
+  " General syntax highlighting and visuals
+  Plug 'Yggdroot/indentLine'
+  Plug 'frazrepo/vim-rainbow', {'on': 'RainbowToggle'}
+
+  " General formating and editting
+  Plug 'godlygeek/tabular', {'on': 'Tabularize'}
+  Plug 'jiangmiao/auto-pairs'
+  Plug 'tpope/vim-surround'
+  Plug 'terryma/vim-multiple-cursors'
+  Plug 'easymotion/vim-easymotion'
+
+  " text, markdown, dqn
+  Plug 'dhruvasagar/vim-table-mode', {'for': 'dqn', 'on': 'TableModeToggle'}
+  Plug 'junegunn/goyo.vim', {'for': ['dqn', 'markdown'], 'on': 'Goyo'}
+  Plug 'junegunn/limelight.vim',
+        \ {'for': ['dqn', 'markdown'], 'on': ['Goyo', 'Limelight']}
+
   " Git
   Plug 'airblade/vim-gitgutter'
   Plug 'tpope/vim-fugitive'
+
   " For optimizing python3
-  Plug 'tmhedberg/SimpylFold'
+  Plug 'tmhedberg/SimpylFold', {'for': 'python'}
+
   " For ledger
-  Plug 'ledger/vim-ledger'
+  Plug 'ledger/vim-ledger', {'for': 'ledger'}
+
+  " Misc
+  Plug 'lambdalisue/suda.vim', {'on': ['SudaRead', 'SudaWrite']}
+
   call plug#end()
 catch /^Vim\%((\a\+)\)\=:E117/
 endtry
