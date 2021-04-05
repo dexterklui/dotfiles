@@ -49,6 +49,8 @@ try
   Plug 'terryma/vim-multiple-cursors'
   Plug 'easymotion/vim-easymotion'
   Plug 'preservim/nerdcommenter'
+  Plug 'SirVer/ultisnips'
+  Plug 'honza/vim-snippets'
 
   " text, markdown, dqn
   Plug 'dhruvasagar/vim-table-mode', {'for': 'dqn', 'on': 'TableModeToggle'}
@@ -482,6 +484,20 @@ if !has('nvim')
   imap <C-b>e <M-e>
   imap <C-b>b <M-b>
 endif
+
+" * UltiSnips * {{{3
+""""""""""""""""""""
+" Trigger configuration. You need to change this to something other than <tab>
+" if you use one of the following:
+" - https://github.com/Valloric/YouCompleteMe
+" - https://github.com/nvim-lua/completion-nvim
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsListSnippets="<M-u>"
+let g:UltiSnipsJumpForwardTrigger="<M-i>"
+let g:UltiSnipsJumpBackwardTrigger="<M-o>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
 " * Syntastic * {{{3
 """"""""""""""""""""
