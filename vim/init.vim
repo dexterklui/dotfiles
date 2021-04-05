@@ -242,8 +242,6 @@ nnoremap j gj
 nnoremap k gk
 " Highlight last inserted line.
 nnoremap gV `[v`]
-nnoremap PP "+p
-nnoremap Pp "0p
 nnoremap <Leader>sea :setl spell spelllang=en<CR>
 nnoremap <Leader>sen :setl spell spelllang=en_gb<CR>
 nnoremap <Leader>sde :setl spell spelllang=de_de<CR>

@@ -1,7 +1,7 @@
 " DQNYank:          DQN plugin for yanking a paragraph
 " Maintainer:       Dexter K. Lui <dexterklui@pm.me>
 " Last Change:      26 May 2020
-" Version:          1.34.0 (DQN v1.34)
+" Version:          1.34.1 (DQN v1.34)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Abort if running in vi-compatible mode or the user doesn't want us.
@@ -252,6 +252,8 @@
   nnoremap <silent> YY "+yy
   nnoremap <silent> yc ^y$
   nnoremap <silent> Yc ^"+y$
+  nnoremap <silent> PP "+p
+  nnoremap <silent> Pp "0p
   "nnoremap YT :call Osc52Yank()<CR>
 
 " vimscript thingy
