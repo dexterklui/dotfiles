@@ -202,8 +202,10 @@ set colorcolumn=+1
 
 if $TERM !=# 'linux'
   set showbreak=∥   " TODO dqn0 unset its showbreak setting messing up others
-  "set lcs=tab:‹\ ›,trail:·,eol:¬,nbsp:_ " adjust the text printed by :list
-  "set list            " Show "invisible chars on screen like using :list
+  if $HOST_NAME == 'dqarch'
+    set lcs=tab:‹\ ›,trail:·,eol:¬,nbsp:_ " adjust the text printed by :list
+    set list            " Show "invisible chars on screen like using :list
+  endif
 else
   set showbreak=▶
   set lcs=tab:<\ >,trail:·,eol:¬,nbsp:_ " adjust the text printed by :list
