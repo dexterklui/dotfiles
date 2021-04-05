@@ -17,6 +17,7 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ** setup vim-plug ** {{{2
 """"""""""""""""""""""""""""""""""""""""
+let g:ran_vim_plugins = 1
 try
   if $HOST_NAME == 'dqarch'
     call plug#begin('~/.config/nvim/plug')
@@ -72,6 +73,7 @@ try
 
   call plug#end()
 catch /^Vim\%((\a\+)\)\=:E117/
+  let g:ran_vim_plugins = 0
 endtry
 
 " ** packadd ** {{{2
@@ -296,6 +298,8 @@ nnoremap <M-l> <C-w>l
 
 " *** Customizing Plugins *** {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if g:ran_vim_plugins " Only customize Vim plugins if they were loaded
+""""""""""""""""""""""""""""""""""""""""
 " ** For both vim and nvim ** {{{2
 """"""""""""""""""""""""""""""""""""""""
 " * Airline * {{{3
@@ -597,6 +601,8 @@ let g:ledger_extra_options = '--pedantic --explicit --check-payees'
 "      \ <Plug>NetrwTreeSqueeze
 "  augroup END
 "endif
+"""""""""""""""""""""""""""""""""""""""" }}}2
+endif " g:ran_vim_plugins
 
 " *** Post vimrc *** {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
