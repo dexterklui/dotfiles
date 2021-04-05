@@ -282,7 +282,7 @@ tnoremap <C-E><C-H> <C-\><C-N><C-W><C-H>
 tnoremap <C-E><C-L> <C-\><C-N><C-W><C-L>
 tnoremap <C-E>:	    <C-\><C-N>:
 tnoremap <C-E>N	    <C-\><C-N>
-tnoremap <C-E><C-N> <C-\><C-N>  
+tnoremap <C-E><C-N> <C-\><C-N>
 
 " To use `ALT+{h,j,k,l}` to navigate windows from any mode:
 tnoremap <M-h> <C-\><C-N><C-w>h
@@ -474,12 +474,12 @@ let g:indentLine_bufNameExclude = ['NERD_tree.*']
 
 " * AutoPairs * {{{3
 """"""""""""""""""""
-map <leader>pp <M-p>
-map <leader>pn <M-n>
-imap <C-b>e <M-e>
-imap <C-b>1e <M-e><M-e><C-o>ge<C-o>ge<M-e><M-e><C-o>h
-imap <C-b>2e <M-e><C-o>ge<C-o>ge<M-e><M-e><C-o>h
-imap <C-b>b <M-b>
+if !has('nvim')
+  map <leader>pp <M-p>
+  map <leader>pn <M-n>
+  imap <C-b>e <M-e>
+  imap <C-b>b <M-b>
+endif
 
 " * Syntastic * {{{3
 """"""""""""""""""""
