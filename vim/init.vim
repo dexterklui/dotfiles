@@ -32,9 +32,10 @@ try
   Plug 'preservim/nerdtree'
   Plug 'kien/ctrlp.vim'
 
-  " General syntax checking and autocomplete
+  " General syntax checking and autocomplete and tags
   Plug 'Valloric/YouCompleteMe'
   Plug 'vim-syntastic/syntastic'
+  Plug 'preservim/tagbar', {'on': 'TagbarToggle'}
 
   " General syntax highlighting and visuals
   Plug 'Yggdroot/indentLine'
@@ -56,6 +57,9 @@ try
   " Git
   Plug 'airblade/vim-gitgutter'
   Plug 'tpope/vim-fugitive'
+
+  " C family
+  Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['cpp', 'c']}
 
   " For optimizing python3
   Plug 'tmhedberg/SimpylFold', {'for': 'python'}
@@ -400,6 +404,10 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_global_ycm_extra_conf =
       \ ($XDG_CONFIG_HOME == "" ? "~/.config" : $XDG_CONFIG_HOME)
       \ . "/nvim/ycm_global_ycm_extra_conf"
+
+" * Tarbar * {{{3
+""""""""""""""""""""
+nnoremap <leader>; :TagbarToggle<CR>
 
 " * ctrlp * {{{3
 """"""""""""""""""""
