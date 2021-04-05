@@ -79,7 +79,6 @@
   endfunction
 
 " mappings
-  nnoremap <Leader>cs :call DQColorToggle()<CR>
 
 " vimscript thingy
   let &cpo = s:save_cpo
