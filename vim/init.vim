@@ -71,6 +71,7 @@ try
 
   " Misc
   Plug 'lambdalisue/suda.vim', {'on': ['SudaRead', 'SudaWrite']}
+  Plug 'christoomey/vim-tmux-navigator'
 
   call plug#end()
 catch /^Vim\%((\a\+)\)\=:E117/
@@ -411,6 +412,15 @@ nmap <leader><Tab> :NERDTreeToggle<CR>
 let NERDTreeQuitOnOpen = 3
 let NERDTreeMinimalUI = 1
 let NERDTreeShowBookmarks = 1
+
+" * vim-tmux-navigator * {{{3
+""""""""""""""""""""
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <M-\> :TmuxNavigatePrevious<cr>
 
 " * YouCompleteMe * {{{3
 """"""""""""""""""""
