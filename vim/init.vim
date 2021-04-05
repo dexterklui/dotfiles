@@ -221,6 +221,15 @@ map ][ /}<CR>b99]}:noh<CR>
 map ]] j0[[%/{<CR>:noh<CR>
 map [] k$][%?}<CR>:noh<CR>
 
+map ]l :lnext<CR>
+map [l :lprev<CR>
+map ]e :cnext<CR>
+map [e :cprev<CR>
+map ]a :next<CR>
+map [a :prev<CR>
+map [A :first<CR>
+map ]A :last<CR>
+
 " file it was loaded from, thus the changes you made.
 command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
   \ | wincmd p | diffthis
