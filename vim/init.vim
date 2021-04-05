@@ -48,6 +48,7 @@ try
   Plug 'tpope/vim-surround'
   Plug 'terryma/vim-multiple-cursors'
   Plug 'easymotion/vim-easymotion'
+  Plug 'preservim/nerdcommenter'
 
   " text, markdown, dqn
   Plug 'dhruvasagar/vim-table-mode', {'for': 'dqn', 'on': 'TableModeToggle'}
