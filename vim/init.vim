@@ -215,6 +215,12 @@ endif
 " *** Commands and Mappings *** {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Convenient command to see the difference between the current buffer and the
+" Make ]] and [[ useful even open brace is not at the first column
+map [[ ?{<CR>w99[{:noh<CR>
+map ][ /}<CR>b99]}:noh<CR>
+map ]] j0[[%/{<CR>:noh<CR>
+map [] k$][%?}<CR>:noh<CR>
+
 " file it was loaded from, thus the changes you made.
 command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
   \ | wincmd p | diffthis
