@@ -397,8 +397,9 @@ let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 let g:ycm_filetype_blacklist = { 'ledger': 1 }
 let g:ycm_autoclose_preview_window_after_completion = 1
-" Let Syntastic do syntax checking (see :help syntastic)
-let g:ycm_show_diagnostics_ui = 0
+let g:ycm_global_ycm_extra_conf =
+      \ ($XDG_CONFIG_HOME == "" ? "~/.config" : $XDG_CONFIG_HOME)
+      \ . "/nvim/ycm_global_ycm_extra_conf"
 
 " * ctrlp * {{{3
 """"""""""""""""""""

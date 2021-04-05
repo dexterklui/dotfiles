@@ -83,6 +83,11 @@ find vim -type f -name '*.vim' | sed 's|/[^/]*$||' | sort | uniq | sed -E "s|^vi
 find vim -type f -name '*.vim' | sed -E "s|^(.*)$|\1 \1|" | sed -E "s|^([^ ]*) vim/(.*)$|ln $LINK_ARG $PWD/\1 $DSTDIR/\2|" > $TMP_DOT_SCRIPT
 bash $TMP_DOT_SCRIPT
 
+# config files for vim plugins {{{2
+########################################
+# YouCompleteMe
+ln $LINK_ARG $PWD/vim/ycm_global_ycm_extra_conf $DSTDIR/ycm_global_ycm_extra_conf
+
         break
     fi
 done
