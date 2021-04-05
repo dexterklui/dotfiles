@@ -552,13 +552,6 @@ command -nargs=? L call s:LimePara(<args>)
 
 " * rainbow * {{{3
 """"""""""""""""""""
-func s:rainbowload()
-  try
-    call rainbow#load()
-  catch /^Vim\%((\a\+)\)\=:E117/
-  endtry
-endfunc
-au FileType python,vim,tex,sh call s:rainbowload()
 nnoremap <Leader>rb :RainbowToggle<CR>
 
 " * ledger * {{{3
