@@ -1,7 +1,7 @@
 " DQToggleConceal:  Plugin for toggling conceallevel
 " Maintainer:       Dexter K. Lui <dexterklui@pm.me>
 " Lat Change:       30 Apr 2020
-" Version:          1.2
+" Version:          1.2.1
 
 " Abort if running in vi-compatible mode or the user doesn't want us.
   if &cp || exists('g:loaded_DQToggleConceal')
@@ -59,9 +59,6 @@
 " Defining commands
 
 " mappings
-  noremap <leader>cl :call DQToggleConceal()<CR>
-  noremap <leader>cn :call DQToggleNormalCocu()<CR>
-  noremap <unique> <leader>cc :call DQToggleNormalCocu()<CR>
 
 " vimscript thingy
   let &cpo = s:save_cpo
