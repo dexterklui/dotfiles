@@ -495,6 +495,11 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsListSnippets="<M-u>"
 let g:UltiSnipsJumpForwardTrigger="<M-i>"
 let g:UltiSnipsJumpBackwardTrigger="<M-o>"
+" Need to unmap <tab> for abbrev expansion in dqn
+autocmd vimrcEx BufEnter *.dqn
+      \ try| iun <tab>| catch /^Vim\%((\a\+)\)\=:E31/| endtry
+autocmd vimrcEx BufLeave *.dqn
+      \ inoremap <tab> <C-R>=UltiSnips#ExpandSnippet()<CR>
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
