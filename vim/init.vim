@@ -222,6 +222,14 @@ endif
 
 " *** Commands and Mappings *** {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Prevent accidentally enter command-line window qith q: (very annoying)
+noremap q: <Nop>
+noremap Q: q:
+" Similar reason for Ex mode, use gQ instead:
+noremap Q <Nop>
+" dunno why the above mappings cause gqq to delay. So this remove the delay
+nnoremap <nowait> gqq gqq
+
 " Convenient command to see the difference between the current buffer and the
 " Make ]] and [[ useful even open brace is not at the first column
 map [[ ?{<CR>w99[{:noh<CR>
@@ -268,7 +276,6 @@ inoremap <C-L> <Del>
 " so that you can undo CTRL-U after inserting a line break.
 inoremap <C-U> <C-G>u<C-U>
 
-nnoremap Q <nop>
 exe 'nnoremap <silent> <Leader>B'
   \ . ' :if &bg==#"dark"<CR>se bg=light<CR>el<CR>se bg=dark<CR>end<CR>'
 
