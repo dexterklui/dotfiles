@@ -15,9 +15,10 @@ nnoremap <buffer> <F9> :Opencfile<CR>
 command! -nargs=0 RunCppOut vsp term://./%:.:r.out
 nnoremap <buffer> <F12> :RunCppOut<CR>
 
+let b:_undo_ftplugin = 'setl et< sw< sts< tw< cc<'
 if !exists(b:undo_ftplugin)
-  let b:undo_ftplugin = 'setl et< sw< sts< tw< cc<'
+  let b:undo_ftplugin = b:_undo_ftplugin
 else
-  let b:undo_ftplugin .= '| ' . 'setl et< sw< sts< tw< cc<'
+  let b:undo_ftplugin .= '| ' . b:_undo_ftplugin
 endif
 let b:undo_ftplugin .= '| delc Compile| delc Readcfile| delc Opencfile| delc RunCppOut'
