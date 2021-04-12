@@ -531,6 +531,14 @@ let g:syntastic_html_checkers = ["validator"]
 " * GitGutter * {{{3
 """"""""""""""""""""
 nnoremap <Leader>hc :GitGutterQuickFix<CR>
+" Ycm, when parsing, stops GitGutter update signs. A temporary work around:
+autocmd vimrcEx InsertLeave *.cpp,*.c,*.h,Makefile GitGutter
+autocmd vimrcEx BufWritePost *.cpp,*.c,*.h,Makefile GitGutter
+autocmd vimrcEx BufRead *.cpp,*.c,*.h,Makefile
+      \ nnoremap <buffer> u u:GitGutter<CR>
+autocmd vimrcEx BufRead *.cpp,*.c,*.h,Makefile
+      \ nnoremap <buffer> <C-r> <C-r>:GitGutter<CR>
+" still doesn't handle the case with :earlier and :later
 
 " * goyo * {{{3
 """"""""""""""""""""
