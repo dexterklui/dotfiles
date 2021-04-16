@@ -198,6 +198,7 @@ set cursorline      " Make bg color of cursor line different
 set updatetime=250  " after 250ms, write swap and update gitgutter
 set winwidth=87     " Set the min nr of columns for current window
 set spelllang=en_gb " Set default spell language as british english
+set spellfile=~/.config/nvim/spell/en.utf-8.add " file to store good spellings
 set pastetoggle=<F36> " Set mapping for toggle 'paste' option.
 set textwidth=80
 set colorcolumn=+1

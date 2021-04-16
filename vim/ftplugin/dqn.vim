@@ -20,7 +20,7 @@ setl smartcase
 setl concealcursor=nc
 setl nrformats=alpha,hex
 setl spell
-setl spellfile=~/.vim/spell/en.utf-8.add,~/.vim/spell/dqn.utf-8.add
+setl spellfile+=~/.config/nvim/spell/dqn.utf-8.add
 setl colorcolumn=+1
 setl breakindent
 setl breakindentopt=min:32,shift:-1
