@@ -1,5 +1,5 @@
 " Enable folding
-if exists("b:loaded_SimpylFold")
+if exists('b:loaded_SimpylFold')
   setl foldmethod=expr
 else
   setl foldmethod=indent

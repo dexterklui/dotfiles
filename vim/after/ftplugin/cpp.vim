@@ -16,7 +16,7 @@ command! -nargs=0 RunCppOut vsp term://./%:.:r.out
 nnoremap <buffer> <F12> :RunCppOut<CR>
 
 let b:_undo_ftplugin = 'setl et< sw< sts< tw< cc<'
-if !exists(b:undo_ftplugin)
+if !exists('b:undo_ftplugin')
   let b:undo_ftplugin = b:_undo_ftplugin
 else
   let b:undo_ftplugin .= '| ' . b:_undo_ftplugin
