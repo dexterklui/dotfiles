@@ -102,4 +102,15 @@ set searchurls.de https://de.pons.com/%C3%BCbersetzung?l=deen&in=&lf=de&qnac=&q=
 
 command se set
 
+" autocontainer
+" first unset all existing autocontain
+unset autocontain
+autocontain -s web\.whatsapp\.com Personal
+autocontain -s hkuportal\.hku\.hk Work
+autocontain -s moodle\.hku\.hk Work
+autocontain -s github\.com hello
+autocontain -s archlinux\.org hello
+autocontain -s protonmail\.com hello
+autocontain -s linode\.com hello
+
 " vim:ft=vim
