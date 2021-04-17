@@ -325,7 +325,7 @@ if exists('g:colors_name') && g:colors_name ==# 'solarized'
 else
   let g:airline_theme='dark'
 endif
-if ($HOST_NAME ==# 'dqarch' && $TERM_PROGRAM =~# '^alacritty$\|^kitty$') || ($HOST_NAME ==# 'dq-x1c' && $TERM_PROGRAM ==# 'gnome-terminal')
+if ($HOST_NAME ==# 'dqarch' && $TERM_PROGRAM =~# '^alacritty$\|^kitty$\|tmux')
   let g:airline_powerline_fonts = 1
 endif
 let g:airline_mode_map = {
