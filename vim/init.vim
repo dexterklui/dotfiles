@@ -223,13 +223,8 @@ endif
 
 " *** Commands and Mappings *** {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Prevent accidentally enter command-line window qith q: (very annoying)
-noremap q: <Nop>
-noremap Q: q:
-" Similar reason for Ex mode, use gQ instead:
+" Prevent accidentally enter Ex mode, use gQ instead:
 noremap Q <Nop>
-" dunno why the above mappings cause gqq to delay. So this remove the delay
-nnoremap <nowait> gqq gqq
 
 " Convenient command to see the difference between the current buffer and the
 " Make ]] and [[ useful even open brace is not at the first column
