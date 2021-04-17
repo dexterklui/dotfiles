@@ -1,4 +1,4 @@
-# Glubal ycm extra conf file for compile flags
+# Global ycm extra conf file for compile flags
 
 c_warn = ['-Wall', '-Wextra', '-Werror']
 c_flags = ['-pedantic-errors']
