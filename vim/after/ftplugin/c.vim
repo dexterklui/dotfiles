@@ -22,7 +22,7 @@ func <SID>CompileC()
     let l:cmd .= ' -o ' . l:prg . ' ' . l:src
     let l:cmd .= ' 2>&1 | tee ' . l:errfile
   else
-    let l:cmd = '!' . l:cpp . ' ' . l:cppflag . ' ' . l:warnflags . ' ' . l:prg
+    let l:cmd = '!' . l:cpp . ' ' . l:cppflag . ' ' . l:warnflags
     let l:cmd .= ' -o ' . l:prg . ' ' . l:src
     let l:cmd .= ' 2>&1 | tee ' . l:errfile
   endif
