@@ -2,7 +2,6 @@ setl expandtab
 setl shiftwidth=4
 setl tabstop=4
 setl textwidth=80
-setl colorcolumn=+1
 
 func <SID>CompileC()
   let l:c = "gcc"
@@ -43,9 +42,9 @@ endf
 nnoremap <buffer> <F11> :call <SID>CompileC()<CR>
 nnoremap <buffer> <F12> :vsp term://./%:.:r.out<CR>
 
-let b:_undo_ftplugin = 'setl et< sw< sts< tw< cc<'
-if !exists('b:undo_ftplugin')
-  let b:undo_ftplugin = b:_undo_ftplugin
-else
+let b:_undo_ftplugin = 'setl et< sw< ts< tw<'
+if exists('b:undo_ftplugin')
   let b:undo_ftplugin .= '| ' . b:_undo_ftplugin
+else
+  let b:undo_ftplugin = b:_undo_ftplugin
 endif

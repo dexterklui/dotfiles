@@ -4,17 +4,12 @@ setl foldlevel=99
 
 setl tabstop=3
 setl shiftwidth=3
-setl colorcolumn=+1
 
 setl formatoptions-=t
 
-" Set compiler
-"compiler python
-
-" for Plugin tmhedberg/SimpylFold
-
+let b:_undo_ftplugin = 'setl fdm< fdl< ts< sw< fo<'
 if exists('b:undo_ftplugin')
-  let b:undo_ftplugin .= "| setl fdm< fdl< ts< sts< sw< cc< fo<"
+  let b:undo_ftplugin .= '| ' . b:_undo_ftplugin
 else
-  let b:undo_ftplugin = "setl fdm< fdl< ts< sts< sw< cc< fo<"
+  let b:undo_ftplugin = b:_undo_ftplugin
 endif

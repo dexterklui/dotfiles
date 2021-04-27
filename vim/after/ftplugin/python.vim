@@ -36,8 +36,9 @@ let python_highlight_all = 1
 
 " for Plugin tmhedberg/SimpylFold
 
+let b:_undo_ftplugin = "setl fdm< fdl< cink< indk< inc< inex< sua< com< cms< ofu< et< sw< sts< ts< kp<| delc Compile| delc Readcfile| delc Opencfile"
 if exists('b:undo_ftplugin')
-  let b:undo_ftplugin .= "| setl fdm< fdl< cink< indk< inc< inex< sua< com< cms< ofu< et< sw< sts< ts< kp< | delc Compile| delc Readcfile| delc Opencfile"
+  let b:undo_ftplugin .= '| ' . b:_undo_ftplugin
 else
-  let b:undo_ftplugin = "setl fdm< fdl< cink< indk< inc< inex< sua< com< cms< ofu< et< sw< sts< ts< kp<| delc Compile| delc Readcfile| delc Opencfile"
+  let b:undo_ftplugin = b:_undo_ftplugin
 endif
