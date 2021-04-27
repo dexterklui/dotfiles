@@ -87,6 +87,8 @@ bash $TMP_DOT_SCRIPT
 ########################################
 # YouCompleteMe
 ln $LINK_ARG $PWD/vim/ycm_global_ycm_extra_conf $DSTDIR/ycm_global_ycm_extra_conf
+# UltiSnips
+ln $LINK_ARG $PWD/vim/UltiSnips/ $DSTDIR/UltiSnips
 
         break
     fi

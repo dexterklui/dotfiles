@@ -1,0 +1,164 @@
+priority 1
+
+snippet impl
+IMPLICIT NONE
+	${0}
+endsnippet
+
+snippet prog
+PROGRAM ${1:main}
+	${0}
+END PROGRAM $1
+endsnippet
+
+snippet mod
+MODULE  ${1:modulename}
+	${0}
+END MODULE $1
+endsnippet
+
+snippet proc
+PROCEDURE ${1:name}
+	${0}
+END PROCEDURE $1
+endsnippet
+
+snippet iface
+INTERFACE ${1:name}
+	${0}
+END INTERFACE $1
+endsnippet
+
+snippet doc
+! """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+! File: ${2:`vim_snippets#Filename('$1')`}
+! Author: `g:snips_author`
+! Email: `g:snips_email`
+! Github: `g:snips_github`
+! Description: $1
+! """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+${0}
+endsnippet
+
+snippet dox
+!> @brief ${1}
+!!
+!> ${2}
+!> @author `g:snips_author`
+${0}
+endsnippet
+
+snippet doxp
+!> @param[${1}]${0}
+# Variables definitions
+# Boolean
+endsnippet
+
+snippet bool
+LOGICAL :: ${0}
+# Integer
+endsnippet
+
+snippet int
+INTEGER :: ${0}
+endsnippet
+
+snippet real
+REAL :: ${0}
+# Double Precision
+endsnippet
+
+snippet double
+DOUBLE PRECISION :: ${0}
+# Char
+endsnippet
+
+snippet str
+CHARACTER (LEN=${1:*}) :: ${0:}
+# Types
+endsnippet
+
+snippet type
+TYPE (${1:name})
+	${0}
+END TYPE
+endsnippet
+
+snippet const
+${1:type}, PARAMETER :: $2 = ${0}
+endsnippet
+
+snippet arr
+${1:type}, ${2:allocatable, }DIMENSION (${3::}) :: ${0}
+endsnippet
+
+snippet intent
+${1:type}, INTENT (INOUT) :: ${0}
+# Array
+endsnippet
+
+snippet /
+(/ $1 /) ${2:,&} ${0}
+endsnippet
+
+snippet if
+IF (${1:condition}) THEN
+	${0}
+END IF
+endsnippet
+
+snippet case
+SELECT CASE (${1:expr})
+	CASE ($2)
+	CASE DEFAULT
+		$3
+END SELECT ${0}
+endsnippet
+
+snippet do
+DO ${1:i} = ${2:start}, ${3:end}, ${4:incr}
+	${0}
+END DO
+endsnippet
+
+snippet dow
+DO WHILE (${1:condition})
+	$2
+END DO
+endsnippet
+
+snippet sub
+SUBROUTINE ${1:name}($2)
+	${0}
+END SUBROUTINE $1
+endsnippet
+
+snippet func
+FUNCTION ${1:name}($2) RESULT($3)
+	${0}
+END FUNCTION $1
+endsnippet
+
+snippet pr
+WRITE(*,*) ${0}
+endsnippet
+
+snippet dpr
+WRITE(*,*) '$1 = ', $1
+endsnippet
+
+snippet read
+READ(UNIT = ${1:fp}, FILE = ${2:filename}, IOSTAT = ${3:ierr}) ${0}
+endsnippet
+
+snippet write
+WRITE(UNIT = ${1:fp}, FILE = ${2:filename}, IOSTAT = ${3:ierr}) ${0}
+endsnippet
+
+snippet open
+OPEN(UNIT = ${1:fp}, FILE = ${2:filename}, STATUS = ${3:unknown}, IOSTAT = ${4:ierr}) ${0}
+endsnippet
+
+snippet close
+CLOSE(UNIT = ${1:fp}) ${0}
+endsnippet
