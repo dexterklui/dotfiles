@@ -4,8 +4,10 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible " Use Vim, rather than Vi settings (nvim default).
 
-syntax on " (nvim default)
+" "filtype plugin indent on" before "syntax on" to make fortran_free_source
+" effective
 filetype plugin indent on " (nvim default)
+syntax on " (nvim default)
 let mapleader = ' ' " Must b4 any mapping that uses <Leader> to take effect
 
 augroup vimrcEx
