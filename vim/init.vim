@@ -65,6 +65,9 @@ try
   " C family
   Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['cpp', 'c']}
 
+  " JavaScript
+  Plug 'pangloss/vim-javascript', {'for': ['javascript']}
+
   " For optimizing python3
   Plug 'tmhedberg/SimpylFold', {'for': 'python'}
 
@@ -488,6 +491,13 @@ if !has('nvim')
   imap <C-b>e <M-e>
   imap <C-b>b <M-b>
 endif
+
+" * vim-javascript * {{{3
+""""""""""""""""""""
+augroup javascript_folding
+  au!
+  au FileType javascript setlocal foldmethod=syntax
+augroup END
 
 " * UltiSnips * {{{3
 """"""""""""""""""""
