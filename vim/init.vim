@@ -246,6 +246,9 @@ map [a :prev<CR>
 map [A :first<CR>
 map ]A :last<CR>
 
+" Toogle the current window to highlight difference
+nnoremap dr :set diff!<CR>
+
 " file it was loaded from, thus the changes you made.
 command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
   \ | wincmd p | diffthis
