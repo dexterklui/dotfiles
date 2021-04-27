@@ -1,6 +1,6 @@
 setl expandtab
-setl shiftwidth=2
-setl softtabstop=2
+setl tabstop=3
+setl shiftwidth=3
 setl textwidth=80
 setl colorcolumn=+1
 

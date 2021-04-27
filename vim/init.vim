@@ -180,6 +180,7 @@ set fillchars=vert:\|,fold:\  " Set filling characters for foldlines to space
 set conceallevel=2  " This is also needed for the plugin indentLine
 set nowrapscan      " disable search through bottom to the top
 set expandtab       " Typing <Tab> insert appropriate number of spaces
+set tabstop=4       " Set the width of a tab character
 set shiftwidth=4    " Make each indent level to be of 4 spaces
 set smarttab " <Tab> at line beginnings inserts whitespaces = 'shiftwidth' (n)
 set backspace=indent,eol,start " allow backspacing over everything (n)
