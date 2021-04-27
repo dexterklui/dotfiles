@@ -119,9 +119,49 @@ func s:OpFdChild()
   call cursor(l:line,l:virtcol)
 endfunc " }}}
 
+func s:Retab(old_indent, new_indent)
+" This function doesn't deal with <Tab> characters, but indentation with {{{
+" spaces. It changes old space indentation amount into new space indentation
+" amount.
+  if a:old_indent == a:new_indent
+    return
+  elseif a:old_indent < a:new_indent
+    for l:i in range(10, 1, -1)
+      let l:current_indent = a:old_indent * l:i
+      let l:new_indent_string = repeat(" ", a:new_indent * l:i)
+      silent exe "%s/^ \\{" . l:current_indent . "}\\ze\\S/"
+            \. l:new_indent_string . "/e"
+    endfor
+  else
+    for l:i in range(1, 10)
+      let l:current_indent = a:old_indent * l:i
+      let l:new_indent_string = repeat(" ", a:new_indent * l:i)
+      silent exe "%s/^ \\{" . l:current_indent . "}\\ze\\S/"
+            \. l:new_indent_string . "/e"
+    endfor
+  endif
+endfunc " }}}
+
+func s:SetIndent(new_indent)
+" Set shift width and tab stop at the same time {{{
+  exe "setl shiftwidth=" . a:new_indent
+  exe "setl tabstop=" . a:new_indent
+endfunc " }}}
+
+func s:RetabAndSetShiftWidth(old_indent, new_indent)
+" Call Retab then update shift width and tab stop option {{{
+  call s:Retab(a:old_indent, a:new_indent)
+  call s:SetIndent(a:new_indent)
+endfunc " }}}
+
 " Setting {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set foldtext=DQFoldText()
+
+" Command {{{1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+command -nargs=* Retab call <SID>RetabAndSetShiftWidth(<f-args>)
+command -nargs=1 Indent call <SID>SetIndent(<f-args>)
 
 " Mappings {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
