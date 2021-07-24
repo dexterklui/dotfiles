@@ -28,7 +28,9 @@ func <SID>CompileC()
 
   update
   exe l:cmd
-  exe 'cfile ' . l:errfile
+  if filereadable(l:errfile)
+    exe 'cfile ' . l:errfile
+  endif
   exe 'silent !rm -f ' . l:errfile
   if !empty(getqflist())
     copen
