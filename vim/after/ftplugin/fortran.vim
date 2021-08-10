@@ -2,6 +2,14 @@ setl expandtab
 setl shiftwidth=3
 setl tabstop=3
 
+" Abbreviation
+abbrev <buffer> .and.  .AND.
+abbrev <buffer> .or.   .OR.
+abbrev <buffer> .not.  .NOT.
+abbrev <buffer> .eqv.  .EQV.
+abbrev <buffer> .neqv. .NEQV.
+
+" Function for compilation
 func <SID>CompileFortran()
   let l:compiler = "gfortran"
   let l:std = ""
