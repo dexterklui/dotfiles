@@ -2,7 +2,6 @@ priority 1
 
 snippet impl
 IMPLICIT NONE
-	${0}
 endsnippet
 
 snippet prog
@@ -29,9 +28,25 @@ INTERFACE ${1:name}
 END INTERFACE $1
 endsnippet
 
+snippet !20
+!!!!!!!!!!!!!!!!!!!!
+endsnippet
+
+snippet !40
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+endsnippet
+
+snippet !60
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+endsnippet
+
+snippet !70
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+endsnippet
+
 snippet doc
 ! """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-! File: ${2:`vim_snippets#Filename('$1')`}
+! File: ${2:`vim_snippets\#Filename('$1')`}
 ! Author: `g:snips_author`
 ! Email: `g:snips_email`
 ! Github: `g:snips_github`
@@ -50,34 +65,59 @@ endsnippet
 
 snippet doxp
 !> @param[${1}]${0}
+endsnippet
+
 # Variables definitions
 # Boolean
-endsnippet
-
 snippet bool
 LOGICAL :: ${0}
-# Integer
 endsnippet
 
+# Integer
 snippet int
 INTEGER :: ${0}
 endsnippet
 
-snippet real
-REAL :: ${0}
-# Double Precision
+snippet intk
+INTEGER (KIND=${1:4}) :: ${0}
 endsnippet
 
+# Constant integer
+snippet intc
+INTEGER, PARAMETER :: ${0}
+endsnippet
+
+snippet real
+REAL :: ${0}
+endsnippet
+
+snippet realc
+REAL, PARAMETER :: ${0}
+endsnippet
+
+# Double Precision
 snippet double
 DOUBLE PRECISION :: ${0}
+endsnippet
+
+snippet doublec
+DOUBLE PRECISION, PARAMETER :: ${0}
+endsnippet
+
 # Char
+snippet char
+CHARACTER :: ${0}
 endsnippet
 
 snippet str
 CHARACTER (LEN=${1:*}) :: ${0:}
-# Types
 endsnippet
 
+snippet strc
+CHARACTER (LEN=${1:*}), PARAMETER :: ${0:}
+endsnippet
+
+# Types
 snippet type
 TYPE (${1:name})
 	${0}
@@ -94,9 +134,9 @@ endsnippet
 
 snippet intent
 ${1:type}, INTENT (INOUT) :: ${0}
-# Array
 endsnippet
 
+# Array
 snippet /
 (/ $1 /) ${2:,&} ${0}
 endsnippet
@@ -107,12 +147,29 @@ IF (${1:condition}) THEN
 END IF
 endsnippet
 
+snippet elif
+ELSE IF (${1:condition}) THEN
+	${0}
+endsnippet
+
+snippet else
+else
+	${0}
+endsnippet
+
+# there is one extra level of indentation, because in Vim it automatically helps
+# you to reduce one level of indentation when you type case
+snippet select
+	SELECT CASE (${1:expr})
+		CASE ($2)
+		CASE DEFAULT
+			$3
+	END SELECT ${0}
+endsnippet
+
 snippet case
-SELECT CASE (${1:expr})
-	CASE ($2)
-	CASE DEFAULT
-		$3
-END SELECT ${0}
+CASE ($1)
+	$0
 endsnippet
 
 snippet do
@@ -125,6 +182,16 @@ snippet dow
 DO WHILE (${1:condition})
 	$2
 END DO
+endsnippet
+
+snippet where
+WHERE (${1:conditiono})
+	${0}
+END WHERE
+endsnippet
+
+snippet elsewhere
+ELSEWHERE
 endsnippet
 
 snippet sub
@@ -161,4 +228,8 @@ endsnippet
 
 snippet close
 CLOSE(UNIT = ${1:fp}) ${0}
+endsnippet
+
+snippet data
+DATA ${1:variables} /${0:list}/
 endsnippet
