@@ -1,0 +1,7 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=My feh
+Exec=/home/dexq/bin/fehh %U
+Categories=Graphics
+MimeType=image/jpeg;
+Icon=feh

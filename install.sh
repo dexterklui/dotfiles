@@ -48,6 +48,15 @@ ln $LINK_ARG $PWD/scripts/* ~/bin/
     fi
 done
 
+# desktop application {{{1
+##############################################################################
+for i in $@ ; do
+    if [[ $i = 'desktop_app' || $i = '--all' ]] ; then
+ln $LINK_ARG $PWD/desktop_app/* ~/.local/share/applications/
+        break
+    fi
+done
+
 # okular {{{1
 ##############################################################################
 for i in $@ ; do
