@@ -1,0 +1,6 @@
+#!/usr/bin/bash
+
+xinput set-prop $(xinput|grep -i trackpoint|sed -E 's/^.*id=([0-9]+).*$/\1/') 'libinput Accel Speed' 1.0
+xinput set-prop $(xinput|grep -i synaptics|sed -E 's/^.*id=([0-9]+).*$/\1/') 'libinput Accel Speed' 1.0
+xinput set-prop $(xinput|grep -i synaptics|sed -E 's/^.*id=([0-9]+).*$/\1/') 'libinput Natural Scrolling Enabled' 1
+xinput set-prop $(xinput|grep -i synaptics|sed -E 's/^.*id=([0-9]+).*$/\1/') 'libinput Tapping Enabled' 1

@@ -1,0 +1,40 @@
+#!/bin/sh
+#
+# A program that generates Titech Matrix passcode given a series of keys.
+#
+# Each argument is a key which consists of one digit and one alphabet letter,
+# where the digit indicates the row of the matrix (1-7) and the letter
+# indicates the column (a-j).  Order within a key doesn't matter. Both upper
+# and lower case letters are acceptable.
+#
+# TODO Guardian
+
+code=''
+for key ; do
+########################################
+row=$(echo $key | sed 's/[a-zA-Z]//')
+col=$(echo $key | sed 's/[0-9]//' | tr '[:upper:]' '[:lower:]')
+i=1
+for letter in a b c d e f g h i j ; do
+    if [ $col = $letter ] ; then
+        col=$i
+        break
+    fi
+    i=$((i+1))
+done
+code="$code$(cat $0 | tail -n7 | sed 's/^#.*| //' | awk "NR == $row {print \$$col}")"
+########################################
+done
+if [ -x "$(which notify-send)" ] ; then notify-send -u low $code ; fi
+echo $code
+
+# The matrix: (CHANGE WITH CAUTION, PROGRAM DEPENDS ON IT!)
+#  | A B C D E F G H I J
+#--+---------------------
+# 1| w s b v l w t t r t
+# 2| s x e j b p s h r e
+# 3| i v n y h h l n o n
+# 4| z k m q f c b s i e
+# 5| n a n g p s r a k h
+# 6| m z j q f n f h f q
+# 7| k s x b a s u u f z

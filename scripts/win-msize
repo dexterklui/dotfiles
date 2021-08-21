@@ -1,0 +1,19 @@
+#!/usr/bin/bash
+
+dpy_w=$(xdpyinfo|grep dimension|perl -pe 's/^\D+(\d+)x.+$/\1/')
+dpy_h=$(xdpyinfo|grep dimension|perl -pe 's/^\D+\d+x(\d+).+$/\1/')
+win_w=$(xwininfo -id $(xdo id)|grep -i '^\s*width:'|perl -pe 's/^\D+(\d+).*$/\1/')
+win_h=$(xwininfo -id $(xdo id)|grep -i '^\s*height'|perl -pe 's/^\D+(\d+).*$/\1/')
+wid=$(echo "$dpy_w * 0.80" | bc -l | sed 's/\..*//')
+hgt=$(echo "$dpy_h * 0.80" | bc -l | sed 's/\..*//')
+if [[ $wid = $win_w && $hgt = $win_h ]]; then
+    wid=$(echo "$dpy_w * 0.5" | bc -l | sed 's/\..*//')
+    #hgt=$(echo "$dpy * 0.5" | bc -l | sed 's/\..*//')
+    hgt=$(echo "($dpy_h-30) * 0.5 - 25" | bc -l | sed 's/\..*//')
+    xdo resize -w $wid -h $hgt
+else
+    x=$(echo "($dpy_w - $wid)/2" | bc -l)
+    y=$(echo "($dpy_h - $hgt)/2" | bc -l)
+    xdo move -x $x -y $y
+    xdo resize -w $wid -h $hgt
+fi

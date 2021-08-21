@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+SKYPE_INDEX=$(pacmd list-source-outputs | awk '/index:/ {a = $2}; /Skype/ {b = a}; END {print b}')
+[ -z "$SKYPE_INDEX" ] && exit 1
+MUTED=$(pacmd list-source-outputs | grep -A10 "index: $SKYPE_INDEX" | grep 'muted: yes')
+
+if [ -n "$MUTED" ]; then
+    pacmd set-source-output-mute $SKYPE_INDEX 0
+    notify-send -t 800 'Unmuted Skype.'
+else
+    pacmd set-source-output-mute $SKYPE_INDEX 1
+    notify-send -t 800 'Muted Skype.'
+fi

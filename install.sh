@@ -39,6 +39,15 @@ ln $LINK_ARG $PWD/bash/bash_profile  ~/.bash_profile
     fi
 done
 
+# scripts {{{1
+##############################################################################
+for i in $@ ; do
+    if [[ $i = 'scripts' || $i = '--all' ]] ; then
+ln $LINK_ARG $PWD/scripts/* ~/bin/
+        break
+    fi
+done
+
 # okular {{{1
 ##############################################################################
 for i in $@ ; do
