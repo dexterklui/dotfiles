@@ -5,10 +5,12 @@ if [[ ! $? -eq 0 ]]; then
     exit
 fi
 
+arg="--auto-rotate --scale-down"
+
 if [[ $# -eq 0 ]]; then
-    feh --auto-rotate --borderless --scale-down ./
+    feh $arg ./
 elif [[ $# -eq 1 ]]; then
-    feh --auto-rotate --borderless --scale-down --start-at $1
+    feh $arg --start-at $1
 else
-    feh --auto-rotate --borderless --scale-down $@
+    feh $arg $@
 fi
