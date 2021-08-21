@@ -1,4 +1,7 @@
 #!/usr/bin/bash
+# Toggle mute microphone input to Skype only.
+# require program pacmd
+
 SKYPE_INDEX=$(pacmd list-source-outputs | awk '/index:/ {a = $2}; /Skype/ {b = a}; END {print b}')
 [ -z "$SKYPE_INDEX" ] && exit 1
 MUTED=$(pacmd list-source-outputs | grep -A10 "index: $SKYPE_INDEX" | grep 'muted: yes')

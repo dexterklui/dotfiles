@@ -1,7 +1,9 @@
 #!/usr/bin/env xdg-open
+# A desktop application that opens images with feh with custom flags. This is
+# done by calling a custom bash scripts: ~/bin/fehh.
 [Desktop Entry]
 Name=My feh
-Exec=/home/dexq/bin/fehh %U
+Exec=~/bin/fehh %U
 Categories=Graphics
 MimeType=image/jpeg;
 Icon=feh

@@ -1,4 +1,10 @@
 #!/usr/bin/bash
+# A bash script toggle between two window states:
+# (1) resizing a window such that each eage's length is 80% of the screen and
+# then center it. Or (2) resize a window to 50% of screen width and a bit less
+# than 50% of screen height.
+#
+# Require program xdo
 
 dpy_w=$(xdpyinfo|grep dimension|perl -pe 's/^\D+(\d+)x.+$/\1/')
 dpy_h=$(xdpyinfo|grep dimension|perl -pe 's/^\D+\d+x(\d+).+$/\1/')

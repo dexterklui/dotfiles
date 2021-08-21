@@ -1,4 +1,7 @@
 #!/usr/bin/bash
+# A bash scripts to make the sensitivity of the trackpoint of Lenovo laptop
+# highest.
+# Require the command xinput
 
 xinput set-prop $(xinput|grep -i trackpoint|sed -E 's/^.*id=([0-9]+).*$/\1/') 'libinput Accel Speed' 1.0
 xinput set-prop $(xinput|grep -i synaptics|sed -E 's/^.*id=([0-9]+).*$/\1/') 'libinput Accel Speed' 1.0
