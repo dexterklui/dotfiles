@@ -668,7 +668,7 @@ endif " g:ran_vim_plugins
 " *** Post vimrc *** {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " To ensure the autocmds added by vimrc got run
-doautocmd vimrcEx ColorScheme *
+silent doautocmd vimrcEx ColorScheme *
 if v:vim_did_enter
   let &ft=&ft " Reload ftplugin to override vimrc settings after resource
 endif
