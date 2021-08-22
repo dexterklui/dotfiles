@@ -24,11 +24,6 @@ alias ll='ls -lh'
 alias la='ls -lAh'
 alias l='ls -CF'
 
-if [[ (-x "/usr/bin/which" || -x "/bin/which") && -x $(which gcc) ]]; then
-    alias comp='g++ -pedantic-errors -std=c++11'
-    alias compc='gcc -pedantic-errors -std=c11'
-fi
-
 if [ -x /usr/bin/nvim ]; then
     alias v='nvim'
     alias vr='nvim -R' # Neovim read-only mode
