@@ -11,7 +11,7 @@ arg="--auto-rotate --scale-down"
 if [[ $# -eq 0 ]]; then
     feh $arg ./
 elif [[ $# -eq 1 ]]; then
-    feh $arg --start-at $1
+    feh $arg --start-at "$1"
 else
-    feh $arg $@
+    feh $arg "$@"
 fi
