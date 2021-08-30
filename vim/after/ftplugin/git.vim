@@ -8,7 +8,7 @@ if getline('$') ==# '#'
   setl colorcolumn=51,+1
 endif
 
-let b:_undo_ftplugin = 'tw< wrap< lbr< spell< spl< cc<"'
+let b:_undo_ftplugin = 'setl tw< wrap< lbr< spell< spl< cc<"'
 if exists('b:undo_ftplugin')
   let b:undo_ftplugin .= '| ' . b:_undo_ftplugin
 else
