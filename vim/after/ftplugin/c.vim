@@ -30,12 +30,8 @@ func <SID>CompileC()
   exe l:cmd
   if filereadable(l:errfile)
     exe 'cfile ' . l:errfile
-    if !empty(getqflist())
-      crewind
-    else
-      cclose
-    endif
   endif
+  cwindow
   exe 'silent !rm -f ' . l:errfile
 endf
 

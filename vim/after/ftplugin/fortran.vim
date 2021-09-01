@@ -31,12 +31,7 @@ func <SID>CompileFortran()
   exe l:cmd
   exe 'cfile ' . l:errfile
   exe 'silent !rm -f ' . l:errfile
-  if !empty(getqflist())
-    copen
-    crewind
-  else
-    cclose
-  endif
+  cwindow
 endf
 
 " Shortcuts for compilation
