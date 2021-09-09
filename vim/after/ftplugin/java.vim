@@ -11,7 +11,7 @@ func <SID>CompileJava()
   let l:errfile = expand("%:.:t:r") . ".err"
 
   if (system("ls | grep -i '^makefile$'") !=# "")
-    let l:cmd = "make " . l:prg
+    let l:cmd = "make " . l:bytecode
   else
     let l:cmd = '!' . l:compiler . ' ' . l:flags . ' ' . l:src
     let l:cmd .= ' 2>&1 | tee ' . l:errfile
