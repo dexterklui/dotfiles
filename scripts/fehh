@@ -6,7 +6,7 @@ if [[ ! $? -eq 0 ]]; then
     exit
 fi
 
-arg="--auto-rotate --scale-down"
+arg="--auto-rotate --scale-down --auto-zoom"
 
 if [[ $# -eq 0 ]]; then
     feh $arg ./
