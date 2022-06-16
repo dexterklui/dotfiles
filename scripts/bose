@@ -7,7 +7,7 @@ INDEX=$(pacmd list-cards | awk '/index:/ {a = $2}; /dqbose/ {b = a}; END {print 
 SKYPE_INDEX=$(pacmd list-source-outputs | awk '/index:/ {a = $2}; /Skype/ {b = a}; END {print b}')
 
 if [ -n "$(pacmd list-cards | grep 'active profile: <a2dp_sink>')" ]; then
-    pacmd set-card-profile $INDEX headset_head_unit
+    pacmd set-card-profile $INDEX handsfree_head_unit
     [ -n "$SKYPE_INDEX" ] && pacmd set-source-output-mute $SKYPE_INDEX 0
 else
     pacmd set-card-profile $INDEX a2dp_sink
