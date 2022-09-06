@@ -39,6 +39,7 @@ inoremap <buffer> <C-J><C-J> <Esc>o<C-O>0<C-O>D<Tab>
 inoremap <buffer> <C-J><C-K> ░<CR>
 
 " Define abbreviations that are local to .dqn buffers.
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 iabbrev <buffer> #l ----------------------------------------------------------------------
 iabbrev <buffer> #L ======================================================================
 
@@ -99,6 +100,7 @@ let b:undo_ftplugin .= "| iunab <buffer> #L| iunab <buffer> #l"
       \ . "| iunab <buffer> {{s| iunab <buffer> ;r| iunab <buffer> ;R"
       \ . "| iunab <buffer> ;t| iunab <buffer> ;d| iunab <buffer> ;D"
       \ . "| iunab <buffer> latex"
+
 " DQN Plugins
 """"""""""""""""""""""""""""""""""""""""
 let b:undo_ftplugin .= "| nun <buffer> <leader>cl| nun <buffer> <leader>cn"
