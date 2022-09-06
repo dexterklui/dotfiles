@@ -214,6 +214,8 @@ set spellfile=~/.config/nvim/spell/en.utf-8.add " file to store good spellings
 set pastetoggle=<F36> " Set mapping for toggle 'paste' option.
 set textwidth=80
 set colorcolumn=+1
+set smartcase
+set ignorecase
 
 if $TERM !=# 'linux'
   set showbreak=∥   " TODO dqn0 unset its showbreak setting messing up others
