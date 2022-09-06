@@ -43,6 +43,8 @@ try
   " General syntax highlighting and visuals
   Plug 'Yggdroot/indentLine'
   Plug 'frazrepo/vim-rainbow', {'on': 'RainbowToggle'}
+  Plug 'xolox/vim-easytags'
+  Plug 'xolox/vim-misc' " required by vim-easytags
 
   " General formating and editting
   Plug 'godlygeek/tabular', {'on': 'Tabularize'}
@@ -69,6 +71,10 @@ try
 
   " JavaScript
   Plug 'pangloss/vim-javascript', {'for': ['javascript']}
+
+  " Java
+  "Plug 'uiiaoo/java-syntax.vim', {'for': ['java']}
+  " ^ try using easytag plugin in place for that
 
   " For optimizing python3
   Plug 'tmhedberg/SimpylFold', {'for': 'python'}
@@ -492,6 +498,10 @@ let g:indentLine_setConceal = 0
 let g:indentLine_fileTypeExclude = ['dqn', 'dqn0', 'man', 'help']
 let g:indentLine_bufTypeExclude = ['help', 'terminal']
 let g:indentLine_bufNameExclude = ['NERD_tree.*']
+
+" * vim-easytag * {{{3
+""""""""""""""""""""
+"let g:easytags_dynamic_files = 1
 
 " * AutoPairs * {{{3
 """"""""""""""""""""
