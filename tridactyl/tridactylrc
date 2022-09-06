@@ -114,4 +114,4 @@ command se set
 "autocontain -s proton\.me hello
 "autocontain -s linode\.com hello
 
-" vim:ft=vim
+" vi: ft=vim tw=0
