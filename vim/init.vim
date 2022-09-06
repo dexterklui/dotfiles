@@ -76,6 +76,9 @@ try
   "Plug 'uiiaoo/java-syntax.vim', {'for': ['java']}
   " ^ try using easytag plugin in place for that
 
+  " Tex
+  Plug 'lervag/vimtex', {'for': ['tex']}
+
   " For optimizing python3
   Plug 'tmhedberg/SimpylFold', {'for': 'python'}
 
