@@ -14,7 +14,7 @@ bind ? fillcmdline find -?
 bind ,f fullscreen
 bind n findnext 1
 bind N findnext -1
-bind c fillcmdline bmarks
+bind c current_url bmarks
 bind K tabprev
 bind J tabnext
 bind D tabclose
