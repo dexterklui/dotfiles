@@ -104,13 +104,14 @@ command se set
 
 " autocontainer
 " first unset all existing autocontain
-unset autocontain
-autocontain -s web\.whatsapp\.com Personal
-autocontain -s hkuportal\.hku\.hk Work
-autocontain -s moodle\.hku\.hk Work
-autocontain -s github\.com hello
-autocontain -s archlinux\.org hello
-autocontain -s protonmail\.com hello
-autocontain -s linode\.com hello
+"unset autocontain
+"autocontain -s web\.whatsapp\.com Personal
+"autocontain -s hkuportal\.hku\.hk Work
+"autocontain -s eportal\.hku\.hk Work
+"autocontain -s moodle\.hku\.hk Work
+"autocontain -s github\.com hello
+"autocontain -s archlinux\.org hello
+"autocontain -s proton\.me hello
+"autocontain -s linode\.com hello
 
 " vim:ft=vim
