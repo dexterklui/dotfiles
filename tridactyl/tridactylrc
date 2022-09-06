@@ -56,7 +56,10 @@ bind f hint -Jc a,button,input
 bind F hint -Jbc a,button,input
 
 bindurl lihkg.com f hint -Jc a,i
-bindurl mail.protonmail.com f hint -Jc a,button,input,[class^="subject-text"]
+bindurl proton.me f hint -Jc a,button,input,[class^="subject-text"],.item-container
+bindurl github.com f hint -Jc a,button,input,.js-feature-preview-indicator-container
+bindurl emicloud.emieow.com f hint -Jc a,button,input,.menutoggle,.button,.task-item__body,.content__title,.multiselect__single,[for^="toggleCompleted"],[for^="allDayToggle"],[for^="detailsToggleCompleted"]
+      \
 
 " Stupid workaround to let hint -; be used with composite which steals
 " semi-colons
