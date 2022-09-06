@@ -1,0 +1,29 @@
+snippet mtr "Expenses:Transportation:MTR" b
+${0:`date +%Y/%m/%d`} MTR
+	Expenses:Transportation:Train  ${1:amount}
+	${2:Assets:Wallet:Octopus}
+endsnippet
+
+snippet bus "Expenses:Transportation:Bus" b
+${0:`date +%Y/%m/%d`} Transportation
+	Expenses:Transportation:Bus  ${1:amount}
+	${2:Assets:Wallet:Octopus}
+endsnippet
+
+snippet meal "Expenses:Food:Meal" b
+${0:`date +%Y/%m/%d`} ${1:Restaurant}
+	Expenses:Food:Meal  ${2:amount}
+	${3:Assets:Wallet:Octopus}
+endsnippet
+
+snippet snacks "Expenses:Food:Snacks" b
+${0:`date +%Y/%m/%d`} ${1:Supermarket}
+	Expenses:Food:Snacks  ${2:amount}
+	${3:Assets:Wallet:Octopus}
+endsnippet
+
+snippet drinks "Expenses:Food:Drinks" b
+${0:`date +%Y/%m/%d`} ${1:Cafe}
+	Expenses:Food:Drinks  ${2:amount}
+	${3:Assets:Wallet:Octopus}
+endsnippet
