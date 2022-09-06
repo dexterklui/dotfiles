@@ -207,7 +207,12 @@ set ttimeoutlen=50  " Time (ms) that is waited for a key-seq to complete (n)
 set viminfo^=!      " (n)
 set langnoremap     " (n)
 set cursorline      " Make bg color of cursor line different
-set updatetime=250  " after 250ms, write swap and update gitgutter
+" The solution seems to set it 1000 first, then manual (delayed) set it back to
+" 95 (and then optionally?: back to 1000 again)
+set updatetime=1000   " If too lag, set to 1000
+"set updatetime=95   " after *ms, write swap and do CursorHold autocmd
+                    " ^ When set above ~95ms, CursorHold autocmd is blocked by
+                    " YouCompleteMe plugin
 set winwidth=87     " Set the min nr of columns for current window
 set spelllang=en_gb " Set default spell language as british english
 set spellfile=~/.config/nvim/spell/en.utf-8.add " file to store good spellings
@@ -561,13 +566,15 @@ let g:syntastic_html_checkers = ["validator"]
 """"""""""""""""""""
 nnoremap <Leader>hc :GitGutterQuickFix<CR>
 " Ycm, when parsing, stops GitGutter update signs. A temporary work around:
-autocmd vimrcEx InsertLeave *.cpp,*.c,*.h,Makefile GitGutter
-autocmd vimrcEx BufWritePost *.cpp,*.c,*.h,Makefile GitGutter
-autocmd vimrcEx BufRead *.cpp,*.c,*.h,Makefile
-      \ nnoremap <buffer> u u:GitGutter<CR>
-autocmd vimrcEx BufRead *.cpp,*.c,*.h,Makefile
-      \ nnoremap <buffer> <C-r> <C-r>:GitGutter<CR>
+"autocmd vimrcEx InsertLeave *.cpp,*.c,*.h,Makefile GitGutter
+"autocmd vimrcEx BufWritePost *.cpp,*.c,*.h,Makefile GitGutter
+"autocmd vimrcEx BufRead *.cpp,*.c,*.h,Makefile
+      "\ nnoremap <buffer> u u:GitGutter<CR>
+"autocmd vimrcEx BufRead *.cpp,*.c,*.h,Makefile
+      "\ nnoremap <buffer> <C-r> <C-r>:GitGutter<CR>
 " still doesn't handle the case with :earlier and :later
+" ^ by turing down 'updatetime' <= 95ms I can get GitGutter to update signs
+" automatically with CursorHold autocmd again.
 
 " * goyo * {{{3
 """"""""""""""""""""
