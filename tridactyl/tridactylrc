@@ -88,11 +88,6 @@ bind --mode=ex <C-b> text.backward_char
 "set hintfiltermode vimperator-reflow
 "set hintnames numeric
 
-" guiset
-"guiset_quiet hoverlink none
-"guiset gui none
-"guiset tabs always
-
 " settings
 set newtab about:blank
 
@@ -101,6 +96,11 @@ set searchurls.en https://dictionary.cambridge.org/search/direct/?datasetsearch=
 set searchurls.de https://de.pons.com/%C3%BCbersetzung?l=deen&in=&lf=de&qnac=&q=
 
 command se set
+
+" guiset
+"guiset_quiet hoverlink none
+"guiset gui none
+"guiset tabs always
 
 " autocontainer
 " first unset all existing autocontain
