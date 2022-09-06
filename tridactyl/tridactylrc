@@ -1,8 +1,14 @@
 " Unbind
 unbind --mode=browser <C-6>
 unbind --mode=browser <CS-6>
+unbind --mode=browser <C-^>
+unbind <C-6>
+unbind <CS-6>
+unbind <C-^>
+unbind A
 
 " Bindings for normal mode
+bind a tab #
 bind / fillcmdline find
 bind ? fillcmdline find -?
 bind ,f fullscreen
