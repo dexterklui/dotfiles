@@ -553,7 +553,7 @@ let g:UltiSnipsEditSplit="vertical"
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = {
-  \ "mode": "passive",
+  \ "mode": "active",
   \ "active_filetypes": [],
   \ "passive_filetypes": [] }
 command -nargs=0 SC SyntasticCheck
@@ -564,6 +564,7 @@ command -nargs=0 SR SyntasticReset
 let g:syntastic_python_checkers = ["pylint"]
 let g:syntastic_cpp_checkers = ["clang_check"]
 let g:syntastic_html_checkers = ["validator"]
+let g:syntastic_java_checkers = ["java"]
 
 " * GitGutter * {{{3
 """"""""""""""""""""
