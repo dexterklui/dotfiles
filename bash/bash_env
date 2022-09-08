@@ -13,7 +13,7 @@ export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 [ -n $PATH ] && export PATH=$HOME/bin:$PATH
 
-if [[ (-n "$(ledger --version)" || -n "$(hledger --version)") ]] ; then
+if [[ (-n "$(command -v ledger)" || -n "$(command -v hledger)") ]] ; then
     export LEDGER_FILE=/media/mikeX/Nextcloud/Documents/Ledger/journal.ledger
     export LEDGER_PEDANTIC=1
 fi
