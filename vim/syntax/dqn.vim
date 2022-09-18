@@ -109,7 +109,17 @@ syn cluster dqnTitle add=dqnTitle1,dqnTitle2,dqnTitle3,dqnSubtitle
 
 " Keywords {{{2
 """"""""""""""""""""
-syn keyword dqnKeyword DUNNO NOTE WARN TODO XXX FIXME
+syn keyword dqnKeyword DUNNO WELL NOTE WARN TODO XXX FIXME
+" DUNNO: Indicating that the following is not note-taking, but is a comment
+" about me having some confusion, difficulty to understand, question and doubt.
+" WELL: Indicating that the following is not note-taking, but is a comment
+" writing my own opinions, thoughts in general, which may include doubts and
+" questions.
+" NOTE: Bringing attention ("note that ...").
+" WARN: Also bring attention, especially clarifying something that is easily
+" misunderstood.
+" TODO XXX FIXME: These are common keywords that are usually syntax-highighted.
+
 syn match   dqnKeyword +/?/+ display
 
 " Tags TODO {{{2
