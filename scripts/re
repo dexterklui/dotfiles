@@ -1,9 +1,19 @@
 #!/usr/bin/bash
-# A bash scripts to make the sensitivity of the trackpoint of Lenovo laptop
-# highest.
-# Require the command xinput
+# rex: reset xinput parameters
+#
+# Perosnal script to set xinput parameters to intended value
+# Now this script needs to manually invoked after the relevant devices are
+# connected, to set the intended parameters for those devices.
+#
+# Require xinput
 
+# For Lenovo thinkpad's trackpoint.
 xinput set-prop $(xinput|grep -i trackpoint|sed -E 's/^.*id=([0-9]+).*$/\1/') 'libinput Accel Speed' 1.0
+
+# For Lenovo thinkpad's touch pad
 xinput set-prop $(xinput|grep -i synaptics|sed -E 's/^.*id=([0-9]+).*$/\1/') 'libinput Accel Speed' 1.0
 xinput set-prop $(xinput|grep -i synaptics|sed -E 's/^.*id=([0-9]+).*$/\1/') 'libinput Natural Scrolling Enabled' 1
 xinput set-prop $(xinput|grep -i synaptics|sed -E 's/^.*id=([0-9]+).*$/\1/') 'libinput Tapping Enabled' 1
+
+# For microsoft bluetooth mouse
+xinput set-prop $(xinput|grep -i 'microsoft bluetooth mouse\s*id'|sed -E 's/^.*id=([0-9]+).*$/\1/') 'libinput Accel Speed' 1.0
