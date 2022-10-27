@@ -1,7 +1,7 @@
 setl expandtab
 setl tabstop=4
 setl shiftwidth=4
-setl textwidth=80
+setl textwidth=0
 
 let b:_undo_ftplugin = 'setl et< ts< sw< tw<'
 if exists('b:undo_ftplugin')
