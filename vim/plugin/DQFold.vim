@@ -3,6 +3,8 @@
 " Last Change:      17 May 2020
 " Version:          1.5
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" To use the foldtext, add the line:
+" set foldtext=DQFoldText()
 
 " Abort if running in vi-compatible mode or the user doesn't want us. {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -153,10 +155,6 @@ func s:RetabAndSetShiftWidth(old_indent, new_indent)
   call s:Retab(a:old_indent, a:new_indent)
   call s:SetIndent(a:new_indent)
 endfunc " }}}
-
-" Setting {{{1
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set foldtext=DQFoldText()
 
 " Command {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

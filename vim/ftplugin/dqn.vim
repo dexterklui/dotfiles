@@ -27,6 +27,10 @@ setl breakindentopt=min:32,shift:-1
 setl nolist
 setl virtualedit=block
 
+if exists("*DQFoldText()")
+  setl foldtext=DQFoldText()
+endif
+
 " Define mappings that are local to .dqn buffers.
 "
 " Format a paragraph but skip the first line (which is used for title).
@@ -91,7 +95,7 @@ nnoremap <buffer> <F12> :Dqn2html<CR>
 let b:autopairs_enabled = 0
 
 let b:undo_ftplugin = "setl cole< ai< fdm< fdc< js< tw< wrap< lbr< fo< flp< ts<"
-      \ . " com< ic< scs< cocu< nf< spell< cc< bri< briopt< list< ve<"
+      \ . " com< ic< scs< cocu< nf< spell< cc< bri< briopt< list< ve< fdt<"
 let b:undo_ftplugin .= "| nun <buffer> gqn| nun <buffer> <leader>fi"
       \ . "| iun <buffer> <C-B>t| iun <buffer> <C-B><C-T>"
       \ . "| iun <buffer> <C-J><C-J>| iun <buffer> <C-J><C-K>"
