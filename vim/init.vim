@@ -14,7 +14,7 @@ augroup vimrcEx
   au!
 augroup END
 "}}}1
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " *** Adding packages *** {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ** setup vim-plug ** {{{2
@@ -71,10 +71,6 @@ try
 
   " JavaScript
   Plug 'pangloss/vim-javascript', {'for': ['javascript']}
-
-  " Java
-  "Plug 'uiiaoo/java-syntax.vim', {'for': ['java']}
-  " ^ try using easytag plugin in place for that
 
   " Tex
   Plug 'lervag/vimtex', {'for': ['tex']}
@@ -242,6 +238,10 @@ autocmd vimrcEx FileType * set breakindent breakindentopt=min:32,shift:-1
 if !has('nvim') && has('termwinkey')
   set termwinkey=<C-E> " Set the key that starts a CTRL-W cmd in terminal window
 endif
+
+" ** Global variables ** {{{2
+""""""""""""""""""""""""""""""""""""""""
+let g:markdown_folding = 1
 
 " *** Commands and Mappings *** {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
