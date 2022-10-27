@@ -335,6 +335,7 @@ nnoremap <M-l> <C-w>l
 digraphs \|- 8866 " ⊢ (turnstile)
 digraphs \|= 8872 " ⊨ (double turnstile)
 digraphs o+ 8853 " ⊕ (xor symbol)
+digraphs (/ 8713 " ∉ (does not belong)
 
 " *** Customizing Plugins *** {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
