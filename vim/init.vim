@@ -172,6 +172,18 @@ endif
 "source ~/.vim/DQScripts/digraphs/symbols.vim
 "source ~/.vim/DQScripts/digraphs/super_sub_scripts.vim
 
+" Work around: fix meta key in terminal
+" See https://stackoverflow.com/questions/6778961/alt-key-shortcuts-not-working-on-gnome-terminal-with-vim
+if !has("nvim")
+    let c='a'
+    while c <= 'z'
+      exec "set <A-".c.">=\e".c
+      exec "imap \e".c." <A-".c.">"
+      let c = nr2char(1+char2nr(c))
+    endwhile
+    set ttimeout ttimeoutlen=50
+endif
+
 " *** settings *** {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ** Both vim and nvim ** {{{2
@@ -702,6 +714,39 @@ let g:ledger_extra_options = '--pedantic --explicit --check-payees'
 "endif
 """""""""""""""""""""""""""""""""""""""" }}}2
 endif " g:ran_vim_plugins
+
+" *** Tmux Integration *** {{{1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" see :h tmux-integration
+"if !has("nvim")
+    "if !has('gui_running') && &term =~ '^\%(screen\|tmux\)'
+        " Better mouse support, see  :help 'ttymouse'
+        "set ttymouse=sgr
+
+        " Enable true colors, see  :help xterm-true-color
+        "let &termguicolors = v:true
+        "let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+        "let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+        " Enable bracketed paste mode, see  :help xterm-bracketed-paste
+        "let &t_BE = "\<Esc>[?2004h"
+        "let &t_BD = "\<Esc>[?2004l"
+        "let &t_PS = "\<Esc>[200~"
+        "let &t_PE = "\<Esc>[201~"
+
+        " Enable focus event tracking, see  :help xterm-focus-event
+        "let &t_fe = "\<Esc>[?1004h"
+        "let &t_fd = "\<Esc>[?1004l"
+        "execute "set <FocusGained>=\<Esc>[I"
+        "execute "set <FocusLost>=\<Esc>[O"
+
+        " Enable modified arrow keys, see  :help arrow_modifiers
+        "execute "silent! set <xUp>=\<Esc>[@;*A"
+        "execute "silent! set <xDown>=\<Esc>[@;*B"
+        "execute "silent! set <xRight>=\<Esc>[@;*C"
+        "execute "silent! set <xLeft>=\<Esc>[@;*D"
+    "endif
+"endif
 
 " *** Post vimrc *** {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
