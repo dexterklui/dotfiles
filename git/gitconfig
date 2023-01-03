@@ -9,7 +9,7 @@
         cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
 # Set "nvim" as tool for merging
 [merge]
-        tool = nvim
+        tool = vim
 # Automatically launch merge tool without displaying a prompt
 [mergetool]
         prompt = false
@@ -17,14 +17,14 @@
 # Choose difftool
 ##############################################################################
 [diff]
-        tool = nvimdiff
+        tool = vimdiff
 
 [difftool]
         prompt = false
 
 ##############################################################################
 [core]
-        editor = nvim
+        editor = vim
         excludesfile = /home/dexq/.gitignore
 [alias]
         co = checkout

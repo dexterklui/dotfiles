@@ -221,6 +221,8 @@ set colorcolumn=+1
 set smartcase
 set ignorecase
 
+set background=dark
+
 if $TERM !=# 'linux'
   set showbreak=∥   " TODO dqn0 unset its showbreak setting messing up others
   if $HOST_NAME == 'dqarch'

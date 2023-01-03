@@ -83,12 +83,7 @@ bindkey -M emacs '^N' history-substring-search-down
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions (migrated to bash_env)
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='nvim'
-#   export VISUAL='nvim'
-# fi
+# export EDITOR='vim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"

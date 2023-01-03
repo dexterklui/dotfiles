@@ -24,14 +24,14 @@ alias ll='ls -lh'
 alias la='ls -lAh'
 alias l='ls -CF'
 
-if [ -x /usr/bin/nvim ]; then
-    alias v='nvim'
-    alias vr='nvim -R' # Neovim read-only mode
-    alias vdiff='nvim -d'
-elif [ -x /usr/bin/vim ]; then
+if [ -x /usr/bin/vim ]; then
     alias v='vim'
     alias vr='vim -R'
     alias vdiff='vim -d'
+elif [ -x /usr/bin/nvim ]; then
+    alias v='nvim'
+    alias vr='nvim -R' # Neovim read-only mode
+    alias vdiff='nvim -d'
 fi
 [ -x /usr/bin/git ] && alias g='git'
 

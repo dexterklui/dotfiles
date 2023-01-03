@@ -127,8 +127,6 @@ fi
 # <<< conda init <<<
 
 # User config (migrated to bash_env)
-#export EDITOR=/home/dexq/bin/nvim
-#export VISUAL=/home/dexq/bin/nvim
 #export TERM_PROGRAM=gnome-terminal
 #export XDG_CONFIG_HOME=/home/dexq/.config
 #export XDG_DATA_HOME=/home/dexq/.local/share

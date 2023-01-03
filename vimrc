@@ -4,5 +4,5 @@ else
   let s:dir = $HOME .'/.config/nvim'
 endif
 
-exec 'source ' .s:dir .'/init.vim'
 exec 'set rtp^=' .s:dir
+exec 'source ' .s:dir .'/init.vim'
