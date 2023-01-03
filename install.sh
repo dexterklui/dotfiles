@@ -179,6 +179,15 @@ ln $LINK_ARG $PWD/profile ~/.profile
         break
     fi
 done
+
+# papis {{{1
+##############################################################################
+for i in $@ ; do
+    if [[ $i = 'papis' || $i = '--all' ]] ; then
+ln $LINK_ARG $PWD/papis $XDG_CONFIG_HOME/papis
+        break
+    fi
+done
 #}}}1
 ##############################################################################
 rm $TMP_DOT_SCRIPT

@@ -1,0 +1,21 @@
+# Default library
+[papis]
+dir = /media/mikeX/Papis
+opentool = okular
+
+# Global settings
+[settings]
+default-library = papis
+opentool = xdg-open
+# Edit the info.yaml file before adding a doc
+add-edit = True
+# Open the files before adding a document into the library
+add-open = True
+
+[tui]
+editmode = vi
+
+[bibtex]
+default-read-bibfile = main.bib
+default-save-bibfile = main.bib
+auto-read = True
