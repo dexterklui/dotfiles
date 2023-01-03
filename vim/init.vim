@@ -162,6 +162,12 @@ augroup END
 
 runtime! ftplugin/man.vim " Make vim able to read man pages within Vim.
 
+" Set insert mode cursor to be a bar (nvim default behaviour)
+if !has("nvim")
+    let &t_SI = "\e[6 q"
+    let &t_EI = "\e[2 q"
+endif
+
 " TODO Source digraphs
 "source ~/.vim/DQScripts/digraphs/symbols.vim
 "source ~/.vim/DQScripts/digraphs/super_sub_scripts.vim
