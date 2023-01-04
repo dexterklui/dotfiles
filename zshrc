@@ -127,6 +127,12 @@ if [ -x /usr/bin/kitty ]; then
     kitty + complete setup zsh | source /dev/stdin
 fi
 
+# papis
+######################################################################
+if [ -x "$(which papis)" ]; then
+    eval "$(_PAPIS_COMPLETE=source_zsh papis)"
+fi
+
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
