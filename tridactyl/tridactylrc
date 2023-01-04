@@ -12,8 +12,8 @@ bind a tab #
 bind / fillcmdline find
 bind ? fillcmdline find -?
 bind ,f fullscreen
-bind n findnext 1
-bind N findnext -1
+bind n findnext
+bind N findnext --reverse
 bind c current_url bmarks
 bind K tabprev
 bind J tabnext
