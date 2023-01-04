@@ -13,7 +13,7 @@ add-edit = True
 add-open = True
 
 [tui]
-editmode = vi
+#editmode = vi
 
 [bibtex]
 default-read-bibfile = main.bib
