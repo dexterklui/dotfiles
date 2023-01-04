@@ -42,7 +42,7 @@ endfunc
 " Defining commands and mappings {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 command -nargs=0 BibRef call PapisBibtexRef()
-command -nargs=0 BibOpen exec "!papis bibtex open"
+command -nargs=0 BibOpen exec "!papis bibtex read " . expand("%:r") . ".bib open"
 
 " vimscript thingy {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
