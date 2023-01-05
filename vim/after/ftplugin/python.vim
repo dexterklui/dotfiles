@@ -20,11 +20,19 @@ setl colorcolumn=73,+1
 compiler python
 
 " Compiling shortcut
-command! -nargs=0 Compile up | let g:_tem_makeprg = &makeprg |
-  \ let g:_tem_fpath = expand("%:p:S") | let g:_tem_fname = expand("%:t") |
-  \ vert new | cal termopen(g:_tem_makeprg . " " . g:_tem_fpath .
-  \ " 2>&1 | tee /tmp/" . g:_tem_fname . ".err") |
-  \ unl g:_tem_makeprg g:_tem_fpath g:_tem_fname | norm i
+if exists('nvim')
+  command! -nargs=0 Compile up | let g:_tem_makeprg = &makeprg |
+    \ let g:_tem_fpath = expand("%:p:S") | let g:_tem_fname = expand("%:t") |
+    \ vert new | cal termopen(g:_tem_makeprg . " " . g:_tem_fpath .
+    \ " 2>&1 | tee /tmp/" . g:_tem_fname . ".err") |
+    \ unl g:_tem_makeprg g:_tem_fpath g:_tem_fname | norm i
+else
+  command! -nargs=0 Compile up | let g:_tem_makeprg = &makeprg |
+    \ let g:_tem_fpath = expand("%") | let g:_tem_fname = expand("%:t") |
+    \ vert cal term_start(g:_tem_makeprg . " " . g:_tem_fpath .
+    \ " 2>&1 | tee /tmp/" . g:_tem_fname . ".err") |
+    \ unl g:_tem_makeprg g:_tem_fpath g:_tem_fname
+endif
 command! -nargs=0 Readcfile cfile /tmp/%:t.err
 command! -nargs=0 Opencfile e /tmp/%:t.err
 nnoremap <buffer> <F11> :Compile<CR>
