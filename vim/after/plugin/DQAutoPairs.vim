@@ -28,7 +28,7 @@ func! AutoPairsSpace()
 
   if !b:autopairs_enabled
     return "\<SPACE>"
-  end
+  endif
 
   func! s:getline()
     let line = getline('.')
@@ -40,12 +40,12 @@ func! AutoPairsSpace()
       let n = line('$')
       let i = line('.')+1
       while i <= n
-	let line = getline(i)
-	let after = after.' '.line
-	if !(line =~ '\v^\s*$')
-	  break
-	end
-	let i = i+1
+    let line = getline(i)
+    let after = after.' '.line
+    if !(line =~ '\v^\s*$')
+      break
+    end
+    let i = i+1
       endwhile
     end
     return [before, after, afterline]
