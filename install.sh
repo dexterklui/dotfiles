@@ -89,9 +89,6 @@ for i in $@ ; do
 
 DSTDIR=$XDG_CONFIG_HOME/nvim
 
-# .vimrc and init.vim {{{2
-########################################
-ln $LINK_ARG $PWD/vimrc ~/.vimrc
 
 # other config files {{{2
 ########################################
@@ -103,6 +100,16 @@ bash $TMP_DOT_SCRIPT
 
 mkdir -p $DSTDIR/UltiSnips
 ln $LINK_ARG $PWD/vim/UltiSnips/*.snippets $DSTDIR/UltiSnips/
+
+# ln config files and folders of Vim to that of Neovim
+########################################
+# .vimrc and init.vim
+#ln $LINK_ARG $PWD/vimrc ~/.vimrc # replaced with the line below
+ln $LINK_ARG $PWD/vim/init.vim ~/.vimrc
+
+# create .vim shortcut at ~/ to $XDG_CONFIG_HOME/nvim
+# This is because vim's config folder is at ~/.vim
+ln $LINK_ARG $DSTDIR ~/.vim
 
 # config files for vim plugins {{{2
 ########################################
