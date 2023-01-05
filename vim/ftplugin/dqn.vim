@@ -84,12 +84,12 @@ nnoremap <buffer> gqm :call DqnParFormat()<CR>
 nnoremap <buffer> <F12> :Dqn2html<CR>
 
 " The following function is needed for iabbrev {{s
-"if !exists('*Eatchar')
-  func! Eatchar(pat)
+if !exists('*Eatchar')
+  func Eatchar(pat)
     let c = nr2char(getchar(0))
     return (c =~ a:pat) ? '' : c
   endfunc
-"endif
+endif
 
 " Customize plugin AutoPairs
 let b:autopairs_enabled = 0
