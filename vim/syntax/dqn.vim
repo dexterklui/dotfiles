@@ -159,7 +159,7 @@ syn match dqnEsc     +\~[]{~}[]+ transparent extend contains=dqnEscChar
 """"""""""""""""""""""""""""""""""""""""
 " Solarized Colorscheme: t_Co>=16 && g:solarized_termcolors != 256 {{{2
 """"""""""""""""""""
-if g:colors_name =~ 'solarized' && &t_Co>=16 && g:solarized_termcolors != 256
+if exists('g:colors_name') && g:colors_name =~ 'solarized' && &t_Co>=16 && g:solarized_termcolors != 256
       \ && !has("gui_running")
 
 let s:g_Yellow  = '#b58900'
@@ -200,7 +200,7 @@ let s:t_Frgrd = '0'
 
 " Solarized Colorscheme: gui || t_Co<16 || g:solarized_termcolors==256 {{{2
 """"""""""""""""""""
-elseif g:colors_name =~ 'solarized'
+elseif exists('g:colors_name') && g:colors_name =~ 'solarized'
 
 let s:g_Yellow  = '#b58900'
 let s:g_Green   = '#859900'
