@@ -102,12 +102,15 @@ endif
 """"""""""""""""""""""""""""""""""""""""
 if $TERM ==# 'linux'
   colorscheme dd-noitalic
-else
+endif
+
+if $COLORSCHEME =~ 'solarized'
   let g:solarized_termtrans=1
   let g:solarized_diffmode='high'
   " ^Config var must be assigned before applying colorscheme to take effect.
   try
     colorscheme solarized
+
     func s:CustomHlSolarized()
       if !exists('g:colors_name') || g:colors_name !=# 'solarized'
         return
@@ -142,9 +145,16 @@ else
       hi link GitGutterChange Type
       hi link GitGutterDelete Special
     endfunc
+
     autocmd vimrcEx ColorScheme * call s:CustomHlSolarized()
   catch /^Vim\%((\a\+)\)\=:E185/
   endtry
+
+  if $COLORSCHEME =~ 'dark'
+    set background=dark
+  elseif $COLORSCHEME =~ 'light'
+    set background=light
+  endif
 endif " }}}2
 
 " Put these in an autocmd group, so that we can delete them easily.
@@ -221,6 +231,8 @@ set sidescroll=1  " When 'nowrap': the min. columns to scoll horizontally (n)
 set undodir=~/.local/share/nvim/undo " (n)
 set undofile        " Now vim will safe undo history
 set ttimeoutlen=50  " Time (ms) that is waited for a key-seq to complete (n)
+                    " NOTE that Vim requires this setting set NOT equal to 0 to
+                    " fix the <Meta-> keybinding issue.
 set viminfo^=!      " (n)
 set langnoremap     " (n)
 set cursorline      " Make bg color of cursor line different
@@ -238,8 +250,6 @@ set textwidth=80
 set colorcolumn=+1
 set smartcase
 set ignorecase
-
-set background=dark
 
 if $TERM !=# 'linux'
   set showbreak=∥   " TODO dqn0 unset its showbreak setting messing up others
