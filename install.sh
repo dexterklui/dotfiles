@@ -166,6 +166,7 @@ for i in $@ ; do
 mkdir -p $XDG_CONFIG_HOME/kitty
 ln $LINK_ARG $PWD/kitty/kitty.conf $XDG_CONFIG_HOME/kitty/kitty.conf
 ln $LINK_ARG $PWD/kitty/colors/active_color.conf $XDG_CONFIG_HOME/kitty/active_color.conf
+ln $LINK_ARG $PWD/kitty/themes/ $XDG_CONFIG_HOME/kitty/themes
         break
     fi
 done
