@@ -212,7 +212,7 @@ func Dqn2Md() range abort
 
   let l:md_file = expand("%:t:r") . '.md'
   let l:md_file_path = expand("%:p:r") . '.md'
-  if l:md_file_path != ""
+  if filereadable(l:md_file_path)
     echoe l:md_file . ' already exists! Abort function.'
     return
   endif
