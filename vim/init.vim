@@ -7,7 +7,19 @@ set nocompatible " Use Vim, rather than Vi settings (nvim default).
 " "filtype plugin indent on" before "syntax on" to make fortran_free_source
 " effective
 filetype plugin indent on " (nvim default)
+
+" Setting True Color
+""""""""""""""""""""""""""""""""""""""""
+" I think this need to run before colorscheme and syntax
+"if !has('nvim') && $TERM =~ "256color"
+  "let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
+  "let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
+  "set termguicolors
+"endif
+""""""""""""""""""""""""""""""""""""""""
+
 syntax on " (nvim default)
+
 let mapleader = ' ' " Must b4 any mapping that uses <Leader> to take effect
 
 augroup vimrcEx
@@ -100,6 +112,8 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Setting the colorscheme {{{2
 """"""""""""""""""""""""""""""""""""""""
+colorscheme default
+
 if $TERM ==# 'linux'
   colorscheme dd-noitalic
 endif
@@ -109,10 +123,11 @@ if $COLORSCHEME =~ 'solarized'
   let g:solarized_diffmode='high'
   " ^Config var must be assigned before applying colorscheme to take effect.
   try
+    "colorscheme dqguisolarized
     colorscheme solarized
 
     func s:CustomHlSolarized()
-      if !exists('g:colors_name') || g:colors_name !=# 'solarized'
+      if !exists('g:colors_name') || g:colors_name !~ 'solarized'
         return
       endif
       " overriding default highlight
