@@ -395,7 +395,7 @@ if g:ran_vim_plugins " Only customize Vim plugins if they were loaded
 if exists('g:colors_name') && g:colors_name ==# 'solarized'
   let g:airline_theme='dqsolarized'
 else
-  let g:airline_theme='dark'
+  let g:airline_theme='alduin'
 endif
 if ($HOST_NAME ==# 'dqarch' && $TERM_PROGRAM =~# '^alacritty$\|^kitty$\|tmux')
   let g:airline_powerline_fonts = 1
