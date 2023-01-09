@@ -375,13 +375,6 @@ nnoremap <M-j> <C-w>j
 nnoremap <M-k> <C-w>k
 nnoremap <M-l> <C-w>l
 
-" *** Defining Digraphs *** {{{1
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-digraphs \|- 8866 " ⊢ (turnstile)
-digraphs \|= 8872 " ⊨ (double turnstile)
-digraphs o+ 8853 " ⊕ (xor symbol)
-digraphs (/ 8713 " ∉ (does not belong)
-
 " *** Customizing Plugins *** {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if g:ran_vim_plugins " Only customize Vim plugins if they were loaded
