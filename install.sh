@@ -109,7 +109,7 @@ ln $LINK_ARG $PWD/vim/init.vim ~/.vimrc
 
 # create .vim shortcut at ~/ to $XDG_CONFIG_HOME/nvim
 # This is because vim's config folder is at ~/.vim
-ln $LINK_ARG $DSTDIR ~/.vim
+ln -T $LINK_ARG $DSTDIR ~/.vim
 
 # config files for vim plugins {{{2
 ########################################
