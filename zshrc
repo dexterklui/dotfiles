@@ -106,6 +106,7 @@ fi
 [ -f ~/.config/localshellrc ] && . ~/.config/localshellrc
 
 # enable fasd
+######################################################################
 if [ -x /usr/bin/fasd ]; then
     eval "$(fasd --init auto)"
 fi
@@ -131,6 +132,14 @@ fi
 ######################################################################
 if [ -x "$(which papis)" ]; then
     eval "$(_PAPIS_COMPLETE=source_zsh papis)"
+fi
+
+# fzf
+######################################################################
+if [ -x "$(which fzf)" ]; then
+    source /usr/share/fzf/key-bindings.zsh
+    source /usr/share/fzf/completion.zsh
+    export FZF_DEFAULT_OPTS='--height 40% --border'
 fi
 
 # Example aliases
