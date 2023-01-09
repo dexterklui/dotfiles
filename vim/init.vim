@@ -1,5 +1,5 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" *** Load first *** {{{1
+" *** Load first & true color *** {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " This must be first, because it changes other options as a side effect.
 set nocompatible " Use Vim, rather than Vi settings (nvim default).
@@ -11,11 +11,12 @@ filetype plugin indent on " (nvim default)
 " Setting True Color
 """"""""""""""""""""""""""""""""""""""""
 " I think this need to run before colorscheme and syntax
-"if !has('nvim') && $TERM =~ "256color"
-  "let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
-  "let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
-  "set termguicolors
-"endif
+" Note that turning on truecolors lowers the performance
+if !has('nvim') && $COLORTERM =~ "truecolor" && $VIM_TRUECOLOR ==? "true"
+  let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
+  let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
+  set termguicolors " short for 'tgc'
+endif
 """"""""""""""""""""""""""""""""""""""""
 
 syntax on " (nvim default)
@@ -123,8 +124,11 @@ if $COLORSCHEME =~ 'solarized'
   let g:solarized_diffmode='high'
   " ^Config var must be assigned before applying colorscheme to take effect.
   try
-    "colorscheme dqguisolarized
-    colorscheme solarized
+    if &termguicolors
+      colorscheme dqguisolarized
+    else
+      colorscheme solarized
+    endif
 
     func s:CustomHlSolarized()
       if !exists('g:colors_name') || g:colors_name !~ 'solarized'
@@ -385,7 +389,7 @@ if g:ran_vim_plugins " Only customize Vim plugins if they were loaded
 """"""""""""""""""""
 " General {{{4
 """"""""""
-if exists('g:colors_name') && g:colors_name ==# 'solarized'
+if exists('g:colors_name') && g:colors_name =~ 'solarized'
   let g:airline_theme='dqsolarized'
 else
   let g:airline_theme='alduin'
@@ -418,7 +422,7 @@ let g:airline_mode_map = {
 " has a different name, so I need to force vim to reload AirlineTheme
 " everytime the 'background' / colorscheme is changed.
 func s:AirlineTheme()
-  if exists('g:colors_name') && g:colors_name ==# 'solarized' && exists(':AirlineTheme')
+  if exists('g:colors_name') && g:colors_name =~ 'solarized' && exists(':AirlineTheme')
     AirlineTheme dqsolarized
   elseif exists(':AirlineTheme')
     AirlineTheme dark

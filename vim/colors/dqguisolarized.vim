@@ -230,7 +230,7 @@ hi clear
 if exists("syntax_on")
   syntax reset
 endif
-let colors_name = "dqsolarized"
+let colors_name = "dqguisolarized"
 
 "}}}
 " GUI & CSApprox hexadecimal palettes"{{{

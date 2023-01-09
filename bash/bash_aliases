@@ -28,10 +28,12 @@ if [ -x /usr/bin/vim ]; then
     alias v='vim'
     alias vr='vim -R'
     alias vdiff='vim -d'
+    alias vtrue='VIM_TRUECOLOR=true vim'
 elif [ -x /usr/bin/nvim ]; then
     alias v='nvim'
     alias vr='nvim -R' # Neovim read-only mode
     alias vdiff='nvim -d'
+    alias vtrue='VIM_TRUECOLOR=true nvim'
 fi
 [ -x /usr/bin/git ] && alias g='git'
 
