@@ -12,9 +12,11 @@ filetype plugin indent on " (nvim default)
 """"""""""""""""""""""""""""""""""""""""
 " I think this need to run before colorscheme and syntax
 " Note that turning on truecolors lowers the performance
-if !has('nvim') && $COLORTERM =~ "truecolor" && $VIM_TRUECOLOR ==? "true"
-  let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
-  let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
+if $COLORTERM =~ "truecolor" && $VIM_TRUECOLOR ==? "true"
+  if !has('nvim')
+    let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
+    let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
+  endif
   set termguicolors " short for 'tgc'
 endif
 """"""""""""""""""""""""""""""""""""""""
