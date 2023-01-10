@@ -1,10 +1,16 @@
+# Export PATH {{{1
+########################################################################
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# ZSH Path {{{1
+########################################################################
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
 
+# ZSH Theme {{{1
+########################################################################
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -17,6 +23,8 @@ ZSH_THEME="dqpygmalion-virtualenv"
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
+# ZSH Completion Setting {{{1
+########################################################################
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -24,6 +32,8 @@ ZSH_THEME="dqpygmalion-virtualenv"
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
+# ZSH Update Setting {{{1
+########################################################################
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
 
@@ -33,6 +43,8 @@ ZSH_THEME="dqpygmalion-virtualenv"
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
 
+# Misc settings {{{1
+########################################################################
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS=true
 
@@ -61,9 +73,13 @@ ZSH_THEME="dqpygmalion-virtualenv"
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
+# ZSH custom folder path {{{1
+########################################################################
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+# ZSH Plugins {{{1
+########################################################################
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -72,76 +88,82 @@ ZSH_THEME="dqpygmalion-virtualenv"
 plugins=(git zsh-syntax-highlighting zsh-history-substring-search zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
+
+# ZSH Key bindings {{{1
+########################################################################
 bindkey -M emacs '^P' history-substring-search-up
 bindkey -M emacs '^N' history-substring-search-down
 
-# User configuration
-
+# Export ENV variables {{{1
+########################################################################
 # export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions (migrated to bash_env)
-# export EDITOR='vim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
+if [ -f ~/.bash_env ]; then
+    . ~/.bash_env
+fi
+
+# Set aliases {{{1
+########################################################################
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 
-if [ -f ~/.bash_env ]; then
-    . ~/.bash_env
-fi
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
-if [ -f ~/.zsh_history ]; then
-    alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(cat ~/.zsh_history|tail -n1|sed -e '\''s/^[: 0-9]\+\;//;s/\s*[;&|]\s*alert$//'\'')"'
-fi
 
+# TODO: No need? {{{1
+########################################################################
 [ -f ~/.config/localshellrc ] && . ~/.config/localshellrc
 
-# enable fasd
-######################################################################
-if [ -x /usr/bin/fasd ]; then
-    eval "$(fasd --init auto)"
+# ZSH plugins settings {{{1
+########################################################################
+# ZSH_AUTOSUGGEST {{{2
+########################################
+if [ -n "$(echo $COLORSCHEME | grep solarized)" ]; then
+    export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
 fi
-
-# Plugins
-######################################################################
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
 export ZSH_AUTOSUGGEST_USE_ASYNC='True'
 export ZSH_AUTOSUGGEST_HISTORY_IGNORE='cd*'
 export ZSH_AUTOSUGGEST_COMPLETION_IGNORE='git*'
 bindkey '^ ' autosuggest-toggle
 
-# kitty
-######################################################################
-if [ -x /usr/bin/kitty ]; then
+# Settings for programs {{{1
+########################################################################
+# fasd {{{2
+########################################
+# Enable fasd
+if [ -x "/usr/bin/fasd" -o -x "$(which fasd)" ]; then
+    eval "$(fasd --init auto)"
+fi
+
+# kitty {{{2
+########################################
+if [ -x "/usr/bin/kitty" -o -x "$(which kitty)" ]; then
     autoload -Uz compinit
     compinit
     # Completion for kitty
     kitty + complete setup zsh | source /dev/stdin
+    alias icat='kitty +kitten icat'
 fi
 
-# papis
-######################################################################
-if [ -x "$(which papis)" ]; then
+# papis {{{2
+########################################
+if [ -x "/usr/bin/papis" -o -x "$(which papis)" ]; then
     eval "$(_PAPIS_COMPLETE=source_zsh papis)"
 fi
 
-# fzf
-######################################################################
-if [ -x "$(which fzf)" ]; then
+# fzf {{{2
+########################################
+if [ -x "/usr/bin/fzf" -o -x "$(which fzf)" ]; then
     source /usr/share/fzf/key-bindings.zsh
     source /usr/share/fzf/completion.zsh
     export FZF_DEFAULT_OPTS='--height 40% --border'
 fi
 
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# }}}1
+# vim: fdm=marker
