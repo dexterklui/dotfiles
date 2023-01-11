@@ -427,7 +427,7 @@ func s:AirlineTheme()
   if exists('g:colors_name') && g:colors_name =~ 'solarized' && exists(':AirlineTheme')
     AirlineTheme dqsolarized
   elseif exists(':AirlineTheme')
-    AirlineTheme dark
+    AirlineTheme alduin
   endif
 endfunc
 autocmd vimrcEx ColorScheme * call s:AirlineTheme()
