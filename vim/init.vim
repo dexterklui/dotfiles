@@ -189,8 +189,6 @@ endif
 
 " Put these in an autocmd group, so that we can delete them easily.
 augroup vimrcEx
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
   " (happens when dropping a file on gvim).
@@ -207,10 +205,6 @@ if !has("nvim")
     let &t_SI = "\e[6 q"
     let &t_EI = "\e[2 q"
 endif
-
-" TODO Source digraphs
-"source ~/.vim/DQScripts/digraphs/symbols.vim
-"source ~/.vim/DQScripts/digraphs/super_sub_scripts.vim
 
 " Work around: fix meta key in terminal
 " See https://stackoverflow.com/questions/6778961/alt-key-shortcuts-not-working-on-gnome-terminal-with-vim
