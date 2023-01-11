@@ -280,6 +280,7 @@ set textwidth=80
 set colorcolumn=+1
 set smartcase
 set ignorecase
+set cpo+=W          " Don't overwrite read-only file with :w!
 
 if $TERM !=# 'linux'
   set showbreak=∥   " TODO dqn0 unset its showbreak setting messing up others
