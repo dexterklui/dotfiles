@@ -184,6 +184,30 @@ if $COLORSCHEME =~ 'solarized'
   endtry
 else
   colorscheme default
+
+  " I dunno why default has to change 'background' back to light
+  if $COLORSCHEME =~ 'light'
+    set background=light
+  else
+    set background=dark
+  endif
+
+  hi Statement   ctermfg=DarkYellow
+  hi Function    cterm=bold ctermfg=DarkCyan
+  hi NonText     ctermfg=DarkGrey
+  hi DiffAdd     cterm=reverse ctermfg=DarkGreen
+  hi SpellBad    cterm=undercurl ctermbg=NONE
+  hi SpellCap    cterm=undercurl ctermbg=NONE
+  hi SpellLocal  cterm=undercurl ctermbg=NONE
+  hi SpellRare   cterm=undercurl ctermbg=NONE
+  hi LineNr      ctermfg=243
+  hi Comment     cterm=italic ctermfg=243
+  hi Todo        cterm=standout ctermfg=Magenta ctermbg=Black
+
+  if $COLORSCHEME ==# 'one_half_dark'
+    hi NonText  ctermfg=240
+    hi Folded   cterm=bold,italic ctermfg=243 ctermbg=NONE
+  endif
 endif
 " }}}2
 

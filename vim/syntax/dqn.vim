@@ -282,12 +282,12 @@ let s:g_Frgrd = 'black'
   endif
 
 let s:t_Yellow  = 'yellow'
-let s:t_Green   = 'green'
-let s:t_Blue    = 'blue'
-let s:t_Orange  = 'brown'
+let s:t_Green   = 'darkgreen'
+let s:t_Blue    = 'darkblue'
+let s:t_Orange  = 'darkyellow'
 let s:t_Purple  = 'darkmagenta'
-let s:t_Cyan    = 'cyan'
-let s:t_Magenta = 'magenta'
+let s:t_Cyan    = 'darkcyan'
+let s:t_Magenta = 'darkmagenta'
 let s:t_Red     = 'darkred'
   if &background ==# 'dark'
 let s:t_Shade = 'darkgray'
@@ -335,6 +335,10 @@ for i in s:list
   exe 'hi def dqn' .i .' guifg=' .eval('s:g_'.i) .' ctermfg=' .eval('s:t_'.i)
 endfor
 
+hi dqnPurple cterm=italic
+hi dqnOrange cterm=bold
+hi dqnMagenta cterm=underdouble
+
 "" Coloured highlighting with gray background {{{2
 """""""""""
 let s:list = ['Yellow', 'Green', 'Blue', 'Orange', 'Purple', 'Cyan',
@@ -362,7 +366,7 @@ hi def link dqnCodeEsc dqnCodeNrm
 """""""""""
 hi def link dqnKeyword  Todo
 hi def link dqnMark     Comment
-hi def link dqnFoldMark dqnBkgrd
+hi def link dqnFoldMark NonText
 hi def link dqnComment  Comment
 hi def link dqnNomatch  dqnBgFrgrd
 hi def link dqnCodeMark dqnBgOrange
