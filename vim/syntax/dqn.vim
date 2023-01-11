@@ -188,7 +188,7 @@ let s:t_Purple  = '13'
 let s:t_Cyan    = '6'
 let s:t_Magenta = '5'
 let s:t_Red     = '1'
-  if g:colors_name ==# 'solarized' && &background ==# 'dark'
+  if g:colors_name =~ 'solarized' && &background ==# 'dark'
 exe 'let s:t_Shade = ' .($TERM==#'linux' ? 0 : 236)
 let s:t_Bkgrd = '8'
 let s:t_Frgrd = '7'

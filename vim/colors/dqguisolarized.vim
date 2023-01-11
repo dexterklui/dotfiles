@@ -138,7 +138,8 @@
 let s:terms_italic=[
             \"rxvt",
             \"gnome-terminal",
-            \"kitty"
+            \"kitty",
+            \"tmux"
             \]
 " For reference only, terminals are known to be incomptible.
 " Terminals that are in neither list need to be tested.
@@ -146,8 +147,8 @@ let s:terms_noitalic=[
             \"iTerm.app",
             \"Apple_Terminal"
             \]
-if has("gui_running") || $TERM=='xterm-256color'
-    let s:terminal_italic=1 " TODO: could refactor to not require this at all
+if has("gui_running")
+    let s:terminal_italic=1
 else
     let s:terminal_italic=0 " terminals will be guilty until proven compatible
     for term in s:terms_italic
@@ -1152,5 +1153,5 @@ autocmd ColorScheme * if g:colors_name != "solarized" | silent! aunmenu Solarize
 " OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 " THE SOFTWARE.
 "
-" vim:foldmethod=marker:foldlevel=0
+" vim:foldmethod=marker:foldlevel=0:sw=4
 "}}}

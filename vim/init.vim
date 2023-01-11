@@ -1,5 +1,5 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" *** Load first & true color *** {{{1
+" *** Load first & true color & escape sequence *** {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " This must be first, because it changes other options as a side effect.
 set nocompatible " Use Vim, rather than Vi settings (nvim default).
@@ -18,6 +18,18 @@ if $COLORTERM =~ "truecolor" && $VIM_TRUECOLOR ==? "true"
     let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
   endif
   set termguicolors " short for 'tgc'
+endif
+
+" Escape sequence for special syntax
+""""""""""""""""""""""""""""""""""""""""
+if !has('nvim')
+  " Undercurl:
+  let &t_Cs = "\e[4:3m"
+  let &t_Ce = "\e[4:0m"
+  " Underdouble:
+  let &t_Us = "\e[4:2m"
+  let &t_ds = "\e[4:4m"
+  let &t_Ds = "\e[4:5m"
 endif
 """"""""""""""""""""""""""""""""""""""""
 
@@ -115,10 +127,10 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Setting the colorscheme {{{2
 """"""""""""""""""""""""""""""""""""""""
-colorscheme default
-
-if $TERM ==# 'linux'
-  colorscheme dd-noitalic
+if $COLORSCHEME =~ 'light'
+  set background=light
+else
+  set background=dark
 endif
 
 if $COLORSCHEME =~ 'solarized'
@@ -129,7 +141,7 @@ if $COLORSCHEME =~ 'solarized'
     if &termguicolors
       colorscheme dqguisolarized
     else
-      colorscheme solarized
+      colorscheme dqsolarized
     endif
 
     func s:CustomHlSolarized()
@@ -170,13 +182,10 @@ if $COLORSCHEME =~ 'solarized'
     autocmd vimrcEx ColorScheme * call s:CustomHlSolarized()
   catch /^Vim\%((\a\+)\)\=:E185/
   endtry
-
-  if $COLORSCHEME =~ 'dark'
-    set background=dark
-  elseif $COLORSCHEME =~ 'light'
-    set background=light
-  endif
-endif " }}}2
+else
+  colorscheme default
+endif
+" }}}2
 
 " Put these in an autocmd group, so that we can delete them easily.
 augroup vimrcEx
