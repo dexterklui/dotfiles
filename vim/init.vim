@@ -183,31 +183,7 @@ if $COLORSCHEME =~ 'solarized'
   catch /^Vim\%((\a\+)\)\=:E185/
   endtry
 else
-  colorscheme default
-
-  " I dunno why default has to change 'background' back to light
-  if $COLORSCHEME =~ 'light'
-    set background=light
-  else
-    set background=dark
-  endif
-
-  hi Statement   ctermfg=DarkYellow
-  hi Function    cterm=bold ctermfg=DarkCyan
-  hi NonText     ctermfg=DarkGrey
-  hi DiffAdd     cterm=reverse ctermfg=DarkGreen
-  hi SpellBad    cterm=undercurl ctermbg=NONE
-  hi SpellCap    cterm=undercurl ctermbg=NONE
-  hi SpellLocal  cterm=undercurl ctermbg=NONE
-  hi SpellRare   cterm=undercurl ctermbg=NONE
-  hi LineNr      ctermfg=243
-  hi Comment     cterm=italic ctermfg=243
-  hi Todo        cterm=standout ctermfg=Magenta ctermbg=Black
-
-  if $COLORSCHEME ==# 'one_half_dark'
-    hi NonText  ctermfg=240
-    hi Folded   cterm=bold,italic ctermfg=243 ctermbg=NONE
-  endif
+  colorscheme dqdefault
 endif
 " }}}2
 
@@ -244,8 +220,6 @@ endif
 
 " *** settings *** {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ** Both vim and nvim ** {{{2
-""""""""""""""""""""""""""""""""""""""""
 " (n) = (nvim default)
 set hlsearch        " highlight search matches (n)
 set autoindent      " (n)
@@ -312,8 +286,6 @@ else
 endif
 autocmd vimrcEx FileType * set breakindent breakindentopt=min:32,shift:-1
 
-" ** For vim only ** {{{2
-""""""""""""""""""""""""""""""""""""""""
 if !has('nvim') && has('termwinkey')
   set termwinkey=<C-E> " Set the key that starts a CTRL-W cmd in terminal window
 endif
@@ -413,9 +385,7 @@ nnoremap <M-l> <C-w>l
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if g:ran_vim_plugins " Only customize Vim plugins if they were loaded
 """"""""""""""""""""""""""""""""""""""""
-" ** For both vim and nvim ** {{{2
-""""""""""""""""""""""""""""""""""""""""
-" * Airline * {{{3
+" * Airline * {{{2
 """"""""""""""""""""
 " General {{{4
 """"""""""
@@ -517,14 +487,14 @@ let g:airline#extensions#tabline#buffer_nr_format = '%s:'
 """"""""""
 let airline_dqsolarized_dark_text = 1 " Better contrast for airline_section_z
 
-" * NERDTree * {{{3
+" * NERDTree * {{{2
 """"""""""""""""""""
 nmap <leader><Tab> :NERDTreeToggle<CR>
 let NERDTreeQuitOnOpen = 3
 let NERDTreeMinimalUI = 1
 let NERDTreeShowBookmarks = 1
 
-" * vim-tmux-navigator * {{{3
+" * vim-tmux-navigator * {{{2
 """"""""""""""""""""
 let g:tmux_navigator_no_mappings = 1
 nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
@@ -533,7 +503,7 @@ nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <M-\> :TmuxNavigatePrevious<cr>
 
-" * YouCompleteMe * {{{3
+" * YouCompleteMe * {{{2
 """"""""""""""""""""
 map <leader>g   :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_key_list_select_completion = ['<Down>']
@@ -544,11 +514,11 @@ let g:ycm_global_ycm_extra_conf =
       \ ($XDG_CONFIG_HOME == "" ? "~/.config" : $XDG_CONFIG_HOME)
       \ . "/nvim/ycm_global_ycm_extra_conf"
 
-" * Tarbar * {{{3
+" * Tarbar * {{{2
 """"""""""""""""""""
 nnoremap <leader>; :TagbarToggle<CR>
 
-" * ctrlp * {{{3
+" * ctrlp * {{{2
 """"""""""""""""""""
 let g:ctrlp_root_markers = ['.dqn']
 let g:ctrlp_mruf_include = '\.dqn$'
@@ -557,7 +527,7 @@ nnoremap <leader>sm :CtrlPMixed<CR>
 nnoremap <leader>sr :CtrlPMRUFiles<CR>
 nnoremap <leader>sb :CtrlPBuffer<CR>
 
-" * Easymotion * {{{3
+" * Easymotion * {{{2
 """"""""""""""""""""
 nmap s <Plug>(easymotion-sn)
 nmap <M-s> <Plug>(easymotion-overwin-f2)
@@ -567,11 +537,11 @@ map <M-S> <C-o><Plug>(easymotion-prefix)
 imap <M-S> <C-o><Plug>(easymotion-prefix)
 let g:EasyMotion_add_search_history = 0 " Don't want vim's search highlight
 
-" * Table-mode setting * {{{3
+" * Table-mode setting * {{{2
 """"""""""""""""""""
 let g:table_mode_align='c1'
 
-" * indentLine * {{{3
+" * indentLine * {{{2
 """"""""""""""""""""
 let g:indentLine_enabled = 1 " enablde indentLine (it is by default disabled)
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
@@ -583,11 +553,11 @@ let g:indentLine_fileTypeExclude = ['dqn', 'dqn0', 'man', 'help']
 let g:indentLine_bufTypeExclude = ['help', 'terminal']
 let g:indentLine_bufNameExclude = ['NERD_tree.*']
 
-" * vim-easytag * {{{3
+" * vim-easytag * {{{2
 """"""""""""""""""""
 "let g:easytags_dynamic_files = 1
 
-" * AutoPairs * {{{3
+" * AutoPairs * {{{2
 """"""""""""""""""""
 if !has('nvim')
   map <leader>pp <M-p>
@@ -596,14 +566,14 @@ if !has('nvim')
   imap <C-b>b <M-b>
 endif
 
-" * vim-javascript * {{{3
+" * vim-javascript * {{{2
 """"""""""""""""""""
 augroup javascript_folding
   au!
   au FileType javascript setlocal foldmethod=syntax
 augroup END
 
-" * UltiSnips * {{{3
+" * UltiSnips * {{{2
 """"""""""""""""""""
 " Trigger configuration. You need to change this to something other than <tab>
 " if you use one of the following:
@@ -622,7 +592,7 @@ autocmd vimrcEx BufLeave *.dqn
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-" * Syntastic * {{{3
+" * Syntastic * {{{2
 """"""""""""""""""""
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_wq = 0
@@ -640,7 +610,7 @@ let g:syntastic_cpp_checkers = ["clang_check"]
 let g:syntastic_html_checkers = ["validator"]
 let g:syntastic_java_checkers = ["java"]
 
-" * GitGutter * {{{3
+" * GitGutter * {{{2
 """"""""""""""""""""
 nnoremap <Leader>hc :GitGutterQuickFix<CR>
 " Ycm, when parsing, stops GitGutter update signs. A temporary work around:
@@ -654,7 +624,7 @@ nnoremap <Leader>hc :GitGutterQuickFix<CR>
 " ^ by turing down 'updatetime' <= 95ms I can get GitGutter to update signs
 " automatically with CursorHold autocmd again.
 
-" * goyo * {{{3
+" * goyo * {{{2
 """"""""""""""""""""
 function s:goyo_enter()
   if exists(':Limelight') == 2
@@ -690,7 +660,7 @@ autocmd vimrcEx User GoyoEnter nested set eventignore=FocusGained
 autocmd vimrcEx User GoyoLeave nested set eventignore=
 endif
 
-" * limelight * {{{3
+" * limelight * {{{2
 """"""""""""""""""""
 func s:limelight_conceal()
   if exists('g:colors_name') && g:colors_name =~ 'solarized'
@@ -724,11 +694,11 @@ endfunction
 " Note that you don't need a space before the argument, e.g. :L1
 command -nargs=? L call s:LimePara(<args>)
 
-" * rainbow * {{{3
+" * rainbow * {{{2
 """"""""""""""""""""
 nnoremap <Leader>rb :RainbowToggle<CR>
 
-" * ledger * {{{3
+" * ledger * {{{2
 """"""""""""""""""""
 let g:ledger_maxwidth = 78
 let g:ledger_fillstring = '-'
@@ -736,7 +706,7 @@ let g:ledger_detailed_first = 1
 let g:ledger_fold_blanks = 1
 let g:ledger_extra_options = '--pedantic --explicit --check-payees'
 
-" * Netrw Customization * {{{3
+" * Netrw Customization * {{{2
 """"""""""""""""""""
 "if !exists('g:loaded_netrwPlugin') && !exists('g:loaded_nerd_tree')
 "  let g:netrw_banner = 0
@@ -766,39 +736,6 @@ let g:ledger_extra_options = '--pedantic --explicit --check-payees'
 "endif
 """""""""""""""""""""""""""""""""""""""" }}}2
 endif " g:ran_vim_plugins
-
-" *** Tmux Integration *** {{{1
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" see :h tmux-integration
-"if !has("nvim")
-    "if !has('gui_running') && &term =~ '^\%(screen\|tmux\)'
-        " Better mouse support, see  :help 'ttymouse'
-        "set ttymouse=sgr
-
-        " Enable true colors, see  :help xterm-true-color
-        "let &termguicolors = v:true
-        "let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-        "let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-
-        " Enable bracketed paste mode, see  :help xterm-bracketed-paste
-        "let &t_BE = "\<Esc>[?2004h"
-        "let &t_BD = "\<Esc>[?2004l"
-        "let &t_PS = "\<Esc>[200~"
-        "let &t_PE = "\<Esc>[201~"
-
-        " Enable focus event tracking, see  :help xterm-focus-event
-        "let &t_fe = "\<Esc>[?1004h"
-        "let &t_fd = "\<Esc>[?1004l"
-        "execute "set <FocusGained>=\<Esc>[I"
-        "execute "set <FocusLost>=\<Esc>[O"
-
-        " Enable modified arrow keys, see  :help arrow_modifiers
-        "execute "silent! set <xUp>=\<Esc>[@;*A"
-        "execute "silent! set <xDown>=\<Esc>[@;*B"
-        "execute "silent! set <xRight>=\<Esc>[@;*C"
-        "execute "silent! set <xLeft>=\<Esc>[@;*D"
-    "endif
-"endif
 
 " *** Post vimrc *** {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
