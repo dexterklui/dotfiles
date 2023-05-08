@@ -122,9 +122,8 @@ func s:OpFdChild()
 endfunc " }}}
 
 func s:Retab(old_indent, new_indent)
-" This function doesn't deal with <Tab> characters, but indentation with {{{
-" spaces. It changes old space indentation amount into new space indentation
-" amount.
+" This function doesn't deal with <Tab> characters, but indentation with spaces.
+" It changes old space indentation amount into new space indentation amount. {{{
   if a:old_indent == a:new_indent
     return
   elseif a:old_indent < a:new_indent
