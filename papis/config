@@ -1,7 +1,7 @@
 # Default library
 [papis]
 dir = /media/mikeX/Papis
-#opentool = okular
+ref-format = {doc[author_list][0][family]} {doc[year]} {doc[title]:.12}
 
 # Global settings
 [settings]
@@ -10,7 +10,7 @@ opentool = xdg-open
 # Edit the info.yaml file before adding a doc
 add-edit = True
 # Open the files before adding a document into the library
-add-open = True
+#add-open = True
 
 [tui]
 #editmode = vi
