@@ -147,7 +147,7 @@ if [ -x "/usr/bin/kitty" -o -x "$(which kitty)" ]; then
     autoload -Uz compinit
     compinit
     # Completion for kitty
-    kitty + complete setup zsh | source /dev/stdin
+    #kitty + complete setup zsh | source /dev/stdin
     alias icat='kitty +kitten icat'
 fi
 
