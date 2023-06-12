@@ -143,9 +143,23 @@ syn match dqnBreak /^\s*\zs░/ conceal display
 """"""""""""""""""""
 " Python {{{3
 """"""""""
+if exists("b:current_syntax")
+  " Needed otherwise can't include more than 1 other filetype
+  unlet b:current_syntax
+endif
 syn include @dqnPython syntax/python.vim
 syn region  dqnPython matchgroup=dqnMark start=/#beginPython#\( {\{3}\d\=\)\=/ end=/#endPython#\( }\{3}\d\=\)\=/
       \ contains=@dqnPython
+
+" HTML {{{3
+""""""""""
+if exists("b:current_syntax")
+  " Needed otherwise can't include more than 1 other filetype
+  unlet b:current_syntax
+endif
+syn include @dqnHtml syntax/html.vim
+syn region  dqnHtml matchgroup=dqnMark start=/#beginHTML#\( {\{3}\d\=\)\=/ end=/#endHTML#\( }\{3}\d\=\)\=/
+      \ contains=@dqnHtml
 
 " Escape character (highest priority) {{{2
 """"""""""""""""""""
@@ -376,6 +390,7 @@ hi def link dqnEscChar  Comment
 """"""""""""""""""""""""""""""""""""""""
 syn sync match dqnIncludeSync  groupthere NONE      /#endPython#$/
 syn sync match dqnIncludeSync  groupthere dqnPython /#beginPython#$/
+syn sync match dqnIncludeSync  groupthere dqnHtml   /#beginHTML#$/
 syn sync match dqnSubtitleSync groupthere NONE      /^\%(\t\| \{4}\)* \{3}|.\+|$/
 syn sync match dqnFoldMarkSync groupthere NONE      /{\{3}\d\=$/
 syn sync minlines=1
