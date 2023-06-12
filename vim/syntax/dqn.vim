@@ -386,20 +386,19 @@ hi def link dqnNomatch  dqnBgFrgrd
 hi def link dqnCodeMark dqnBgOrange
 hi def link dqnEscChar  Comment
 
-" Syntax Syncing {{{1
+" Syntax Synchronizing {{{1
 """"""""""""""""""""""""""""""""""""""""
-syn sync match dqnIncludeSync  groupthere NONE      /#endPython#$/
-syn sync match dqnIncludeSync  groupthere dqnPython /#beginPython#$/
-syn sync match dqnIncludeSync  groupthere dqnHtml   /#beginHTML#$/
-syn sync match dqnSubtitleSync groupthere NONE      /^\%(\t\| \{4}\)* \{3}|.\+|$/
-syn sync match dqnFoldMarkSync groupthere NONE      /{\{3}\d\=$/
-syn sync minlines=1
-" }}}1
-"=====================================================================
-" Others {{{1
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Spelling {{{2
-""""""""""""""""""""""""""""""""""""""""
+" Sync at the beginning of dqn titles.
+syn sync match dqnTitleSync grouphere NONE "^\[\~{ .\+ }\~]\ze\%( \={\{3}1\)\=$"
+syn sync match dqnTitleSync grouphere NONE "^ \zs== .\+ ==\ze\%( \={\{3}2\)\=$"
+syn sync match dqnTitleSync grouphere NONE "^  \zs> .\+ <\ze\%( \={\{3}3\)\=$"
+syn sync match dqnTitleSync grouphere NONE "^\%(\t\| \{4}\)* \{3}\zs|.\+|\ze\%( \={\{3}\d\=\)\=$"
+" }}}1                                       
+"=========================================== ==========================
+" Others {{{1                                
+"""""""""""""""""""""""""""""""""""""""""""" """"""""""""""""""""""""""
+" Spelling {{{2                              
+""""""""""""""""""""""""""""""""""""""""     
 syn spell toplevel
 
 " To reapply cleared highlightings upon colorscheme change {{{2
