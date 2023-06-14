@@ -158,6 +158,10 @@ ln $LINK_ARG $PWD/tridactyl/tridactylrc $XDG_CONFIG_HOME/tridactyl/tridactylrc
     fi
 done
 
+# vimium {{{1
+##############################################################################
+# TODO
+
 # alacritty {{{1
 ##############################################################################
 for i in $@ ; do
