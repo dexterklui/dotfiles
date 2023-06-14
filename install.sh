@@ -120,6 +120,15 @@ ln $LINK_ARG $PWD/vim/ycm_global_ycm_extra_conf $DSTDIR/ycm_global_ycm_extra_con
     fi
 done
 
+# VSCode {{{1
+##############################################################################
+for i in $@ ; do
+    if [[ $i = 'vscode' || $i = '--all' ]] ; then
+ln $LINK_ARG "$PWD/vscode/settings.json" "$HOME/.config/Code - OSS/User/settings.json"
+        break
+    fi
+done
+
 # tmux {{{1
 ##############################################################################
 for i in $@ ; do

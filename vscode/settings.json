@@ -1,0 +1,11 @@
+{
+  "vim.easymotion": true,
+  "vim.useSystemClipboard": true,
+  "vim.incsearch": true,
+  "vim.hlsearch": true,
+  "vim.sneak": true,
+  "vim.useCtrlKeys": true,
+  "vim.handleKeys": {
+    "<C-k>": false
+  }
+}
