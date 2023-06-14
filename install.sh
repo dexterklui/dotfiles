@@ -185,8 +185,7 @@ done
 for i in $@ ; do
     if [[ $i = 'konsole' || $i = '--all' ]] ; then
 mkdir -p $XDG_DATA_HOME/konsole
-ln $LINK_ARG "$PWD/konsole/One Half Dark.colorscheme" "$XDG_DATA_HOME/konsole/One Half Dark.colorscheme"
-ln $LINK_ARG "$PWD/konsole/One Half Dark.profile" "$XDG_DATA_HOME/konsole/One Half Dark.profile"
+ln $LINK_ARG -t "$XDG_DATA_HOME" "$PWD/konsole"
         break
     fi
 done
