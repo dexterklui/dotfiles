@@ -158,8 +158,28 @@ if exists("b:current_syntax")
   unlet b:current_syntax
 endif
 syn include @dqnHtml syntax/html.vim
-syn region  dqnHtml matchgroup=dqnMark start=/#beginHTML#\( {\{3}\d\=\)\=/ end=/#endHTML#\( }\{3}\d\=\)\=/
+syn region  dqnHtml matchgroup=dqnMark start=/#beginHtml#\( {\{3}\d\=\)\=/ end=/#endHtml#\( }\{3}\d\=\)\=/
       \ contains=@dqnHtml
+
+" CSS {{{3
+""""""""""
+if exists("b:current_syntax")
+  " Needed otherwise can't include more than 1 other filetype
+  unlet b:current_syntax
+endif
+syn include @dqnCss syntax/css.vim
+syn region  dqnHtml matchgroup=dqnMark start=/#beginCss#\( {\{3}\d\=\)\=/ end=/#endCss#\( }\{3}\d\=\)\=/
+      \ contains=@dqnCss
+
+" JavaScript {{{3
+""""""""""
+if exists("b:current_syntax")
+  " Needed otherwise can't include more than 1 other filetype
+  unlet b:current_syntax
+endif
+syn include @dqnJs syntax/javascript.vim
+syn region  dqnHtml matchgroup=dqnMark start=/#beginJavascript#\( {\{3}\d\=\)\=/ end=/#endJavascript#\( }\{3}\d\=\)\=/
+      \ contains=@dqnJs
 
 " Escape character (highest priority) {{{2
 """"""""""""""""""""
@@ -393,12 +413,12 @@ syn sync match dqnTitleSync grouphere NONE "^\[\~{ .\+ }\~]\ze\%( \={\{3}1\)\=$"
 syn sync match dqnTitleSync grouphere NONE "^ \zs== .\+ ==\ze\%( \={\{3}2\)\=$"
 syn sync match dqnTitleSync grouphere NONE "^  \zs> .\+ <\ze\%( \={\{3}3\)\=$"
 syn sync match dqnTitleSync grouphere NONE "^\%(\t\| \{4}\)* \{3}\zs|.\+|\ze\%( \={\{3}\d\=\)\=$"
-" }}}1                                       
-"=========================================== ==========================
-" Others {{{1                                
-"""""""""""""""""""""""""""""""""""""""""""" """"""""""""""""""""""""""
-" Spelling {{{2                              
-""""""""""""""""""""""""""""""""""""""""     
+" }}}1
+"======================================================================
+" Others {{{1
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Spelling {{{2
+""""""""""""""""""""""""""""""""""""""""
 syn spell toplevel
 
 " To reapply cleared highlightings upon colorscheme change {{{2
