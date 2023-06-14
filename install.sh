@@ -180,6 +180,17 @@ ln $LINK_ARG $PWD/kitty/themes/ $XDG_CONFIG_HOME/kitty/themes
     fi
 done
 
+# konsole {{{1
+##############################################################################
+for i in $@ ; do
+    if [[ $i = 'konsole' || $i = '--all' ]] ; then
+mkdir -p $XDG_DATA_HOME/konsole
+ln $LINK_ARG "$PWD/konsole/One Half Dark.colorscheme" "$XDG_DATA_HOME/konsole/One Half Dark.colorscheme"
+ln $LINK_ARG "$PWD/konsole/One Half Dark.profile" "$XDG_DATA_HOME/konsole/One Half Dark.profile"
+        break
+    fi
+done
+
 # dircolors {{{1
 ##############################################################################
 for i in $@ ; do
