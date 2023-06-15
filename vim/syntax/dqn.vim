@@ -87,6 +87,7 @@ syn region dqnCodeAlt matchgroup=dqnMark start=+:+ end=+:+ skip=+\~:+
   \ concealends contained contains=@NoSpell,dqnCodeSym,dqnCodeEsc
 syn region dqnCodeNrm matchgroup=dqnMark start=+\[\\+ end=+]\\+ skip=+\~]+
   \ concealends contains=@NoSpell,dqnCodeAlt keepend
+syn region dqnCodeBlk matchgroup=dqnMark start=+#beginCode#\( {\{3}\d\=\)\=$+ end=+#endCode#\( {\{3}\d\=\)\=$+ contains=@NoSpell keepend
 
 syn cluster dqnCode add=dqnCodeNrm,dqnCodeAlt,dqnCodeSym
 
@@ -395,6 +396,7 @@ hi def link dqnCodeNrm dqnBgFrgrd
 hi def link dqnCodeAlt dqnBgGreen
 hi def link dqnCodeSym dqnBgOrange
 hi def link dqnCodeEsc dqnCodeNrm
+hi! def link dqnCodeBlk Constant
 
 "" Keywords and others {{{2
 """""""""""
