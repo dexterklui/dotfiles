@@ -82,6 +82,11 @@ try
   Plug 'preservim/nerdcommenter'
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
+  " post install (yarn install | npm install) then load plugin only for editing
+  " supported files
+  Plug 'prettier/vim-prettier', {
+    \ 'do': 'npm install --frozen-lockfile --production',
+    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
 
   " text, markdown, dqn
   Plug 'dhruvasagar/vim-table-mode', {'for': 'dqn', 'on': 'TableModeToggle'}
