@@ -561,15 +561,6 @@ let g:indentLine_bufNameExclude = ['NERD_tree.*']
 """"""""""""""""""""
 "let g:easytags_dynamic_files = 1
 
-" * AutoPairs * {{{2
-""""""""""""""""""""
-if !has('nvim')
-  map <leader>pp <M-p>
-  map <leader>pn <M-n>
-  imap <C-b>e <M-e>
-  imap <C-b>b <M-b>
-endif
-
 " * vim-javascript * {{{2
 """"""""""""""""""""
 augroup javascript_folding
