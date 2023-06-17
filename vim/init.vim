@@ -193,11 +193,16 @@ if $COLORSCHEME =~ 'solarized'
 else
   colorscheme dqdefault
 endif
-" }}}2
 
+" Re highlight {{{2
+""""""""""""""""""""""""""""""""""""""""
+hi Pmenu ctermfg=15 ctermbg=8
+hi PmenuSel ctermfg=14 ctermbg=8
+
+" When editing a file, always jump to the last known cursor position. {{{2
+""""""""""""""""""""""""""""""""""""""""
 " Put these in an autocmd group, so that we can delete them easily.
 augroup vimrcEx
-  " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
   " (happens when dropping a file on gvim).
   autocmd BufReadPost *
@@ -208,13 +213,15 @@ augroup END
 
 runtime! ftplugin/man.vim " Make vim able to read man pages within Vim.
 
-" Set insert mode cursor to be a bar (nvim default behaviour)
+" Set insert mode cursor to be a bar (nvim default behaviour) {{{2
+""""""""""""""""""""""""""""""""""""""""
 if !has("nvim")
     let &t_SI = "\e[6 q"
     let &t_EI = "\e[2 q"
 endif
 
-" Work around: fix meta key in terminal
+" Work around: fix meta key in terminal {{{2
+""""""""""""""""""""""""""""""""""""""""
 " See https://stackoverflow.com/questions/6778961/alt-key-shortcuts-not-working-on-gnome-terminal-with-vim
 if !has("nvim")
     let c='a'
