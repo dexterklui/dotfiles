@@ -63,7 +63,7 @@ try
   Plug 'kien/ctrlp.vim'
 
   " General syntax checking and autocomplete and tags
-  Plug 'Valloric/YouCompleteMe'
+  Plug 'Valloric/YouCompleteMe', {'on': ['YcmDebugInfo'], 'for': ['c', 'cpp', 'javascript', 'css', 'html']}
   Plug 'vim-syntastic/syntastic'
   Plug 'preservim/tagbar', {'on': 'TagbarToggle'}
 
@@ -95,6 +95,9 @@ try
 
   " C family
   Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['cpp', 'c']}
+
+  " HTML
+  Plug 'rstacruz/sparkup', {'for': ['html']}
 
   " JavaScript
   Plug 'pangloss/vim-javascript', {'for': ['javascript']}
@@ -506,6 +509,7 @@ nnoremap <silent> <M-\> :TmuxNavigatePrevious<cr>
 " * YouCompleteMe * {{{2
 """"""""""""""""""""
 map <leader>g   :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nmap <leader>D <plug>(YCMHover)
 let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 let g:ycm_filetype_blacklist = { 'ledger': 1 }
