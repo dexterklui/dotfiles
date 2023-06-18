@@ -344,7 +344,7 @@ endif
 
 " For easy access some documents:
 command Vimnote tabe ~/Documents/learn-type/vim.dqn0
-command Master e ~/.master.dqn
+command Master e ~/master.dqn
 " For saving and compiling current file
 command -nargs=0 Make update | make %:p:S
 
@@ -604,7 +604,7 @@ let g:UltiSnipsEditSplit="vertical"
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = {
-  \ "mode": "active",
+  \ "mode": "passive",
   \ "active_filetypes": [],
   \ "passive_filetypes": [] }
 command -nargs=0 SC SyntasticCheck
