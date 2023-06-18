@@ -569,6 +569,12 @@ let g:indentLine_fileTypeExclude = ['dqn', 'dqn0', 'man', 'help']
 let g:indentLine_bufTypeExclude = ['help', 'terminal']
 let g:indentLine_bufNameExclude = ['NERD_tree.*']
 
+" * vim-prettier * {{{2
+""""""""""""""""""""
+augroup vimrcEx
+  autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.svelte,*.yaml,*.html PrettierAsync
+augroup END
+
 " * vim-easytag * {{{2
 """"""""""""""""""""
 "let g:easytags_dynamic_files = 1
