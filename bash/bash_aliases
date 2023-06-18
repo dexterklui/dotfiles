@@ -23,6 +23,7 @@ fi
 alias ll='ls -lh'
 alias la='ls -lAh'
 alias l='ls -CF'
+alias cdp='cd -P'
 
 if [ -x /usr/bin/vim ]; then
     alias v='vim'
