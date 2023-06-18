@@ -72,6 +72,7 @@ try
   Plug 'frazrepo/vim-rainbow', {'on': 'RainbowToggle'}
   Plug 'xolox/vim-easytags'
   Plug 'xolox/vim-misc' " required by vim-easytags
+  Plug 'hail2u/vim-css3-syntax', {'for': 'css'}
 
   " General formating and editting
   Plug 'godlygeek/tabular', {'on': 'Tabularize'}
