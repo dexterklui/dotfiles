@@ -2,8 +2,8 @@
 setl fdm=indent
 setl foldlevel=99
 
-setl tabstop=4
-setl shiftwidth=4
+setl tabstop=2
+setl shiftwidth=2
 
 setl formatoptions-=t
 
