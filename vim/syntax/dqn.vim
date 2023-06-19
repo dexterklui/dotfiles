@@ -150,7 +150,7 @@ if exists("b:current_syntax")
 endif
 syn include @dqnPython syntax/python.vim
 syn region  dqnPython matchgroup=dqnMark start=/#beginPython#\( {\{3}\d\=\)\=/ end=/#endPython#\( }\{3}\d\=\)\=/
-      \ contains=@dqnPython
+      \ contains=@dqnPython keepend
 
 " HTML {{{3
 """"""""""
@@ -160,7 +160,7 @@ if exists("b:current_syntax")
 endif
 syn include @dqnHtml syntax/html.vim
 syn region  dqnHtml matchgroup=dqnMark start=/#beginHtml#\( {\{3}\d\=\)\=/ end=/#endHtml#\( }\{3}\d\=\)\=/
-      \ contains=@dqnHtml
+      \ contains=@dqnHtml keepend
 
 " CSS {{{3
 """"""""""
@@ -170,7 +170,7 @@ if exists("b:current_syntax")
 endif
 syn include @dqnCss syntax/css.vim
 syn region  dqnHtml matchgroup=dqnMark start=/#beginCss#\( {\{3}\d\=\)\=/ end=/#endCss#\( }\{3}\d\=\)\=/
-      \ contains=@dqnCss
+      \ contains=@dqnCss keepend
 
 " JavaScript {{{3
 """"""""""
@@ -180,7 +180,7 @@ if exists("b:current_syntax")
 endif
 syn include @dqnJs syntax/javascript.vim
 syn region  dqnHtml matchgroup=dqnMark start=/#beginJavascript#\( {\{3}\d\=\)\=/ end=/#endJavascript#\( }\{3}\d\=\)\=/
-      \ contains=@dqnJs
+      \ contains=@dqnJs keepend
 
 " Escape character (highest priority) {{{2
 """"""""""""""""""""
