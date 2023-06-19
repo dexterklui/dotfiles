@@ -572,9 +572,27 @@ let g:indentLine_bufNameExclude = ['NERD_tree.*']
 
 " * vim-prettier * {{{2
 """"""""""""""""""""
-augroup vimrcEx
-  autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.svelte,*.yaml,*.html PrettierAsync
+augroup dqPrettier
+  autocmd!
+  autocmd BufWritePre *.js,*.ts,*.css,*.json,*.yaml,*.html PrettierAsync
 augroup END
+
+function PrettierAsyncAtBufWrite()
+  if exists("#dqPrettier")
+    augroup dqPrettier
+      autocmd!
+    augroup END
+    aug! dqPrettier
+    echo "Disabled async Prettier at writing buffer."
+  else
+    augroup dqPrettier
+      autocmd BufWritePre *.js,*.ts,*.css,*.json,*.yaml,*.html PrettierAsync
+    augroup END
+    echo "Enabled async Prettier at writing buffer."
+  endif
+endfunc
+
+nmap <Leader>tp :call PrettierAsyncAtBufWrite()<CR>
 
 " * vim-easytag * {{{2
 """"""""""""""""""""
