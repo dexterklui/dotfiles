@@ -572,12 +572,17 @@ let g:indentLine_bufNameExclude = ['NERD_tree.*']
 
 " * vim-prettier * {{{2
 """"""""""""""""""""
+let g:PrettierFiletypes = [
+      \"js", "jsx", "mjs", "ts", "tsx", "css", "less", "scss", "json"
+      \, "graphql", "md", "vue", "svelte", "yaml", "html"]
 augroup dqPrettier
   autocmd!
-  autocmd BufWritePre *.js,*.ts,*.css,*.json,*.yaml,*.html PrettierAsync
+  for s:item in g:PrettierFiletypes
+    exe "autocmd BufWritePre *." .s:item ." PrettierAsync"
+  endfor
 augroup END
 
-function PrettierAsyncAtBufWrite()
+function TogglePrettierAsyncAtBufWrite()
   if exists("#dqPrettier")
     augroup dqPrettier
       autocmd!
@@ -586,13 +591,15 @@ function PrettierAsyncAtBufWrite()
     echo "Disabled async Prettier at writing buffer."
   else
     augroup dqPrettier
-      autocmd BufWritePre *.js,*.ts,*.css,*.json,*.yaml,*.html PrettierAsync
+      for l:item in g:PrettierFiletypes
+          exe "autocmd BufWritePre *." .l:item ." PrettierAsync"
+      endfor
     augroup END
     echo "Enabled async Prettier at writing buffer."
   endif
 endfunc
 
-nmap <Leader>tp :call PrettierAsyncAtBufWrite()<CR>
+nmap <Leader>tp :call TogglePrettierAsyncAtBufWrite()<CR>
 
 " * vim-easytag * {{{2
 """"""""""""""""""""
