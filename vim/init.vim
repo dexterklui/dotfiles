@@ -72,7 +72,6 @@ try
   Plug 'frazrepo/vim-rainbow', {'on': 'RainbowToggle'}
   Plug 'xolox/vim-easytags'
   Plug 'xolox/vim-misc' " required by vim-easytags
-  Plug 'hail2u/vim-css3-syntax', {'for': 'css'}
 
   " General formating and editting
   Plug 'godlygeek/tabular', {'on': 'Tabularize'}
@@ -94,6 +93,7 @@ try
   Plug 'junegunn/goyo.vim', {'for': ['dqn', 'markdown'], 'on': 'Goyo'}
   Plug 'junegunn/limelight.vim',
         \ {'for': ['dqn', 'markdown'], 'on': ['Goyo', 'Limelight']}
+  Plug 'preservim/vim-markdown', {'for': 'markdown'}
 
   " Git
   Plug 'airblade/vim-gitgutter'
@@ -104,6 +104,9 @@ try
 
   " HTML
   Plug 'rstacruz/sparkup', {'for': ['html']}
+
+  " CSS
+  Plug 'hail2u/vim-css3-syntax', {'for': 'css'}
 
   " JavaScript
   Plug 'pangloss/vim-javascript', {'for': ['javascript']}
@@ -569,6 +572,17 @@ let g:indentLine_setConceal = 0
 let g:indentLine_fileTypeExclude = ['dqn', 'dqn0', 'man', 'help']
 let g:indentLine_bufTypeExclude = ['help', 'terminal']
 let g:indentLine_bufNameExclude = ['NERD_tree.*']
+
+" * vim-markdown * {{{2
+""""""""""""""""""""
+" Don't need to enable Vim's innate marking method.
+let g:markdown_folding = 0
+
+let g:vim_markdown_math = 1
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_strikethrough = 1
+let g:vim_markdown_conceal_code_blocks = 0
+let g:indentLine_setColors = 0
 
 " * vim-prettier * {{{2
 """"""""""""""""""""

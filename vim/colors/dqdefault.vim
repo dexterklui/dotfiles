@@ -228,7 +228,6 @@ let &background=s:background
 "exe "hi def Folded"         .s:fmt_b_i        .s:fg_fg      .s:bg_none
 hi Statement                                ctermfg=DarkGreen
 hi Function             cterm=bold          ctermfg=DarkCyan
-hi NonText                                  ctermfg=DarkGrey
 hi Comment              cterm=italic        ctermfg=243
 hi Constant                                 ctermfg=DarkCyan
 hi Identifier                               ctermfg=DarkBlue
@@ -242,6 +241,7 @@ hi Special                                  ctermfg=DarkRed
 
 hi NonText                                  ctermfg=240
 hi Folded               cterm=bold,italic   ctermfg=243             ctermbg=NONE
+hi Conceal                                  ctermfg=239             ctermbg=NONE
 
 hi LineNr                                   ctermfg=243
 hi SignColumn                                                       ctermbg=NONE
