@@ -22,7 +22,10 @@ function s:UnsetMarkdownHighlight()
   else
     call nvim_set_hl(0, 'Conceal', b:OriginConcealHl)
   endif
-  unlet b:OriginConcealHl
+  " Check to prevent running b:undo_ftplugin twice by other plugins
+  if exists('b:OriginConcealHl')
+    unlet b:OriginConcealHl
+  endif
 endfunction
 
 call s:SetMarkdownHighlight()
@@ -33,7 +36,7 @@ augroup dqMarkdown
   au BufLeave *.md call s:UnsetMarkdownHighlight()
 augroup END
 
-let b:_undo_ftplugin = 'setl et< ts< sw< tw< | call hlset(b:OriginConcealHl) | unlet b:OriginConcealHl'
+let b:_undo_ftplugin = 'setl et< ts< sw< tw< | call s:UnsetMarkdownHighlight()'
 let b:_undo_ftplugin = 'setl et< ts< sw< tw<'
 if exists('b:undo_ftplugin')
   let b:undo_ftplugin .= '| ' . b:_undo_ftplugin

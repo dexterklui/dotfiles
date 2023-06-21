@@ -356,7 +356,7 @@ command -nargs=0 Make update | make %:p:S
 nnoremap <Leader>ve :call dq_autoload#toggle_ve_blk()<CR>
 nnoremap j gj
 nnoremap k gk
-" Highlight last inserted line.
+" Highlight last inserted line.(writing clear the record)
 nnoremap gV `[v`]
 nnoremap <Leader>sea :setl spell spelllang=en<CR>
 nnoremap <Leader>sen :setl spell spelllang=en_gb<CR>
