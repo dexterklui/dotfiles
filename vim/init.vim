@@ -48,11 +48,8 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""
 let g:ran_vim_plugins = 1
 try
-  if $HOST_NAME == 'dqarch'
-    call plug#begin('~/.config/nvim/plug')
-  else
-    call plug#begin('~/.vim/bundle')
-  endif
+  call plug#begin('~/.config/nvim/plug')
+
   " Vim themes
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
@@ -215,7 +212,11 @@ augroup vimrcEx
     \ endif
 augroup END
 
-runtime! ftplugin/man.vim " Make vim able to read man pages within Vim.
+" Allow :Man to read man pages (nvim default) {{{2
+""""""""""""""""""""""""""""""""""""""""
+if !has('nvim')
+  runtime! ftplugin/man.vim " Make vim able to read man pages within Vim.
+endif
 
 " Set insert mode cursor to be a bar (nvim default behaviour) {{{2
 """"""""""""""""""""""""""""""""""""""""
@@ -287,13 +288,13 @@ set winwidth=87     " Set the min nr of columns for current window
 set spelllang=en_gb " Set default spell language as british english
 set spellfile=~/.config/nvim/spell/en.utf-8.add " file to store good spellings
 set pastetoggle=<F36> " Set mapping for toggle 'paste' option.
-"set textwidth=80
+"set textwidth=80     " In modern era, there is not much point for this.
 set colorcolumn=+1
 set smartcase
 set ignorecase
 set cpo+=W          " Don't overwrite read-only file with :w!
 
-if $TERM !=# 'linux'
+if $TERM !=# 'linux' " i.e. NOT in <C-A-F2> command line mode in linux
   set showbreak=∥   " TODO dqn0 unset its showbreak setting messing up others
   if $HOST_NAME == 'dqarch'
     set lcs=tab:‹\ ›,trail:·,eol:¬,nbsp:_ " adjust the text printed by :list
@@ -318,7 +319,6 @@ let g:markdown_folding = 1
 " Prevent accidentally enter Ex mode, use gQ instead:
 noremap Q <Nop>
 
-" Convenient command to see the difference between the current buffer and the
 " Make ]] and [[ useful even open brace is not at the first column
 map [[ ?{<CR>w99[{:noh<CR>
 map ][ /}<CR>b99]}:noh<CR>
@@ -337,6 +337,7 @@ map ]A :last<CR>
 " Toogle the current window to highlight difference
 nnoremap dr :set diff!<CR>
 
+" Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
 command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
   \ | wincmd p | diffthis
@@ -347,7 +348,6 @@ if !has('nvim')
 endif
 
 " For easy access some documents:
-command Vimnote tabe ~/Documents/learn-type/vim.dqn0
 command Master e ~/master.dqn
 " For saving and compiling current file
 command -nargs=0 Make update | make %:p:S
