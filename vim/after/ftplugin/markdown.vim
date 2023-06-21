@@ -17,6 +17,10 @@ function s:SetMarkdownHighlight()
 endfunction
 
 function s:UnsetMarkdownHighlight()
+  " Check to prevent running b:undo_ftplugin twice by other plugins
+  if !exists('b:OriginConcealHl')
+    return
+  endif
   if !has('nvim')
     call hlset(b:OriginConcealHl)
   else
