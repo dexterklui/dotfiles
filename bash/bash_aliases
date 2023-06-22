@@ -30,7 +30,11 @@ if [ -x /usr/bin/vim ]; then
     alias vr='vim -R'
     alias vdiff='vim -d'
     alias vtrue='VIM_TRUECOLOR=true vim'
-elif [ -x /usr/bin/nvim ]; then
+fi
+if [ -x "/usr/bin/nvim" ]; then
+    alias nv='nvim'
+fi
+if [ "$EDITOR" = "nvim" ]; then
     alias v='nvim'
     alias vr='nvim -R' # Neovim read-only mode
     alias vdiff='nvim -d'
