@@ -25,7 +25,8 @@ fi
 if [ -x /usr/bin/vim ]; then
     export EDITOR='vim'
     export DIFFPROG='vimdiff'
-elif [ -x /usr/bin/nvim ]; then
+fi
+if [ -x /usr/bin/nvim ]; then
     export EDITOR='nvim'
     #export VISUAL='nvim'
     export DIFFPROG="nvim -d"
