@@ -2,7 +2,7 @@
 AntiAliasFonts=true
 BoldIntense=true
 ColorScheme=One Half Dark
-Font=Hack,12,-1,5,50,0,0,0,0,0
+Font=Hack Nerd Font Mono,12,-1,5,50,0,0,0,0,0
 IgnoreWcWidth=false
 LineSpacing=0
 TabColor=128,128,128
