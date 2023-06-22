@@ -46,85 +46,87 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ** setup vim-plug ** {{{2
 """"""""""""""""""""""""""""""""""""""""
-let g:ran_vim_plugins = 1
-try
-  call plug#begin('~/.config/nvim/plug')
+if !has('nvim')
+  let g:ran_vim_plugins = 1
+  try
+    call plug#begin('~/.config/nvim/plug')
 
-  " Vim themes
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-  Plug 'altercation/vim-colors-solarized'
+    " Vim themes
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'altercation/vim-colors-solarized'
 
-  " General files management and search
-  Plug 'preservim/nerdtree'
-  Plug 'kien/ctrlp.vim'
+    " General files management and search
+    Plug 'preservim/nerdtree'
+    Plug 'kien/ctrlp.vim'
 
-  " General syntax checking and autocomplete and tags
-  Plug 'Valloric/YouCompleteMe', {'on': ['YcmDebugInfo'], 'for': ['c', 'cpp', 'javascript', 'css', 'html']}
-  Plug 'vim-syntastic/syntastic'
-  Plug 'preservim/tagbar', {'on': 'TagbarToggle'}
+    " General syntax checking and autocomplete and tags
+    Plug 'Valloric/YouCompleteMe', {'on': ['YcmDebugInfo'], 'for': ['c', 'cpp', 'javascript', 'css', 'html']}
+    Plug 'vim-syntastic/syntastic'
+    Plug 'preservim/tagbar', {'on': 'TagbarToggle'}
 
-  " General syntax highlighting and visuals
-  Plug 'Yggdroot/indentLine'
-  Plug 'frazrepo/vim-rainbow', {'on': 'RainbowToggle'}
-  Plug 'xolox/vim-easytags'
-  Plug 'xolox/vim-misc' " required by vim-easytags
+    " General syntax highlighting and visuals
+    Plug 'Yggdroot/indentLine'
+    Plug 'frazrepo/vim-rainbow', {'on': 'RainbowToggle'}
+    Plug 'xolox/vim-easytags'
+    Plug 'xolox/vim-misc' " required by vim-easytags
 
-  " General formating and editting
-  Plug 'godlygeek/tabular', {'on': 'Tabularize'}
-  Plug 'jiangmiao/auto-pairs'
-  Plug 'tpope/vim-surround'
-  Plug 'terryma/vim-multiple-cursors'
-  Plug 'easymotion/vim-easymotion'
-  Plug 'preservim/nerdcommenter'
-  Plug 'SirVer/ultisnips'
-  Plug 'honza/vim-snippets'
-  " post install (yarn install | npm install) then load plugin only for editing
-  " supported files
-  Plug 'prettier/vim-prettier', {
-    \ 'do': 'npm install --frozen-lockfile --production',
-    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
+    " General formating and editting
+    Plug 'godlygeek/tabular', {'on': 'Tabularize'}
+    Plug 'jiangmiao/auto-pairs'
+    Plug 'tpope/vim-surround'
+    Plug 'terryma/vim-multiple-cursors'
+    Plug 'easymotion/vim-easymotion'
+    Plug 'preservim/nerdcommenter'
+    Plug 'SirVer/ultisnips'
+    Plug 'honza/vim-snippets'
+    " post install (yarn install | npm install) then load plugin only for editing
+    " supported files
+    Plug 'prettier/vim-prettier', {
+      \ 'do': 'npm install --frozen-lockfile --production',
+      \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
 
-  " text, markdown, dqn
-  Plug 'dhruvasagar/vim-table-mode', {'for': 'dqn', 'on': 'TableModeToggle'}
-  Plug 'junegunn/goyo.vim', {'for': ['dqn', 'markdown'], 'on': 'Goyo'}
-  Plug 'junegunn/limelight.vim',
-        \ {'for': ['dqn', 'markdown'], 'on': ['Goyo', 'Limelight']}
-  Plug 'preservim/vim-markdown', {'for': 'markdown'}
+    " text, markdown, dqn
+    Plug 'dhruvasagar/vim-table-mode', {'for': 'dqn', 'on': 'TableModeToggle'}
+    Plug 'junegunn/goyo.vim', {'for': ['dqn', 'markdown'], 'on': 'Goyo'}
+    Plug 'junegunn/limelight.vim',
+          \ {'for': ['dqn', 'markdown'], 'on': ['Goyo', 'Limelight']}
+    Plug 'preservim/vim-markdown', {'for': 'markdown'}
 
-  " Git
-  Plug 'airblade/vim-gitgutter'
-  Plug 'tpope/vim-fugitive'
+    " Git
+    Plug 'airblade/vim-gitgutter'
+    Plug 'tpope/vim-fugitive'
 
-  " C family
-  Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['cpp', 'c']}
+    " C family
+    Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['cpp', 'c']}
 
-  " HTML
-  Plug 'rstacruz/sparkup', {'for': ['html']}
+    " HTML
+    Plug 'rstacruz/sparkup', {'for': ['html']}
 
-  " CSS
-  Plug 'hail2u/vim-css3-syntax', {'for': 'css'}
+    " CSS
+    Plug 'hail2u/vim-css3-syntax', {'for': 'css'}
 
-  " JavaScript
-  Plug 'pangloss/vim-javascript', {'for': ['javascript']}
+    " JavaScript
+    Plug 'pangloss/vim-javascript', {'for': ['javascript']}
 
-  " Tex
-  Plug 'lervag/vimtex', {'for': ['tex']}
+    " Tex
+    Plug 'lervag/vimtex', {'for': ['tex']}
 
-  " For optimizing python3
-  Plug 'tmhedberg/SimpylFold', {'for': 'python'}
+    " For optimizing python3
+    Plug 'tmhedberg/SimpylFold', {'for': 'python'}
 
-  " For ledger
-  Plug 'ledger/vim-ledger', {'for': 'ledger'}
+    " For ledger
+    Plug 'ledger/vim-ledger', {'for': 'ledger'}
 
-  " Misc
-  Plug 'lambdalisue/suda.vim', {'on': ['SudaRead', 'SudaWrite']}
-  Plug 'christoomey/vim-tmux-navigator'
+    " Misc
+    Plug 'lambdalisue/suda.vim', {'on': ['SudaRead', 'SudaWrite']}
+    Plug 'christoomey/vim-tmux-navigator'
 
-  call plug#end()
-catch /^Vim\%((\a\+)\)\=:E117/
-  let g:ran_vim_plugins = 0
-endtry
+    call plug#end()
+  catch /^Vim\%((\a\+)\)\=:E117/
+    let g:ran_vim_plugins = 0
+  endtry
+endif
 
 " ** packadd ** {{{2
 """"""""""""""""""""""""""""""""""""""""
@@ -402,7 +404,7 @@ nnoremap <M-l> <C-w>l
 
 " *** Customizing Plugins *** {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if g:ran_vim_plugins " Only customize Vim plugins if they were loaded
+if exists("g:ran_vim_plugins") && g:ran_vim_plugins " Only customize Vim plugins if they were loaded
 """"""""""""""""""""""""""""""""""""""""
 " * Airline * {{{2
 """"""""""""""""""""
