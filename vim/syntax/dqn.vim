@@ -294,6 +294,46 @@ let s:t_Frgrd = '234'
     endif
   endif
 
+" Tokyonight-moon {{{2
+""""""""""""""""""""
+elseif exists('g:colors_name') && g:colors_name =~ 'tokyonight'
+
+let s:g_Yellow  = '#ffc777'
+let s:g_Green   = '#c3e88d'
+let s:g_Blue    = '#82aaff'
+let s:g_Orange  = '#ffa077'
+let s:g_Purple  = '#9b75f9'
+let s:g_Cyan    = '#86e1fc'
+let s:g_Magenta = '#c099ff'
+let s:g_Red     = '#ff757f'
+  if &background ==# 'dark'
+let s:g_Shade = '#374347'
+let s:g_Bkgrd = '#1b1d2b'
+let s:g_Frgrd = '#c8d3f5'
+  else
+let s:g_Shade = '#93a1a1'
+let s:g_Bkgrd = '#828bb8'
+let s:g_Frgrd = '#1b1d2b'
+  endif
+
+let s:t_Yellow  = 'yellow'
+let s:t_Green   = 'darkgreen'
+let s:t_Blue    = 'darkblue'
+let s:t_Orange  = 'darkyellow'
+let s:t_Purple  = 'darkmagenta'
+let s:t_Cyan    = 'darkcyan'
+let s:t_Magenta = 'darkmagenta'
+let s:t_Red     = 'darkred'
+  if &background ==# 'dark'
+let s:t_Shade = 'darkgray'
+let s:t_Bkgrd = 'black'
+let s:t_Frgrd = 'white'
+  else
+let s:t_Shade = 'lightgray'
+let s:t_Bkgrd = 'white'
+let s:t_Frgrd = 'black'
+  endif
+
 " Other colorscheme {{{2
 """"""""""""""""""""
 else " colorscheme other than solarized
