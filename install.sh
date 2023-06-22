@@ -18,7 +18,7 @@ HOST_NAME=$(cat /proc/sys/kernel/hostname)
 [[ -z $XDG_CONFIG_HOME ]] && XDG_CONFIG_HOME=$HOME/.config
 [[ -z $XDG_DATA_HOME ]]   && XDG_DATA_HOME=$HOME/.local/share
 TMP_DOT_SCRIPT=/tmp/$(whoami)_dot_install.sh
-touch $TMP_DOT_SCRIPT || (echo "Can't create $TMP_DOT_SCRIPT! Abort." ; exit 1)
+touch "$TMP_DOT_SCRIPT" || (echo "Can't create '$TMP_DOT_SCRIPT'! Abort." ; exit 1)
 
 LINK_ARG='-sv'
 CP_ARG='-nv'
@@ -87,7 +87,7 @@ done
 for i in $@ ; do
     if [[ $i = 'vim' || $i = '--all' ]] ; then
 
-DSTDIR=$XDG_CONFIG_HOME/nvim
+DSTDIR="$HOME/.vim"
 
 
 # other config files {{{2
@@ -96,25 +96,25 @@ DSTDIR=$XDG_CONFIG_HOME/nvim
 find vim -type f -name '*.vim' | sed 's|/[^/]*$||' | sort | uniq | sed -E "s|^vim/(.*)$|$DSTDIR/\1|" | xargs mkdir -p
 # Make a script to make symbolic link for each vim scripts
 find vim -type f -name '*.vim' | sed -E "s|^(.*)$|\1 \1|" | sed -E "s|^([^ ]*) vim/(.*)$|ln $LINK_ARG $PWD/\1 $DSTDIR/\2|" > $TMP_DOT_SCRIPT
-bash $TMP_DOT_SCRIPT
+bash "$TMP_DOT_SCRIPT"
 
-mkdir -p $DSTDIR/UltiSnips
-ln $LINK_ARG $PWD/vim/UltiSnips/*.snippets $DSTDIR/UltiSnips/
+mkdir -p "$DSTDIR/UltiSnips"
+ln $LINK_ARG "$PWD"/vim/UltiSnips/*.snippets "$DSTDIR/UltiSnips/"
 
 # ln config files and folders of Vim to that of Neovim
 ########################################
 # .vimrc and init.vim
 #ln $LINK_ARG $PWD/vimrc ~/.vimrc # replaced with the line below
-ln $LINK_ARG $PWD/vim/init.vim ~/.vimrc
+ln $LINK_ARG "$PWD/vim/vimrc" "$HOME"/.vimrc
 
 # create .vim shortcut at ~/ to $XDG_CONFIG_HOME/nvim
 # This is because vim's config folder is at ~/.vim
-ln -T $LINK_ARG $DSTDIR ~/.vim
+# ln -T $LINK_ARG $DSTDIR ~/.vim
 
 # config files for vim plugins {{{2
 ########################################
 # YouCompleteMe
-ln $LINK_ARG $PWD/vim/ycm_global_ycm_extra_conf $DSTDIR/ycm_global_ycm_extra_conf
+ln $LINK_ARG "$PWD"/vim/ycm_global_ycm_extra_conf.py "$DSTDIR"/ycm_global_ycm_extra_conf.py
 
         break
     fi

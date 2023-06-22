@@ -49,7 +49,7 @@ augroup END
 if !has('nvim')
   let g:ran_vim_plugins = 1
   try
-    call plug#begin('~/.config/nvim/plug')
+    call plug#begin('~/.vim/plug')
 
     " Vim themes
     Plug 'vim-airline/vim-airline'
@@ -288,7 +288,7 @@ set updatetime=1000   " If too lag, set to 1000
                     " YouCompleteMe plugin
 set winwidth=87     " Set the min nr of columns for current window
 set spelllang=en_gb " Set default spell language as british english
-set spellfile=~/.config/nvim/spell/en.utf-8.add " file to store good spellings
+set spellfile=~/.vim/spell/en.utf-8.add " file to store good spellings
 set pastetoggle=<F36> " Set mapping for toggle 'paste' option.
 "set textwidth=80     " In modern era, there is not much point for this.
 set colorcolumn=+1
@@ -532,9 +532,9 @@ let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 let g:ycm_filetype_blacklist = { 'ledger': 1 }
 let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_global_ycm_extra_conf =
-      \ ($XDG_CONFIG_HOME == "" ? "~/.config" : $XDG_CONFIG_HOME)
-      \ . "/nvim/ycm_global_ycm_extra_conf"
+let g:ycm_global_ycm_extra_conf = "~/.vim/ycm_global_cym_extra_conf.py"
+      "\ ($XDG_CONFIG_HOME == "" ? "~/.config" : $XDG_CONFIG_HOME)
+      "\ . "/nvim/ycm_global_ycm_extra_conf"
 
 " * Tarbar * {{{2
 """"""""""""""""""""
