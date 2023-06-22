@@ -59,13 +59,23 @@ iabbrev <buffer> {{s <C-O>0<C-O>d$<Space><Space><Space><Bar><Bar><Left>
 iabbrev <buffer> {{S <C-O>0<C-O>d$<Space><Space><Space><Bar><Bar><Space>{{{4<Left><Left><Left><Left><Left><Left>
   \<C-O>:let b:Eatchar=1<CR>
   \<C-R>=Eatchar('\s')<CR>
-iabbrev <buffer> ;r ➱
-iabbrev <buffer> ;R ⮱
-iabbrev <buffer> ;t ‣
-iabbrev <buffer> ;d ·
-iabbrev <buffer> ;D •
+
+if !has('nvim')
+  iabbrev <buffer> ;r ➱
+  iabbrev <buffer> ;R ⮱
+  iabbrev <buffer> ;t ‣
+  iabbrev <buffer> ;d ·
+  iabbrev <buffer> ;D •
+  iabbrev <buffer> ;; <BS><Space>
+else
+  iabbrev <buffer> lr ➱<Space><Space>
+  iabbrev <buffer> lR ⮱<Space><Space>
+  iabbrev <buffer> lt ‣<Space><Space>
+  iabbrev <buffer> ld ·<Space><Space>
+  iabbrev <buffer> lD •<Space><Space>
+endif
+
 iabbrev <buffer> latex LaTeX
-iabbrev <buffer> ;; <BS><Space>
 
 " Mappings for dqn plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
