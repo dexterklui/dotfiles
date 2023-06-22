@@ -120,6 +120,23 @@ ln $LINK_ARG "$PWD"/vim/ycm_global_ycm_extra_conf.py "$DSTDIR"/ycm_global_ycm_ex
     fi
 done
 
+# NeoVim {{{1
+##############################################################################
+for i in $@ ; do
+    if [[ $i = 'nvim' || $i = '--all' ]] ; then
+
+DSTDIR="$XDG_CONFIG_HOME"/nvim
+
+if [ ! -d "$DSTDIR" ]; then
+    mkdir -p "$DSTDIR"
+fi
+
+ln $LINK_ARG "$PWD"/nvim/init.lua "$DSTDIR"/
+ln $LINK_ARG "$PWD"/nvim/nvimrc.vim "$DSTDIR"/
+
+    fi
+done
+
 # VSCode {{{1
 ##############################################################################
 for i in $@ ; do
