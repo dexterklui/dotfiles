@@ -123,7 +123,8 @@ done
 # NeoVim {{{1
 ##############################################################################
 for i in $@ ; do
-    if [[ $i = 'nvim' || $i = '--all' ]] ; then
+    # By default, --all install lazyvim rather than nvim
+    if [[ $i = 'nvim' ]] ; then
 
 DSTDIR="$XDG_CONFIG_HOME"/nvim
 
@@ -133,6 +134,22 @@ fi
 
 ln $LINK_ARG "$PWD"/nvim/init.lua "$DSTDIR"/
 ln $LINK_ARG "$PWD"/nvim/nvimrc.vim "$DSTDIR"/
+
+    fi
+done
+
+# LazyVim {{{1
+##############################################################################
+for i in $@ ; do
+    if [[ $i = 'lazyvim' || $i = '--all' ]] ; then
+
+DSTDIR="$XDG_CONFIG_HOME"
+
+if [ ! -d "$DSTDIR" ]; then
+    mkdir -p "$DSTDIR"
+fi
+
+ln $LINK_ARG "$PWD"/lazyvim "$DSTDIR"/nvim
 
     fi
 done
