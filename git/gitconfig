@@ -3,28 +3,24 @@
         email = dexlui@pm.me
         signingkey = 24628C9E1B04F6D1
 
-# Define command which will be used when "nvim.cmd" is set as a merge tool
-##############################################################################
-[mergetool "nvim"]
-        cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
-# Set "nvim" as tool for merging
 [merge]
-        tool = vim
-# Automatically launch merge tool without displaying a prompt
+        tool = nvimdiff2
+
 [mergetool]
+# Automatically launch merge tool without displaying a prompt
         prompt = false
 
 # Choose difftool
 ##############################################################################
 [diff]
-        tool = vimdiff
+        tool = nvimdiff
 
 [difftool]
         prompt = false
 
 ##############################################################################
 [core]
-        editor = vim
+        editor = nvim
         excludesfile = /home/dexq/.gitignore
 [alias]
         co = checkout
