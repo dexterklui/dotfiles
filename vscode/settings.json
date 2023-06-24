@@ -7,5 +7,10 @@
   "vim.useCtrlKeys": true,
   "vim.handleKeys": {
     "<C-k>": false
-  }
+  },
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "explorer.confirmDelete": false
 }
