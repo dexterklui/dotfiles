@@ -1,18 +1,18 @@
-" DQAutoPairs:	    Redefine auto-pairs plugin function to make it work with
-"		    Eatchar()
-" Maintainer:	    DQ
-" Latest Change:    4 May 2020
-" Version:	    1.0
+" DQAutoPairs:   Redefine auto-pairs plugin function to make it work with
+"                Eatchar()
+" Maintainer:    DQ
+" Latest Change: 4 May 2020
+" Version:       1.0
 
 " Abort if running in vi-compatible mode or the user doesn't want us.
-  if &cp || exists('g:loaded_DQAutoPairs')
-    if &cp && &verbose
-      echo "Not loading DQAutoPairs in compatible mode."
-    elseif exists('g:loaded_DQAutoPairs')
-      echo "DQAutoPairs was loaded already."
-    endif
-    finish
+if &cp || exists('g:loaded_DQAutoPairs')
+  if &cp && &verbose
+    echo "Not loading DQAutoPairs in compatible mode."
+  elseif exists('g:loaded_DQAutoPairs')
+    echo "DQAutoPairs was loaded already."
   endif
+  finish
+endif
 
 " Don't need to run this script without auto-pairs plugin.
 if !exists('g:AutoPairsLoaded')
@@ -69,16 +69,16 @@ func! AutoPairsSpace()
 endf
 
 " vimscript thingy
-  let s:save_cpo = &cpo
-  set cpo&vim
+let s:save_cpo = &cpo
+set cpo&vim
 
 " Defining commands
 
 " mappings
 
 " vimscript thingy
-  let &cpo = s:save_cpo
-  unlet s:save_cpo
-  let g:loaded_DQAutoPairs = 1
+let &cpo = s:save_cpo
+unlet s:save_cpo
+let g:loaded_DQAutoPairs = 1
 
 " vim:set sw=2 sts=2 fdm=indent:
