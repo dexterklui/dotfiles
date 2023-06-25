@@ -39,6 +39,7 @@ if [ "$EDITOR" = "nvim" ]; then
     alias vr='nvim -R' # Neovim read-only mode
     alias vdiff='nvim -d'
     alias vtrue='VIM_TRUECOLOR=true nvim'
+    alias vh='NVIM_HTML_CSS=true nvim' # Enable nvim-html-css plugin (about 20ms more startup time)
 fi
 [ -x /usr/bin/git ] && alias g='git'
 
