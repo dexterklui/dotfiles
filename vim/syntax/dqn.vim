@@ -19,27 +19,27 @@ endif
 " Coloured highlighting without background {{{2
 """"""""""""""""""""
 syn region dqnRed     matchgroup=dqnMark start=+\[/+ end=+]/+ skip=+\~]+
-  \ concealends contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
+  \ concealends keepend contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
 syn region dqnOrange  matchgroup=dqnMark start=+\[-+ end=+]-+ skip=+\~]+
-  \ concealends contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
+  \ concealends keepend contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
 syn region dqnYellow  matchgroup=dqnMark start=+\[\[+ end=+]]+ skip=+\~]+
-  \ concealends contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
+  \ concealends keepend contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
 syn region dqnGreen   matchgroup=dqnMark start=+\[{+ end=+]}+ skip=+\~]+
-  \ concealends contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
+  \ concealends keepend contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
 syn region dqnCyan    matchgroup=dqnMark start=+\["+ end=+]"+ skip=+\~]+
-  \ concealends contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
+  \ concealends keepend contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
 syn region dqnBlue    matchgroup=dqnMark start=+\['+ end=+]'+ skip=+\~]+
-  \ concealends contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
+  \ concealends keepend contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
 syn region dqnPurple  matchgroup=dqnMark start=+\[=+ end=+]=+ skip=+\~]+
-  \ concealends contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
+  \ concealends keepend contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
 syn region dqnMagenta matchgroup=dqnMark start=+\[;+ end=+];+ skip=+\~]+
-  \ concealends contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
+  \ concealends keepend contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
 syn region dqnShade   matchgroup=dqnMark start=+\[,+ end=+],+ skip=+\~]+
-  \ concealends contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
+  \ concealends keepend contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
 syn region dqnFrgrd   matchgroup=dqnMark start=+\[`+ end=+]`+ skip=+\~]+
-  \ concealends contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
+  \ concealends keepend contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
 syn region dqnBkgrd   matchgroup=dqnMark start=+\[_+ end=+]_+ skip=+\~]+
-  \ concealends contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
+  \ concealends keepend contains=@Spell,dqnBreak,@dqnColor,@dqnBgColor
 
 syn cluster dqnColor add=dqnRed,dqnOrange,dqnYellow,dqnGreen,dqnCyan,dqnBlue
   \,dqnPurple,dqnMagenta,dqnShade,dqnFrgrd,dqnBkgrd
@@ -47,27 +47,27 @@ syn cluster dqnColor add=dqnRed,dqnOrange,dqnYellow,dqnGreen,dqnCyan,dqnBlue
 " Coloured highlighting with gray background {{{2
 """"""""""""""""""""
 syn region dqnBgRed     matchgroup=dqnMark start=+{/+ end=+}/+ skip=+\~}+
-  \ concealends contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
+  \ concealends keepend contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
 syn region dqnBgOrange  matchgroup=dqnMark start=+{-+ end=+}-+ skip=+\~}+
-  \ concealends contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
+  \ concealends keepend contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
 syn region dqnBgYellow  matchgroup=dqnMark start=+{\[+ end=+}]+ skip=+\~}+
-  \ concealends contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
+  \ concealends keepend contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
 syn region dqnBgGreen   matchgroup=dqnMark start=+{{+ end=+}}+ skip=+\~}+
-  \ concealends contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
+  \ concealends keepend contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
 syn region dqnBgCyan    matchgroup=dqnMark start=+{"+ end=+}"+ skip=+\~}+
-  \ concealends contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
+  \ concealends keepend contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
 syn region dqnBgBlue    matchgroup=dqnMark start=+{'+ end=+}'+ skip=+\~}+
-  \ concealends contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
+  \ concealends keepend contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
 syn region dqnBgPurple  matchgroup=dqnMark start=+{=+ end=+}=+ skip=+\~}+
-  \ concealends contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
+  \ concealends keepend contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
 syn region dqnBgMagenta matchgroup=dqnMark start=+{;+ end=+};+ skip=+\~}+
-  \ concealends contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
+  \ concealends keepend contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
 syn region dqnBgShade   matchgroup=dqnMark start=+{,+ end=+},+ skip=+\~}+
-  \ concealends contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
+  \ concealends keepend contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
 syn region dqnBgFrgrd   matchgroup=dqnMark start=+{`+ end=+}`+ skip=+\~}+
-  \ concealends contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
+  \ concealends keepend contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
 syn region dqnBgBkgrd   matchgroup=dqnMark start=+{_+ end=+}_+ skip=+\~}+
-  \ concealends contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
+  \ concealends keepend contains=@NoSpell,dqnBreak,@dqnColor,@dqnBgColor
 
 syn cluster dqnBgColor add=dqnBgRed,dqnBgOrange,dqnBgYellow,dqnBgGreen
   \,dqnBgCyan,dqnBgBlue,dqnBgPurple,dqnBgMagenta,dqnBgShade,dqnBgFrgrd
