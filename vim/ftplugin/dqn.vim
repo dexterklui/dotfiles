@@ -12,7 +12,6 @@ setl wrap
 setl linebreak
 setl formatoptions=cqltn
 setl formatlistpat=^\\s*(\\=\\d\\+[:.)]\\s\\+\\\|^\\s*[⮱➱‣•·+*-]\\s\\+
-setl tabstop=4
 setl comments=:///
 setl nojoinspaces
 setl ignorecase
@@ -26,6 +25,9 @@ setl breakindent
 setl breakindentopt=min:32,shift:-1
 setl nolist
 setl virtualedit=block
+setl tabstop=4
+setl shiftwidth=4
+setl expandtab
 
 if exists("*DQFoldText()")
   setl foldtext=DQFoldText()
@@ -104,16 +106,23 @@ endif
 " Customize plugin AutoPairs
 let b:autopairs_enabled = 0
 
-let b:undo_ftplugin = "setl cole< ai< fdm< fdc< js< tw< wrap< lbr< fo< flp< ts<"
+let b:undo_ftplugin = "setl cole< ai< fdm< fdc< js< tw< wrap< lbr< fo< flp<"
+      \ . " ts< sw< et<"
       \ . " com< ic< scs< cocu< nf< spell< cc< bri< briopt< list< ve< fdt<"
 let b:undo_ftplugin .= "| nun <buffer> gqn| nun <buffer> <leader>fi"
       \ . "| iun <buffer> <C-B>t| iun <buffer> <C-B><C-T>"
       \ . "| iun <buffer> <C-J><C-J>| iun <buffer> <C-J><C-K>"
 let b:undo_ftplugin .= "| iunab <buffer> #L| iunab <buffer> #l"
       \ . "| iunab <buffer> {{1| iunab <buffer> {{2| iunab <buffer> {{3"
-      \ . "| iunab <buffer> {{s| iunab <buffer> ;r| iunab <buffer> ;R"
-      \ . "| iunab <buffer> ;t| iunab <buffer> ;d| iunab <buffer> ;D"
-      \ . "| iunab <buffer> latex"
+      \ . "| iunab <buffer> {{s| iunab <buffer> latex"
+
+if !has('nvim')
+  let b:undo_ftplugin .= "| iunab <buffer> ;r| iunab <buffer> ;R"
+        \ . "| iunab <buffer> ;t| iunab <buffer> ;d| iunab <buffer> ;D"
+else
+  let b:undo_ftplugin .= "| iunab <buffer> lr| iunab <buffer> lR"
+        \ . "| iunab <buffer> lt| iunab <buffer> ld| iunab <buffer> lD"
+endif
 
 " DQN Plugins
 """"""""""""""""""""""""""""""""""""""""
