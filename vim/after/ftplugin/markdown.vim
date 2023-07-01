@@ -1,7 +1,7 @@
 setl expandtab
 setl tabstop=4
 setl shiftwidth=4
-setl textwidth=0
+setl textwidth=80
 
 function s:SetMarkdownHighlight()
   " Prevent the origin conceal setting overwritten when ftplugin is loaded twice
