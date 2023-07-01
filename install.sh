@@ -254,6 +254,15 @@ ln $LINK_ARG $PWD/papis $XDG_CONFIG_HOME/papis
         break
     fi
 done
+# papis {{{1
+##############################################################################
+for i in $@ ; do
+    if [[ $i = 'pipewire' || $i = '--all' ]] ; then
+ln $LINK_ARG "$PWD"/pipewire "$XDG_CONFIG_HOME"/pipewire
+        break
+    fi
+done
+
 #}}}1
 ##############################################################################
 rm $TMP_DOT_SCRIPT
