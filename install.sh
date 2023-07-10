@@ -143,13 +143,18 @@ done
 for i in $@ ; do
     if [[ $i = 'lazyvim' || $i = '--all' ]] ; then
 
-DSTDIR="$XDG_CONFIG_HOME"
+PARENT_DIR="$XDG_CONFIG_HOME"
+DSTDIR="${PARENT_DIR}/nvim"
 
-if [ ! -d "$DSTDIR" ]; then
-    mkdir -p "$DSTDIR"
-fi
+mkdir -p "$PARENT_DIR"
+ln $LINK_ARG -T "$PWD"/lazyvim "$DSTDIR"
 
-ln $LINK_ARG "$PWD"/lazyvim "$DSTDIR"/nvim
+mkdir -p "${DSTDIR}/local_plugins/oldvim"
+ln $LINK_ARG -T "${PWD}/vim/plugin" "${DSTDIR}/local_plugins/oldvim/plugin"
+ln $LINK_ARG -T "${PWD}/vim/ftplugin" "${DSTDIR}/local_plugins/oldvim/ftplugin"
+ln $LINK_ARG -T "${PWD}/vim/syntax" "${DSTDIR}/local_plugins/oldvim/syntax"
+ln $LINK_ARG -T "${PWD}/vim/after" "${DSTDIR}/local_plugins/oldvim/after"
+ln $LINK_ARG -T "${PWD}/vim/filetype.vim" "${DSTDIR}/local_plugins/oldvim/filetype.vim"
 
     fi
 done
