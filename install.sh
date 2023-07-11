@@ -172,7 +172,10 @@ done
 ##############################################################################
 for i in $@ ; do
     if [[ $i = 'tmux' || $i = '--all' ]] ; then
-ln $LINK_ARG $PWD/tmux/tmux.conf ~/.tmux.conf
+DSTDIR="$XDG_CONFIG_HOME"/tmux
+mkdir -p "$DSTDIR"
+mkdir -p "$XDG_DATA_HOME"/tmux/plugins
+ln $LINK_ARG "$PWD"/tmux/tmux.conf "$DSTDIR"/tmux.conf
         break
     fi
 done
@@ -271,4 +274,4 @@ done
 #}}}1
 ##############################################################################
 rm $TMP_DOT_SCRIPT
-# vi: fdm=marker sw=4 et
+# vi: fdm=marker sw=4 et fdl=0
