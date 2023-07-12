@@ -262,7 +262,7 @@ ln $LINK_ARG $PWD/papis $XDG_CONFIG_HOME/papis
         break
     fi
 done
-# papis {{{1
+# pipewire {{{1
 ##############################################################################
 for i in $@ ; do
     if [[ $i = 'pipewire' || $i = '--all' ]] ; then
