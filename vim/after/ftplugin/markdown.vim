@@ -3,7 +3,7 @@ setl tabstop=4
 setl shiftwidth=4
 setl textwidth=80
 
-function s:SetMarkdownHighlight()
+function DqSetMarkdownHighlight()
   " Prevent the origin conceal setting overwritten when ftplugin is loaded twice
   if !exists("b:OriginConcealHl")
     if !has('nvim')
@@ -16,7 +16,7 @@ function s:SetMarkdownHighlight()
   hi Conceal ctermfg=247 ctermbg=NONE
 endfunction
 
-function s:UnsetMarkdownHighlight()
+function DqUnsetMarkdownHighlight()
   " Check to prevent running b:undo_ftplugin twice by other plugins
   if !exists('b:OriginConcealHl')
     return
@@ -32,16 +32,39 @@ function s:UnsetMarkdownHighlight()
   endif
 endfunction
 
-call s:SetMarkdownHighlight()
+if !has('nvim')
+  call DqSetMarkdownHighlight()
 
-augroup dqMarkdown
-  au!
-  au BufEnter *.md call s:SetMarkdownHighlight()
-  au BufLeave *.md call s:UnsetMarkdownHighlight()
-augroup END
+  augroup dqMarkdown
+    au!
+    au BufEnter *.md call DqSetMarkdownHighlight()
+    au BufLeave *.md call DqUnsetMarkdownHighlight()
+  augroup END
+endif
 
-let b:_undo_ftplugin = 'setl et< ts< sw< tw< | call s:UnsetMarkdownHighlight()'
+iabbrev <buffer> <l <lt>leader>
+  \<C-O>:let b:Eatchar=1<CR>
+  \<C-R>=Eatchar('\s')<CR>
+
+iabbrev <buffer> `<l `<lt>leader><C-v>`<left>
+  \<C-O>:let b:Eatchar=1<CR>
+  \<C-R>=Eatchar('\s')<CR>
+
+iabbrev <buffer> `` <C-v>`<C-v>`<C-v>`<cr><C-v>`<C-v>`<C-v>`<up><end>
+  \<C-o>:let b:Eatchar=1<cr>
+  \<c-r>=Eatchar('\s')<cr>
+
+" The following function is needed for iabbrev {{s
+if !exists('*Eatchar')
+  func Eatchar(pat)
+    let c = nr2char(getchar(0))
+    return (c =~ a:pat) ? '' : c
+  endfunc
+endif
+
 let b:_undo_ftplugin = 'setl et< ts< sw< tw<'
+      \. '| call DqUnsetMarkdownHighlight()'
+      \. '| iunab <buffer> <l | iunab <buffer> `<l |iunab <buffer> ``'
 if exists('b:undo_ftplugin')
   let b:undo_ftplugin .= '| ' . b:_undo_ftplugin
 else

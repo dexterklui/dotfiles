@@ -78,6 +78,13 @@ else
 endif
 
 iabbrev <buffer> latex LaTeX
+iabbrev <buffer> <l <lt>leader>
+  \<C-O>:let b:Eatchar=1<CR>
+  \<C-R>=Eatchar('\s')<CR>
+iabbrev <buffer> [\<l <lt>leader>
+  \<C-O>:let b:Eatchar=1<CR>
+  \<C-R>=Eatchar('\s')<CR>
+
 
 " Mappings for dqn plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -115,6 +122,7 @@ let b:undo_ftplugin .= "| nun <buffer> gqn| nun <buffer> <leader>fi"
 let b:undo_ftplugin .= "| iunab <buffer> #L| iunab <buffer> #l"
       \ . "| iunab <buffer> {{1| iunab <buffer> {{2| iunab <buffer> {{3"
       \ . "| iunab <buffer> {{s| iunab <buffer> latex"
+      \ . '| iunab <buffer> <l |iunab <buffer> [\<l'
 
 if !has('nvim')
   let b:undo_ftplugin .= "| iunab <buffer> ;r| iunab <buffer> ;R"
