@@ -67,10 +67,10 @@ hgt_S=540
 # If is M size to L size, if L size to S size, otherwise default to M size.
 if [[ $win_w -ge $(($wid_L-$border_wid)) && $win_h -ge $((hgt_L-$border_hgt)) ]]
 then
-    x=0
-    y=0
-    xdo move -x $x -y $y
+    x=$(( ($free_area_wid-$wid_S) / 2 + $panel_left ))
+    y=$(( ($free_area_hgt-$hgt_S) / 2 + $panel_top ))
     xdo resize -w $wid_S -h $hgt_S
+    xdo move -x "$x" -y "$y"
 elif [[ $win_w -ge $(($wid_M-$border_wid)) && $win_h -ge $(($hgt_M-$border_hgt)) ]]
 then
     x=0
@@ -80,6 +80,6 @@ then
 else
     x=$(( ($free_area_wid-$wid_M) / 2 + $panel_left ))
     y=$(( ($free_area_hgt-$hgt_M) / 2 + $panel_top ))
-    xdo move -x $x -y $y
     xdo resize -w $wid_M -h $hgt_M
+    xdo move -x $x -y $y
 fi
