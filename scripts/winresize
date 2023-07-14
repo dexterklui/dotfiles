@@ -1,13 +1,12 @@
 #!/usr/bin/bash
-# A bash script toggle between two window states:
-# (1) resizing a window such that each eage's length is 80% of the screen and
-# then center it. Or (2) resize a window to 50% of screen width and a bit less
-# than 50% of screen height.
-#
-# Require program xdo, xwininfo, xdpyinfo, xprop
+# A bash script to resize active window among two states:
+# 1: Max size of screen (but it is not `maximised`, so window borders remain)
+# 2: Quarter size of screen, and place it in the center
+# Require program xdo, xwininfo, xprop, bc and sed. xdpyinfo might be needed in
+# the future.
 
 # Variable setting {{{1
-###############################################################################
+################################################################################
 dpy_w=1920
 dpy_h=1080
 
@@ -21,15 +20,20 @@ panel_r=0  # right
 panel_t=32 # top
 panel_b=0  # bottom
 
-# NOTE:some keybindings are not consistent, e.g. "ctrl+super+".
+# keybindings that xdotool uses later
+# Note that some keybindings are not consistent, e.g. "ctrl+super+".
 keybind_next_screen="super+w"
 
 # Calculare variables {{{1
-###############################################################################
+################################################################################
 
 win_id="$(xdo id)"
-win_w="$(xwininfo -id "$win_id" | grep -i '^\s*width:' | perl -pe 's/^\D+(\d+).*$/\1/')"
-win_h="$(xwininfo -id "$win_id" | grep -i '^\s*height' | perl -pe 's/^\D+(\d+).*$/\1/')"
+win_w="$(xwininfo -id "$win_id" |
+	grep -i '^\s*width:' |
+	sed -E 's/^[^0-9]+([0-9]+).*$/\1/')"
+win_h="$(xwininfo -id "$win_id" |
+	grep -i '^\s*height' |
+	sed -E 's/^[^0-9]+([0-9]+).*$/\1/')"
 win_x="$(xwininfo -id "$win_id" |
 	grep -i '^\s*Absolute upper-left X' |
 	sed -E 's/^\s*Absolute.*X:\s+([0-9]+)\s*$/\1/')"
@@ -43,27 +47,31 @@ if [ "$win_x" -gt "$dpy_w" ] || [ "$win_y" -gt "$dpy_h" ]; then
 fi
 
 # account for display width/height occupied by fixed window panel/dock
-panel_w="$(printf "${panel_l} + ${panel_r}\n" | bc -s)"
-panel_h="$(printf "${panel_t} + ${panel_b}\n" | bc -s)"
+panel_w="$(printf "%s + %s\n" "$panel_l" "$panel_r" | bc -s)"
+panel_h="$(printf "%s + %s\n" "$panel_t" "$panel_b" | bc -s)"
 
-if [[ -z "$(xprop -id "$win_id" | grep '^_NET_FRAME_EXTENTS(CARDINAL)')" ||
--n "$(xprop -id "$win_id" | grep '^_NET_FRAME_EXTENTS(CARDINAL) = 0, 0, 0, 0$')" ]]; then
+if ! xprop -id "$win_id" |
+	grep -q '^_NET_FRAME_EXTENTS(CARDINAL)' ||
+	xprop -id "$win_id" |
+	grep -q '^_NET_FRAME_EXTENTS(CARDINAL) = 0, 0, 0, 0$'; then
 	border_w=0
 	border_h=0
 fi
 
-space_w="$(printf "$dpy_w - $panel_w\n" | bc -s)"
-space_h="$(printf "$dpy_h - $panel_h\n" | bc -s)"
+space_w="$(printf "%s - %s\n" "$dpy_w" "$panel_w" | bc -s)"
+space_h="$(printf "%s - %s\n" "$dpy_h" "$panel_h" | bc -s)"
 
 # Assume first screen have full 1920 x 1080
 large_w="$dpy_w"
 large_h="$dpy_h"
-small_w="$(printf "$space_w * 0.5 - ${border_w}\n" | bc -s)"
-small_h="$(printf "$space_h * 0.5 - ${border_h}\n" | bc -s)"
+small_w="$(printf "%s* 0.5 - %s\n" "$space_w" "$border_w" | bc -s)"
+small_h="$(printf "%s * 0.5 - %s\n" "$space_h" "$border_h" | bc -s)"
 
 new_size="large"
-if [ "$win_w" -ge "$(printf "$space_w - $border_w\n" | bc -s)" ] ||
-	[ "$win_h" -ge "$(printf "$space_h - $border_h\n" | bc -s)" ]; then
+if [ "$win_w" -ge "$(printf "%s - %s\n" "$space_w" "$border_w" |
+	bc -s)" ] ||
+	[ "$win_h" -ge "$(printf "%s - %s\n" "$space_h" "$border_h" |
+		bc -s)" ]; then
 	new_size="small"
 fi
 
@@ -76,13 +84,16 @@ new_y=0
 if [ "$new_size" = "small" ]; then
 	new_w="$small_w"
 	new_h="$small_h"
-	new_x="$(printf "($dpy_w - $new_w) / 2\n" | bc -s)"
-	new_y="$(printf "($dpy_h - $new_h) / 2\n" | bc -s)"
+	new_x="$(printf "(%s - %s) / 2\n" "$dpy_w" "$new_w" | bc -s)"
+	new_y="$(printf "(%s - %s) / 2\n" "$dpy_h" "$new_h" | bc -s)"
 fi
 xdo resize -w "$new_w" -h "$new_h"
 xdo move -x "$new_x" -y "$new_y"
+# XXX: this is ugly and the behaviour of using xdotool is unstable
 if test "$on_next_screen"; then
 	xdotool key "$keybind_next_screen"
 fi
 
+# Vim modelines {{{1
+################################################################################
 # vim: fdm=marker tw=80
