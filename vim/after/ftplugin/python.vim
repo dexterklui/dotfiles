@@ -17,7 +17,9 @@ setl fileformat=unix
 setl colorcolumn=73,+1
 
 " Set compiler
-compiler python
+if !has('nvim')
+  compiler python
+endif
 
 " Compiling shortcut
 if exists('nvim')
