@@ -1,0 +1,88 @@
+#!/usr/bin/bash
+# A bash script toggle between two window states:
+# (1) resizing a window such that each eage's length is 80% of the screen and
+# then center it. Or (2) resize a window to 50% of screen width and a bit less
+# than 50% of screen height.
+#
+# Require program xdo, xwininfo, xdpyinfo, xprop
+
+# Variable setting {{{1
+###############################################################################
+dpy_w=1920
+dpy_h=1080
+
+# Use xwininfo to check the value
+border_w=10 # account for extra height occupied by border of the window
+border_h=10 # account for extra height occupied by border of the window
+
+# Panels on desktop
+panel_l=0  # left
+panel_r=0  # right
+panel_t=32 # top
+panel_b=0  # bottom
+
+# NOTE:some keybindings are not consistent, e.g. "ctrl+super+".
+keybind_next_screen="super+w"
+
+# Calculare variables {{{1
+###############################################################################
+
+win_id="$(xdo id)"
+win_w="$(xwininfo -id "$win_id" | grep -i '^\s*width:' | perl -pe 's/^\D+(\d+).*$/\1/')"
+win_h="$(xwininfo -id "$win_id" | grep -i '^\s*height' | perl -pe 's/^\D+(\d+).*$/\1/')"
+win_x="$(xwininfo -id "$win_id" |
+	grep -i '^\s*Absolute upper-left X' |
+	sed -E 's/^\s*Absolute.*X:\s+([0-9]+)\s*$/\1/')"
+win_y="$(xwininfo -id "$win_id" |
+	grep -i '^\s*Absolute upper-left Y' |
+	sed -E 's/^\s*Absolute.*Y:\s+([0-9]+)\s*$/\1/')"
+
+on_next_screen=""
+if [ "$win_x" -gt "$dpy_w" ] || [ "$win_y" -gt "$dpy_h" ]; then
+	on_next_screen="1"
+fi
+
+# account for display width/height occupied by fixed window panel/dock
+panel_w="$(printf "${panel_l} + ${panel_r}\n" | bc -s)"
+panel_h="$(printf "${panel_t} + ${panel_b}\n" | bc -s)"
+
+if [[ -z "$(xprop -id "$win_id" | grep '^_NET_FRAME_EXTENTS(CARDINAL)')" ||
+-n "$(xprop -id "$win_id" | grep '^_NET_FRAME_EXTENTS(CARDINAL) = 0, 0, 0, 0$')" ]]; then
+	border_w=0
+	border_h=0
+fi
+
+space_w="$(printf "$dpy_w - $panel_w\n" | bc -s)"
+space_h="$(printf "$dpy_h - $panel_h\n" | bc -s)"
+
+# Assume first screen have full 1920 x 1080
+large_w="$dpy_w"
+large_h="$dpy_h"
+small_w="$(printf "$space_w * 0.5 - ${border_w}\n" | bc -s)"
+small_h="$(printf "$space_h * 0.5 - ${border_h}\n" | bc -s)"
+
+new_size="large"
+if [ "$win_w" -ge "$(printf "$space_w - $border_w\n" | bc -s)" ] ||
+	[ "$win_h" -ge "$(printf "$space_h - $border_h\n" | bc -s)" ]; then
+	new_size="small"
+fi
+
+# Main {{{1
+################################################################################
+new_w="$large_w"
+new_h="$large_h"
+new_x=0
+new_y=0
+if [ "$new_size" = "small" ]; then
+	new_w="$small_w"
+	new_h="$small_h"
+	new_x="$(printf "($dpy_w - $new_w) / 2\n" | bc -s)"
+	new_y="$(printf "($dpy_h - $new_h) / 2\n" | bc -s)"
+fi
+xdo resize -w "$new_w" -h "$new_h"
+xdo move -x "$new_x" -y "$new_y"
+if test "$on_next_screen"; then
+	xdotool key "$keybind_next_screen"
+fi
+
+# vim: fdm=marker tw=80
