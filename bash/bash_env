@@ -1,4 +1,6 @@
-export HOST_NAME=$(cat /proc/sys/kernel/hostname)
+#!/usr/bin/bash
+HOST_NAME="$(cat /proc/sys/kernel/hostname)"
+export HOST_NAME
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share
 export MANWIDTH=80
@@ -11,25 +13,31 @@ export LESS_TERMCAP_se=$'\e[0m'
 export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
-[ -n $PATH ] && export PATH=$HOME/bin:$PATH
 
-if [[ (-n "$(command -v ledger)" || -n "$(command -v hledger)") ]] ; then
-    export LEDGER_FILE=/media/mikeX/Nextcloud/Documents/Ledger/journal.ledger
-    export LEDGER_PEDANTIC=1
+PATH="$HOME/.local/bin:$PATH"
+PATH="$HOME/bin:$PATH"
+export PATH
+
+npm_config_prefix="$HOME/.local"
+export npm_config_prefix
+
+if [[ (-n "$(command -v ledger)" || -n "$(command -v hledger)") ]]; then
+	export LEDGER_FILE=/media/mikeX/Nextcloud/Documents/Ledger/journal.ledger
+	export LEDGER_PEDANTIC=1
 fi
 
-if [[ $HOST_NAME == 'dq-x1c' && ! -n $TERM_PROGRAM ]]; then
-   export TERM_PROGRAM=gnome-terminal
+if [[ $HOST_NAME == 'dq-x1c' && -z $TERM_PROGRAM ]]; then
+	export TERM_PROGRAM=gnome-terminal
 fi
 
 if [ -x /usr/bin/vim ]; then
-    export EDITOR='vim'
-    export DIFFPROG='vimdiff'
+	export EDITOR='vim'
+	export DIFFPROG='vimdiff'
 fi
 if [ -x /usr/bin/nvim ]; then
-    export EDITOR='nvim'
-    #export VISUAL='nvim'
-    export DIFFPROG="nvim -d"
+	export EDITOR='nvim'
+	#export VISUAL='nvim'
+	export DIFFPROG="nvim -d"
 fi
 
 export LOADED_BASH_ENV=1

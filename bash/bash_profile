@@ -1,10 +1,7 @@
-#
+#! /usr/bin/sh
 # ~/.bash_profile
 #
 
-export PATH=$HOME/bin:$PATH
-export GPG_TTY=$(tty)
-
-[[ -f ~/.bashrc ]] && . ~/.bashrc
+[ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"
 
 # vi: ft=sh
