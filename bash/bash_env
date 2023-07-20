@@ -18,9 +18,6 @@ PATH="$HOME/.local/bin:$PATH"
 PATH="$HOME/bin:$PATH"
 export PATH
 
-npm_config_prefix="$HOME/.local"
-export npm_config_prefix
-
 if [[ (-n "$(command -v ledger)" || -n "$(command -v hledger)") ]]; then
 	export LEDGER_FILE=/media/mikeX/Nextcloud/Documents/Ledger/journal.ledger
 	export LEDGER_PEDANTIC=1
