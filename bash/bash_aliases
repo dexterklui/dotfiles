@@ -1,10 +1,5 @@
+#!/usr/bin/bash
 if [[ $HOST_NAME == "dq-x1c" ]]; then
-    # shortcuts for directories
-    alias hku='cd /media/dexq/mSD-xStorage-NTFS/HKU'
-    alias ntfs='cd /media/dexq/mSD-xStorage-NTFS'
-    alias dq='cd /media/dexq/DQ-II/DQII/'
-    alias hkuv='vim /media/dexq/mSD-xStorage-NTFS/HKU/courses.dqn -c "cd /media/dexq/mSD-xStorage-NTFS/HKU"'
-
     # often used commands for fixing common issues
     #alias re='xinput set-prop "TPPS/2 Elan TrackPoint" "libinput Accel Speed" -0.7 && xinput list-props "TPPS/2 Elan TrackPoint"' # Lower the sensitivity of laptop's TrackPoint
     alias re='xinput set-prop "TPPS/2 Elan TrackPoint" "libinput Accel Speed" 0.5 && xinput list-props "TPPS/2 Elan TrackPoint"' # Lower the sensitivity of laptop's TrackPoint
@@ -13,9 +8,6 @@ if [[ $HOST_NAME == "dq-x1c" ]]; then
     # running programs
     alias java64='/usr/java/jre1.8.0_181/bin/java -d64 -jar'
     alias Tor='cd ~/Tor/tor-browser_en-US/ && ./start-tor-browser.desktop && cd -'
-    alias ATLauncher='java64 ~/Launch/ATLauncher3.3.4.2/ATLauncher.jar &'
-
-    alias VB='VBoxManage'
 fi
 
 # Save a lot of typing for common commands
@@ -32,7 +24,7 @@ alias cdp='cd -P'
 # pass LC_CTYPE to neovim as well
 alias man='LC_CTYPE=C man'
 
-# To make sure manpage use only ASCII chars
+# Make sure manpages use only ASCII chars
 # Pass  ‐w,
 if [ -x /usr/bin/vim ]; then
     alias v='vim'
@@ -44,11 +36,12 @@ if [ -x "/usr/bin/nvim" ]; then
     alias nv='nvim'
 fi
 if [ "$EDITOR" = "nvim" ]; then
-    alias v='LC_CTYPE=C nvim'
-    alias vr='LC_CTYPE=C nvim -R' # Neovim read-only mode
-    alias vdiff='LC_CTYPE=C nvim -d'
-    alias vtrue='VIM_TRUECOLOR=true LC_CTYPE=C nvim'
-    alias vh='NVIM_HTML_CSS=true LC_CTYPE=C  nvim' # Enable nvim-html-css plugin (about 20ms more startup time)
+    alias v='nvim'
+    alias vr='nvim -R' # Neovim read-only mode
+    alias vdiff='nvim -d'
+    alias vtrue='VIM_TRUECOLOR=true nvim'
+    alias vh='NVIM_HTML_CSS=true nvim' # Enable nvim-html-css plugin (about 20ms more startup time)
+    alias vman='LC_CTYPE=C nvim' # Make sure manpages use only ASCII chars
 fi
 [ -x /usr/bin/git ] && alias g='git'
 
