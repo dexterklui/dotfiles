@@ -3,10 +3,10 @@ SESSION_NAME=norm
 
 # Exit if session already exists
 if tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
-    printf "Tmux session '$SESSION_NAME' already exists!\n"
-    exit 1
+	printf "Tmux session '%s' already exists!\n" "$SESSION_NAME"
+	exit 1
 fi
 
-tmux new-session -d -s $SESSION_NAME -n 'notes' -c "/media/mikeX/Nextcloud/Notes"
-tmux new-window -d -n 'arch' -c $HOME/src/dotfiles
-tmux -2 attach-session -t $SESSION_NAME
+tmux new-session -d -s "$SESSION_NAME" -n 'notes' -c "/media/mikeX/Nextcloud"
+tmux new-window -d -n 'dq' -c "$HOME"
+tmux -2 attach-session -t "$SESSION_NAME"

@@ -1,13 +1,13 @@
 #!/usr/bin/bash
 if [[ $HOST_NAME == "dq-x1c" ]]; then
-    # often used commands for fixing common issues
-    #alias re='xinput set-prop "TPPS/2 Elan TrackPoint" "libinput Accel Speed" -0.7 && xinput list-props "TPPS/2 Elan TrackPoint"' # Lower the sensitivity of laptop's TrackPoint
-    alias re='xinput set-prop "TPPS/2 Elan TrackPoint" "libinput Accel Speed" 0.5 && xinput list-props "TPPS/2 Elan TrackPoint"' # Lower the sensitivity of laptop's TrackPoint
-    alias network='sudo service network-manager restart'
+	# often used commands for fixing common issues
+	#alias re='xinput set-prop "TPPS/2 Elan TrackPoint" "libinput Accel Speed" -0.7 && xinput list-props "TPPS/2 Elan TrackPoint"' # Lower the sensitivity of laptop's TrackPoint
+	alias re='xinput set-prop "TPPS/2 Elan TrackPoint" "libinput Accel Speed" 0.5 && xinput list-props "TPPS/2 Elan TrackPoint"' # Lower the sensitivity of laptop's TrackPoint
+	alias network='sudo service network-manager restart'
 
-    # running programs
-    alias java64='/usr/java/jre1.8.0_181/bin/java -d64 -jar'
-    alias Tor='cd ~/Tor/tor-browser_en-US/ && ./start-tor-browser.desktop && cd -'
+	# running programs
+	alias java64='/usr/java/jre1.8.0_181/bin/java -d64 -jar'
+	alias Tor='cd ~/Tor/tor-browser_en-US/ && ./start-tor-browser.desktop && cd -'
 fi
 
 # Save a lot of typing for common commands
@@ -27,21 +27,21 @@ alias man='LC_CTYPE=C man'
 # Make sure manpages use only ASCII chars
 # Pass  ‐w,
 if [ -x /usr/bin/vim ]; then
-    alias v='vim'
-    alias vr='vim -R'
-    alias vdiff='vim -d'
-    alias vtrue='VIM_TRUECOLOR=true vim'
+	alias v='vim'
+	alias vr='vim -R'
+	alias vdiff='vim -d'
+	alias vtrue='VIM_TRUECOLOR=true vim'
 fi
 if [ -x "/usr/bin/nvim" ]; then
-    alias nv='nvim'
+	alias nv='nvim'
 fi
 if [ "$EDITOR" = "nvim" ]; then
-    alias v='nvim'
-    alias vr='nvim -R' # Neovim read-only mode
-    alias vdiff='nvim -d'
-    alias vtrue='VIM_TRUECOLOR=true nvim'
-    alias vh='NVIM_HTML_CSS=true nvim' # Enable nvim-html-css plugin (about 20ms more startup time)
-    alias vman='LC_CTYPE=C nvim' # Make sure manpages use only ASCII chars
+	alias v='nvim'
+	alias vr='nvim -R' # Neovim read-only mode
+	alias vdiff='nvim -d'
+	alias vtrue='VIM_TRUECOLOR=true nvim'
+	alias vh='NVIM_HTML_CSS=true nvim' # Enable nvim-html-css plugin (about 20ms more startup time)
+	alias vman='LC_CTYPE=C nvim'       # Make sure manpages use only ASCII chars
 fi
 [ -x /usr/bin/git ] && alias g='git'
 
@@ -50,20 +50,23 @@ alias sudo='sudo '
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)"
-    test -r ~/.config/dircolors && eval "$(dircolors -b ~/.config/dircolors)"
-    test -r $XDG_CONFIG_HOME/dircolors && eval "$(dircolors -b $XDG_CONFIG_HOME/dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)"
+	test -r ~/.config/dircolors && eval "$(dircolors -b ~/.config/dircolors)"
+	test -r $XDG_CONFIG_HOME/dircolors && eval "$(dircolors -b $XDG_CONFIG_HOME/dircolors)" || eval "$(dircolors -b)"
+	alias ls='ls --color=auto'
+	#alias dir='dir --color=auto'
+	#alias vdir='vdir --color=auto'
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+	alias grep='grep --color=auto'
+	alias fgrep='fgrep --color=auto'
+	alias egrep='egrep --color=auto'
 fi
 
 if [ -f ~/.zsh_history ]; then
-    alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(cat ~/.zsh_history|tail -n1|sed -e '\''s/^[: 0-9]\+\;//;s/\s*[;&|]\s*alert$//'\'')"'
+	alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(cat ~/.zsh_history|tail -n1|sed -e '\''s/^[: 0-9]\+\;//;s/\s*[;&|]\s*alert$//'\'')"'
 fi
+
+# Convenient open files
+alias index='cd "/media/mikeX/Nextcloud" && v index.md'
 
 # vi: ft=sh et sw=4
