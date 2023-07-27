@@ -42,6 +42,7 @@ if [ "$EDITOR" = "nvim" ]; then
 	alias vtrue='VIM_TRUECOLOR=true nvim'
 	alias vh='NVIM_HTML_CSS=true nvim' # Enable nvim-html-css plugin (about 20ms more startup time)
 	alias vman='LC_CTYPE=C nvim'       # Make sure manpages use only ASCII chars
+	alias org='NVIM_ORG="true" nvim'   # Enable orgmode plugins and configs
 fi
 [ -x /usr/bin/git ] && alias g='git'
 
