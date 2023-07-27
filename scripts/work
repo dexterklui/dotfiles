@@ -7,6 +7,6 @@ if tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
 	exit 1
 fi
 
-tmux new-session -d -s "$SESSION_NAME" -n 'notes' -c "/media/mikeX/Nextcloud"
+tmux new-session -d -s "$SESSION_NAME" -n 'notes' -c "/media/mikeX/Nextcloud/Notes"
 tmux new-window -d -n 'dq' -c "$HOME"
 tmux -2 attach-session -t "$SESSION_NAME"
