@@ -1,6 +1,6 @@
 setl expandtab
-setl tabstop=4
-setl shiftwidth=4
+setl tabstop=2
+setl shiftwidth=2
 setl textwidth=80
 
 function DqSetMarkdownHighlight()
