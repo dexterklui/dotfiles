@@ -186,6 +186,7 @@ for i in $@ ; do
     if [[ $i = 'git' || $i = '--all' ]] ; then
 ln $LINK_ARG $PWD/git/gitconfig ~/.gitconfig
 ln $LINK_ARG $PWD/git/gitignore ~/.gitignore
+ln $LINK_ARG $PWD/git/gitconfig-keys.inc ~/.gitconfig-keys.inc
         break
     fi
 done
