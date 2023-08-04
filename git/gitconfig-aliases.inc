@@ -35,7 +35,7 @@
 
         ; log short aliases {{{1
         lg = log --oneline --decorate --graph
-        lga = log --oneline -decorate --graph --all
+        lga = log --oneline --decorate --graph --all
         lgg = log --decorate --graph
         lgga = log --decorate --graph --all
         lggs = log --decorate --graph --stat
